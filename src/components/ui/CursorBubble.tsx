@@ -1,36 +1,47 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 export function CursorBubble() {
-    const [position, setPosition] = useState({ x: 0, y: 0 })
-    const [isPointer, setIsPointer] = useState(false)
+    const bubbleRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        const moveCursor = (e: MouseEvent) => {
-            setPosition({ x: e.clientX, y: e.clientY })
+        let rafId: number
+        const target = { x: 0, y: 0, isPointer: false }
 
-            const target = e.target as HTMLElement
-            const inNavbar = target.closest('header') !== null
-
-            setIsPointer(!inNavbar && (
-                window.getComputedStyle(target).cursor === 'pointer' ||
-                target.tagName === 'A' ||
-                target.tagName === 'BUTTON'
-            ))
+        const update = () => {
+            const el = bubbleRef.current
+            if (!el) return
+            const offset = target.isPointer ? 20 : 8
+            el.style.transform = `translate3d(${target.x - offset}px, ${target.y - offset}px, 0)`
+            el.className = `fixed top-0 left-0 pointer-events-none z-[9999] transition-transform duration-100 ease-out hidden sm:flex items-center justify-center mix-blend-difference bg-white rounded-full ${target.isPointer ? 'w-10 h-10 opacity-60' : 'w-4 h-4 opacity-100'}`
+            rafId = requestAnimationFrame(update)
         }
 
-        window.addEventListener('mousemove', moveCursor)
-        return () => window.removeEventListener('mousemove', moveCursor)
+        const onMouseMove = (e: MouseEvent) => {
+            target.x = e.clientX
+            target.y = e.clientY
+            const el = e.target as HTMLElement
+            const inNavbar = el.closest('header') !== null
+            target.isPointer = !inNavbar && (
+                window.getComputedStyle(el).cursor === 'pointer' ||
+                el.tagName === 'A' ||
+                el.tagName === 'BUTTON'
+            )
+        }
+
+        rafId = requestAnimationFrame(update)
+        window.addEventListener('mousemove', onMouseMove, { passive: true })
+        return () => {
+            cancelAnimationFrame(rafId)
+            window.removeEventListener('mousemove', onMouseMove)
+        }
     }, [])
 
     return (
         <div
-            className={`fixed top-0 left-0 pointer-events-none z-[9999] transition-transform duration-100 ease-out hidden sm:flex items-center justify-center mix-blend-difference bg-white rounded-full ${isPointer ? 'w-10 h-10 opacity-60' : 'w-4 h-4 opacity-100'
-                }`}
-            style={{
-                transform: `translate3d(${position.x - (isPointer ? 20 : 8)}px, ${position.y - (isPointer ? 20 : 8)}px, 0)`
-            }}
+            ref={bubbleRef}
+            className="fixed top-0 left-0 pointer-events-none z-[9999] hidden sm:flex items-center justify-center mix-blend-difference bg-white rounded-full w-4 h-4 opacity-100"
         />
     )
 }

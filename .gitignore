@@ -43,5 +43,17 @@ nul
 # Large video files — hosted on Google Drive, not in repo
 public/images/**/*.mp4
 
-
+# Vercel
 .vercel
+
+# One-time fix scripts
+fix-project1.sh
+
+# Old backup files
+CLAUDE.md.old-backup
+
+# Test runtime artifacts
+testsprite_tests/tmp/
+
+# Temporary files
+*.tmp

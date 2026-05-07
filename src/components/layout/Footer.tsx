@@ -83,7 +83,7 @@ export function Footer() {
                 <div className="mt-16 pt-8 border-t border-[#F3F4F6] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-[#6B7280] font-mono">
                     <p>© {new Date().getFullYear()} Richard Pillaca Burga.</p>
                     <div className="flex items-center gap-2">
-                        <span>Built with Next.js 15 & Tailwind CSS</span>
+                        <span>Built with Next.js 16 & Tailwind CSS</span>
                         <span className="w-1 h-1 rounded-full bg-[#E5E7EB]"></span>
                         <span>Deployed on Vercel</span>
                     </div>
