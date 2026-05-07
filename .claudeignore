@@ -1,0 +1,36 @@
+# Secrets & credentials — Claude must never read these
+.env
+.env.*
+*.pem
+*.key
+*.p12
+secrets.json
+credentials.*
+service-account*.json
+
+# SSH & cloud credentials
+.ssh/
+.aws/
+.gcp/
+terraform.tfvars
+*.tfstate
+
+# Databases
+*.sqlite
+*.db
+*.db-journal
+
+# Dependencies & build output (too noisy, not useful)
+node_modules/
+.next/
+dist/
+build/
+.cache/
+__pycache__/
+*.pyc
+
+# Lock files (rarely useful for Claude)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+

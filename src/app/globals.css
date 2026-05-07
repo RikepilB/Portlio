@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+/* ── Minimalist Polaroid Design System ─────────────────── */
+/* Tailwind v4 CSS-first config */
+
+@theme {
+  /* Fonts: Minimalist, clean sans-serifs exclusively */
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-display: var(--font-display), system-ui, sans-serif;
+  --font-mono: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Strict 5-Color Palette */
+  --color-white: #FFFFFF;
+  /* Backgrounds, overlapping cards */
+  --color-off-white: #F9FAFB;
+  /* Distinct sections, faint borders */
+  --color-black: #1A1A1A;
+  /* Primary text, stark contrast */
+  --color-gray: #6B7280;
+  /* Secondary text, metadata */
+  --color-accent: #10B981;
+  /* Emerald/Mint green for CTAs and highlights */
+
+  /* Semantic Aliases */
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-black);
+  --color-muted: var(--color-off-white);
+  --color-muted-foreground: var(--color-gray);
+  --color-border: #F3F4F6;
+  --color-ring: var(--color-accent);
+
+  /* Spacing overrides for extremely generous whitespace */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+  --spacing-30: 7.5rem;
+
+  /* Refined, softer shadows for the polaroid effect */
+  --shadow-polaroid: 0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-polaroid-hover: 0 20px 50px -10px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+
+  /* Animation */
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ── Custom Utilities ─────────────────────────────────── */
+
+/* Soft Mesh Gradient Background */
+@utility bg-mesh {
+  background-image:
+    radial-gradient(at 100% 0%, hsla(152, 85%, 95%, 1) 0px, transparent 50%),
+    radial-gradient(at 0% 0%, hsla(210, 80%, 98%, 1) 0px, transparent 50%);
+  background-color: white;
+}
+
+/* Polaroid Card Style */
+@utility polaroid {
+  background-color: white;
+  padding: 0.5rem;
+  padding-bottom: 2.5rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-polaroid);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  border: 1px solid #F9FAFB;
+}
+
+@utility polaroid-hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-polaroid-hover);
+  z-index: 10;
+}
+
+/* ── Stagger helpers ──────── */
+@utility stagger-1 {
+  animation-delay: 0.1s;
+}
+
+@utility stagger-2 {
+  animation-delay: 0.2s;
+}
+
+@utility stagger-3 {
+  animation-delay: 0.35s;
+}
+
+@utility stagger-4 {
+  animation-delay: 0.5s;
+}
+
+/* ── Animated link (Thin, elegant) ──────── */
+@utility link-hover {
+  position: relative;
+  text-decoration: none;
+  background-image: linear-gradient(#1A1A1A, #1A1A1A);
+  background-position: 0 100%;
+  background-size: 0 1px;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility link-hover-active {
+  background-size: 100% 1px;
+}
+
+/* ── Base ─────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    font-weight: 600;
+  }
+
+  ::selection {
+    background-color: rgba(16, 185, 129, 0.15);
+    /* Soft emerald */
+    color: var(--color-black);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+}
+
+/* ── Component specific styles ───────────────────────── */
+
+.nav-link {
+  font-size: 0.875rem;
+  color: var(--color-gray);
+  transition: color 0.2s ease;
+  padding: 0.5rem 0.25rem;
+  text-decoration: none;
+  position: relative;
+}
+
+.nav-link::before,
+.nav-link::after {
+  content: "";
+  position: absolute;
+  background-color: #A6A6A6;
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  transition: width 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.nav-link::before {
+  left: 0;
+}
+
+.nav-link::after {
+  right: 0;
+}
+
+.nav-link:hover::before,
+.nav-link:hover::after,
+.nav-link[aria-current="page"]::before,
+.nav-link[aria-current="page"]::after {
+  width: 100%;
+}
+
+.nav-link:hover,
+.nav-link[aria-current="page"] {
+  color: var(--color-black);
+}
+
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: var(--color-off-white);
+  color: var(--color-gray);
+  border: 1px solid var(--color-border);
+}
+
+.card-ultra-clean {
+  background: white;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card-ultra-clean:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  border-color: #E5E7EB;
+}

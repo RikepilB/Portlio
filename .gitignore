@@ -1,0 +1,47 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+.next/
+dist/
+build/
+out/
+
+# Secrets
+*.pem
+*.key
+secrets.json
+service-account*.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# TypeScript build info (incremental compile artifact)
+tsconfig.tsbuildinfo
+
+# Windows null device (accidentally created)
+nul
+
+# Claude context files (local reference docs, PDFs — not source code)
+.claude/contexts/
+
+# Large video files — hosted on Google Drive, not in repo
+public/images/**/*.mp4
+
+
+.vercel

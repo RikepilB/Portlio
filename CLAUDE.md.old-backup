@@ -1,0 +1,104 @@
+# Project: Richard Pillaca — Portfolio Website v2
+# Next.js portfolio → Deploy on Vercel → richardpillaca.com
+# Blueprint: @docs/PRD.md | Progress: @docs/progress.txt
+
+## What We're Building
+Personal portfolio for Richard Pillaca Burga — Data Analyst & BI Developer.
+Design language: Michelle Liu (clean/minimal) + Vipul Soni (case study depth) + Noah Barbaros (essays).
+Reference: @docs/ARCHITECTURE.md for full site map and component breakdown.
+
+## Tech Stack
+- Framework: Next.js 16, App Router, TypeScript strict mode
+- Styling: Tailwind CSS utility classes only (no inline styles)
+- Deployment: Vercel (push to GitHub → auto-deploy)
+- Content: MDX for essays/blog posts
+- No database — static content from data files in `src/data/`
+
+## Project Scripts
+- `pnpm dev` — Dev server on port 3000
+- `pnpm build` — Production build (must pass before any PR)
+- `pnpm lint` — ESLint (zero errors required)
+- `npx tsc --noEmit` — Type check only
+
+## Site Structure (App Router)
+```
+src/app/
+├── page.tsx              — Home (/)
+├── projects/
+│   ├── page.tsx          — Project gallery (/projects)
+│   └── [slug]/page.tsx   — Individual case study (/projects/[slug])
+├── essays/
+│   ├── page.tsx          — Essays list (/essays)
+│   └── [slug]/page.tsx   — Individual essay (/essays/[slug])
+├── about/page.tsx        — About (/about)
+└── layout.tsx            — Root layout (Nav + Footer)
+
+src/components/           — Reusable UI components
+src/data/                 — Project content, essay metadata (TypeScript objects)
+src/lib/                  — Utilities, MDX helpers
+public/                   — Images, fonts, static assets
+```
+
+## Content Status (all project text is ready — DO NOT rewrite it)
+- Bike Share project: text ready in prototype JSX — extract and use as-is
+- AI Technical Debt project: text ready in prototype JSX
+- Accounting Automation project: text ready in prototype JSX
+- Exam Analysis project: text ready in prototype JSX
+- Skills grid + certifications: ready in prototype JSX
+- About page personal sections: ready in @docs/PRD.md (Section: ABOUT)
+- Essays: NOT YET WRITTEN — placeholder structure only
+
+## Design Rules (load before any UI work)
+- Frontend/UI: @.claude/rules/frontend.md
+- Always load: @.claude/skills/frontend-design/SKILL.md (auto-activates)
+- Always load: @.claude/skills/vercel-react-best-practices/SKILL.md (auto-activates)
+- Design system: @.claude/skills/tailwind-design-system/SKILL.md
+
+## Skills Available (already downloaded — use these, don't create new ones)
+- `frontend-design` — Production-grade UI, avoids generic AI aesthetic ← USE THIS ALWAYS
+- `vercel-react-best-practices` — Next.js/Vercel optimization patterns (54 rule files)
+- `tailwind-design-system` — Tailwind token system and patterns
+- `web-design-guidelines` — General design principles
+- `fullstack-developer` — Full-stack patterns when needed
+- `systematic-debugging` — When something breaks, load this
+- `subagent-driven-development` — For parallel work on multiple components
+- `requesting-code-review` — Before finalizing any page component
+- `brainstorming` — When planning new sections or features
+
+## Agents Available (use these for specialized tasks)
+- `explorer` — Map the codebase before touching anything (always run first)
+- `planner` — Plan component architecture before coding
+- `code-reviewer` — Review before marking any component done
+- `security-auditor` — Before deploying to Vercel
+- `test-writer` — After building each page
+
+## Workflow for Building a Page
+1. Run explorer agent: map existing components + conventions
+2. Load relevant skill (frontend-design always, vercel-react-best-practices always)
+3. Plan component structure — confirm with me before writing
+4. Build mobile-first (375px → 768px → 1280px)
+5. Run: `pnpm build && pnpm lint && npx tsc --noEmit`
+6. Request code review via requesting-code-review skill
+
+## Critical Rules for THIS Project
+- ✅ Mobile-first responsive on every component
+- ✅ Accessibility: semantic HTML, aria-labels on all interactive elements
+- ✅ All project content stays true to the source — don't invent metrics
+- ✅ Build completes with zero errors before calling anything done
+- ❌ No dark navy/teal aesthetic — that's the AI-generated look we're replacing
+- ❌ No Inter/Roboto/Arial — pick a font with personality
+- ❌ No Lorem Ipsum — use the real content from prototype JSX
+- ❌ No hardcoded colors — Tailwind classes or CSS custom properties only
+
+## Environment Variables
+- `NEXT_PUBLIC_SITE_URL` — Full site URL (e.g. https://richardpillaca.com)
+- No backend, no DB — this project has no secrets beyond the above
+
+## Definition of Done (per page)
+- [ ] Matches Figma design intent
+- [ ] Renders correctly at 375px, 768px, 1280px
+- [ ] `pnpm build` — zero errors
+- [ ] `pnpm lint` — zero errors
+- [ ] `npx tsc --noEmit` — zero errors
+- [ ] All content is real (no placeholder text)
+- [ ] Deployed to Vercel preview URL and visually checked

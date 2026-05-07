@@ -1,0 +1,1842 @@
+[
+  {
+    "id": "TC001",
+    "title": "Homepage hero content is visible on initial load",
+    "description": "Verifies the homepage renders the hero section with the person’s identity content visible to the user.",
+    "category": "Home (Hero, Metrics, Featured Projects)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the homepage URL \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Hero section\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Richard Pillaca\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Hero bio/summary text\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Primary hero call-to-action button or link\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Homepage metrics strip renders with labeled metric values",
+    "description": "Verifies the metrics strip is visible and shows multiple metric items with labels and numeric values.",
+    "category": "Home (Hero, Metrics, Featured Projects)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the homepage URL \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Metrics strip\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"A metric item label\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"A metric item value\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"At least three metric items\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Featured Projects section shows exactly 3 project cards",
+    "description": "Verifies the homepage shows a Featured Projects section with three visible project summary cards.",
+    "category": "Home (Hero, Metrics, Featured Projects)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the homepage URL \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Featured Projects section\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Featured project card 1\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Featured project card 2\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Featured project card 3\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Each featured project card displays essential summary fields",
+    "description": "Verifies a featured project card includes a title and short description/summary visible to the user.",
+    "category": "Home (Hero, Metrics, Featured Projects)",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the homepage URL \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Featured Projects section\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Featured project card title\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Featured project card description/summary text\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Featured project card link or call-to-action\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Recent experience preview content is visible on the homepage",
+    "description": "Verifies the homepage includes a recent experience preview list showing at least one visible item.",
+    "category": "Home (Hero, Metrics, Featured Projects)",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the homepage URL \"/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Recent experience section\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"An experience item\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Experience item role/title\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Experience item company/organization\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Projects page loads and shows all projects by default",
+    "description": "Verifies the Projects Gallery initially displays all project cards and the All filter is available.",
+    "category": "Projects Gallery (/projects) with Category Filter",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"Projects\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"All\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"DATA SCIENCE\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"RESEARCH\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"EXCEL AUTOMATION\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"FULL STACK\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"bike-share-optimization\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "All filter shows the full set of projects",
+    "description": "Verifies clicking All results in seeing all four known projects in the gallery.",
+    "category": "Projects Gallery (/projects) with Category Filter",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"All\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"bike-share-optimization\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"ai-technical-debt-research\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"accounting-automation\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"exam-analysis-system\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "DATA SCIENCE filter narrows the gallery results",
+    "description": "Verifies the DATA SCIENCE filter refines the visible project cards and updates the displayed list.",
+    "category": "Projects Gallery (/projects) with Category Filter",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"DATA SCIENCE\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"DATA SCIENCE\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"bike-share-optimization\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"All\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"ai-technical-debt-research\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "RESEARCH filter shows research project(s) and can be reset",
+    "description": "Verifies the RESEARCH filter applies and the gallery can be reset back to All.",
+    "category": "Projects Gallery (/projects) with Category Filter",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"RESEARCH\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"RESEARCH\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"ai-technical-debt-research\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"All\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"exam-analysis-system\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "EXCEL AUTOMATION filter shows the accounting automation project",
+    "description": "Verifies the EXCEL AUTOMATION filter makes the accounting automation project visible in the gallery.",
+    "category": "Projects Gallery (/projects) with Category Filter",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"EXCEL AUTOMATION\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"EXCEL AUTOMATION\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"accounting-automation\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"All\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"bike-share-optimization\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "FULL STACK filter shows the exam analysis system project",
+    "description": "Verifies the FULL STACK filter makes the exam analysis system project visible in the gallery.",
+    "category": "Projects Gallery (/projects) with Category Filter",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"FULL STACK\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"FULL STACK\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"exam-analysis-system\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"All\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"accounting-automation\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Switching filters multiple times keeps the gallery responsive",
+    "description": "Verifies rapid sequential filter changes update the visible gallery content without getting stuck.",
+    "category": "Projects Gallery (/projects) with Category Filter",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"DATA SCIENCE\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"bike-share-optimization\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"RESEARCH\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"ai-technical-debt-research\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"FULL STACK\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"exam-analysis-system\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Projects gallery remains usable when scrolled on mobile-length pages",
+    "description": "Verifies filter controls and project cards are still accessible after scrolling through the gallery.",
+    "category": "Projects Gallery (/projects) with Category Filter",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"exam-analysis-system\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"exam-analysis-system\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"All\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"All\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"All\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"bike-share-optimization\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Project detail page renders core case study sections for a valid project slug",
+    "description": "Verifies that a valid project detail page shows the expected core content sections (title, overview, methodology, metrics/findings, tech stack).",
+    "category": "Project Detail (/projects/[slug])",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects/bike-share-optimization"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Project title heading\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Overview\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Problem\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Methodology\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Key metrics\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Tech stack\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Project metadata (category, duration, read time) is visible on the project detail page",
+    "description": "Verifies that key project metadata is displayed to the user on the case study page.",
+    "category": "Project Detail (/projects/[slug])",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects/bike-share-optimization"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Category label/value\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Duration label/value\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Read time label/value\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Project overview summary\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "Methodology section displays multiple phases/steps",
+    "description": "Verifies that the methodology section shows a list of phases/steps rather than being empty.",
+    "category": "Project Detail (/projects/[slug])",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects/bike-share-optimization"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"Methodology\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Methodology phase list\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"At least one methodology phase item\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Methodology phase title\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Methodology phase description\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "Key metrics and findings section displays summarized metrics",
+    "description": "Verifies that the project shows key metrics/findings content to the user.",
+    "category": "Project Detail (/projects/[slug])",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects/bike-share-optimization"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"Key metrics\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Metrics summary list\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"At least one metric item\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Metric label\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Metric value\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "Extended metrics visualization or details are shown (time series) when present",
+    "description": "Verifies that extended metrics (such as a chart or expanded metric details) are visible on the project detail page when available.",
+    "category": "Project Detail (/projects/[slug])",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects/bike-share-optimization"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"Key metrics\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Extended metrics container\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Metrics time series visualization or table\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Metrics legend or axis labels\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Tech stack section lists technologies used in the project",
+    "description": "Verifies that the tech stack is presented as a visible list of technologies.",
+    "category": "Project Detail (/projects/[slug])",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects/bike-share-optimization"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"Tech stack\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Tech stack list\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"At least one technology tag/item\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Technology name\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC020",
+    "title": "GitHub link is visible and looks like an external project link",
+    "description": "Verifies that a GitHub link is displayed on the project detail page for a project that provides one.",
+    "category": "Project Detail (/projects/[slug])",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects/bike-share-optimization"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"GitHub\" link area"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"GitHub link\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"GitHub\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"External link icon near GitHub link\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC021",
+    "title": "Non-existent project slug shows a not-found state with a path back to projects gallery",
+    "description": "Verifies that an invalid project slug results in a clear not-found experience and offers navigation back to the projects list.",
+    "category": "Project Detail (/projects/[slug])",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /projects/nonexistent-slug"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Not found\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Project\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Back to projects\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Back to projects\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Projects\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC022",
+    "title": "Essays list page loads and displays core essay metadata",
+    "description": "Verifies the essays list page renders multiple essays and shows title, date, read time, and tags where available.",
+    "category": "Essays (/essays) and Essay Detail",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /essays"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"Essays\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Essays\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least one essay title is visible in the list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a date is visible for at least one essay item"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a read time value is visible for at least one essay item"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least one tag is visible on an essay item (if tags are shown on the page)"
+      }
+    ]
+  },
+  {
+    "id": "TC023",
+    "title": "Open an essay detail page from the essays list",
+    "description": "Verifies a user can click an essay from the list and reach the essay detail page with content visible.",
+    "category": "Essays (/essays) and Essay Detail",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /essays"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least one essay title is visible in the list"
+      },
+      {
+        "type": "action",
+        "description": "Click on the first visible essay title"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/essays/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an article title is visible on the essay detail page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify body content text is visible on the essay detail page"
+      }
+    ]
+  },
+  {
+    "id": "TC024",
+    "title": "Essay detail page shows header metadata (title/date/read time)",
+    "description": "Verifies the essay detail page shows key metadata typically included in the header area.",
+    "category": "Essays (/essays) and Essay Detail",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /essays"
+      },
+      {
+        "type": "action",
+        "description": "Click on the first visible essay title"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an article title is visible on the essay detail page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a date is visible on the essay detail page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a read time value is visible on the essay detail page"
+      }
+    ]
+  },
+  {
+    "id": "TC025",
+    "title": "Essay detail page renders rich content sections (MDX/HTML)",
+    "description": "Verifies the essay body renders multiple paragraphs/sections, indicating MDX/HTML content is loaded and displayed.",
+    "category": "Essays (/essays) and Essay Detail",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /essays"
+      },
+      {
+        "type": "action",
+        "description": "Click on the first visible essay title"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/essays/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify body content text is visible on the essay detail page"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the middle of the page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify additional body content text is visible below the initial viewport"
+      }
+    ]
+  },
+  {
+    "id": "TC026",
+    "title": "Substack subscribe CTA is visible on the essays list page",
+    "description": "Verifies the subscribe call-to-action is visible on the essays list page.",
+    "category": "Essays (/essays) and Essay Detail",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /essays"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Subscribe\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Substack\" is visible (if the CTA mentions Substack)"
+      }
+    ]
+  },
+  {
+    "id": "TC027",
+    "title": "Substack subscribe CTA is actionable from the essays list page",
+    "description": "Verifies clicking the subscribe CTA results in navigation intent (URL change) to a subscribe destination.",
+    "category": "Essays (/essays) and Essay Detail",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /essays"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Subscribe\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Subscribe\" call-to-action"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"substack\""
+      }
+    ]
+  },
+  {
+    "id": "TC028",
+    "title": "Essays list gracefully handles empty/low-content state",
+    "description": "Verifies the essays list page provides visible feedback if no essays are shown (empty state) rather than a broken UI.",
+    "category": "Essays (/essays) and Essay Detail",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /essays"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the essays list area is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify either at least one essay item is visible or an empty-state message is visible (for example, \"No essays\" or \"Coming soon\")"
+      }
+    ]
+  },
+  {
+    "id": "TC029",
+    "title": "Essay navigation back to list is available from detail page (if provided)",
+    "description": "Verifies users can return to the essays list using an on-page navigation control.",
+    "category": "Essays (/essays) and Essay Detail",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /essays"
+      },
+      {
+        "type": "action",
+        "description": "Click on the first visible essay title"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify URL contains \"/essays/\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Back\" or \"All essays\" is visible (whichever exists)"
+      }
+    ]
+  },
+  {
+    "id": "TC030",
+    "title": "About page displays communities, beyond-work interests, and skills summary",
+    "description": "Verifies that the About page renders the key About content sections expected from the About content source.",
+    "category": "About & Social Links",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the About page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"About\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Communities\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Beyond\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Skills\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Skills summary\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC031",
+    "title": "Footer shows social links and contact info on About page",
+    "description": "Verifies that the footer on the About page includes social links and contact information for reaching out.",
+    "category": "About & Social Links",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the About page"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the footer"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Contact\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Email\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Social\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Social link\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC032",
+    "title": "View Journey timeline default state shows all entries",
+    "description": "Verifies the Journey page loads and shows the full timeline by default (All filter).",
+    "category": "Journey (Career Timeline) with Type Filter",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Journey (Career Timeline) page from the site’s main navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"Journey\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Type filter\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"All\" filter option is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Timeline\" (list of timeline cards) is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least one \"timeline card\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC033",
+    "title": "Filter Journey timeline to Work entries",
+    "description": "Verifies selecting the Work filter updates the timeline to show Work entries only.",
+    "category": "Journey (Career Timeline) with Type Filter",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Journey (Career Timeline) page from the site’s main navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Type filter\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Work\" in the Type filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Work\" is visible as the selected filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least one \"timeline card\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Research\" is not visible within the Type filter selection indicator area"
+      }
+    ]
+  },
+  {
+    "id": "TC034",
+    "title": "Filter Journey timeline to Research entries",
+    "description": "Verifies selecting the Research filter updates the timeline to show Research entries only.",
+    "category": "Journey (Career Timeline) with Type Filter",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Journey (Career Timeline) page from the site’s main navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Type filter\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Research\" in the Type filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Research\" is visible as the selected filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least one \"timeline card\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Timeline\" (list of timeline cards) is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC035",
+    "title": "Filter Journey timeline to Volunteer entries",
+    "description": "Verifies selecting the Volunteer filter updates the timeline to show Volunteer entries only.",
+    "category": "Journey (Career Timeline) with Type Filter",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Journey (Career Timeline) page from the site’s main navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Type filter\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Volunteer\" in the Type filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Volunteer\" is visible as the selected filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least one \"timeline card\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Timeline\" (list of timeline cards) is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC036",
+    "title": "Switch filters sequentially and confirm timeline updates each time",
+    "description": "Verifies changing filters multiple times updates the visible timeline cards without needing a page refresh.",
+    "category": "Journey (Career Timeline) with Type Filter",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Journey (Career Timeline) page from the site’s main navigation"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Work\" in the Type filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Work\" is visible as the selected filter"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Research\" in the Type filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Research\" is visible as the selected filter"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"All\" in the Type filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"All\" is visible as the selected filter"
+      }
+    ]
+  },
+  {
+    "id": "TC037",
+    "title": "Empty state handling when a filter returns no entries",
+    "description": "Verifies the UI shows a clear empty state message if a selected type has no timeline entries.",
+    "category": "Journey (Career Timeline) with Type Filter",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Journey (Career Timeline) page from the site’s main navigation"
+      },
+      {
+        "type": "action",
+        "description": "Click on \"Volunteer\" in the Type filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Volunteer\" is visible as the selected filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Timeline\" (list of timeline cards) is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"No entries\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Try a different filter\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC038",
+    "title": "Timeline card content contains the required fields",
+    "description": "Verifies each visible timeline card presents role, organization, period, and description.",
+    "category": "Journey (Career Timeline) with Type Filter",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Journey (Career Timeline) page from the site’s main navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least one \"timeline card\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Role\" text within a timeline card is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Organization\" text within a timeline card is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Period\" text within a timeline card is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Description\" text within a timeline card is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC039",
+    "title": "Invalid type is not available in the UI filter options",
+    "description": "Verifies the UI prevents selecting an invalid type by only showing the supported filter values.",
+    "category": "Journey (Career Timeline) with Type Filter",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Journey (Career Timeline) page from the site’s main navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Type filter\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"All\" filter option is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Work\" filter option is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Research\" filter option is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Volunteer\" filter option is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"InvalidType\" is not visible in the Type filter"
+      }
+    ]
+  },
+  {
+    "id": "TC040",
+    "title": "View skills grid with all categories displayed",
+    "description": "Verifies the skills grid renders and shows the expected category sections and skill badges.",
+    "category": "Skills Grid",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Skills page (the page that contains the Skills Grid)."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Skills\" is visible."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Data & Analytics\" is visible."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Software Engineering\" is visible."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Modeling & Research\" is visible."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least one skill badge element is visible within the grid."
+      }
+    ]
+  },
+  {
+    "id": "TC041",
+    "title": "Filter skills by category: Data & Analytics",
+    "description": "Verifies selecting the Data & Analytics category shows skills for that category in the grid.",
+    "category": "Skills Grid",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Skills page (the page that contains the Skills Grid)."
+      },
+      {
+        "type": "action",
+        "description": "Click on the category control labeled \"Data & Analytics\"."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Data & Analytics\" is visible as the active/selected category."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the skills list/grid is visible."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least one skill badge element is visible in the filtered results."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Software Engineering\" is not visible within the filtered results area."
+      }
+    ]
+  },
+  {
+    "id": "TC042",
+    "title": "Filter skills by category: Software Engineering",
+    "description": "Verifies selecting the Software Engineering category shows skills for that category in the grid.",
+    "category": "Skills Grid",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Skills page (the page that contains the Skills Grid)."
+      },
+      {
+        "type": "action",
+        "description": "Click on the category control labeled \"Software Engineering\"."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Software Engineering\" is visible as the active/selected category."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the skills list/grid is visible."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least one skill badge element is visible in the filtered results."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Data & Analytics\" is not visible within the filtered results area."
+      }
+    ]
+  },
+  {
+    "id": "TC043",
+    "title": "Filter skills by category: Modeling & Research",
+    "description": "Verifies selecting the Modeling & Research category shows skills for that category in the grid.",
+    "category": "Skills Grid",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Skills page (the page that contains the Skills Grid)."
+      },
+      {
+        "type": "action",
+        "description": "Click on the category control labeled \"Modeling & Research\"."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Modeling & Research\" is visible as the active/selected category."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the skills list/grid is visible."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least one skill badge element is visible in the filtered results."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Data & Analytics\" is not visible within the filtered results area."
+      }
+    ]
+  },
+  {
+    "id": "TC044",
+    "title": "Switch categories multiple times without breaking the grid",
+    "description": "Verifies the grid remains usable when switching categories back and forth.",
+    "category": "Skills Grid",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Skills page (the page that contains the Skills Grid)."
+      },
+      {
+        "type": "action",
+        "description": "Click on the category control labeled \"Data & Analytics\"."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Data & Analytics\" is visible as the active/selected category."
+      },
+      {
+        "type": "action",
+        "description": "Click on the category control labeled \"Software Engineering\"."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Software Engineering\" is visible as the active/selected category."
+      },
+      {
+        "type": "action",
+        "description": "Click on the category control labeled \"Modeling & Research\"."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Modeling & Research\" is visible as the active/selected category."
+      }
+    ]
+  },
+  {
+    "id": "TC045",
+    "title": "Proficiency metadata is displayed for a skill (if provided)",
+    "description": "Verifies that proficiency/level metadata is visible on at least one skill item when present.",
+    "category": "Skills Grid",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Skills page (the page that contains the Skills Grid)."
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the skills grid section."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least one skill card/item element is visible."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Proficiency\" is visible within a skill item, or a visible level indicator text such as \"Beginner\", \"Intermediate\", \"Advanced\", or \"Expert\" is present."
+      },
+      {
+        "type": "action",
+        "description": "Click on a visible skill item to view its details (if the UI supports opening details)."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the selected skill name text is visible in the details area/panel (if a details view appears)."
+      }
+    ]
+  },
+  {
+    "id": "TC046",
+    "title": "Graceful handling when skills fail to load (error state)",
+    "description": "Verifies an error message or fallback content appears if skills cannot be fetched.",
+    "category": "Skills Grid",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Skills page (the page that contains the Skills Grid)."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify either the skills grid becomes visible or an error/fallback message is visible."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Unable to load\" or \"Something went wrong\" or \"Error\" is visible if the grid is not shown."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a retry control (e.g., button labeled \"Retry\" or \"Try again\") is visible if an error message is shown."
+      },
+      {
+        "type": "action",
+        "description": "Click on the retry control if it is visible."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the skills grid is visible after retry, or the error message remains visible (but the page does not crash or go blank)."
+      }
+    ]
+  },
+  {
+    "id": "TC047",
+    "title": "Fallback to static skills payload when available",
+    "description": "Verifies the UI can display skills from a static fallback source when configured/available.",
+    "category": "Skills Grid",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Skills page (the page that contains the Skills Grid)."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the skills grid is visible."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Data & Analytics\" is visible."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Software Engineering\" is visible."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Modeling & Research\" is visible."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify at least one skill badge element is visible in the grid."
+      }
+    ]
+  },
+  {
+    "id": "TC048",
+    "title": "Resume page loads and shows primary PDF download action",
+    "description": "Verifies the /resume page renders and presents a visible control to download the resume PDF.",
+    "category": "Resume Download (/resume)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /resume"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page title contains \"Resume\""
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Download\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"PDF\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Download resume\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC049",
+    "title": "Resume page provides contact instructions for download issues",
+    "description": "Verifies the resume page includes visible contact instructions for users who cannot download the PDF.",
+    "category": "Resume Download (/resume)",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /resume"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to \"Contact\" section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Contact\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"If you have trouble\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"email\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify element \"Contact link\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC050",
+    "title": "Submit subscription with a valid email from the footer CTA",
+    "description": "Verifies a user can subscribe using a valid email and sees a visible success confirmation.",
+    "category": "Contact & Subscribe (Footer / Substack CTA)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the site home page"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the footer section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Subscribe\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Type \"user@example.com\" into the subscribe email field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Subscribe\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Subscribed\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC051",
+    "title": "Subscription validation blocks an invalid email format",
+    "description": "Verifies subscribing with an invalid email shows a visible validation error and does not show success.",
+    "category": "Contact & Subscribe (Footer / Substack CTA)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the site home page"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the footer section"
+      },
+      {
+        "type": "action",
+        "description": "Type \"bad-email\" into the subscribe email field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Subscribe\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Invalid email\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Subscribed\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC052",
+    "title": "Recover from invalid subscription attempt and succeed with a valid email",
+    "description": "Verifies a user can correct an invalid email and successfully subscribe afterward.",
+    "category": "Contact & Subscribe (Footer / Substack CTA)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the site home page"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the footer section"
+      },
+      {
+        "type": "action",
+        "description": "Type \"bad-email\" into the subscribe email field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Subscribe\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Invalid email\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Type \"user@example.com\" into the subscribe email field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Subscribe\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Subscribed\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC053",
+    "title": "Submit contact form with valid name, email, and message",
+    "description": "Verifies a user can send a contact message and sees a visible success confirmation.",
+    "category": "Contact & Subscribe (Footer / Substack CTA)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the site home page"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the footer section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Contact\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Test User\" into the contact name field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"user@example.com\" into the contact email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Hello Richard, this is a test message.\" into the contact message field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Send\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Message received\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC054",
+    "title": "Contact form validation blocks invalid email format",
+    "description": "Verifies the contact form shows a visible error when the email is invalid and does not show success.",
+    "category": "Contact & Subscribe (Footer / Substack CTA)",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the site home page"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the footer section"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Test User\" into the contact name field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"bad-email\" into the contact email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Testing invalid email validation.\" into the contact message field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Send\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Invalid email\" is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Message received\" is not visible"
+      }
+    ]
+  },
+  {
+    "id": "TC055",
+    "title": "Contact form validation blocks empty required message",
+    "description": "Verifies the contact form requires a message and shows a visible error when message is empty.",
+    "category": "Contact & Subscribe (Footer / Substack CTA)",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the site home page"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the footer section"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Test User\" into the contact name field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"user@example.com\" into the contact email field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Send\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Message is required\" is visible"
+      }
+    ]
+  },
+  {
+    "id": "TC056",
+    "title": "Full happy path: subscribe successfully then send a contact message",
+    "description": "Verifies a user can complete both subscription and contact workflows sequentially in one session and sees success confirmations for both.",
+    "category": "Contact & Subscribe (Footer / Substack CTA)",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the site home page"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the footer section"
+      },
+      {
+        "type": "action",
+        "description": "Type \"user@example.com\" into the subscribe email field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Subscribe\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Subscribed\" is visible"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Test User\" into the contact name field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"user@example.com\" into the contact email field"
+      },
+      {
+        "type": "action",
+        "description": "Type \"Following up after subscribing.\" into the contact message field"
+      },
+      {
+        "type": "action",
+        "description": "Click on the \"Send\" button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text \"Message received\" is visible"
+      }
+    ]
+  }
+]

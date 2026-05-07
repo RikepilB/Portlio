@@ -1,0 +1,28 @@
+SESSION: 2026-02-27 | Model: Claude Sonnet
+STATUS: Planning phase — build plan created, awaiting approval
+
+COMPLETED:
+- Next.js 16 initialized (pnpm, tsconfig, next.config.ts, postcss.config.mjs)
+- GitHub MCP connected (✓ Connected)
+- Basic layout.tsx shell (Plus Jakarta Sans + JetBrains Mono fonts)
+- page.tsx stub created
+
+IN PROGRESS:
+- Build plan sent to user for approval
+
+NEXT AGENT SHOULD:
+1. Read docs/PRD.md for acceptance criteria
+2. Follow implementation_plan.md build order
+3. Start with src/data/projects.ts (data layer first, no UI)
+4. Then src/lib/utils.ts → UI components → layout → pages
+
+BLOCKERS:
+- [VERCEL MCP — DEFER TO DEPLOY STEP]
+  The claude.ai Vercel remote MCP server (https://mcp.vercel.com/sse) requires
+  OAuth authentication, NOT a Bearer token from a Vercel API token.
+  The local npx @modelcontextprotocol/server-vercel package does not exist on npm.
+  FIX WHEN READY TO DEPLOY: Inside Claude Code, run `/mcp` and authenticate
+  the "claude.ai Vercel" remote connector via OAuth browser flow.
+  Alternatively: use `npx vercel login` then `npx vercel --prod` for deployment.
+  The Vercel CLI (v50.25.3 via npx) IS authenticated as `rikepilb`.
+

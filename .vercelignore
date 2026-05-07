@@ -1,0 +1,14 @@
+# Large video files — hosted on Google Drive, not needed on Vercel
+public/images/**/*.mp4
+public/images/ExamVault/ExamVaultDemoVideo.mp4
+public/images/ticketing platform/*.mp4
+public/images/Bookstore/*.mp4
+
+# Test files
+testsprite_tests/
+
+# Docs
+docs/
+
+# Local Claude context
+.claude/contexts/
