@@ -112,28 +112,30 @@ export default function ProjectsPage() {
                 </div>
 
                 {/* ── Footer ── */}
-                <div className="mt-24 pt-12 border-t border-[#F3F4F6]">
-                    <div className="flex flex-col items-center gap-6">
+                <div className="mt-20 pt-10 border-t border-[#F3F4F6]">
+                    <div className="flex flex-col items-center gap-5">
                         <div className="flex items-center gap-3">
                             <Image
                                 src="/images/logo.png"
                                 alt=""
-                                width={28}
-                                height={28}
+                                width={24}
+                                height={24}
                                 className="rounded-full"
                             />
-                            <span className="font-display text-xl font-bold text-[#1A1A1A]">Richard.</span>
+                            <span className="font-display font-bold text-[#1A1A1A] text-lg">Richard.</span>
                         </div>
 
-                        <div className="flex flex-col items-center gap-2">
-                            <p className="text-[10px] font-bold tracking-widest uppercase text-[#6B7280] mb-1">Jokes & Fun Facts</p>
-                            <ul className="flex flex-col items-center gap-2">
-                                {funFacts.map((fact, i) => (
-                                    <li key={i} className="text-xs text-[#6B7280] leading-relaxed max-w-sm text-center opacity-70 hover:opacity-100 transition-opacity">
-                                        {fact}
-                                    </li>
-                                ))}
-                            </ul>
+                        <p className="text-[10px] font-bold tracking-widest uppercase text-[#6B7280]">Jokes &amp; Fun Facts</p>
+
+                        <div className="grid sm:grid-cols-2 gap-x-10 gap-y-3 w-full max-w-lg">
+                            {funFacts.map((fact, i) => (
+                                <div key={i} className="flex items-start gap-2.5 group">
+                                    <span className="w-4 h-4 rounded-full bg-[#10B981]/10 flex items-center justify-center text-[#10B981] font-mono text-[9px] font-bold shrink-0 mt-[2px] group-hover:bg-[#10B981] group-hover:text-white transition-colors">
+                                        {i + 1}
+                                    </span>
+                                    <p className="text-xs text-[#6B7280] leading-[1.55]">{fact}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
