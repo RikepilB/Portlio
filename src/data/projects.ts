@@ -407,7 +407,7 @@ export const projects: Project[] = [
         catColor: '#F59E0B',
         duration: '2024 — 25',
         readTime: '7 min read',
-        image: '/images/mainpage.jpg',
+        image: '/images/empenalo.png',
         stack: ['Next.js', 'React', 'Tailwind', 'Supabase', 'Vercel', 'Upstash Redis'],
         results: [
             { metric: '2-sided', label: 'Customer + Business marketplace' },
@@ -463,7 +463,7 @@ export const projects: Project[] = [
         catColor: '#2563EB',
         duration: '2024 — 25',
         readTime: '7 min read',
-        image: '/images/mainpage.jpg',
+        image: '/images/scoutlane.png',
         stack: ['React', 'Next.js', 'Node.js', 'Postgres', 'AI Resume Parser'],
         results: [
             { metric: 'AI-powered', label: 'Resume parsing engine' },

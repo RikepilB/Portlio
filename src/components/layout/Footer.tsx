@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { contactInfo } from '@/data/social'
 
 const footerLinks = [
@@ -10,6 +13,9 @@ const footerLinks = [
 ]
 
 export function Footer() {
+    const pathname = usePathname()
+    if (pathname === '/') return null
+
     return (
         <footer className="bg-white border-t border-[#F3F4F6] mt-24" aria-label="Site footer">
             <div className="max-w-5xl mx-auto px-6 sm:px-12 py-16">
@@ -33,7 +39,7 @@ export function Footer() {
                                 <li key={link.name}>
                                     <Link
                                         href={link.href}
-                                        className="text-sm text-[#6B7280] hover:text-[#10B981] transition-colors"
+                                        className="text-sm text-[#6B7280] hover:text-[#0c5a40] transition-colors"
                                     >
                                         {link.name}
                                     </Link>
@@ -49,7 +55,7 @@ export function Footer() {
                             <li>
                                 <a
                                     href={`mailto:${contactInfo.email}`}
-                                    className="text-sm text-[#6B7280] hover:text-[#10B981] transition-colors"
+                                    className="text-sm text-[#6B7280] hover:text-[#0c5a40] transition-colors"
                                 >
                                     Email
                                 </a>
@@ -59,7 +65,7 @@ export function Footer() {
                                     href={contactInfo.linkedin}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-sm text-[#6B7280] hover:text-[#10B981] transition-colors"
+                                    className="text-sm text-[#6B7280] hover:text-[#0c5a40] transition-colors"
                                 >
                                     LinkedIn ↗
                                 </a>
@@ -69,7 +75,7 @@ export function Footer() {
                                     href={contactInfo.github}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-sm text-[#6B7280] hover:text-[#10B981] transition-colors"
+                                    className="text-sm text-[#6B7280] hover:text-[#0c5a40] transition-colors"
                                 >
                                     GitHub ↗
                                 </a>
@@ -84,7 +90,7 @@ export function Footer() {
                     <p>© {new Date().getFullYear()} Richard Pillaca Burga.</p>
                     <div className="flex items-center gap-2">
                         <span>Built with Next.js 16 & Tailwind CSS</span>
-                        <span className="w-1 h-1 rounded-full bg-[#E5E7EB]"></span>
+                        <span className="w-1 h-1 rounded-full bg-[#E5E7EB]" />
                         <span>Deployed on Vercel</span>
                     </div>
                 </div>
