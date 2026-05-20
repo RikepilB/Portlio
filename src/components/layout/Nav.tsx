@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { contactInfo } from '@/data/social'
 
+const phrases = ['HEY!', 'HOLAAA!', 'SALUT!', 'QUE ONDA!', 'GOOOL!']
+
 const navItems = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
@@ -17,6 +19,7 @@ export function Nav() {
     const pathname = usePathname()
     const [isScrolled, setIsScrolled] = useState(false)
     const [mobileOpen, setMobileOpen] = useState(false)
+    const [phrase] = useState(() => phrases[Math.floor(Math.random() * phrases.length)])
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 20)
@@ -53,7 +56,7 @@ export function Nav() {
                             priority
                         />
                         <span className="font-sans font-bold text-[16px] tracking-[-0.01em]" style={{ color: '#D4AF37' }}>
-                            HEY!
+                            {phrase}
                         </span>
                     </Link>
 
