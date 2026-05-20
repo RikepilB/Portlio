@@ -210,19 +210,19 @@ function ProjectRow({ project }: { project: (typeof projects)[number] }) {
   const demoHref = project.demoVideo ?? '#'
 
   return (
-    <article className="grid grid-cols-1 md:grid-cols-[340px_1fr] border-b border-[#e6e8eb] last:border-b-0 bg-white hover:bg-[#f3fbf8] transition-colors group">
+    <article className="grid grid-cols-1 md:grid-cols-[1fr_1fr] border-b border-[#e6e8eb] last:border-b-0 bg-white hover:bg-[#f3fbf8] transition-colors group">
       {/* Thumbnail */}
-      <div className="relative w-full aspect-[16/9] md:aspect-auto flex-shrink-0 md:border-r md:border-[#e6e8eb] md:border-b-0 border-b border-[#e6e8eb] overflow-hidden bg-[#f3fbf8]">
+      <div className="relative w-full aspect-[16/9] md:aspect-[4/3] flex-shrink-0 md:border-r md:border-[#e6e8eb] md:border-b-0 border-b border-[#e6e8eb] overflow-hidden bg-[#f8f9fa]">
         {project.image ? (
           <>
             <Image
               src={project.image}
               alt={project.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="340px"
+              className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
           </>
         ) : (
           <div
@@ -235,7 +235,7 @@ function ProjectRow({ project }: { project: (typeof projects)[number] }) {
       </div>
 
       {/* Content */}
-      <div className="p-7 md:p-8 flex flex-col gap-3 justify-center">
+      <div className="p-7 md:p-10 flex flex-col gap-3 justify-center md:pl-12">
         <div className="flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.1em] text-[#6e7481]">
           <span className="text-[#0c5a40] font-medium">{project.category}</span>
           <span>{project.duration}</span>
