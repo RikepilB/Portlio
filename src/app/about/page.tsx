@@ -246,12 +246,6 @@ export default function AboutPage() {
                             Hi, I&#39;m Richard!
                         </h1>
 
-                        <div className="flex items-center gap-3 text-xs font-mono text-[#6B7280] uppercase animate-fade-up stagger-1">
-                            <span>📍 Toronto, ON</span>
-                            <span>·</span>
-                            <span>🎓 UBC &#39;25</span>
-                        </div>
-
                         {/* Language Toggle */}
                         <div className="flex items-center gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-full p-0.5 w-fit animate-fade-up stagger-2">
                             {(['EN', 'ES'] as const).map((l) => (
