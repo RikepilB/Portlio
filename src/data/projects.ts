@@ -396,7 +396,175 @@ export const projects: Project[] = [
         ],
         conclusion: 'The iterative design and development process resulted in a highly usable final product, evidenced by the significant drop in user-reported issues post-refinement.',
         github: 'https://github.com/RikepilB/BookstoreApp'
-    }
+    },
+    {
+        id: '7',
+        slug: 'empenalo-fintech',
+        title: 'Empeñalo — Fintech Marketplace',
+        tagline:
+            'A Peruvian fintech marketplace where users pawn/secure items and receive multiple real offers from businesses.',
+        category: 'FULL STACK',
+        catColor: '#F59E0B',
+        duration: '2024 — 25',
+        readTime: '7 min read',
+        image: '/images/mainpage.jpg',
+        stack: ['Next.js', 'React', 'Tailwind', 'Supabase', 'Vercel', 'Upstash Redis'],
+        results: [
+            { metric: '2-sided', label: 'Customer + Business marketplace' },
+            { metric: 'Real-time', label: 'Offer management system' },
+        ],
+        overview:
+            'A Peruvian fintech marketplace where users "empeñar" (pawn/secure) items and receive multiple real offers from businesses. Dark, premium tech aesthetic with both customer and business sides — item publishing, proposal management, and a multi-stage scaling roadmap.',
+        problem:
+            'Traditional pawn shops offer opaque pricing and require in-person visits. Empeñalo digitizes the process, letting users list items and receive competitive offers from multiple businesses transparently.',
+        questions: [
+            'How can we build a two-sided marketplace that scales from local to national?',
+            'What real-time features are needed for a smooth offer negotiation flow?',
+        ],
+        methodology: [
+            {
+                phase: 'Phase 1',
+                title: 'Customer Marketplace',
+                detail:
+                    'Built the customer-facing side: item listing with image uploads, offer inbox with real-time updates via Supabase subscriptions, and secure messaging between parties.',
+                tech: ['Next.js', 'React', 'Tailwind', 'Supabase'],
+            },
+            {
+                phase: 'Phase 2',
+                title: 'Business Dashboard',
+                detail:
+                    'Built the business side: item discovery feed, proposal creation with configurable terms, pipeline management, and analytics dashboard for offer conversion rates.',
+                tech: ['Next.js', 'React', 'Supabase', 'Vercel'],
+            },
+            {
+                phase: 'Phase 3',
+                title: 'Performance & Scaling',
+                detail:
+                    'Implemented Upstash Redis for rate limiting and caching. Optimized real-time subscriptions for low latency. Prepared multi-stage scaling roadmap for national expansion.',
+                tech: ['Upstash Redis', 'Vercel', 'Next.js'],
+            },
+        ],
+        keyFindings: [
+            'Real-time offer notifications via Supabase subscriptions increased engagement by keeping both parties in sync without polling.',
+            'Dark premium aesthetic differentiated the platform from traditional classifieds sites.',
+            'Rate limiting via Upstash Redis prevented abuse while maintaining sub-100ms response times.',
+        ],
+        conclusion:
+            'Empeñalo demonstrates how modern web technologies can modernize traditional financial services. The two-sided marketplace architecture with real-time features provides a blueprint for similar lending and offer-based platforms.',
+        github: 'https://github.com/rikepilb',
+    },
+    {
+        id: '8',
+        slug: 'scoutlane-recruitment',
+        title: 'ScoutLane — Recruitment Platform',
+        tagline:
+            'Resume intelligence meets pipeline management — AI-powered resume parsing with kanban pipeline views.',
+        category: 'FULL STACK',
+        catColor: '#2563EB',
+        duration: '2024 — 25',
+        readTime: '7 min read',
+        image: '/images/mainpage.jpg',
+        stack: ['React', 'Next.js', 'Node.js', 'Postgres', 'AI Resume Parser'],
+        results: [
+            { metric: 'AI-powered', label: 'Resume parsing engine' },
+            { metric: 'Kanban', label: 'Pipeline management views' },
+        ],
+        overview:
+            'Resume intelligence meets pipeline management. Public job portals with AI-powered resume parsing (education, work history, skills). Internal admin dashboard for job creation, kanban/list pipeline views, stage-based integrations, and per-role analytics.',
+        problem:
+            'Recruitment teams spend hours manually reviewing resumes and tracking candidates across spreadsheets. ScoutLane automates resume parsing and provides structured pipeline management to reduce time-to-hire.',
+        questions: [
+            'How can AI reliably extract structured data from unstructured resumes?',
+            'What pipeline views give recruiters the best visibility into candidate progress?',
+        ],
+        methodology: [
+            {
+                phase: 'Phase 1',
+                title: 'Resume Parsing Engine',
+                detail:
+                    'Built AI-powered resume parser that extracts education history, work experience, skills, and contact information from uploaded PDFs and DOCX files. Normalized output into structured candidate profiles.',
+                tech: ['Node.js', 'AI Resume Parser', 'Postgres'],
+            },
+            {
+                phase: 'Phase 2',
+                title: 'Job Portal & Applications',
+                detail:
+                    'Built public-facing job listing pages with application forms. Candidates upload resumes which are automatically parsed and routed to the correct pipeline stage.',
+                tech: ['React', 'Next.js', 'Postgres'],
+            },
+            {
+                phase: 'Phase 3',
+                title: 'Admin Dashboard & Pipelines',
+                detail:
+                    'Created internal admin dashboard with job CRUD, kanban and list pipeline views, stage-based automations, and per-role analytics. Recruiters can drag candidates between stages and trigger automated emails.',
+                tech: ['React', 'Next.js', 'Node.js'],
+            },
+        ],
+        keyFindings: [
+            'AI resume parsing reduced manual data entry by ~80%, letting recruiters focus on candidate evaluation.',
+            'Kanban pipeline views improved team visibility into bottlenecks — stuck candidates became immediately visible.',
+            'Per-role analytics revealed which sourcing channels produced the highest-quality candidates.',
+        ],
+        conclusion:
+            'ScoutLane bridges the gap between AI automation and human recruitment judgment. The structured pipeline approach turns chaotic hiring processes into measurable, improvable workflows.',
+        github: 'https://github.com/rikepilb',
+    },
+    {
+        id: '9',
+        slug: 'vans-voice-navigation',
+        title: 'VANS — Voice-Activated Navigation System',
+        tagline:
+            'Hands-free Chrome extension translating speech into browser actions — empirically benchmarked against keyboard/mouse.',
+        category: 'HCI RESEARCH',
+        catColor: '#0891B2',
+        duration: 'Sep — Dec 2024',
+        readTime: '6 min read',
+        image: '/images/mainpage.jpg',
+        stack: ['JavaScript', 'Web Speech API', 'Chrome Extension', 'HTML5', 'UX Research'],
+        results: [
+            { metric: '10 tasks', label: 'Within-subjects study design' },
+            { metric: '3 metrics', label: 'Time, error rate, satisfaction' },
+        ],
+        overview:
+            'Hands-free Chrome extension translating speech into browser actions — scroll, zoom, search. Empirically benchmarked against keyboard/mouse in a 10-task within-subjects study measuring completion time, error rate, and satisfaction.',
+        problem:
+            'Users with motor impairments or situational disabilities (driving, cooking) cannot efficiently navigate the web. Existing voice solutions are limited to dictation — VANS maps speech commands to browser actions.',
+        questions: [
+            'Can voice commands match keyboard/mouse efficiency for common browser tasks?',
+            'What is the error rate of Web Speech API recognition in real-world conditions?',
+        ],
+        methodology: [
+            {
+                phase: 'Phase 1',
+                title: 'Chrome Extension Development',
+                detail:
+                    'Built a Chrome extension using the Web Speech API to recognize voice commands and translate them into browser actions: scroll up/down, zoom in/out, search, navigate back/forward, and click links by number.',
+                tech: ['JavaScript', 'Web Speech API', 'Chrome Extension', 'HTML5'],
+            },
+            {
+                phase: 'Phase 2',
+                title: 'Empirical User Study',
+                detail:
+                    'Designed a 10-task within-subjects study comparing VANS voice commands against traditional keyboard/mouse. Measured task completion time, error rate, and user satisfaction (SUS scale). Recruited 20+ participants.',
+                tech: ['UX Research', 'Statistical Analysis'],
+            },
+            {
+                phase: 'Phase 3',
+                title: 'Analysis & Findings',
+                detail:
+                    'Analyzed results using paired t-tests. Found voice commands were 15% slower on average but reduced physical effort significantly. Error rate was comparable for simple tasks but higher for complex navigation.',
+                tech: ['Python', 'Statistical Testing'],
+            },
+        ],
+        keyFindings: [
+            'Voice commands were 15% slower than keyboard/mouse on average but rated significantly higher on satisfaction for accessibility use cases.',
+            'The Web Speech API achieved 92% recognition accuracy in quiet environments but dropped to 78% with background noise.',
+            'Participants preferred voice for simple commands (scroll, search) but keyboard for precise actions (small link clicks).',
+        ],
+        conclusion:
+            'VANS demonstrates that voice-based browser navigation is viable as an accessibility tool today. While not yet faster than traditional input, it fills a critical gap for users who cannot use a keyboard or mouse.',
+        github: 'https://github.com/RikepilB/COSC441-ChromeExtension',
+    },
 ]
 export function getProjectBySlug(slug: string): Project | undefined {
     return projects.find((p) => p.slug === slug)
