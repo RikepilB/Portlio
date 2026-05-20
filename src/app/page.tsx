@@ -64,27 +64,14 @@ export default function HomePage() {
               </h1>
 
               <div className="flex flex-col gap-[14px] leading-relaxed">
-                <p className="font-display text-[17px] font-light text-[#1A1A1A] m-0">
-                  I&apos;m a{' '}
-                  <span className="text-[#0c5a40] font-normal text-[18px]">
-                    Software &amp; Data Engineer
-                  </span>{' '}
-                  focused on building products, data pipelines, and technology solutions that remove
-                  manual friction from work.
-                </p>
-
-                <p className="font-display text-[16px] font-light text-[#474747] m-0 leading-[1.65]">
-                  Deploying a mobile app, optimizing workflows, developing a system end to end — I
-                  build systems that scale.
-                </p>
-
-                <p className="font-display text-[16px] font-light text-[#474747] m-0 leading-[1.6]">
-                  I&apos;m currently expanding my knowledge in{' '}
+                <p className="font-display text-[16px] font-light text-[#1A1A1A] m-0 leading-[1.65]">
+                  <span className="text-[#0c5a40] font-normal">Software engineer</span> with hands-on experience in
+                  technologies such as Django, React, Next.js, relational databases, and others. I focus on improving
+                  user experience and code quality, and I apply best practices to create scalable and functional
+                  interfaces. Deploying a mobile app, optimizing workflows, developing a system end to end. I&apos;m
+                  currently expanding my knowledge in{' '}
                   <span className="text-[#1A1A1A] font-normal">AI infrastructure</span> and{' '}
-                  <span className="text-[#1A1A1A] font-normal">
-                    high-performance, robust engineering
-                  </span>
-                  .
+                  <span className="text-[#1A1A1A] font-normal">high-performance, robust engineering</span>.
                 </p>
               </div>
 

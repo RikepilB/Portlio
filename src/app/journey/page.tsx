@@ -1,17 +1,6 @@
-'use client'
-
-import { useState } from 'react'
 import { experiences } from '@/data/experience'
 
-const categories = ['All', 'Work', 'Research', 'Volunteer']
-
 export default function JourneyPage() {
-    const [activeTab, setActiveTab] = useState('All')
-
-    const filtered = activeTab === 'All'
-        ? experiences
-        : experiences.filter(e => e.type === activeTab.toLowerCase())
-
     return (
         <div className="bg-white min-h-screen">
             {/* ── Header ── */}
@@ -25,27 +14,9 @@ export default function JourneyPage() {
             </div>
 
             <div className="max-w-4xl mx-auto px-6 sm:px-12 pb-24 border-t border-[#F3F4F6] pt-12">
-                {/* Filter */}
-                <div className="flex gap-2 mb-16 animate-fade-up stagger-2" role="tablist">
-                    {categories.map((cat) => (
-                        <button
-                            key={cat}
-                            role="tab"
-                            aria-selected={activeTab === cat}
-                            onClick={() => setActiveTab(cat)}
-                            className={`text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full border transition-all duration-200 ${activeTab === cat
-                                ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
-                                : 'text-[#6B7280] border-[#E5E7EB] bg-white hover:border-[#1A1A1A] hover:text-[#1A1A1A]'
-                                }`}
-                        >
-                            {cat}
-                        </button>
-                    ))}
-                </div>
-
                 {/* Minimal Timeline */}
-                <div className="relative border-l-2 border-[#F3F4F6] ml-3 sm:ml-0 md:pl-8 space-y-16 animate-fade-up stagger-3">
-                    {filtered.map((exp) => (
+                <div className="relative border-l-2 border-[#F3F4F6] ml-3 sm:ml-0 md:pl-8 space-y-16">
+                    {experiences.map((exp) => (
                         <article key={exp.id} className="relative pl-8 md:pl-0">
                             {/* Timeline Marker (Circle) */}
                             <div
