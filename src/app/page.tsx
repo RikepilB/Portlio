@@ -68,7 +68,7 @@ export default function HomePage() {
                   <span className="text-[#2bc08f] font-bold text-[18px]">Software engineer</span> with hands-on
                   experience in technologies such as Django, React, Next.js, relational databases, and others. I
                   focus on improving user experience and code quality, and I apply best practices to create
-                  scalable and functional interfaces. Deploying a mobile app, optimizing workflows, developing a
+                  scalable and functional interfaces. Deploying a mobile app, optimizing workflows and developing a
                   system end to end.
                 </p>
                 <p className="font-display text-[16px] font-light text-[#1A1A1A] m-0 leading-[1.6]">
