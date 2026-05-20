@@ -68,7 +68,7 @@ export default function HomePage() {
                   <span className="text-[#2bc08f] font-bold text-[18px]">Software engineer</span> with hands-on
                   experience in technologies such as Django, React, Next.js, relational databases, and others. I
                   focus on improving user experience and code quality, and I apply best practices to create
-                  scalable and functional interfaces. Deploying a mobile app, optimizing workflows, developing a
+                  scalable and functional interfaces. Deploying a mobile app, optimizing workflows and developing a
                   system end to end.
                 </p>
                 <p className="font-display text-[16px] font-light text-[#1A1A1A] m-0 leading-[1.6]">
@@ -169,10 +169,6 @@ export default function HomePage() {
           <h2 className="font-display font-normal text-[clamp(32px,3.5vw,44px)] tracking-[-0.02em] leading-[1.05] m-0 mb-4">
             Skills &amp; <em className="italic text-[#0c5a40] font-light">Stack</em>
           </h2>
-          <p className="text-[#6e7481] max-w-xl leading-relaxed mb-12">
-            The languages, tools, and platforms I use to build automated pipelines, software systems, and data models.
-          </p>
-
           <div className="grid md:grid-cols-3 gap-8">
             {areas.map((area) => (
               <div
