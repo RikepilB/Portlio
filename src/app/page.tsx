@@ -7,9 +7,9 @@ import { projects } from '@/data/projects'
 import { socialLinks } from '@/data/social'
 
 const featuredSlugs = [
-  'bike-share-optimization',
   'empenalo-fintech',
   'scoutlane-recruitment',
+  'bike-share-optimization',
   'exam-analysis-system',
 ]
 
