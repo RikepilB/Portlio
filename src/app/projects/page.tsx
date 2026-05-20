@@ -2,23 +2,12 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { projects } from '@/data/projects'
-
-const funFacts = [
-    'Otters hold hands while they sleep so they don\'t drift away from each other in the water.',
-    'Identical twins don\'t have the same fingerprints.',
-    'Bananas are curved because they grow towards the sun.',
-    'Octopuses have three hearts and blue blood.',
-    'A day on Venus is longer than a year on Venus.',
-    'Humans share about 50% of their DNA with bananas.',
-]
 
 const categories = ['All', 'DATA SCIENCE', 'RESEARCH', 'EXCEL AUTOMATION', 'FULL STACK']
 
 export default function ProjectsPage() {
     const [active, setActive] = useState('All')
-    const [funFact] = useState(() => funFacts[Math.floor(Math.random() * funFacts.length)])
 
     const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active)
 
@@ -110,31 +99,6 @@ export default function ProjectsPage() {
                             </Link>
                         </article>
                     ))}
-                </div>
-
-                {/* ── Footer ── */}
-                <div className="mt-20 pt-10 border-t border-[#F3F4F6]">
-                    <div className="flex flex-col items-center gap-4">
-                        <div className="w-[72px] h-[72px] rounded-full border-[3px] border-white shadow-[0_2px_12px_rgba(0,0,0,0.08)] overflow-hidden">
-                            <Image
-                                src="/images/profile-pic.png"
-                                alt=""
-                                width={72}
-                                height={72}
-                                className="object-cover w-full h-full"
-                            />
-                        </div>
-                        <div className="flex flex-col items-center gap-1">
-                            <span className="font-display font-bold text-[#1A1A1A] text-lg">Richard Pillaca</span>
-                            <p className="text-xs text-[#6B7280] text-center max-w-xs leading-relaxed">
-                                Data Analyst &amp; BI Developer based in Toronto. Building scalable pipelines, intelligent tools, and automated workflows.
-                            </p>
-                        </div>
-                        <p className="text-[10px] font-bold tracking-widest uppercase text-[#6B7280] mt-2">Fun Fact</p>
-                        <p className="text-xs text-[#6B7280] leading-relaxed max-w-xs text-center italic">
-                            {funFact}
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
