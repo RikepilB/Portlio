@@ -11,8 +11,8 @@ const communities = [
         org: 'Latin American Student Association — UBCO',
         url: null,
         description: 'VP Internal of a student-led club celebrating Latin American culture at UBC Okanagan. I managed logistics, budgets, and compliance, drove marketing through reels and targeted ads, and built partnerships with other clubs to co-host events and cut costs.',
-        images: ['/images/Latin american student Organization/LASOPIC.png', '/images/Latin american student Organization/WhatsApp Image 2025-09-22 at 20.53.18_17a5ac8d.jpg'],
-        labels: ['LASO community 🌎', 'Event night']
+        images: ['/images/Latin american student Organization/WhatsApp Image 2025-09-22 at 20.53.18_17a5ac8d.jpg', '/images/Latin american student Organization/LASOPIC.png'],
+        labels: ['Event night', 'LASO community 🌎']
     },
     {
         title: 'Hispanotech',
@@ -27,8 +27,8 @@ const communities = [
         org: 'Wealthsimple Foundation',
         url: null,
         description: 'Selected as a member of the Wealthsimple Foundation program focused on economic empowerment. Working alongside driven peers to build financial literacy and entrepreneurial skills in underserved communities.',
-        images: ['/images/wealthsimple foundation/wealthsimpl4.jpeg', '/images/wealthsimple foundation/WhatsApp Image 2025-12-04 at 10.12.57 AM.jpeg'],
-        labels: ['Program kickoff', 'Community meetup']
+        images: ['/images/wealthsimple foundation/WhatsApp Image 2025-12-04 at 10.12.57 AM.jpeg', '/images/wealthsimple foundation/wealthsimpl4.jpeg'],
+        labels: ['Community meetup', 'Program kickoff']
     },
     {
         title: 'OTIN',
@@ -151,6 +151,7 @@ export default function AboutPage() {
     const [lang, setLang] = useState<'EN' | 'ES'>('EN')
     const [activeSection, setActiveSection] = useState('communities')
     const [photoIndex, setPhotoIndex] = useState<Record<string, number>>({})
+    const [bioExpanded, setBioExpanded] = useState(false)
     const bio = lang === 'EN' ? bioEN : bioES
 
     useEffect(() => {
@@ -182,11 +183,6 @@ export default function AboutPage() {
 
     const scrollToSection = (id: string) => {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-    }
-
-    const handleDotClick = (e: React.MouseEvent, org: string, index: number) => {
-        e.stopPropagation()
-        setPhotoIndex((prev) => ({ ...prev, [org]: index }))
     }
 
     const handleTouchStart = (e: React.TouchEvent) => {
@@ -242,8 +238,8 @@ export default function AboutPage() {
             )}
 
             {/* ── Hero ── */}
-            <section className="max-w-4xl mx-auto px-6 sm:px-12 pt-16 pb-16">
-                <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 items-start">
+            <section className="max-w-6xl mx-auto px-6 sm:px-12 pt-16 pb-16">
+                <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-12 items-start">
                     {/* Left: Bio + Info */}
                     <div className="flex flex-col gap-5">
                         <h1 className="font-display text-4xl sm:text-6xl font-bold text-[#1A1A1A] leading-tight animate-fade-up">
@@ -272,9 +268,19 @@ export default function AboutPage() {
 
                         {/* Bio */}
                         <div className="flex flex-col gap-[14px] text-[#1A1A1A] text-[16px] font-display font-light leading-[1.65] animate-fade-up stagger-2">
-                            {bio.map((paragraph, i) => (
-                                <p key={i} className="m-0">{paragraph}</p>
-                            ))}
+                            {bioExpanded
+                                ? bio.map((paragraph, i) => (
+                                    <p key={i} className="m-0">{paragraph}</p>
+                                ))
+                                : <p className="m-0">{bio[0]}</p>
+                            }
+                            <button
+                                onClick={() => setBioExpanded(!bioExpanded)}
+                                className="text-sm font-medium text-[#10B981] hover:text-[#0c5a40] transition-colors cursor-pointer inline-flex items-center gap-1 w-fit"
+                            >
+                                {bioExpanded ? 'Show less' : 'Read more'}
+                                <span className="text-[10px]">{bioExpanded ? '↑' : '→'}</span>
+                            </button>
                         </div>
 
                         {/* Education */}
@@ -354,7 +360,7 @@ export default function AboutPage() {
 
             {/* ── Content + Sidebar ── */}
             <div className="border-t border-[#F3F4F6]">
-                <div className="max-w-4xl mx-auto px-6 sm:px-12 py-16 md:py-24">
+                <div className="max-w-6xl mx-auto px-6 sm:px-12 py-16 md:py-24">
 
                     {/* Mobile Tab Bar */}
                     <div className="flex md:hidden overflow-x-auto gap-2 pb-2 mb-8 sticky top-16 z-20 bg-white py-2 -mx-6 px-6 border-b border-[#F3F4F6] scrollbar-hide">
@@ -403,7 +409,7 @@ export default function AboutPage() {
                                 <div className="flex flex-col gap-2 mb-10">
                                     <h2 className="text-2xl font-bold text-[#1A1A1A]">My Communities</h2>
                                     <p className="text-[#6B7280] text-sm">The people who make it all worth it ❤️</p>
-                                    <p className="text-[10px] font-mono text-[#6B7280] opacity-60">Click images to expand · tap dots to browse</p>
+                                    <p className="text-[10px] font-mono text-[#6B7280] opacity-60">Click images to expand · use arrows to browse</p>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
@@ -431,8 +437,6 @@ export default function AboutPage() {
                                                 {/* Polaroid */}
                                                 <div
                                                     onClick={() => setSelectedImage({ src: currImg, label: currLabel })}
-                                                    onTouchStart={handleTouchStart}
-                                                    onTouchEnd={(e) => handleTouchEnd(e, comm.org, comm.images.length)}
                                                     className="w-[140px] h-[180px] polaroid transition-all hover:scale-105 cursor-zoom-in self-start mt-1"
                                                 >
                                                     <div className="relative w-full h-[140px] bg-[#F3F4F6] rounded overflow-hidden">
@@ -441,18 +445,40 @@ export default function AboutPage() {
                                                     </div>
                                                     <p className="text-center mt-2 font-display text-[8px] text-[#6B7280] px-1 truncate">{currLabel}</p>
                                                 </div>
-                                                {/* Dots */}
+                                                {/* Arrows */}
                                                 {comm.images.length > 1 && (
-                                                    <div className="flex items-center gap-1.5">
-                                                        {comm.images.map((_, i) => (
-                                                            <button
-                                                                key={i}
-                                                                onClick={(e) => handleDotClick(e, comm.org, i)}
-                                                                className={`w-2 h-2 rounded-full transition-all ${i === currIdx ? 'bg-[#1A1A1A]' : 'bg-[#D1D5DB] hover:bg-[#6B7280]'
-                                                                    }`}
-                                                                aria-label={`Photo ${i + 1}`}
-                                                            />
-                                                        ))}
+                                                    <div
+                                                        className="flex items-center justify-center gap-3"
+                                                        onTouchStart={handleTouchStart}
+                                                        onTouchEnd={(e) => handleTouchEnd(e, comm.org, comm.images.length)}
+                                                    >
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.stopPropagation()
+                                                                const prev = photoIndex[comm.org] ?? 0
+                                                                const total = comm.images.length
+                                                                setPhotoIndex((p) => ({ ...p, [comm.org]: (prev - 1 + total) % total }))
+                                                            }}
+                                                            className="w-6 h-6 rounded-full bg-[#F9FAFB] border border-[#E5E7EB] flex items-center justify-center text-[#6B7280] hover:text-[#1A1A1A] hover:border-[#1A1A1A] transition-colors text-[10px]"
+                                                            aria-label="Previous photo"
+                                                        >
+                                                            ‹
+                                                        </button>
+                                                        <span className="text-[10px] font-mono text-[#6B7280] tabular-nums">
+                                                            {currIdx + 1}/{comm.images.length}
+                                                        </span>
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.stopPropagation()
+                                                                const prev = photoIndex[comm.org] ?? 0
+                                                                const total = comm.images.length
+                                                                setPhotoIndex((p) => ({ ...p, [comm.org]: (prev + 1) % total }))
+                                                            }}
+                                                            className="w-6 h-6 rounded-full bg-[#F9FAFB] border border-[#E5E7EB] flex items-center justify-center text-[#6B7280] hover:text-[#1A1A1A] hover:border-[#1A1A1A] transition-colors text-[10px]"
+                                                            aria-label="Next photo"
+                                                        >
+                                                            ›
+                                                        </button>
                                                     </div>
                                                 )}
                                             </div>
