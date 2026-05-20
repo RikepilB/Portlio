@@ -28,16 +28,16 @@ export function Nav() {
     return (
         <>
             <nav
-                className={`fixed top-0 inset-x-0 z-50 transition-all duration-200 ${isScrolled ? 'border-b border-[#e6e8eb]' : 'border-b border-transparent'
+                className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? 'border-b border-[#e6e8eb]' : 'border-b border-transparent'
                     }`}
                 style={{
-                    background: 'rgba(248,249,250,0.82)',
-                    backdropFilter: 'saturate(180%) blur(14px)',
-                    WebkitBackdropFilter: 'saturate(180%) blur(14px)',
+                    background: isScrolled ? 'rgba(248,249,250,0.92)' : 'rgba(248,249,250,0.62)',
+                    backdropFilter: isScrolled ? 'saturate(180%) blur(12px)' : 'saturate(100%) blur(6px)',
+                    WebkitBackdropFilter: isScrolled ? 'saturate(180%) blur(12px)' : 'saturate(100%) blur(6px)',
                 }}
                 aria-label="Main navigation"
             >
-                <div className="shell flex items-center justify-between h-[72px]">
+                <div className="shell flex items-center justify-between h-[60px]">
                     <Link
                         href="/"
                         className="font-sans font-semibold text-[17px] tracking-[-0.01em] inline-flex items-center gap-[10px] text-[#1A1A1A]"
@@ -95,7 +95,7 @@ export function Nav() {
             </nav>
 
             <div
-                className={`fixed inset-x-0 top-[72px] z-40 bg-[#f8f9fa] border-b border-[#e6e8eb] transition-all duration-200 md:hidden overflow-hidden ${mobileOpen ? 'max-h-96 opacity-100 pointer-events-auto' : 'max-h-0 opacity-0 pointer-events-none'
+                className={`fixed inset-x-0 top-[60px] z-40 bg-[#f8f9fa] border-b border-[#e6e8eb] transition-all duration-200 md:hidden overflow-hidden ${mobileOpen ? 'max-h-96 opacity-100 pointer-events-auto' : 'max-h-0 opacity-0 pointer-events-none'
                     }`}
                 aria-hidden={!mobileOpen}
             >

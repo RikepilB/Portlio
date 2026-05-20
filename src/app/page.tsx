@@ -1,12 +1,10 @@
 'use client'
 
-import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Github, Linkedin, Instagram, Twitter } from 'lucide-react'
-import { Database, Code2, Network } from 'lucide-react'
+import { Github, Linkedin, Instagram, Twitter, Database, Code2, Network } from 'lucide-react'
 import { projects } from '@/data/projects'
-import { socialLinks, contactInfo } from '@/data/social'
+import { socialLinks } from '@/data/social'
 
 const featuredSlugs = [
   'bike-share-optimization',
@@ -36,23 +34,21 @@ const areas = [
   },
 ]
 
-const platformIcons: Record<string, React.ReactNode> = {
-  linkedin: <Linkedin size={18} strokeWidth={1.5} />,
-  github: <Github size={18} strokeWidth={1.5} />,
-  instagram: <Instagram size={18} strokeWidth={1.5} />,
-  twitter: <Twitter size={18} strokeWidth={1.5} />,
+const iconMap: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>> = {
+  github: Github,
+  linkedin: Linkedin,
+  instagram: Instagram,
+  twitter: Twitter,
 }
 
 export default function HomePage() {
-  const [showAll, setShowAll] = useState(false)
-
   const featuredProjects = projects.filter((p) => featuredSlugs.includes(p.slug))
-  const moreProjects = projects.filter((p) => !featuredSlugs.includes(p.slug))
+  const remainingCount = projects.length - featuredProjects.length
 
   return (
     <>
       {/* ── Hero ───────────────────────────────────────── */}
-      <section className="relative pt-16 pb-20 md:pt-24 md:pb-28" aria-label="Introduction">
+      <section className="relative pt-20 pb-20 md:pt-28 md:pb-28" aria-label="Introduction">
         <div
           className="absolute top-[-200px] right-[-200px] w-[600px] h-[600px] pointer-events-none -z-10"
           style={{ background: 'radial-gradient(circle, rgba(43,192,143,0.10) 0%, transparent 60%)' }}
@@ -100,19 +96,22 @@ export default function HomePage() {
                   <span className="text-[#2bc08f] mx-[6px] font-light">·</span>
                   <b className="text-[#2bc08f] font-medium italic">Charismatic.</b>
                 </span>
-                <div className="flex items-center gap-3 mt-1">
-                  {socialLinks.map((link) => (
-                    <a
-                      key={link.platform}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#6e7481] hover:text-[#2bc08f] transition-colors"
-                      aria-label={link.label}
-                    >
-                      {platformIcons[link.platform] ?? link.label}
-                    </a>
-                  ))}
+                <div className="flex items-center gap-4 mt-1">
+                  {socialLinks.slice(0, 4).map((link) => {
+                    const Icon = iconMap[link.platform] ?? Github
+                    return (
+                      <a
+                        key={link.platform}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-full bg-[#f3fbf8] border border-[#d1d2d8] flex items-center justify-center text-[#6e7481] hover:text-[#2bc08f] hover:border-[#2bc08f] hover:shadow-md transition-all group"
+                        aria-label={link.label}
+                      >
+                        <Icon size={18} strokeWidth={2} className="group-hover:scale-110 transition-transform" />
+                      </a>
+                    )
+                  })}
                 </div>
               </div>
             </div>
@@ -146,25 +145,31 @@ export default function HomePage() {
             <h2 className="font-display font-normal text-[clamp(32px,3.5vw,44px)] tracking-[-0.02em] leading-[1.05] m-0">
               My <em className="italic text-[#0c5a40] font-light">work</em>
             </h2>
-            <button type="button" onClick={() => setShowAll(!showAll)} className="section-link">
-              {showAll ? 'Hide all' : 'View all'}
-              <span>{showAll ? '↙' : '↗'}</span>
-            </button>
+            <Link href="/projects" className="section-link">
+              View all projects
+              <span>↗</span>
+            </Link>
           </div>
 
           <div className="flex flex-col border border-[#e6e8eb] rounded-[14px] overflow-hidden">
             {featuredProjects.map((project) => (
               <ProjectRow key={project.id} project={project} />
             ))}
-
-            {showAll && (
-              <div className="animate-fade-up">
-                {moreProjects.map((project) => (
-                  <ProjectRow key={project.id} project={project} />
-                ))}
-              </div>
-            )}
           </div>
+
+          {remainingCount > 0 && (
+            <div className="mt-8 text-center">
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-3 font-mono text-[11.5px] uppercase tracking-[0.08em] text-[#0c5a40] px-5 py-3 rounded-full border border-[#d1d2d8] bg-white hover:border-[#2bc08f] hover:bg-[#f3fbf8] transition-all"
+              >
+                View all projects
+                <span className="rounded-full bg-[#2bc08f]/10 text-[#0c5a40] px-2.5 py-0.5 text-[10px] font-medium">
+                  +{remainingCount} more
+                </span>
+              </Link>
+            </div>
+          )}
         </div>
       </section>
 
@@ -215,18 +220,23 @@ export default function HomePage() {
 }
 
 function ProjectRow({ project }: { project: (typeof projects)[number] }) {
+  const demoHref = project.demoVideo ?? '#'
+
   return (
-    <article className="grid grid-cols-1 md:grid-cols-[340px_1fr] border-b border-[#e6e8eb] last:border-b-0 bg-white hover:bg-[#f3fbf8] transition-colors">
+    <article className="grid grid-cols-1 md:grid-cols-[340px_1fr] border-b border-[#e6e8eb] last:border-b-0 bg-white hover:bg-[#f3fbf8] transition-colors group">
       {/* Thumbnail */}
-      <div className="relative w-full aspect-[16/10] flex-shrink-0 md:border-r md:border-[#e6e8eb] md:border-b-0 border-b border-[#e6e8eb] overflow-hidden bg-[#f3fbf8]">
+      <div className="relative w-full aspect-[16/9] md:aspect-auto flex-shrink-0 md:border-r md:border-[#e6e8eb] md:border-b-0 border-b border-[#e6e8eb] overflow-hidden bg-[#f3fbf8]">
         {project.image ? (
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            className="object-cover"
-            sizes="340px"
-          />
+          <>
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="340px"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          </>
         ) : (
           <div
             className="w-full h-full flex items-center justify-center font-mono text-[11px] text-[#6e7481] uppercase tracking-[0.1em]"
@@ -261,12 +271,14 @@ function ProjectRow({ project }: { project: (typeof projects)[number] }) {
         </p>
 
         <div className="flex gap-2 mt-1 flex-wrap">
-          <Link
-            href={project.demoVideo ?? '#'}
+          <a
+            href={demoHref}
+            target={demoHref.startsWith('http') ? '_blank' : undefined}
+            rel={demoHref.startsWith('http') ? 'noopener noreferrer' : undefined}
             className="work-btn work-btn-demo"
           >
             ↗ Demo
-          </Link>
+          </a>
           <Link href={`/projects/${project.slug}`} className="work-btn work-btn-details">
             Details
           </Link>

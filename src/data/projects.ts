@@ -408,6 +408,8 @@ export const projects: Project[] = [
         duration: '2024 — 25',
         readTime: '7 min read',
         image: '/images/empenalo.png',
+        images: ['/images/empenalo.png'],
+        demoVideo: 'https://empenalo.netlify.app/',
         stack: ['Next.js', 'React', 'Tailwind', 'Supabase', 'Vercel', 'Upstash Redis'],
         results: [
             { metric: '2-sided', label: 'Customer + Business marketplace' },
@@ -464,6 +466,8 @@ export const projects: Project[] = [
         duration: '2024 — 25',
         readTime: '7 min read',
         image: '/images/scoutlane.png',
+        images: ['/images/scoutlane.png'],
+        demoVideo: 'https://scoutlane.vercel.app',
         stack: ['React', 'Next.js', 'Node.js', 'Postgres', 'AI Resume Parser'],
         results: [
             { metric: 'AI-powered', label: 'Resume parsing engine' },
