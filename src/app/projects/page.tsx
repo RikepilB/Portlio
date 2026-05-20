@@ -18,6 +18,7 @@ const categories = ['All', 'DATA SCIENCE', 'RESEARCH', 'EXCEL AUTOMATION', 'FULL
 
 export default function ProjectsPage() {
     const [active, setActive] = useState('All')
+    const [funFact] = useState(() => funFacts[Math.floor(Math.random() * funFacts.length)])
 
     const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active)
 
@@ -113,30 +114,26 @@ export default function ProjectsPage() {
 
                 {/* ── Footer ── */}
                 <div className="mt-20 pt-10 border-t border-[#F3F4F6]">
-                    <div className="flex flex-col items-center gap-5">
-                        <div className="flex items-center gap-3">
+                    <div className="flex flex-col items-center gap-4">
+                        <div className="w-[72px] h-[72px] rounded-full border-[3px] border-white shadow-[0_2px_12px_rgba(0,0,0,0.08)] overflow-hidden">
                             <Image
-                                src="/images/logo.png"
+                                src="/images/profile-pic.png"
                                 alt=""
-                                width={24}
-                                height={24}
-                                className="rounded-full"
+                                width={72}
+                                height={72}
+                                className="object-cover w-full h-full"
                             />
-                            <span className="font-display font-bold text-[#1A1A1A] text-lg">Richard.</span>
                         </div>
-
-                        <p className="text-[10px] font-bold tracking-widest uppercase text-[#6B7280]">Jokes &amp; Fun Facts</p>
-
-                        <div className="grid sm:grid-cols-2 gap-x-10 gap-y-3 w-full max-w-lg">
-                            {funFacts.map((fact, i) => (
-                                <div key={i} className="flex items-start gap-2.5 group">
-                                    <span className="w-4 h-4 rounded-full bg-[#10B981]/10 flex items-center justify-center text-[#10B981] font-mono text-[9px] font-bold shrink-0 mt-[2px] group-hover:bg-[#10B981] group-hover:text-white transition-colors">
-                                        {i + 1}
-                                    </span>
-                                    <p className="text-xs text-[#6B7280] leading-[1.55]">{fact}</p>
-                                </div>
-                            ))}
+                        <div className="flex flex-col items-center gap-1">
+                            <span className="font-display font-bold text-[#1A1A1A] text-lg">Richard Pillaca</span>
+                            <p className="text-xs text-[#6B7280] text-center max-w-xs leading-relaxed">
+                                Data Analyst &amp; BI Developer based in Toronto. Building scalable pipelines, intelligent tools, and automated workflows.
+                            </p>
                         </div>
+                        <p className="text-[10px] font-bold tracking-widest uppercase text-[#6B7280] mt-2">Fun Fact</p>
+                        <p className="text-xs text-[#6B7280] leading-relaxed max-w-xs text-center italic">
+                            {funFact}
+                        </p>
                     </div>
                 </div>
             </div>
