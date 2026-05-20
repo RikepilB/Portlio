@@ -2,12 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { Github, Linkedin, Instagram, Twitter, X } from 'lucide-react'
-import { socialLinks, contactInfo } from '@/data/social'
-
-// Metadata is not supported in client components in Next.js. 
-// It should be moved to a separate layout.tsx if needed.
+import { socialLinks } from '@/data/social'
 
 const communities = [
     {
@@ -136,12 +132,45 @@ const education = {
     location: 'Kelowna, BC',
 }
 
+const sections = [
+    { id: 'communities', label: 'Communities' },
+    { id: 'exploring', label: 'Exploring' },
+    { id: 'beyond-work', label: 'Beyond Work' },
+    { id: 'shelf', label: 'Shelf' },
+]
+
+const iconMap: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>> = {
+    github: Github,
+    linkedin: Linkedin,
+    instagram: Instagram,
+    twitter: Twitter,
+}
+
 export default function AboutPage() {
-    const [selectedImage, setSelectedImage] = useState<{ src: string, label?: string } | null>(null)
+    const [selectedImage, setSelectedImage] = useState<{ src: string; label?: string } | null>(null)
     const [lang, setLang] = useState<'EN' | 'ES'>('EN')
+    const [activeSection, setActiveSection] = useState('communities')
+    const [photoIndex, setPhotoIndex] = useState<Record<string, number>>({})
     const bio = lang === 'EN' ? bioEN : bioES
 
-    // Prevent scrolling when modal is open
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) {
+                    if (entry.isIntersecting) {
+                        setActiveSection(entry.target.id)
+                    }
+                }
+            },
+            { rootMargin: '-80px 0px -55% 0px' }
+        )
+        for (const s of sections) {
+            const el = document.getElementById(s.id)
+            if (el) observer.observe(el)
+        }
+        return () => observer.disconnect()
+    }, [])
+
     useEffect(() => {
         if (selectedImage) {
             document.body.style.overflow = 'hidden'
@@ -150,6 +179,33 @@ export default function AboutPage() {
         }
         return () => { document.body.style.overflow = 'unset' }
     }, [selectedImage])
+
+    const scrollToSection = (id: string) => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    }
+
+    const handleDotClick = (e: React.MouseEvent, org: string, index: number) => {
+        e.stopPropagation()
+        setPhotoIndex((prev) => ({ ...prev, [org]: index }))
+    }
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        ;(e.currentTarget as HTMLElement).dataset.touchX = e.touches[0].clientX.toString()
+    }
+
+    const handleTouchEnd = (e: React.TouchEvent, org: string, total: number) => {
+        const startX = parseFloat((e.currentTarget as HTMLElement).dataset.touchX || '0')
+        const endX = e.changedTouches[0].clientX
+        const diff = startX - endX
+        if (Math.abs(diff) > 50) {
+            const prev = photoIndex[org] ?? 0
+            if (diff > 0) {
+                setPhotoIndex((p) => ({ ...p, [org]: (prev + 1) % total }))
+            } else {
+                setPhotoIndex((p) => ({ ...p, [org]: (prev - 1 + total) % total }))
+            }
+        }
+    }
 
     return (
         <div className="bg-white min-h-screen">
@@ -186,9 +242,10 @@ export default function AboutPage() {
             )}
 
             {/* ── Hero ── */}
-            <div className="max-w-4xl mx-auto px-6 sm:px-12 pt-16 pb-24">
-                <div className="flex flex-col md:flex-row gap-16">
-                    <div className="md:w-1/2 flex flex-col gap-8">
+            <section className="max-w-4xl mx-auto px-6 sm:px-12 pt-16 pb-16">
+                <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 items-start">
+                    {/* Left: Bio + Info */}
+                    <div className="flex flex-col gap-5">
                         <h1 className="font-display text-4xl sm:text-6xl font-bold text-[#1A1A1A] leading-tight animate-fade-up">
                             Hi, I&#39;m Richard!
                         </h1>
@@ -213,49 +270,46 @@ export default function AboutPage() {
                             ))}
                         </div>
 
-                        <div className="flex flex-col gap-6 text-[#1A1A1A] text-lg leading-relaxed animate-fade-up stagger-2">
+                        {/* Bio */}
+                        <div className="flex flex-col gap-[14px] text-[#1A1A1A] text-[16px] font-display font-light leading-[1.65] animate-fade-up stagger-2">
                             {bio.map((paragraph, i) => (
-                                <p key={i}>{paragraph}</p>
+                                <p key={i} className="m-0">{paragraph}</p>
                             ))}
                         </div>
 
-                        <div className="mt-4 pt-6 border-t border-[#F3F4F6] flex flex-col gap-6 animate-fade-up stagger-3">
-                            <a
-                                href={`mailto:${contactInfo.email}`}
-                                className="text-sm font-medium text-[#10B981] flex items-center gap-2 hover:translate-x-1 transition-transform"
-                            >
-                                <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
-                                Working on something cool? Get in touch!
-                            </a>
-
-                            <div className="flex items-center gap-4 md:hidden">
-                                {socialLinks.slice(0, 4).map((link) => {
-                                    const Icon = {
-                                        github: Github,
-                                        linkedin: Linkedin,
-                                        instagram: Instagram,
-                                        twitter: Twitter
-                                    }[link.platform] || Github
-
-                                    return (
-                                        <a
-                                            key={link.platform}
-                                            href={link.href}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="w-10 h-10 rounded-full bg-[#F9FAFB] border border-[#E5E7EB] flex items-center justify-center text-[#6B7280] hover:text-[#10B981] hover:border-[#10B981] hover:shadow-sm transition-all"
-                                            aria-label={link.label}
-                                        >
-                                            <Icon size={18} strokeWidth={2} />
-                                        </a>
-                                    )
-                                })}
+                        {/* Education */}
+                        <div className="flex items-center gap-3 pt-4 mt-2 border-t border-[#F3F4F6] animate-fade-up stagger-3">
+                            <div className="w-10 h-10 rounded-full bg-[#10B981]/10 flex items-center justify-center text-[#10B981] font-display font-bold text-base shrink-0">
+                                U
                             </div>
+                            <div className="flex flex-col gap-0.5">
+                                <span className="text-sm font-semibold text-[#1A1A1A]">{education.degree} · {education.minor}</span>
+                                <span className="text-[11px] text-[#6B7280] font-mono">{education.school} — {education.period} | {education.location}</span>
+                            </div>
+                        </div>
+
+                        {/* Social icons (mobile) */}
+                        <div className="flex items-center gap-4 md:hidden mt-2">
+                            {socialLinks.slice(0, 4).map((link) => {
+                                const Icon = iconMap[link.platform] ?? Github
+                                return (
+                                    <a
+                                        key={link.platform}
+                                        href={link.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-10 h-10 rounded-full bg-[#F9FAFB] border border-[#E5E7EB] flex items-center justify-center text-[#6B7280] hover:text-[#10B981] hover:border-[#10B981] hover:shadow-sm transition-all"
+                                        aria-label={link.label}
+                                    >
+                                        <Icon size={18} strokeWidth={2} />
+                                    </a>
+                                )
+                            })}
                         </div>
                     </div>
 
-                    {/* Right Side: Polaroid Stack & Social Icons */}
-                    <div className="md:w-1/2 flex flex-col items-center gap-12 hidden md:flex animate-fade-up stagger-3" aria-hidden="true">
+                    {/* Right: Polaroid Stack + Social Icons (desktop) */}
+                    <div className="flex-col items-center gap-12 hidden lg:flex justify-end" aria-hidden="true">
                         <div className="relative h-[420px] w-full">
                             <div className="absolute top-0 right-10 w-[200px] h-[240px] polaroid rotate-6 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all z-0 hover:z-20">
                                 <div className="relative w-full h-full bg-[#F3F4F6] rounded overflow-hidden">
@@ -279,13 +333,7 @@ export default function AboutPage() {
 
                         <div className="flex items-center gap-6">
                             {socialLinks.slice(0, 4).map((link) => {
-                                const Icon = {
-                                    github: Github,
-                                    linkedin: Linkedin,
-                                    instagram: Instagram,
-                                    twitter: Twitter
-                                }[link.platform] || Github
-
+                                const Icon = iconMap[link.platform] ?? Github
                                 return (
                                     <a
                                         key={link.platform}
@@ -302,205 +350,259 @@ export default function AboutPage() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            {/* ── Content Blocks ── */}
-            <div className="max-w-4xl mx-auto px-6 sm:px-12 py-24 flex flex-col gap-24 border-t border-[#F3F4F6]">
+            {/* ── Content + Sidebar ── */}
+            <div className="border-t border-[#F3F4F6]">
+                <div className="max-w-4xl mx-auto px-6 sm:px-12 py-16 md:py-24">
 
-                {/* Communities Section */}
-                <section className="flex flex-col gap-12">
-                    <div className="flex flex-col gap-2">
-                        <h2 className="text-2xl font-bold text-[#1A1A1A]">My Communities</h2>
-                        <p className="text-[#6B7280] text-sm">The people who make it all worth it ❤️</p>
-                    </div>
-
-                    <div className="flex flex-col gap-20">
-                        {communities.map((comm) => (
-                            <div key={comm.org} className="flex flex-col gap-8">
-                                <div className="grid md:grid-cols-[1fr_2fr] gap-8">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-14 h-14 rounded-2xl bg-[#F9FAFB] border border-[#E5E7EB] flex items-center justify-center text-xl shadow-sm font-display font-bold text-[#1A1A1A]">
-                                            {comm.title[0]}
-                                        </div>
-                                        <div className="flex flex-col gap-0.5">
-                                            {comm.url ? (
-                                                <a href={comm.url} target="_blank" rel="noopener noreferrer" className="font-display font-bold text-[#1A1A1A] hover:text-[#10B981] transition-colors">{comm.org}</a>
-                                            ) : (
-                                                <h3 className="font-display font-bold text-[#1A1A1A]">{comm.org}</h3>
-                                            )}
-                                        </div>
-                                    </div>
-                                    <p className="text-sm text-[#6B7280] leading-relaxed italic">{comm.description}</p>
-                                </div>
-                                <div className="flex flex-wrap gap-8 justify-center py-4">
-                                    {comm.images?.map((img, i) => (
-                                        <div key={img}
-                                            onClick={() => setSelectedImage({ src: img, label: comm.labels[i] })}
-                                            className={`w-[180px] h-[220px] polaroid transition-all hover:scale-105 hover:z-10 cursor-zoom-in group ${i % 2 === 0 ? 'rotate-2' : '-rotate-2'
-                                                }`}>
-                                            <div className="relative w-full h-[160px] bg-[#F3F4F6] rounded overflow-hidden">
-                                                <div className="absolute inset-0 flex items-center justify-center text-[#6B7280] font-mono text-[8px] z-10 opacity-40 capitalize">{comm.title}_{i + 1}.jpg</div>
-                                                <Image src={img} alt="" fill className="object-cover z-20" />
-                                            </div>
-                                            <p className="text-center mt-3 font-display text-[9px] text-[#6B7280] px-1">{comm.labels[i]}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                    {/* Mobile Tab Bar */}
+                    <div className="flex md:hidden overflow-x-auto gap-2 pb-2 mb-8 sticky top-16 z-20 bg-white py-2 -mx-6 px-6 border-b border-[#F3F4F6] scrollbar-hide">
+                        {sections.map((s) => (
+                            <button
+                                key={s.id}
+                                onClick={() => scrollToSection(s.id)}
+                                className={`shrink-0 text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full border transition-all ${activeSection === s.id
+                                    ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
+                                    : 'text-[#6B7280] border-[#E5E7EB] hover:text-[#1A1A1A] hover:border-[#1A1A1A]'
+                                    }`}
+                            >
+                                {s.label}
+                            </button>
                         ))}
                     </div>
-                </section>
 
-                {/* Travel Section */}
-                <section className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-x-16 gap-y-6 pt-12 border-t border-[#F3F4F6]">
-                    <div className="text-sm font-bold text-[#6B7280] uppercase tracking-widest pt-1">
-                        Exploring
-                    </div>
-                    <div className="flex flex-col gap-6">
-                        <p className="text-lg text-[#6B7280] leading-relaxed">
-                            14 countries and counting. Moving across continents taught me to adapt quickly and communicate clearly — even when the words aren&#39;t perfect.
-                        </p>
-                        <div className="flex flex-wrap gap-3">
-                            {[
-                                { flag: '🇨🇦', name: 'Canada' },
-                                { flag: '🇵🇪', name: 'Peru' },
-                                { flag: '🇬🇧', name: 'UK' },
-                                { flag: '🇨🇭', name: 'Switzerland' },
-                                { flag: '🇬🇷', name: 'Greece' },
-                                { flag: '🇲🇽', name: 'Mexico' },
-                                { flag: '🇪🇨', name: 'Ecuador' },
-                                { flag: '🇺🇸', name: 'USA' },
-                                { flag: '🇩🇴', name: 'Dom. Republic' },
-                                { flag: '✨', name: 'and more' },
-                            ].map(({ flag, name }) => (
-                                <span key={name} className="inline-flex items-center gap-2 px-4 py-2 bg-[#F9FAFB] border border-[#F3F4F6] rounded-full text-sm text-[#1A1A1A] font-medium hover:border-[#10B981]/40 hover:bg-[#10B981]/5 transition-colors">
-                                    <span className="text-xl">{flag}</span>
-                                    {name}
-                                </span>
-                            ))}
-                        </div>
-                        {/* Trip Photo Gallery */}
-                        <div className="flex flex-wrap gap-6 justify-center py-4">
-                            {[
-                                { src: '/images/trips/UK.jpeg', label: 'United Kingdom 🇬🇧' },
-                                { src: '/images/trips/greece.JPG', label: 'Greece 🇬🇷' },
-                                { src: '/images/trips/Peru.jpeg', label: 'Peru 🇵🇪' },
-                            ].map((trip, i) => (
-                                <div
-                                    key={trip.src}
-                                    onClick={() => setSelectedImage(trip)}
-                                    className={`w-[160px] h-[200px] polaroid transition-all hover:scale-105 hover:z-10 cursor-zoom-in ${i % 2 === 0 ? 'rotate-2' : '-rotate-2'}`}
+                    <div className="grid md:grid-cols-[140px_1fr] gap-8 xl:gap-12">
+                        {/* Desktop Sidebar */}
+                        <aside className="hidden md:flex flex-col sticky top-28 self-start gap-3">
+                            {sections.map((s) => (
+                                <button
+                                    key={s.id}
+                                    onClick={() => scrollToSection(s.id)}
+                                    className={`group text-left text-[11px] font-mono font-bold tracking-[0.08em] uppercase transition-all duration-200 ${activeSection === s.id
+                                        ? 'text-[#1A1A1A]'
+                                        : 'text-[#6B7280] hover:text-[#1A1A1A]'
+                                        }`}
                                 >
-                                    <div className="relative w-full h-[150px] bg-[#F3F4F6] rounded overflow-hidden">
-                                        <Image src={trip.src} alt={trip.label} fill className="object-cover" />
+                                    <span
+                                        className={`inline-block w-1.5 h-1.5 rounded-full mr-2 align-middle transition-all ${activeSection === s.id
+                                            ? 'bg-[#10B981]'
+                                            : 'bg-transparent group-hover:bg-[#D1D5DB]'
+                                            }`}
+                                    />
+                                    {s.label}
+                                </button>
+                            ))}
+                        </aside>
+
+                        {/* Content Sections */}
+                        <div className="flex flex-col gap-20 md:gap-24">
+
+                            {/* ── Communities ── */}
+                            <section id="communities">
+                                <div className="flex flex-col gap-2 mb-10">
+                                    <h2 className="text-2xl font-bold text-[#1A1A1A]">My Communities</h2>
+                                    <p className="text-[#6B7280] text-sm">The people who make it all worth it ❤️</p>
+                                    <p className="text-[10px] font-mono text-[#6B7280] opacity-60">Click images to expand · tap dots to browse</p>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+                                    {communities.map((comm) => {
+                                        const currIdx = photoIndex[comm.org] ?? 0
+                                        const currImg = comm.images[currIdx]
+                                        const currLabel = comm.labels[currIdx] ?? ''
+                                        return (
+                                            <div key={comm.org} className="flex flex-col gap-3">
+                                                {/* Icon + Org */}
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] flex items-center justify-center text-sm shadow-sm font-display font-bold text-[#1A1A1A] shrink-0">
+                                                        {comm.title[0]}
+                                                    </div>
+                                                    <div className="flex flex-col gap-0 min-w-0">
+                                                        {comm.url ? (
+                                                            <a href={comm.url} target="_blank" rel="noopener noreferrer" className="font-display font-bold text-[#1A1A1A] hover:text-[#10B981] transition-colors text-sm truncate">{comm.org}</a>
+                                                        ) : (
+                                                            <h3 className="font-display font-bold text-[#1A1A1A] text-sm truncate">{comm.org}</h3>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                                {/* Description */}
+                                                <p className="text-xs text-[#6B7280] leading-relaxed line-clamp-3">{comm.description}</p>
+                                                {/* Polaroid */}
+                                                <div
+                                                    onClick={() => setSelectedImage({ src: currImg, label: currLabel })}
+                                                    onTouchStart={handleTouchStart}
+                                                    onTouchEnd={(e) => handleTouchEnd(e, comm.org, comm.images.length)}
+                                                    className="w-[140px] h-[180px] polaroid transition-all hover:scale-105 cursor-zoom-in self-start mt-1"
+                                                >
+                                                    <div className="relative w-full h-[140px] bg-[#F3F4F6] rounded overflow-hidden">
+                                                        <div className="absolute inset-0 flex items-center justify-center text-[#6B7280] font-mono text-[7px] z-10 opacity-40 capitalize">{comm.title}_polaroid</div>
+                                                        <Image src={currImg} alt={currLabel} fill className="object-cover z-20" />
+                                                    </div>
+                                                    <p className="text-center mt-2 font-display text-[8px] text-[#6B7280] px-1 truncate">{currLabel}</p>
+                                                </div>
+                                                {/* Dots */}
+                                                {comm.images.length > 1 && (
+                                                    <div className="flex items-center gap-1.5">
+                                                        {comm.images.map((_, i) => (
+                                                            <button
+                                                                key={i}
+                                                                onClick={(e) => handleDotClick(e, comm.org, i)}
+                                                                className={`w-2 h-2 rounded-full transition-all ${i === currIdx ? 'bg-[#1A1A1A]' : 'bg-[#D1D5DB] hover:bg-[#6B7280]'
+                                                                    }`}
+                                                                aria-label={`Photo ${i + 1}`}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </section>
+
+                            {/* ── Exploring ── */}
+                            <section id="exploring" className="pt-12 md:pt-0 border-t md:border-t-0 border-[#F3F4F6]">
+                                <h2 className="text-sm font-bold text-[#6B7280] uppercase tracking-widest mb-6">Exploring</h2>
+                                <div className="flex flex-col gap-6">
+                                    <p className="text-lg text-[#6B7280] leading-relaxed">
+                                        14 countries and counting. Moving across continents taught me to adapt quickly and communicate clearly — even when the words aren&#39;t perfect.
+                                    </p>
+                                    <div className="flex flex-wrap gap-3">
+                                        {[
+                                            { flag: '🇨🇦', name: 'Canada' },
+                                            { flag: '🇵🇪', name: 'Peru' },
+                                            { flag: '🇬🇧', name: 'UK' },
+                                            { flag: '🇨🇭', name: 'Switzerland' },
+                                            { flag: '🇬🇷', name: 'Greece' },
+                                            { flag: '🇲🇽', name: 'Mexico' },
+                                            { flag: '🇪🇨', name: 'Ecuador' },
+                                            { flag: '🇺🇸', name: 'USA' },
+                                            { flag: '🇩🇴', name: 'Dom. Republic' },
+                                            { flag: '✨', name: 'and more' },
+                                        ].map(({ flag, name }) => (
+                                            <span key={name} className="inline-flex items-center gap-2 px-4 py-2 bg-[#F9FAFB] border border-[#F3F4F6] rounded-full text-sm text-[#1A1A1A] font-medium hover:border-[#10B981]/40 hover:bg-[#10B981]/5 transition-colors">
+                                                <span className="text-xl">{flag}</span>
+                                                {name}
+                                            </span>
+                                        ))}
                                     </div>
-                                    <p className="text-center mt-2 font-display text-[9px] text-[#6B7280]">{trip.label}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* Education */}
-                <section className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-x-16 gap-y-6 pt-12 border-t border-[#F3F4F6]">
-                    <div className="text-sm font-bold text-[#6B7280] uppercase tracking-widest pt-1">
-                        Education
-                    </div>
-                    <div className="flex items-center gap-6">
-                        <div className="w-16 h-16 rounded-full bg-[#10B981]/10 flex items-center justify-center text-[#10B981] font-display font-bold text-2xl shrink-0">
-                            U
-                        </div>
-                        <div className="flex flex-col gap-1">
-                            <h3 className="font-display text-xl font-bold text-[#1A1A1A]">{education.school}</h3>
-                            <p className="text-[#6B7280] font-medium">{education.degree} — {education.minor}</p>
-                            <p className="text-xs text-[#6B7280] font-mono mt-1 opacity-70 uppercase tracking-widest">{education.period} | {education.location}</p>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Beyond Work */}
-                <section className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-x-16 gap-y-12 pt-12 border-t border-[#F3F4F6]">
-                    <div className="text-sm font-bold text-[#6B7280] uppercase tracking-widest pt-1">
-                        Beyond Work
-                    </div>
-                    <div className="flex flex-col gap-12">
-                        <div className="grid sm:grid-cols-2 gap-x-12 gap-y-16">
-                            {beyondWork.map(({ emoji, title, description }) => (
-                                <div key={title} className="flex flex-col gap-3">
-                                    <h3 className="font-display font-bold text-[#1A1A1A] text-lg flex items-center gap-2">
-                                        <span className="text-2xl">{emoji}</span> {title}
-                                    </h3>
-                                    <p className="text-sm text-[#6B7280] leading-relaxed">{description}</p>
-                                </div>
-                            ))}
-                        </div>
-                        {/* Activity Photos */}
-                        <div className="flex flex-wrap gap-6 justify-center">
-                            {[
-                                { src: '/images/Football club/WhatsApp Image 2026-03-02 at 1.14.12 PM.jpeg', label: 'Football ⚽' },
-                                { src: '/images/Running club/download.jpeg', label: 'Running 🏃' },
-                            ].map((activity, i) => (
-                                <div
-                                    key={activity.src}
-                                    onClick={() => setSelectedImage(activity)}
-                                    className={`w-[160px] h-[200px] polaroid transition-all hover:scale-105 cursor-zoom-in ${i % 2 === 0 ? 'rotate-1' : '-rotate-2'}`}
-                                >
-                                    <div className="relative w-full h-[150px] bg-[#F3F4F6] rounded overflow-hidden">
-                                        <Image src={activity.src} alt={activity.label} fill className="object-cover" />
+                                    {/* Trip Photo Gallery */}
+                                    <div className="flex flex-wrap gap-6 justify-center py-4">
+                                        {[
+                                            { src: '/images/trips/UK.jpeg', label: 'United Kingdom 🇬🇧' },
+                                            { src: '/images/trips/greece.JPG', label: 'Greece 🇬🇷' },
+                                            { src: '/images/trips/Peru.jpeg', label: 'Peru 🇵🇪' },
+                                        ].map((trip, i) => (
+                                            <div
+                                                key={trip.src}
+                                                onClick={() => setSelectedImage(trip)}
+                                                className={`w-[160px] h-[200px] polaroid transition-all hover:scale-105 hover:z-10 cursor-zoom-in ${i % 2 === 0 ? 'rotate-2' : '-rotate-2'}`}
+                                            >
+                                                <div className="relative w-full h-[150px] bg-[#F3F4F6] rounded overflow-hidden">
+                                                    <Image src={trip.src} alt={trip.label} fill className="object-cover" />
+                                                </div>
+                                                <p className="text-center mt-2 font-display text-[9px] text-[#6B7280]">{trip.label}</p>
+                                            </div>
+                                        ))}
                                     </div>
-                                    <p className="text-center mt-2 font-display text-[9px] text-[#6B7280]">{activity.label}</p>
                                 </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
+                            </section>
 
-                {/* Shelf */}
-                <section className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-x-16 gap-y-8 pt-12 border-t border-[#F3F4F6]">
-                    <div className="text-sm font-bold text-[#6B7280] uppercase tracking-widest pt-1">
-                        Shelf
-                    </div>
-                    <div className="flex flex-col gap-6">
-                        <p className="text-lg text-[#6B7280] leading-relaxed">
-                            I love discovering new hidden food spots, getting excited about beautifully designed stationery, and listening to audiobooks on long drives.
-                        </p>
-                        {/* Favorites Gallery */}
-                        <div className="flex flex-wrap gap-5 justify-center py-2">
-                            {[
-                                { src: '/images/Favorites/61LsXpUgxdL.jpg', label: 'Music 🎵' },
-                                { src: '/images/Favorites/81FYASoyw0L._AC_UF894,1000_QL80_.jpg', label: 'Sports 🏃' },
-                                { src: '/images/Favorites/Tintin_movie_poster_01.webp', label: 'Movies 🎬' },
-                                { src: '/images/Favorites/MV5BZWNjZjQwZmItMWU1ZS00YTJhLWExYjUtYjk3YjcxMjJlOTdmXkEyXkFqcGc@._V1_.jpg', label: 'Music 🎶' },
-                                { src: '/images/Running club/Screenshot 2025-10-15 143144.png', label: 'Sports 🏃', position: 'object-[80%_center]' },
-                                { src: '/images/Favorites/Screenshot 2025-10-25 005945.png', label: 'Movies 🎬' },
-                            ].map((fav: { src: string, label?: string, position?: string }, i) => (
-                                <div
-                                    key={fav.src}
-                                    onClick={() => setSelectedImage(fav)}
-                                    className={`w-[120px] h-[170px] polaroid transition-all hover:scale-110 hover:z-10 cursor-zoom-in ${i % 2 === 0 ? 'rotate-1' : '-rotate-1'}`}
-                                >
-                                    <div className="relative w-full h-[130px] bg-[#F3F4F6] rounded overflow-hidden">
-                                        <Image
-                                            src={fav.src}
-                                            alt={fav.label ?? ''}
-                                            fill
-                                            className={`object-cover ${fav.position || 'object-center'}`}
-                                        />
+                            {/* ── Beyond Work ── */}
+                            <section id="beyond-work" className="pt-12 md:pt-0 border-t md:border-t-0 border-[#F3F4F6]">
+                                <h2 className="text-sm font-bold text-[#6B7280] uppercase tracking-widest mb-6">Beyond Work</h2>
+                                <div className="flex flex-col gap-12">
+                                    <div className="grid sm:grid-cols-2 gap-x-12 gap-y-16">
+                                        {beyondWork.map(({ emoji, title, description }) => (
+                                            <div key={title} className="flex flex-col gap-3">
+                                                <h3 className="font-display font-bold text-[#1A1A1A] text-lg flex items-center gap-2">
+                                                    <span className="text-2xl">{emoji}</span> {title}
+                                                </h3>
+                                                <p className="text-sm text-[#6B7280] leading-relaxed">{description}</p>
+                                            </div>
+                                        ))}
                                     </div>
-                                    <p className="text-center mt-2 font-display text-[8px] text-[#6B7280]">{fav.label}</p>
+                                    {/* Activity Photos */}
+                                    <div className="flex flex-wrap gap-6 justify-center">
+                                        {[
+                                            { src: '/images/Football club/WhatsApp Image 2026-03-02 at 1.14.12 PM.jpeg', label: 'Football ⚽' },
+                                            { src: '/images/Running club/download.jpeg', label: 'Running 🏃' },
+                                        ].map((activity, i) => (
+                                            <div
+                                                key={activity.src}
+                                                onClick={() => setSelectedImage(activity)}
+                                                className={`w-[160px] h-[200px] polaroid transition-all hover:scale-105 cursor-zoom-in ${i % 2 === 0 ? 'rotate-1' : '-rotate-2'}`}
+                                            >
+                                                <div className="relative w-full h-[150px] bg-[#F3F4F6] rounded overflow-hidden">
+                                                    <Image src={activity.src} alt={activity.label} fill className="object-cover" />
+                                                </div>
+                                                <p className="text-center mt-2 font-display text-[9px] text-[#6B7280]">{activity.label}</p>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
-                            ))}
-                        </div>
-                        <div className="bg-[#F9FAFB] p-8 rounded-2xl border border-[#F3F4F6] relative overflow-hidden group">
-                            <div className="absolute top-0 right-0 w-24 h-24 bg-[#10B981]/5 rounded-bl-full transition-transform group-hover:scale-150 duration-500" />
-                            <h4 className="text-xs font-bold uppercase tracking-widest text-[#1A1A1A] mb-4">Currently</h4>
-                            <p className="text-[#6B7280] leading-relaxed text-[15px]">
-                                Reading Malcolm Gladwell. Listening to <em className="not-italic text-[#1A1A1A] font-bold">AI Chat</em>. Learning French. Training for the next football season.
-                            </p>
+                            </section>
+
+                            {/* ── Shelf ── */}
+                            <section id="shelf" className="pt-12 md:pt-0 border-t md:border-t-0 border-[#F3F4F6]">
+                                <h2 className="text-sm font-bold text-[#6B7280] uppercase tracking-widest mb-6">Shelf</h2>
+                                <div className="flex flex-col gap-6">
+                                    <p className="text-lg text-[#6B7280] leading-relaxed">
+                                        I love discovering new hidden food spots, getting excited about beautifully designed stationery, and listening to audiobooks on long drives.
+                                    </p>
+                                    {/* Favorites Gallery */}
+                                    <div className="flex flex-wrap gap-5 justify-center py-2">
+                                        {[
+                                            { src: '/images/Favorites/61LsXpUgxdL.jpg', label: 'Music 🎵' },
+                                            { src: '/images/Favorites/81FYASoyw0L._AC_UF894,1000_QL80_.jpg', label: 'Sports 🏃' },
+                                            { src: '/images/Favorites/Tintin_movie_poster_01.webp', label: 'Movies 🎬' },
+                                            { src: '/images/Favorites/MV5BZWNjZjQwZmItMWU1ZS00YTJhLWExYjUtYjk3YjcxMjJlOTdmXkEyXkFqcGc@._V1_.jpg', label: 'Music 🎶' },
+                                            { src: '/images/Running club/Screenshot 2025-10-15 143144.png', label: 'Sports 🏃', position: 'object-[80%_center]' },
+                                            { src: '/images/Favorites/Screenshot 2025-10-25 005945.png', label: 'Movies 🎬' },
+                                        ].map((fav: { src: string; label?: string; position?: string }, i) => (
+                                            <div
+                                                key={fav.src}
+                                                onClick={() => setSelectedImage(fav)}
+                                                className={`w-[120px] h-[170px] polaroid transition-all hover:scale-110 hover:z-10 cursor-zoom-in ${i % 2 === 0 ? 'rotate-1' : '-rotate-1'}`}
+                                            >
+                                                <div className="relative w-full h-[130px] bg-[#F3F4F6] rounded overflow-hidden">
+                                                    <Image
+                                                        src={fav.src}
+                                                        alt={fav.label ?? ''}
+                                                        fill
+                                                        className={`object-cover ${fav.position || 'object-center'}`}
+                                                    />
+                                                </div>
+                                                <p className="text-center mt-2 font-display text-[8px] text-[#6B7280]">{fav.label}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="bg-[#F9FAFB] p-8 rounded-2xl border border-[#F3F4F6] relative overflow-hidden group">
+                                        <div className="absolute top-0 right-0 w-24 h-24 bg-[#10B981]/5 rounded-bl-full transition-transform group-hover:scale-150 duration-500" />
+                                        <h4 className="text-xs font-bold uppercase tracking-widest text-[#1A1A1A] mb-4">Currently</h4>
+                                        <p className="text-[#6B7280] leading-relaxed text-[15px]">
+                                            Reading Malcolm Gladwell. Listening to <em className="not-italic text-[#1A1A1A] font-bold">AI Chat</em>. Learning French. Training for the next football season.
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+
                         </div>
                     </div>
-                </section>
 
+                    {/* Back to Top */}
+                    <div className="flex justify-center mt-16 pt-8 border-t border-[#F3F4F6]">
+                        <button
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            className="inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-widest uppercase text-[#6B7280] hover:text-[#10B981] transition-colors group"
+                        >
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#D1D5DB] group-hover:bg-[#10B981] transition-colors" />
+                            ↑ Back to top
+                        </button>
+                    </div>
+
+                </div>
             </div>
         </div>
     )
