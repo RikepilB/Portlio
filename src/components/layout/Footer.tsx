@@ -14,7 +14,7 @@ const footerLinks = [
 
 export function Footer() {
     const pathname = usePathname()
-    if (pathname === '/' || pathname === '/journey' || pathname === '/about') return null
+    if (pathname === '/' || pathname === '/journey' || pathname === '/about' || pathname === '/projects') return null
 
     return (
         <footer className="bg-white border-t border-[#F3F4F6] mt-24" aria-label="Site footer">

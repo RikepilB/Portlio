@@ -289,7 +289,7 @@ export const projects: Project[] = [
         ],
         conclusion:
             'Full-stack automation of academic workflows is feasible within a single semester with a focused two-person team. The integrity flagging module proved the most impactful feature — not because it caught cheating, but because it gave faculty a defensible, consistent standard for investigation rather than gut feel. The system is currently in production use.',
-        github: 'https://github.com/rikepilb',
+        github: 'https://github.com/RikepilB/ExamVault',
         stack: ['Python', 'Django', 'PostgreSQL', 'React.js', 'Tailwind CSS', 'REST API', 'Docker', 'GitHub Actions'],
     },
     {

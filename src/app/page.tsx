@@ -1,10 +1,20 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Github, Linkedin, Instagram, Twitter, Database, Code2, Network } from 'lucide-react'
 import { projects } from '@/data/projects'
 import { socialLinks } from '@/data/social'
+
+const funFacts = [
+    'Otters hold hands while they sleep so they don\'t drift away from each other in the water.',
+    'Identical twins don\'t have the same fingerprints.',
+    'Bananas are curved because they grow towards the sun.',
+    'Octopuses have three hearts and blue blood.',
+    'A day on Venus is longer than a year on Venus.',
+    'Humans share about 50% of their DNA with bananas.',
+]
 
 const featuredSlugs = [
   'empenalo-fintech',
@@ -44,6 +54,7 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; strokeWidth?:
 export default function HomePage() {
   const featuredProjects = projects.filter((p) => featuredSlugs.includes(p.slug))
   const remainingCount = projects.length - featuredProjects.length
+  const [funFact] = useState(() => funFacts[Math.floor(Math.random() * funFacts.length)])
 
   return (
     <>
@@ -201,6 +212,33 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── Footer ── */}
+      <footer className="border-t border-[#e6e8eb] py-12">
+        <div className="shell">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-[72px] h-[72px] rounded-full border-[3px] border-white shadow-[0_2px_12px_rgba(0,0,0,0.08)] overflow-hidden">
+              <Image
+                src="/images/profile-pic.png"
+                alt=""
+                width={72}
+                height={72}
+                className="object-cover w-full h-full"
+              />
+            </div>
+            <div className="flex flex-col items-center gap-1">
+              <span className="font-display font-bold text-[#1A1A1A] text-lg">Richard Pillaca</span>
+              <p className="text-xs text-[#6e7481] text-center max-w-xs leading-relaxed">
+                Data Analyst &amp; BI Developer based in Toronto. Building scalable pipelines, intelligent tools, and automated workflows.
+              </p>
+            </div>
+            <p className="text-[10px] font-bold tracking-widest uppercase text-[#6e7481] mt-2">Fun Fact</p>
+            <p className="text-xs text-[#6e7481] leading-relaxed max-w-xs text-center italic">
+              {funFact}
+            </p>
+          </div>
+        </div>
+      </footer>
     </>
   )
 }
