@@ -169,10 +169,6 @@ export default function HomePage() {
           <h2 className="font-display font-normal text-[clamp(32px,3.5vw,44px)] tracking-[-0.02em] leading-[1.05] m-0 mb-4">
             Skills &amp; <em className="italic text-[#0c5a40] font-light">Stack</em>
           </h2>
-          <p className="text-[#6e7481] max-w-xl leading-relaxed mb-12">
-            The languages, tools, and platforms I use to build automated pipelines, software systems, and data models.
-          </p>
-
           <div className="grid md:grid-cols-3 gap-8">
             {areas.map((area) => (
               <div
