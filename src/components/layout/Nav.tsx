@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { contactInfo } from '@/data/social'
@@ -40,11 +41,20 @@ export function Nav() {
                 <div className="shell flex items-center justify-between h-[60px]">
                     <Link
                         href="/"
-                        className="font-sans font-semibold text-[17px] tracking-[-0.01em] inline-flex items-center gap-[10px] text-[#1A1A1A]"
+                        className="inline-flex items-center gap-2"
                         aria-label="Home page"
                     >
-                        <span className="pulse-dot" aria-hidden="true" />
-                        Richard Pillaca
+                        <Image
+                            src="/images/logo.png"
+                            alt=""
+                            width={32}
+                            height={32}
+                            className="rounded-full"
+                            priority
+                        />
+                        <span className="font-sans font-bold text-[16px] tracking-[-0.01em]" style={{ color: '#D4AF37' }}>
+                            HEY!
+                        </span>
                     </Link>
 
                     <ul className="hidden md:flex gap-9 list-none m-0 p-0">
