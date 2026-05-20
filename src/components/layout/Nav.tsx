@@ -7,9 +7,9 @@ import { contactInfo } from '@/data/social'
 
 const navItems = [
     { href: '/', label: 'Home' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/journey', label: 'Journey' },
     { href: '/about', label: 'About' },
+    { href: '/journey', label: 'Journey' },
+    { href: '/projects', label: 'Projects' },
 ]
 
 export function Nav() {
