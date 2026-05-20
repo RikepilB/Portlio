@@ -3,112 +3,128 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import { contactInfo } from '@/data/social'
 
 const navItems = [
-    { href: '/projects', label: 'Work' },
-    { href: '/about', label: 'About' },
+    { href: '/', label: 'Home' },
+    { href: '/projects', label: 'Projects' },
     { href: '/journey', label: 'Journey' },
-    { href: '/skills', label: 'Skills' },
-    { href: '/resume', label: 'Resume' },
+    { href: '/about', label: 'About' },
 ]
 
 export function Nav() {
     const pathname = usePathname()
     const [isScrolled, setIsScrolled] = useState(false)
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [mobileOpen, setMobileOpen] = useState(false)
 
-    // Scroll effect for subtle header shadow
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 20)
         window.addEventListener('scroll', handleScroll, { passive: true })
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
-    // Close mobile menu when route changes
-    useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setMobileMenuOpen(false)
-    }, [pathname])
+    const closeMobile = () => setMobileOpen(false)
 
     return (
         <>
-            <header
-                className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-md hover:shadow-md ${isScrolled ? 'border-b border-[#F3F4F6] shadow-[0_4px_30px_rgba(0,0,0,0.02)]' : 'border-b border-transparent'
+            <nav
+                className={`fixed top-0 inset-x-0 z-50 transition-all duration-200 ${isScrolled ? 'border-b border-[#e6e8eb]' : 'border-b border-transparent'
                     }`}
+                style={{
+                    background: 'rgba(248,249,250,0.82)',
+                    backdropFilter: 'saturate(180%) blur(14px)',
+                    WebkitBackdropFilter: 'saturate(180%) blur(14px)',
+                }}
+                aria-label="Main navigation"
             >
-                <div className="max-w-5xl mx-auto px-6 sm:px-12 h-20 flex items-center justify-between">
-
-                    {/* Logo */}
+                <div className="shell flex items-center justify-between h-[72px]">
                     <Link
                         href="/"
-                        className="font-display text-xl font-bold tracking-tight text-[#1A1A1A] hover:opacity-70 transition-opacity"
+                        className="font-sans font-semibold text-[17px] tracking-[-0.01em] inline-flex items-center gap-[10px] text-[#1A1A1A]"
                         aria-label="Home page"
                     >
+                        <span className="pulse-dot" aria-hidden="true" />
                         Richard Pillaca
                     </Link>
 
-                    {/* Desktop Nav */}
-                    <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+                    <ul className="hidden md:flex gap-9 list-none m-0 p-0">
                         {navItems.map((item) => (
+                            <li key={item.href}>
+                                <Link
+                                    href={item.href}
+                                    onClick={closeMobile}
+                                    className={`font-mono text-[11.5px] tracking-[0.05em] uppercase py-[6px] relative transition-colors duration-200 ${pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+                                            ? 'text-[#1A1A1A]'
+                                            : 'text-[#6e7481] hover:text-[#1A1A1A]'
+                                        }`}
+                                    aria-current={
+                                        pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+                                            ? 'page'
+                                            : undefined
+                                    }
+                                >
+                                    {item.label}
+                                    {(pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))) && (
+                                        <span className="absolute left-0 right-0 -bottom-[2px] h-[1.5px] bg-[#2bc08f] rounded-[1px]" />
+                                    )}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+
+                    <a
+                        href={`mailto:${contactInfo.email}`}
+                        className="hidden md:inline-flex items-center gap-2 px-[18px] py-[10px] bg-[#1A1A1A] text-white rounded-full text-[13.5px] font-medium transition-all duration-200 hover:bg-black hover:-translate-y-px"
+                    >
+                        Get in touch
+                        <span className="text-xs transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                            ↗
+                        </span>
+                    </a>
+
+                    <button
+                        type="button"
+                        className="md:hidden w-[42px] h-[42px] rounded-full border border-[#e6e8eb] flex items-center justify-center"
+                        onClick={() => setMobileOpen(!mobileOpen)}
+                        aria-expanded={mobileOpen}
+                        aria-label="Toggle navigation menu"
+                    >
+                        <span className="relative block w-4 h-[1.5px] bg-[#1A1A1A] before:content-[''] before:absolute before:left-0 before:w-4 before:h-[1.5px] before:bg-[#1A1A1A] before:-top-[5px] after:content-[''] after:absolute after:left-0 after:w-4 after:h-[1.5px] after:bg-[#1A1A1A] after:top-[5px]" />
+                    </button>
+                </div>
+            </nav>
+
+            <div
+                className={`fixed inset-x-0 top-[72px] z-40 bg-[#f8f9fa] border-b border-[#e6e8eb] transition-all duration-200 md:hidden overflow-hidden ${mobileOpen ? 'max-h-96 opacity-100 pointer-events-auto' : 'max-h-0 opacity-0 pointer-events-none'
+                    }`}
+                aria-hidden={!mobileOpen}
+            >
+                <ul className="flex flex-col list-none m-0 p-0 px-[var(--gutter)]">
+                    {navItems.map((item) => (
+                        <li key={item.href} className="border-b border-[#e6e8eb] last:border-b-0">
                             <Link
-                                key={item.href}
                                 href={item.href}
-                                className="nav-link font-medium uppercase tracking-wide text-xs"
-                                aria-current={pathname.startsWith(item.href) ? 'page' : undefined}
+                                onClick={closeMobile}
+                                className={`block py-[18px] font-mono text-[13px] tracking-[0.05em] uppercase ${pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+                                        ? 'text-[#1A1A1A]'
+                                        : 'text-[#6e7481]'
+                                    }`}
                             >
                                 {item.label}
                             </Link>
-                        ))}
-
-                        {/* CTA */}
-                        <a
-                            href="mailto:ridi.pillaca@gmail.com"
-                            className="text-[13px] font-bold text-white bg-[#1A1A1A] px-4 py-2 rounded-full hover:bg-[#10B981] transition-colors ml-4"
-                        >
-                            Get in touch
-                        </a>
-                    </nav>
-
-                    {/* Mobile Menu Toggle */}
-                    <button
-                        type="button"
-                        className="md:hidden p-2 text-[#1A1A1A]"
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        aria-expanded={mobileMenuOpen}
-                        aria-label="Toggle navigation menu"
-                    >
-                        {mobileMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
-                    </button>
-                </div>
-            </header>
-
-            {/* Mobile Menu Dropdown */}
-            <div
-                className={`fixed inset-x-0 top-20 z-40 bg-white border-b border-[#F3F4F6] transition-all duration-300 md:hidden overflow-hidden ${mobileMenuOpen ? 'max-h-96 opacity-100 shadow-xl' : 'max-h-0 opacity-0'
-                    }`}
-                aria-hidden={!mobileMenuOpen}
-            >
-                <nav className="flex flex-col px-6 py-6 gap-6">
-                    {navItems.map((item) => (
-                        <Link
-                            key={item.href}
-                            href={item.href}
-                            className={`text-lg font-display font-medium ${pathname.startsWith(item.href) ? 'text-[#10B981]' : 'text-[#1A1A1A]'
-                                }`}
-                        >
-                            {item.label}
-                        </Link>
+                        </li>
                     ))}
-                    <div className="border-t border-[#F3F4F6] pt-6 mt-2">
+                    <li className="pt-4 pb-4">
                         <a
-                            href="mailto:ridi.pillaca@gmail.com"
-                            className="inline-flex items-center justify-center w-full text-sm font-bold text-white bg-[#1A1A1A] px-6 py-3 rounded-xl hover:bg-[#10B981] transition-colors"
+                            href={`mailto:${contactInfo.email}`}
+                            onClick={closeMobile}
+                            className="inline-flex items-center justify-center w-full py-3 px-6 bg-[#1A1A1A] text-white rounded-full text-[13.5px] font-medium"
                         >
                             Get in touch
+                            <span className="ml-2">↗</span>
                         </a>
-                    </div>
-                </nav>
+                    </li>
+                </ul>
             </div>
         </>
     )
