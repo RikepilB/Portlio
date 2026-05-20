@@ -87,6 +87,20 @@ const communities = [
     }
 ]
 
+const bioEN = [
+    'I grew up in Peru seeing how access and stability sometimes determine potential, so at 18, I decided to venture to Canada without speaking great English. Honestly, I didn\'t have a clear idea what I wanted to do — I thought about medicine from the courses I took in IB, then tried Biomedical Engineering for a semester in Peru. But what really excited me was something different: those courses on problem-solving, MVPs, prototypes. I didn\'t want to box myself into a specialty too early. I was fascinated by the idea of building and leading a project. With the tech wave, I decided to apply to Computer Science at UBC, and that\'s where my journey started.',
+    'The last five years, I learned much more than programming: I improved my English, experienced new cultures, and discovered that technology isn\'t magic or as hard as it seems (well, it\'s difficult, tedious, and takes time, but like everything in life, it\'s a matter of practice and effort). However, the best part was the people — amazing people I never would have met if I hadn\'t emigrated. Between mountains, new languages, events, and conversations, I learned fundamental things beyond the academic side. I feel that the best work comes from truly understanding people, from knowing what matters to them and why. I believe technology should be a bridge, not a barrier — and it has to have soul.',
+    'Technically, I\'ve done everything: frontend development, full-stack, research, leadership. But it all comes from the same place: building things with vision. Whether I\'m optimizing workflows, writing research, designing accessible platforms, or analyzing data to find what really matters, I always ask myself the same thing: How does this help me become the professional and person I want to be, and that others perceive?',
+    'I\'m drawn to working with teams and projects that think big but stay grounded, that balance rigor with genuine care for the people using what we build. Now I\'m deep into data analytics and AI, constantly learning, always exploring — because the day you stop being curious is the day you stop growing.',
+]
+
+const bioES = [
+    'Crecí en Perú viendo cómo el acceso y la estabilidad a veces determinaban el potencial, así que a los 18 años decidí aventurarme a Canadá sin dominar el inglés. Sinceramente, no tenía claro qué quería hacer; pensé en medicina por los cursos que tomé en el Bachillerato Internacional, y luego probé Ingeniería Biomédica durante un semestre en Perú. Pero lo que realmente me apasionó fue algo diferente: esos cursos sobre resolución de problemas, productos mínimos viables (MVP) y prototipos. No quería encasillarme en una especialidad demasiado pronto. Me fascinaba la idea de construir y liderar un proyecto. Con la ola tecnológica, decidí postularme a Ciencias de la Computación en la UBC, y ahí comenzó mi aventura.',
+    'En los últimos cinco años, aprendí mucho más que programación: mejoré mi inglés, conocí nuevas culturas y descubrí que la tecnología no es magia ni tan difícil como parece (bueno, es difícil, tediosa y lleva tiempo, pero como todo en la vida, es cuestión de práctica y esfuerzo). Sin embargo, lo mejor de todo fue la gente increíble que nunca habría conocido si no hubiera emigrado. Entre montañas, nuevos idiomas, eventos y conversaciones, aprendí cosas fundamentales que van más allá del ámbito académico. Siento que el mejor trabajo surge de comprender verdaderamente a las personas, de saber qué les importa y por qué. Creo que la tecnología debe ser un puente, no una barrera, y debe tener alma.',
+    'Técnicamente, he hecho de todo: desarrollo frontend, full-stack, investigación, liderazgo. Pero todo parte del mismo origen: construir con visión. Ya sea optimizando flujos de trabajo, escribiendo investigaciones, diseñando plataformas accesibles o analizando datos para descubrir lo que realmente importa, siempre me pregunto lo mismo: ¿Cómo me ayuda esto a convertirme en el profesional y la persona que quiero ser, y que los demás perciben?',
+    'Me atrae trabajar con equipos y proyectos que piensan a lo grande pero mantienen los pies en la tierra, que equilibran el rigor con una preocupación genuina por las personas que usan lo que creamos. Ahora estoy inmerso en el análisis de datos y la IA, aprendiendo y explorando constantemente, porque el día que dejas de ser curioso es el día que dejas de crecer.',
+]
+
 const beyondWork = [
     {
         emoji: '⚽',
@@ -124,6 +138,8 @@ const education = {
 
 export default function AboutPage() {
     const [selectedImage, setSelectedImage] = useState<{ src: string, label?: string } | null>(null)
+    const [lang, setLang] = useState<'EN' | 'ES'>('EN')
+    const bio = lang === 'EN' ? bioEN : bioES
 
     // Prevent scrolling when modal is open
     useEffect(() => {
@@ -183,16 +199,24 @@ export default function AboutPage() {
                             <span>🎓 UBC &#39;25</span>
                         </div>
 
+                        {/* Language Toggle */}
+                        <div className="flex items-center gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-full p-0.5 w-fit animate-fade-up stagger-2">
+                            {(['EN', 'ES'] as const).map((l) => (
+                                <button
+                                    key={l}
+                                    onClick={() => setLang(l)}
+                                    className={`text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full transition-all ${lang === l ? 'bg-[#1A1A1A] text-white' : 'text-[#6B7280] hover:text-[#1A1A1A]'
+                                        }`}
+                                >
+                                    {l}
+                                </button>
+                            ))}
+                        </div>
+
                         <div className="flex flex-col gap-6 text-[#1A1A1A] text-lg leading-relaxed animate-fade-up stagger-2">
-                            <p>
-                                I love data, business, technology, and the ways they can work together to create extraordinary tools for people.
-                            </p>
-                            <p>
-                                I believe thoughtful engineering makes life more intuitive. I want to bring more of it into the world, whether through my automated pipelines, the products I build, or the businesses I help scale.
-                            </p>
-                            <p>
-                                I grew up in Peru, moved to British Columbia for university, and recently relocated to Toronto. Along the way, I went from processing thousands of bike-share records for visualization to building PHP club management systems and delivering freelance solutions for clients across industries.
-                            </p>
+                            {bio.map((paragraph, i) => (
+                                <p key={i}>{paragraph}</p>
+                            ))}
                         </div>
 
                         <div className="mt-4 pt-6 border-t border-[#F3F4F6] flex flex-col gap-6 animate-fade-up stagger-3">
@@ -449,7 +473,7 @@ export default function AboutPage() {
                                 { src: '/images/Favorites/MV5BZWNjZjQwZmItMWU1ZS00YTJhLWExYjUtYjk3YjcxMjJlOTdmXkEyXkFqcGc@._V1_.jpg', label: 'Music 🎶' },
                                 { src: '/images/Running club/Screenshot 2025-10-15 143144.png', label: 'Sports 🏃', position: 'object-[80%_center]' },
                                 { src: '/images/Favorites/Screenshot 2025-10-25 005945.png', label: 'Movies 🎬' },
-                            ].map((fav: any, i) => (
+                            ].map((fav: { src: string, label?: string, position?: string }, i) => (
                                 <div
                                     key={fav.src}
                                     onClick={() => setSelectedImage(fav)}
@@ -458,7 +482,7 @@ export default function AboutPage() {
                                     <div className="relative w-full h-[130px] bg-[#F3F4F6] rounded overflow-hidden">
                                         <Image
                                             src={fav.src}
-                                            alt={fav.label}
+                                            alt={fav.label ?? ''}
                                             fill
                                             className={`object-cover ${fav.position || 'object-center'}`}
                                         />
