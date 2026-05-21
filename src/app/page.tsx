@@ -42,7 +42,9 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; strokeWidth?:
 }
 
 export default function HomePage() {
-  const featuredProjects = projects.filter((p) => featuredSlugs.includes(p.slug))
+  const featuredProjects = featuredSlugs
+    .map((slug) => projects.find((p) => p.slug === slug))
+    .filter((p): p is (typeof projects)[number] => p !== undefined)
   const remainingCount = projects.length - featuredProjects.length
 
   return (

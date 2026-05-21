@@ -45,7 +45,7 @@ export const projects: Project[] = [
         title: 'Bike Share Network Optimization',
         tagline:
             'Graph theory meets urban mobility — processing 2M+ ridership records to optimize station placement across two Canadian cities.',
-        duration: 'Sep 2024 – Present',
+        duration: 'Sep 2024 – Dec 2024',
         readTime: '8 min read',
         overview:
             'This project applies network science and graph theory to analyze bike share systems in Vancouver and Toronto. By modeling stations as nodes and trips as weighted edges, we identified inefficiencies in station placement, over-saturated hubs, and underserved neighborhoods. The analysis culminated in data-driven recommendations for rebalancing and expansion.',
