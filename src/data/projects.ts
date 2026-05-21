@@ -403,7 +403,7 @@ export const projects: Project[] = [
         title: 'Empeñalo — Fintech Marketplace',
         tagline:
             'A Peruvian fintech marketplace where users pawn/secure items and receive multiple real offers from businesses.',
-        category: 'FULL STACK',
+        category: 'FULL STACK 2026',
         catColor: '#F59E0B',
         duration: '2024 — 25',
         readTime: '7 min read',
@@ -461,7 +461,7 @@ export const projects: Project[] = [
         title: 'ScoutLane — Recruitment Platform',
         tagline:
             'Resume intelligence meets pipeline management — AI-powered resume parsing with kanban pipeline views.',
-        category: 'FULL STACK',
+        category: 'FULL STACK 2026',
         catColor: '#2563EB',
         duration: '2024 — 25',
         readTime: '7 min read',

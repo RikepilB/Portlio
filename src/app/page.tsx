@@ -9,8 +9,8 @@ import { socialLinks } from '@/data/social'
 const featuredSlugs = [
   'empenalo-fintech',
   'scoutlane-recruitment',
-  'bike-share-optimization',
   'exam-analysis-system',
+  'bike-share-optimization',
 ]
 
 const areas = [
