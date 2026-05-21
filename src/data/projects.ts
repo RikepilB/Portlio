@@ -453,7 +453,7 @@ export const projects: Project[] = [
         ],
         conclusion:
             'Empeñalo demonstrates how modern web technologies can modernize traditional financial services. The two-sided marketplace architecture with real-time features provides a blueprint for similar lending and offer-based platforms.',
-        github: 'https://github.com/rikepilb',
+        github: 'https://github.com/RikepilB/empeno-quick-cash',
     },
     {
         id: '8',
@@ -511,7 +511,7 @@ export const projects: Project[] = [
         ],
         conclusion:
             'ScoutLane bridges the gap between AI automation and human recruitment judgment. The structured pipeline approach turns chaotic hiring processes into measurable, improvable workflows.',
-        github: 'https://github.com/rikepilb',
+        github: 'https://github.com/RikepilB/ScoutLane',
     },
     {
         id: '9',
