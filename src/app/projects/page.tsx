@@ -11,6 +11,22 @@ export default function ProjectsPage() {
 
     const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active)
 
+    const sorted = [...filtered].sort((a, b) => {
+        const getLatestYear = (d: string) => {
+            const years = d.match(/\d{4}/g)
+            return years ? parseInt(years[years.length - 1]) : 0
+        }
+        const yearDiff = getLatestYear(b.duration) - getLatestYear(a.duration)
+        if (yearDiff !== 0) return yearDiff
+        const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+        const getLatestMonth = (d: string) => {
+            const found = d.toLowerCase().match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\b/g)
+            if (!found || found.length === 0) return 0
+            return months.indexOf(found[found.length - 1]) + 1
+        }
+        return getLatestMonth(b.duration) - getLatestMonth(a.duration)
+    })
+
     return (
         <div className="bg-white min-h-screen">
             {/* ── Subdued Layout Header ── */}
@@ -49,7 +65,7 @@ export default function ProjectsPage() {
 
                 {/* Grid */}
                 <div className="grid md:grid-cols-2 gap-8 animate-fade-up stagger-3" role="list">
-                    {filtered.map((project) => (
+                    {sorted.map((project) => (
                         <article key={project.id} role="listitem">
                             <Link
                                 href={`/projects/${project.slug}`}
