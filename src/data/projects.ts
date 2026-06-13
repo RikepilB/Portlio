@@ -460,7 +460,7 @@ export const projects: Project[] = [
         slug: 'scoutlane-recruitment',
         title: 'ScoutLane — Recruitment Platform',
         tagline:
-            'Resume intelligence meets pipeline management — AI-powered resume parsing with kanban pipeline views.',
+            'AI-powered recruitment pipeline for parsing resumes, tracking candidates, and managing hiring workflows',
         category: 'FULL STACK 2026',
         catColor: '#2563EB',
         duration: 'Apr – May 2026',
@@ -474,7 +474,7 @@ export const projects: Project[] = [
             { metric: 'Kanban', label: 'Pipeline management views' },
         ],
         overview:
-            'Resume intelligence meets pipeline management. Public job portals with AI-powered resume parsing (education, work history, skills). Internal admin dashboard for job creation, kanban/list pipeline views, stage-based integrations, and per-role analytics.',
+            'ScoutLane is a recruitment platform that combines AI-powered resume parsing with pipeline management, helping teams publish jobs, process applications, manage candidates, and analyze hiring performance per role.',
         problem:
             'Recruitment teams spend hours manually reviewing resumes and tracking candidates across spreadsheets. ScoutLane automates resume parsing and provides structured pipeline management to reduce time-to-hire.',
         questions: [
