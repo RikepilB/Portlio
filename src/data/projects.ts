@@ -350,7 +350,7 @@ export const projects: Project[] = [
         ],
         conclusion:
             'Sublime demonstrated that a student team can build and deploy a production-grade e-commerce application with real payment processing within a single semester. The project emphasized the importance of testing — every payment flow bug was caught before demo day by the CI/CD pipeline, not by manual testing.',
-        github: 'https://github.com/rikepilb',
+        github: 'https://github.com/RikepilB/SublimeApp',
         stack: ['Python', 'Django', 'Docker', 'PostgreSQL', 'Stripe', 'GitHub Actions', 'CI/CD'],
     },
     {
