@@ -44,13 +44,13 @@ export const projects: Project[] = [
         demoVideo: 'https://drive.google.com/file/d/1oUZ5A63UTlHPDytAo2pQ5On9Y-geD37a/view?usp=sharing',
         title: 'Bike Share Network Optimization',
         tagline:
-            'Graph theory and hierarchical clustering applied to 150K+ Mobi Vancouver trip records — identifying critical hubs and data-driven rebalancing opportunities across 264 stations.',
+            'Where does a city\'s bike-share network actually break? I mapped 150K+ Mobi Vancouver trips as a living graph to find the hubs that hold it together — and the gaps that quietly cost it.',
         duration: 'Sep 2024 – Dec 2024',
         readTime: '8 min read',
         overview:
-            'A UBC COSC 421 (Network Science) group research project analyzing Mobi by Rogers — Vancouver\'s public bike-share system — using graph theory and network science. Working from Mobi\'s open ridership dataset (publicly published monthly trip data), we processed 150K+ September 2024 trip records, modeling 264 stations as nodes and trips as weighted directed edges. We then applied Ward\'s hierarchical clustering and four centrality metrics (betweenness, eigenvector, degree, closeness) to surface structural inefficiencies, critical hub stations, and rebalancing opportunities. I am now extending the original study with deeper predictive modeling and interactive Power BI dashboards to turn the network analysis into an operational decision tool.',
+            'This UBC COSC 421 (Network Science) research project applies graph theory and network science to Mobi by Rogers — Vancouver\'s public bike-share system. Working from Mobi\'s open ridership dataset, we modeled 264 stations as nodes and trips as weighted directed edges to expose inefficiencies in station placement, over-saturated hubs, and underserved neighborhoods — culminating in data-driven recommendations for rebalancing and network expansion. My role centered on the data: I built an ETL pipeline in R that ingested and standardized 150K+ September 2024 trip records, using regex-based cleaning to strip invalid and placeholder entries before any analysis ran. From the clean graph I applied Ward\'s hierarchical clustering and four centrality metrics (betweenness, eigenvector, degree, closeness) to pinpoint the key hubs and structural bottlenecks, then translated those results into concrete rebalancing strategies. The work gave me hands-on experience across network science, data mining, and visualization — and sharpened my ability to turn raw, messy data into actionable recommendations for sustainable urban mobility, alongside collaborative research, experiment design, and technical reporting. I am now extending the study with interactive Power BI and Excel dashboards that translate complex centrality metrics into clear, map-driven rebalancing recommendations, plus predictive modeling to forecast station imbalance before it happens.',
         problem:
-            'Bike-share operators face persistent station imbalance — some stations overflow while others sit empty. Manual rebalancing is expensive and reactive. This project asks: can graph theory and hierarchical clustering reveal structural inefficiencies and pinpoint critical hub stations before they become operational problems?',
+            'Every bike-share rider has hit it: the station is full so you can\'t dock, or empty so you can\'t ride. Behind that frustration is a hard operations problem — operators rebalance bikes by truck, manually and reactively, burning money to chase a moving target. The usual dashboards show where bikes are, but never why the network behaves the way it does. The bet of this project: treat the system as a graph, and the structure itself will tell you which stations are load-bearing, which are dead weight, and where to act before the imbalance becomes a problem.',
         questions: [
             'Which stations serve as major hubs, and how does their connectivity influence overall network efficiency?',
             'How can data-driven strategies optimize bike distribution and reduce station congestion?',
@@ -60,30 +60,30 @@ export const projects: Project[] = [
         methodology: [
             {
                 phase: 'Phase 1',
-                title: 'Data Collection & Filtering',
+                title: 'From Raw Trips to a Clean Graph',
                 detail:
-                    'Extracted September 2024 ridership data from the Mobi by Rogers website. Standardized station identifiers to 4-digit codes, removed invalid entries (empty fields, placeholder "0000" values), and built a weighted directed edges dataset by counting trip frequency between each unique station pair — creating a clean graph of consistent nodes and edges.',
+                    'Real-world data is never analysis-ready. I built an ETL pipeline in R against Mobi\'s open September 2024 ridership dataset — standardizing station IDs to 4-digit codes, stripping invalid and placeholder ("0000") entries with regex, and collapsing 150K+ individual trips into a weighted directed edge list keyed on each unique origin→destination pair. The output: a single, trustworthy graph of consistent nodes and edges that every downstream metric could rely on.',
                 tech: ['R', 'RStudio', 'CSV', 'igraph'],
             },
             {
                 phase: 'Phase 2',
-                title: 'Hierarchical Clustering',
+                title: 'Letting the Network Cluster Itself',
                 detail:
-                    'Built a directed weighted graph using the igraph library in R. Generated an adjacency matrix converted to a distance matrix (inverse of edge weights, so higher-frequency trips = shorter distance). Applied Ward\'s method hierarchical clustering to minimize intra-cluster variance — yielding 4 clusters of 84, 80, 74, and 26 stations with distinct connectivity patterns. Generated dendrograms and network graphs per cluster.',
+                    'Using igraph, I turned the trip graph into an adjacency matrix and then a distance matrix — inverting edge weights so that high-frequency routes read as "close." Ward\'s hierarchical clustering then minimized intra-cluster variance to let the network reveal its own communities: four natural clusters of 84, 80, 74, and 26 stations, each with a distinct connectivity signature. Dendrograms and per-cluster network graphs made the structure visible at a glance.',
                 tech: ['R', 'igraph', 'Ward\'s Method', 'RStudio'],
             },
             {
                 phase: 'Phase 3',
-                title: 'Centrality Analysis',
+                title: 'Finding the Stations That Matter',
                 detail:
-                    'Computed four centrality metrics across the full network and each cluster: betweenness centrality (mean 239.2) identified bridge stations critical to network flow; eigenvector centrality (mean 0.0188) identified influential hubs connected to other high-traffic nodes; degree centrality revealed in/out imbalances via degree ratios; closeness centrality (mean 0.566, range 0.398–0.620) ranked overall station accessibility.',
+                    'Four centrality lenses, each answering a different operational question. Betweenness (mean 239.2) exposed the bridge stations that traffic must flow through. Eigenvector (mean 0.0188) surfaced the influential hubs wired to other high-traffic nodes. Degree ratios revealed which stations quietly absorb more bikes than they release. Closeness (mean 0.566, range 0.398–0.620) ranked how reachable each station is from everywhere else. Together they turn a flat map of dots into a ranked priority list.',
                 tech: ['R', 'igraph', 'RStudio'],
             },
             {
                 phase: 'Phase 4',
-                title: 'Predictive Modeling & Power BI (in progress)',
+                title: 'Making It Operational — Power BI & Prediction (in progress)',
                 detail:
-                    'Current extension of the project: exporting cluster membership and centrality scores from R as a clean feature table, joining them to station latitude/longitude, and building an interactive Power BI dashboard — a geospatial map overlaying centrality as bubble size/color, a cluster filter, and a degree-ratio heatmap to flag rebalancing candidates at a glance. In parallel I am developing predictive demand models to forecast station imbalance before it happens, moving the analysis from descriptive to prescriptive.',
+                    'Analysis only matters if an operator can act on it. I\'m exporting cluster membership and centrality scores from R into a clean feature table, joining station latitude/longitude, and building an interactive Power BI dashboard: a geospatial map sizing and coloring each station by centrality, a cluster filter, and a degree-ratio heatmap that flags rebalancing candidates instantly. In parallel I\'m developing predictive demand models to forecast imbalance before it happens — moving the project from "here\'s what the network looks like" to "here\'s where to send the truck tomorrow."',
                 tech: ['Power BI', 'DAX', 'R', 'Predictive Modeling'],
             },
         ],
@@ -103,7 +103,7 @@ export const projects: Project[] = [
             'Closeness centrality flagged stations 176, 81, and 198 as the most accessible network-wide, while peripheral stations 988, 994, and 982 depend on longer paths — quantifying exactly where the network has connectivity gaps and where new stations would most improve coverage.',
         ],
         conclusion:
-            'Network science gives bike-share operators a proactive lens on system health that operational dashboards alone cannot surface. The hierarchical clustering and centrality analysis directly support zone-based rebalancing — prioritizing high-betweenness stations for bike availability and directing redistribution toward peripheral, low-closeness nodes. The methodology is fully portable to any city that publishes open bike-share data. I am actively extending the project beyond the original coursework: interactive Power BI dashboards that overlay centrality scores on a live geospatial map of Vancouver, multi-month datasets to capture seasonal demand swings, predictive demand modeling to forecast imbalance before it occurs, and expanded eigenvector modeling for automated, prescriptive rebalancing recommendations.',
+            'Network science gives bike-share operators something a live status dashboard never can: a structural diagnosis of why the system behaves the way it does. By ranking stations on how they actually function in the network — bridges, hubs, sinks, dead ends — the analysis turns guesswork into a concrete, zone-based rebalancing plan: keep the high-betweenness bridges stocked, feed the peripheral low-closeness nodes, and watch the imbalanced absorbers like Node 982. Best of all, none of it is Vancouver-specific — the same pipeline runs on any city that publishes open bike-share data. I\'m now pushing it further: interactive Power BI dashboards that put centrality on a live map, multi-month data to capture seasonal demand swings, and predictive models that forecast imbalance before it strands a single rider — turning a class research project into a genuine operations tool.',
         github: 'https://github.com/Sumer26/COSC_421_Project_Newtork_Science',
         stack: ['R', 'RStudio', 'igraph', 'Ward\'s Clustering', 'Graph Theory', 'Power BI'],
     },
