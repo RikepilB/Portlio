@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { Code2, Database, Network } from 'lucide-react'
 
 export const metadata: Metadata = {
