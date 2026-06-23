@@ -524,7 +524,6 @@ export default function AboutPage() {
                                     <div className="flex flex-wrap gap-6 justify-center py-4">
                                         {[
                                             { src: '/images/trips/UK.jpeg', label: 'United Kingdom 🇬🇧' },
-                                            { src: '/images/trips/greece.JPG', label: 'Greece 🇬🇷' },
                                             { src: '/images/trips/Peru.jpeg', label: 'Peru 🇵🇪' },
                                         ].map((trip, i) => (
                                             <div
