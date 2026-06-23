@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import Link from 'next/link'
@@ -34,12 +34,12 @@ export default function ProjectsPage() {
                 <h1 className="font-display text-4xl sm:text-5xl font-bold text-[#1A1A1A] mb-4 animate-fade-up">
                     Projects
                 </h1>
-                <p className="text-lg text-[#6B7280] max-w-xl leading-relaxed animate-fade-up stagger-1">
+                <p className="text-lg text-[#6e7481] max-w-xl leading-relaxed animate-fade-up stagger-1">
                     Case studies in data science, research, automation, and full-stack engineering.
                 </p>
             </div>
 
-            <div className="max-w-5xl mx-auto px-6 sm:px-12 pb-24 border-t border-[#F3F4F6] pt-12">
+            <div className="max-w-5xl mx-auto px-6 sm:px-12 pb-24 border-t border-[#e6e8eb] pt-12">
                 {/* Filter tabs */}
                 <div
                     role="group"
@@ -55,7 +55,7 @@ export default function ProjectsPage() {
                             onClick={() => setActive(cat)}
                             className={`text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full border transition-all duration-200 ${active === cat
                                     ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
-                                    : 'text-[#6B7280] border-[#E5E7EB] bg-white hover:border-[#1A1A1A] hover:text-[#1A1A1A]'
+                                    : 'text-[#6e7481] border-[#e6e8eb] bg-white hover:border-[#1A1A1A] hover:text-[#1A1A1A]'
                                 }`}
                         >
                             {cat}
@@ -65,30 +65,35 @@ export default function ProjectsPage() {
 
                 {/* Grid */}
                 <div className="grid md:grid-cols-2 gap-8 animate-fade-up stagger-3" role="list">
-                    {sorted.map((project) => (
+                    {sorted.map((project, i) => (
                         <article key={project.id} role="listitem">
                             <Link
                                 href={`/projects/${project.slug}`}
                                 aria-label={`View case study: ${project.title}`}
-                                className="group flex flex-col h-full bg-[#F9FAFB] p-8 rounded-2xl border border-[#F3F4F6] transition-all hover:bg-white hover:border-[#E5E7EB] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
+                                className="group flex flex-col h-full bg-[#f8f9fa] p-8 rounded-2xl border border-[#e6e8eb] transition-all duration-300 hover:bg-white hover:border-[#d4e3db] hover:shadow-[0_14px_40px_-18px_rgba(12,90,64,0.22)] hover:-translate-y-1"
                             >
                                 {/* Header row */}
                                 <div className="flex items-center justify-between mb-6">
-                                    <span
-                                        className="text-[10px] font-bold tracking-widest uppercase px-3 py-1 bg-white border border-[#E5E7EB] rounded-full"
-                                        style={{ color: project.catColor }}
-                                    >
-                                        {project.category}
-                                    </span>
-                                    <span className="text-xs text-[#6B7280] font-mono">{project.duration}</span>
+                                    <div className="flex items-center gap-3">
+                                        <span className="font-mono text-[11px] tabular-nums text-[#b3bac2] group-hover:text-[#0c5a40] transition-colors">
+                                            {String(i + 1).padStart(2, '0')}
+                                        </span>
+                                        <span
+                                            className="text-[10px] font-bold tracking-widest uppercase px-3 py-1 bg-white border border-[#e6e8eb] rounded-full"
+                                            style={{ color: project.catColor }}
+                                        >
+                                            {project.category}
+                                        </span>
+                                    </div>
+                                    <span className="text-xs text-[#6e7481] font-mono">{project.duration}</span>
                                 </div>
 
                                 {/* Title + tagline */}
                                 <div className="flex flex-col gap-3 flex-1">
-                                    <h2 className="font-display text-2xl font-bold text-[#1A1A1A] leading-snug group-hover:text-[#10B981] transition-colors">
+                                    <h2 className="font-display text-2xl font-bold text-[#1A1A1A] leading-snug group-hover:text-[#0c5a40] transition-colors">
                                         {project.title}
                                     </h2>
-                                    <p className="text-sm text-[#6B7280] leading-relaxed mb-6">{project.tagline}</p>
+                                    <p className="text-sm text-[#6e7481] leading-relaxed mb-6">{project.tagline}</p>
                                 </div>
 
                                 {/* Stack */}
@@ -96,19 +101,19 @@ export default function ProjectsPage() {
                                     {project.stack.slice(0, 4).map((t) => (
                                         <span
                                             key={t}
-                                            className="text-xs font-mono text-[#6B7280] bg-white border border-[#E5E7EB] rounded px-2.5 py-1"
+                                            className="text-xs font-mono text-[#6e7481] bg-white border border-[#e6e8eb] rounded px-2.5 py-1"
                                         >
                                             {t}
                                         </span>
                                     ))}
                                     {project.stack.length > 4 && (
-                                        <span className="text-xs text-[#6B7280] font-medium px-1 flex items-center">+{project.stack.length - 4}</span>
+                                        <span className="text-xs text-[#6e7481] font-medium px-1 flex items-center">+{project.stack.length - 4}</span>
                                     )}
                                 </div>
 
                                 {/* CTA */}
-                                <div className="pt-6 border-t border-[#E5E7EB] mt-auto">
-                                    <span className="text-sm font-semibold text-[#1A1A1A] group-hover:text-[#10B981] flex items-center gap-1 transition-colors">
+                                <div className="pt-6 border-t border-[#e6e8eb] mt-auto">
+                                    <span className="text-sm font-semibold text-[#1A1A1A] group-hover:text-[#0c5a40] flex items-center gap-1 transition-colors">
                                         Read case study →
                                     </span>
                                 </div>

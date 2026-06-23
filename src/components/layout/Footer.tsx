@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -24,12 +24,19 @@ const menuLinks = [
 
 export function Footer() {
     const pathname = usePathname()
-    const [funFact] = useState(() => funFacts[Math.floor(Math.random() * funFacts.length)])
+    const funFactRef = useRef<HTMLParagraphElement>(null)
+    useEffect(() => {
+        // Deterministic on SSR (funFacts[0]) so hydration matches; randomize by
+        // writing to the DOM directly after mount — no setState-in-effect.
+        if (funFactRef.current) {
+            funFactRef.current.textContent = funFacts[Math.floor(Math.random() * funFacts.length)]
+        }
+    }, [])
 
     if (pathname === '/' || pathname === '/about' || pathname === '/journey') return null
 
     return (
-        <footer className="border-t border-[#E5E7EB] py-12" aria-label="Site footer">
+        <footer className="border-t border-[#e6e8eb] py-12" aria-label="Site footer">
             <div className="max-w-5xl mx-auto px-6 sm:px-12">
 
                 <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-10 md:gap-16">
@@ -45,15 +52,15 @@ export function Footer() {
                             />
                             <div className="flex flex-col">
                                 <span className="font-display font-bold text-[#1A1A1A]">Richard Pillaca</span>
-                                <p className="text-xs text-[#6B7280] leading-relaxed max-w-xs">
-                                    Data Analyst &amp; BI Developer based in Toronto. Building scalable pipelines, intelligent tools, and automated workflows.
+                                <p className="text-xs text-[#6e7481] leading-relaxed max-w-xs">
+                                    Full-stack engineer specializing in frontend, based in Toronto. Building intelligent tools, automated workflows, and AI infrastructure.
                                 </p>
                             </div>
                         </div>
                         <div className="flex items-start gap-2 mt-1">
-                            <span className="text-[10px] font-bold tracking-widest uppercase text-[#6B7280] shrink-0 mt-px">Fun Fact</span>
-                            <p className="text-xs text-[#6B7280] leading-relaxed italic">
-                                {funFact}
+                            <span className="text-[10px] font-bold tracking-widest uppercase text-[#6e7481] shrink-0 mt-px">Fun Fact</span>
+                            <p ref={funFactRef} className="text-xs text-[#6e7481] leading-relaxed italic">
+                                {funFacts[0]}
                             </p>
                         </div>
                     </div>
@@ -66,7 +73,7 @@ export function Footer() {
                                 <li key={link.name}>
                                     <Link
                                         href={link.href}
-                                        className="text-sm text-[#6B7280] hover:text-[#1A1A1A] transition-colors"
+                                        className="text-sm text-[#6e7481] hover:text-[#1A1A1A] transition-colors"
                                     >
                                         {link.name}
                                     </Link>
@@ -82,7 +89,7 @@ export function Footer() {
                             <li>
                                 <a
                                     href={`mailto:${contactInfo.email}`}
-                                    className="text-sm text-[#6B7280] hover:text-[#1A1A1A] transition-colors"
+                                    className="text-sm text-[#6e7481] hover:text-[#1A1A1A] transition-colors"
                                 >
                                     Email
                                 </a>
@@ -92,7 +99,7 @@ export function Footer() {
                                     href={contactInfo.linkedin}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-sm text-[#6B7280] hover:text-[#1A1A1A] transition-colors"
+                                    className="text-sm text-[#6e7481] hover:text-[#1A1A1A] transition-colors"
                                 >
                                     LinkedIn ↗
                                 </a>
@@ -102,7 +109,7 @@ export function Footer() {
                                     href={contactInfo.github}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-sm text-[#6B7280] hover:text-[#1A1A1A] transition-colors"
+                                    className="text-sm text-[#6e7481] hover:text-[#1A1A1A] transition-colors"
                                 >
                                     GitHub ↗
                                 </a>
@@ -112,11 +119,11 @@ export function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="mt-10 pt-6 border-t border-[#E5E7EB] flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-[#6B7280] font-mono">
+                <div className="mt-10 pt-6 border-t border-[#e6e8eb] flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-[#6e7481] font-mono">
                     <p>© {new Date().getFullYear()} Richard Pillaca Burga.</p>
                     <div className="flex items-center gap-2">
                         <span>Built with Next.js 16 &amp; Tailwind CSS</span>
-                        <span className="w-1 h-1 rounded-full bg-[#D1D5DB]" />
+                        <span className="w-1 h-1 rounded-full bg-[#d1d2d8]" />
                         <span>Deployed on Vercel</span>
                     </div>
                 </div>

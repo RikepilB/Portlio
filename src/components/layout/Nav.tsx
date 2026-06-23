@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -19,7 +19,15 @@ export function Nav() {
     const pathname = usePathname()
     const [isScrolled, setIsScrolled] = useState(false)
     const [mobileOpen, setMobileOpen] = useState(false)
-    const [phrase] = useState(() => phrases[Math.floor(Math.random() * phrases.length)])
+    const phraseRef = useRef<HTMLSpanElement>(null)
+
+    useEffect(() => {
+        // Randomize by writing to the DOM directly after mount, so the
+        // server and first client render match (phrases[0]) — no hydration mismatch.
+        if (phraseRef.current) {
+            phraseRef.current.textContent = phrases[Math.floor(Math.random() * phrases.length)]
+        }
+    }, [])
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 20)
@@ -55,8 +63,8 @@ export function Nav() {
                             className="rounded-full"
                             priority
                         />
-                        <span className="font-sans font-bold text-[16px] tracking-[-0.01em]" style={{ color: '#D4AF37' }}>
-                            {phrase}
+                        <span ref={phraseRef} className="font-sans font-bold text-[16px] tracking-[-0.01em]" style={{ color: '#D4AF37' }}>
+                            {phrases[0]}
                         </span>
                     </Link>
 
