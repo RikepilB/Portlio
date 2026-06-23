@@ -63,7 +63,7 @@ export function Nav() {
                             className="rounded-full"
                             priority
                         />
-                        <span ref={phraseRef} className="font-sans font-bold text-[16px] tracking-[-0.01em]" style={{ color: '#D4AF37' }}>
+                        <span ref={phraseRef} className="font-sans font-bold text-[16px] tracking-[-0.01em]" style={{ color: '#8a6516' }}>
                             {phrases[0]}
                         </span>
                     </Link>

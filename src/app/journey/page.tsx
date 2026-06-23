@@ -1,7 +1,9 @@
-﻿'use client'
+'use client'
 
 import { useState } from 'react'
+import { Download } from 'lucide-react'
 import { experiences } from '@/data/experience'
+import { ResumePaper } from '@/components/ResumePaper'
 
 export default function JourneyPage() {
     const [openId, setOpenId] = useState<string | null>(null)
@@ -13,18 +15,37 @@ export default function JourneyPage() {
     return (
         <div className="bg-white min-h-screen">
             {/* ── Header ── */}
-            <div className="max-w-4xl mx-auto px-6 sm:px-12 pt-16 pb-12">
-                <h1 className="font-display text-4xl sm:text-5xl font-bold text-[#1A1A1A] mb-4 animate-fade-up">
-                    Career Journey
-                </h1>
-                <p className="text-lg text-[#6e7481] max-w-xl leading-relaxed animate-fade-up stagger-1">
-                    The timeline of my professional experience across engineering, data, and consulting.
-                </p>
+            <div className="max-w-6xl mx-auto px-6 sm:px-12 pt-16 pb-12">
+                <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                        <h1 className="font-display text-4xl sm:text-5xl font-bold text-[#1A1A1A] mb-4 animate-fade-up">
+                            Career Journey
+                        </h1>
+                        <p className="text-lg text-[#6e7481] max-w-xl leading-relaxed animate-fade-up stagger-1">
+                            The timeline of my professional experience, side by side with the one-page résumé.
+                        </p>
+                    </div>
+                    <a
+                        href="/resume.pdf"
+                        download="RichardPillaca_Resume.pdf"
+                        className="shrink-0 inline-flex items-center gap-2 self-start sm:self-auto rounded-full bg-[#1A1A1A] px-5 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#0c5a40] animate-fade-up stagger-2"
+                    >
+                        <Download size={15} strokeWidth={2} aria-hidden="true" />
+                        Download Résumé
+                    </a>
+                </div>
             </div>
 
-            <div className="max-w-4xl mx-auto px-6 sm:px-12 pb-24 border-t border-[#e6e8eb] pt-12">
-                {/* Minimal Timeline */}
-                <div className="relative border-l-2 border-[#e6e8eb] ml-3 sm:ml-0 md:pl-8 space-y-16">
+            <div className="max-w-6xl mx-auto px-6 sm:px-12 pb-24 border-t border-[#e6e8eb] pt-12">
+                <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 xl:gap-16 items-start">
+
+                    {/* ── Left: Timeline ── */}
+                    <div>
+                        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#8a6516] mb-8">
+                            The path
+                        </p>
+                        {/* Minimal Timeline */}
+                        <div className="relative border-l-2 border-[#e6e8eb] ml-3 sm:ml-0 md:pl-8 space-y-16">
                     {experiences.map((exp) => {
                         const isOpen = openId === exp.id
                         return (
@@ -79,7 +100,7 @@ export default function JourneyPage() {
                                         <ul className="mb-6 space-y-3">
                                             {exp.bullets.map((bullet, i) => (
                                                 <li key={i} className="relative pl-4 text-sm text-[#6e7481] leading-relaxed">
-                                                    <span className="absolute left-0 top-2.5 w-1 h-1 rounded-full bg-[#d1d5db]" aria-hidden />
+                                                    <span className="absolute left-0 top-2.5 w-1 h-1 rounded-full bg-[#d1d2d8]" aria-hidden />
                                                     {bullet}
                                                 </li>
                                             ))}
@@ -110,8 +131,19 @@ export default function JourneyPage() {
                                     </div>
                                 </div>
                             </article>
-                        )
-                    })}
+                            )
+                        })}
+                        </div>
+                    </div>
+
+                    {/* ── Right: Résumé ── */}
+                    <aside>
+                        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#8a6516] mb-8">
+                            The one-pager
+                        </p>
+                        <ResumePaper />
+                    </aside>
+
                 </div>
             </div>
         </div>

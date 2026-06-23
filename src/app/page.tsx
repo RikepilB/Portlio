@@ -188,55 +188,67 @@ export default function HomePage() {
       {/* ── Skills ──────────────────────────────────────── */}
       <section className="py-24 border-t border-[#e6e8eb] bg-[#f3fbf8]">
         <div className="shell">
-          <div className="grid lg:grid-cols-[0.8fr_1.5fr] gap-12 lg:gap-20">
-            {/* Heading rail */}
-            <div className="lg:sticky lg:top-28 self-start">
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#8a6516] mb-4">
-                What I do
-              </p>
-              <h2 className="font-display font-normal text-[clamp(32px,3.5vw,46px)] tracking-[-0.02em] leading-[1.02] m-0">
-                Skills &amp; <em className="italic text-[#0c5a40] font-light">Stack</em>
-              </h2>
-              <p className="text-sm text-[#6e7481] leading-relaxed mt-5 max-w-[34ch]">
-                Three disciplines I move between, usually on the same project: engineering,
-                AI, and data.
-              </p>
-            </div>
+          {/* Heading */}
+          <div className="max-w-2xl mb-14">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#8a6516] mb-4">
+              What I do
+            </p>
+            <h2 className="font-display font-normal text-[clamp(32px,3.5vw,46px)] tracking-[-0.02em] leading-[1.02] m-0">
+              Skills &amp; <em className="italic text-[#0c5a40] font-light">Stack</em>
+            </h2>
+            <p className="text-base text-[#6e7481] leading-relaxed mt-5 max-w-[52ch]">
+              Three disciplines I move between, usually on the same project: engineering,
+              AI, and data.
+            </p>
+          </div>
 
-            {/* Editorial entries */}
-            <div className="flex flex-col">
-              {areas.map((area, i) => {
-                const accent = i === 1 ? 'text-[#8a6516]' : 'text-[#0c5a40]'
-                return (
-                  <Reveal key={area.title} delay={i * 80}>
-                    <div className="grid grid-cols-[auto_1fr] gap-5 md:gap-8 py-9 border-t border-[#d4e3db] first:border-t-0 first:pt-0 group">
-                      <div className="flex flex-col items-center gap-3 pt-1">
-                        <span className={`font-mono text-[11px] tabular-nums ${accent}`}>
-                          {String(i + 1).padStart(2, '0')}
+          {/* Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {areas.map((area, i) => {
+              const accent = i === 1 ? 'text-[#8a6516]' : 'text-[#0c5a40]'
+              const accentBg = i === 1 ? 'bg-[#8a6516]' : 'bg-[#0c5a40]'
+              return (
+                <Reveal key={area.title} delay={i * 90}>
+                  <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#d4e3db] bg-white p-7 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_50px_-22px_rgba(12,90,64,0.28)]">
+                    {/* Big index watermark */}
+                    <span
+                      className={`pointer-events-none absolute -top-4 right-3 font-display text-[88px] font-light leading-none opacity-[0.07] select-none ${accent}`}
+                      aria-hidden="true"
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+
+                    <span
+                      className={`flex h-12 w-12 items-center justify-center rounded-xl bg-[#f3fbf8] transition-transform duration-300 group-hover:scale-105 ${accent}`}
+                    >
+                      {area.icon}
+                    </span>
+
+                    <h3 className="font-display text-[24px] md:text-[27px] font-normal text-[#1A1A1A] tracking-[-0.01em] leading-tight mt-6">
+                      {area.title}
+                    </h3>
+                    <p className="text-sm text-[#52585f] leading-[1.65] mt-3">{area.desc}</p>
+
+                    <div className="mt-auto flex flex-wrap gap-2 pt-7">
+                      {area.tools.map((t) => (
+                        <span
+                          key={t}
+                          className="font-mono text-[11px] rounded-full border border-[#e6e8eb] bg-[#fafbfc] px-2.5 py-1 text-[#6e7481]"
+                        >
+                          {t}
                         </span>
-                        <span className={`${accent} opacity-75 group-hover:opacity-100 transition-opacity`}>
-                          {area.icon}
-                        </span>
-                        <span className="w-px flex-1 bg-[#d4e3db] mt-1" aria-hidden="true" />
-                      </div>
-                      <div className="flex flex-col gap-3">
-                        <h3 className="font-display text-[22px] md:text-[26px] font-normal text-[#1A1A1A] tracking-[-0.01em] leading-tight">
-                          {area.title}
-                        </h3>
-                        <p className="text-sm text-[#52585f] leading-[1.65] max-w-[62ch]">{area.desc}</p>
-                        <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-1.5">
-                          {area.tools.map((t) => (
-                            <span key={t} className="font-mono text-[11px] text-[#6e7481]">
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+                      ))}
                     </div>
-                  </Reveal>
-                )
-              })}
-            </div>
+
+                    {/* Accent base line on hover */}
+                    <span
+                      className={`absolute bottom-0 left-0 h-[3px] w-0 transition-all duration-300 group-hover:w-full ${accentBg}`}
+                      aria-hidden="true"
+                    />
+                  </div>
+                </Reveal>
+              )
+            })}
           </div>
         </div>
       </section>
