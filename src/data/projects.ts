@@ -174,7 +174,7 @@ export const projects: Project[] = [
         slug: 'accounting-automation',
         category: 'EXCEL AUTOMATION',
         catColor: '#8a6516',
-        image: '/images/scale/WhatsApp Image 2025-10-16 at 23.17.46_2a277869.jpg',
+        image: '/images/scale_withoutborders/WhatsApp Image 2025-10-16 at 23.17.46_2a277869.jpg',
         title: 'Accounting Journal Entry Automation',
         tagline:
             'Replacing 4+ hours of manual copy-paste work with a 12-minute Power Query refresh — built for real accounting teams.',

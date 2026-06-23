@@ -92,7 +92,7 @@ export default function HomePage() {
                   <span className="text-[#0c5a40] font-bold text-[18px]">Full-stack engineer</span>, currently
                   focused on the frontend, building scalable interfaces with{' '}
                   <span className="text-[#1A1A1A] font-normal">React, Next.js, and Node.js</span>. I&apos;ve
-                  shipped an AI-driven API web app and engineered systems end to end.
+                  shipped AI-driven apps and engineered systems end to end.
                 </p>
                 <p className="font-display text-[16px] font-light text-[#1A1A1A] m-0 leading-[1.6]">
                   Now going deeper into{' '}
