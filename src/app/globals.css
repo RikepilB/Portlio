@@ -24,6 +24,12 @@
   --color-accent-soft: #ecfdf6;
   --color-accent-ink: #0c5a40;
 
+  /* Gold — secondary accent (green + gold combo, terraform-derived) */
+  --color-gold: #c79a3a;
+  --color-gold-bright: #e0b452;
+  --color-gold-soft: #f7eed8;
+  --color-gold-ink: #8a6516;
+
   /* Dark palette */
   --color-d-bg: #091233;
   --color-d-bg-2: #0f1a47;
@@ -74,6 +80,8 @@
     color: var(--color-ink);
     line-height: 1.55;
     letter-spacing: -0.01em;
+    /* Contain off-canvas decorative elements without breaking position: sticky */
+    overflow-x: clip;
   }
 
   h1, h2, h3, h4 {
@@ -535,5 +543,17 @@
 @media (max-width: 840px) {
   :root {
     --spacing-gutter: 24px;
+  }
+}
+
+/* ── Reduced motion — respect user OS preference ────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

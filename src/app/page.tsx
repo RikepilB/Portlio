@@ -1,8 +1,9 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Github, Linkedin, Instagram, Twitter, Database, Code2, Network } from 'lucide-react'
+import { Github, Linkedin, Instagram, Twitter, Database, Code2, Sparkles } from 'lucide-react'
 import { projects } from '@/data/projects'
 import { socialLinks } from '@/data/social'
 
@@ -15,22 +16,41 @@ const featuredSlugs = [
 
 const areas = [
   {
-    icon: <Database size={24} strokeWidth={1.5} />,
-    title: 'Data & Analytics',
-    desc: 'Translating messy data into clean, automated reporting pipelines. I build solutions that replace hours of manual spreadsheet work with reliable refreshable reports.',
-    tools: ['SQL', 'Power BI / DAX', 'Python (Pandas, Numpy)', 'Power Query / M', 'Excel (VBA)'],
-  },
-  {
     icon: <Code2 size={24} strokeWidth={1.5} />,
     title: 'Software Engineering',
-    desc: 'Building full-stack applications with an emphasis on robust backends, continuous integration, and clean user interfaces.',
-    tools: ['Python', 'TypeScript', 'Java', 'React / Next.js', 'Django'],
+    desc: 'Full-stack with a frontend focus. I turn designs into responsive, event-driven interfaces and back them with modular auth, reusable components, and CI/CD pipelines.',
+    tools: [
+      'React',
+      'Next.js',
+      'Node.js',
+      'TypeScript',
+      'Django',
+      'Laravel',
+      'Tailwind CSS',
+      'Docker',
+      'CI/CD',
+    ],
   },
   {
-    icon: <Network size={24} strokeWidth={1.5} />,
-    title: 'Modeling & Research',
-    desc: 'Applying statistical methods and graph theory to uncover patterns. From analyzing 5,000+ codebases for technical debt to optimizing city-wide bike share networks.',
-    tools: ['Graph Theory (NetworkX)', 'SciPy', 'Statistical Testing', 'Geopandas'],
+    icon: <Sparkles size={24} strokeWidth={1.5} />,
+    title: 'AI & Automation',
+    desc: 'I wire LLMs into real products, like AI that parses resumes into structured, filterable data, and automate the busywork around them with agents, RAG, and webhooks.',
+    tools: [
+      'LLM Integration',
+      'RAG',
+      'AI Agents',
+      'LangGraph',
+      'MCP',
+      'Vercel AI',
+      'Event-driven',
+      'Webhooks',
+    ],
+  },
+  {
+    icon: <Database size={24} strokeWidth={1.5} />,
+    title: 'Data & Analytics',
+    desc: 'Data-driven by default. I build ETL pipelines that process millions of records and turn them into Power BI dashboards and reporting that replace hours of manual work.',
+    tools: ['SQL', 'PostgreSQL', 'Power BI / DAX', 'ETL', 'Pandas', 'Excel'],
   },
 ]
 
@@ -49,8 +69,10 @@ export default function HomePage() {
 
   return (
     <>
+      <ScrollProgress />
+
       {/* ── Hero ───────────────────────────────────────── */}
-      <section className="relative pt-20 pb-20 md:pt-28 md:pb-28" aria-label="Introduction">
+      <section className="relative overflow-x-clip pt-20 pb-20 md:pt-28 md:pb-28" aria-label="Introduction">
         <div
           className="absolute top-[-200px] right-[-200px] w-[600px] h-[600px] pointer-events-none -z-10"
           style={{ background: 'radial-gradient(circle, rgba(43,192,143,0.10) 0%, transparent 60%)' }}
@@ -67,26 +89,25 @@ export default function HomePage() {
 
               <div className="flex flex-col gap-[14px] leading-relaxed">
                 <p className="font-display text-[16px] font-light text-[#1A1A1A] m-0 leading-[1.65]">
-                  <span className="text-[#2bc08f] font-bold text-[18px]">Software engineer</span> with hands-on
-                  experience in technologies such as Django, React, Next.js, relational databases, and others. I
-                  focus on improving user experience and code quality, and I apply best practices to create
-                  scalable and functional interfaces. Deploying a mobile app, optimizing workflows and developing a
-                  system end to end.
+                  <span className="text-[#0c5a40] font-bold text-[18px]">Full-stack engineer</span>, currently
+                  focused on the frontend, building scalable interfaces with{' '}
+                  <span className="text-[#1A1A1A] font-normal">React, Next.js, and Node.js</span>. I&apos;ve
+                  shipped an AI-driven API web app and engineered systems end to end.
                 </p>
                 <p className="font-display text-[16px] font-light text-[#1A1A1A] m-0 leading-[1.6]">
-                  I&apos;m currently expanding my knowledge in{' '}
-                  <span className="text-[#1A1A1A] font-normal">AI infrastructure</span> and{' '}
-                  <span className="text-[#1A1A1A] font-normal">high-performance, robust engineering</span>.
+                  Now going deeper into{' '}
+                  <span className="text-[#1A1A1A] font-normal">AI infrastructure and high-performance
+                  engineering</span>.
                 </p>
               </div>
 
               <div className="flex flex-col gap-3 items-center py-4 border-t border-b border-[#e6e8eb] mt-2">
                 <span className="font-display text-[18px] font-light text-[#1A1A1A] tracking-[-0.01em] text-center">
-                  <b className="text-[#2bc08f] font-medium italic">Tenacious.</b>
-                  <span className="text-[#2bc08f] mx-[6px] font-light">·</span>
-                  <b className="text-[#2bc08f] font-medium italic">Analytical.</b>
-                  <span className="text-[#2bc08f] mx-[6px] font-light">·</span>
-                  <b className="text-[#2bc08f] font-medium italic">Charismatic.</b>
+                  <b className="text-[#0c5a40] font-medium italic">Tenacious.</b>
+                  <span className="text-[#0c5a40] mx-[6px] font-light">·</span>
+                  <b className="text-[#0c5a40] font-medium italic">Analytical.</b>
+                  <span className="text-[#0c5a40] mx-[6px] font-light">·</span>
+                  <b className="text-[#0c5a40] font-medium italic">Charismatic.</b>
                 </span>
                 <div className="flex items-center gap-4 mt-1">
                   {socialLinks.slice(0, 4).map((link) => {
@@ -97,7 +118,7 @@ export default function HomePage() {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-[#f3fbf8] border border-[#d1d2d8] flex items-center justify-center text-[#6e7481] hover:text-[#2bc08f] hover:border-[#2bc08f] hover:shadow-md transition-all group"
+                        className="w-10 h-10 rounded-full bg-[#f3fbf8] border border-[#d1d2d8] flex items-center justify-center text-[#6e7481] hover:text-[#0c5a40] hover:border-[#2bc08f] hover:shadow-md transition-all group"
                         aria-label={link.label}
                       >
                         <Icon size={18} strokeWidth={2} className="group-hover:scale-110 transition-transform" />
@@ -108,30 +129,27 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right: Polaroid */}
-            <div className="flex justify-center items-center p-6 lg:order-none -order-1">
-              <div className="polaroid max-w-[280px] w-full">
-                <div className="aspect-[4/5] rounded-[2px] relative overflow-hidden">
-                  <Image
-                    src="/images/mainpage.jpg"
-                    alt="Richard Pillaca"
-                    fill
-                    className="object-cover object-top"
-                    priority
-                  />
-                </div>
-                <p className="font-mono text-[10.5px] tracking-[0.06em] text-[#1A1A1A] text-center mt-4 flex justify-center items-center gap-[6px]">
-                  <span className="text-[#0c5a40]">📍</span>
-                  Toronto, ON
-                </p>
-              </div>
+            {/* Right: Line-art portrait */}
+            <div className="flex flex-col justify-center items-center p-6 lg:order-none -order-1">
+              <Image
+                src="/images/hero-portrait.png"
+                alt="Line-art portrait of Richard Pillaca"
+                width={554}
+                height={672}
+                className="w-full max-w-[320px] h-auto drop-shadow-[0_18px_40px_rgba(12,90,64,0.14)]"
+                priority
+              />
+              <p className="font-mono text-[10.5px] tracking-[0.06em] text-[#1A1A1A] text-center mt-3 flex justify-center items-center gap-[6px]">
+                <span className="text-[#0c5a40]">📍</span>
+                Toronto, ON
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── Projects ────────────────────────────────────── */}
-      <section className="pb-24" style={{ paddingTop: '32px' }}>
+      <section className="pb-24 border-t border-[#e6e8eb]" style={{ paddingTop: '72px' }}>
         <div className="shell">
           <div className="flex items-end justify-between mb-10 gap-8 flex-wrap">
             <h2 className="font-display font-normal text-[clamp(32px,3.5vw,44px)] tracking-[-0.02em] leading-[1.05] m-0">
@@ -143,9 +161,11 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="flex flex-col border border-[#e6e8eb] rounded-[14px] overflow-hidden">
-            {featuredProjects.map((project) => (
-              <ProjectRow key={project.id} project={project} />
+          <div className="flex flex-col">
+            {featuredProjects.map((project, i) => (
+              <Reveal key={project.id}>
+                <ProjectRow project={project} index={i} flipped={i % 2 === 1} />
+              </Reveal>
             ))}
           </div>
 
@@ -166,40 +186,57 @@ export default function HomePage() {
       </section>
 
       {/* ── Skills ──────────────────────────────────────── */}
-      <section className="py-24 border-t border-[#e6e8eb]" style={{ background: '#f3fbf8' }}>
+      <section className="py-24 border-t border-[#e6e8eb] bg-[#f3fbf8]">
         <div className="shell">
-          <h2 className="font-display font-normal text-[clamp(32px,3.5vw,44px)] tracking-[-0.02em] leading-[1.05] m-0 mb-4">
-            Skills &amp; <em className="italic text-[#0c5a40] font-light">Stack</em>
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {areas.map((area) => (
-              <div
-                key={area.title}
-                className="flex flex-col h-full bg-white p-8 rounded-2xl border border-[#e6e8eb] hover:border-[#2bc08f] transition-colors duration-300"
-              >
-                <div className="w-12 h-12 bg-[#f3fbf8] rounded-xl border border-[#d1d2d8] flex items-center justify-center text-[#2bc08f] mb-6">
-                  {area.icon}
-                </div>
-                <h3 className="font-display text-xl font-normal text-[#1A1A1A] mb-3">{area.title}</h3>
-                <p className="text-sm text-[#6e7481] leading-relaxed mb-8 flex-1">{area.desc}</p>
+          <div className="grid lg:grid-cols-[0.8fr_1.5fr] gap-12 lg:gap-20">
+            {/* Heading rail */}
+            <div className="lg:sticky lg:top-28 self-start">
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#8a6516] mb-4">
+                What I do
+              </p>
+              <h2 className="font-display font-normal text-[clamp(32px,3.5vw,46px)] tracking-[-0.02em] leading-[1.02] m-0">
+                Skills &amp; <em className="italic text-[#0c5a40] font-light">Stack</em>
+              </h2>
+              <p className="text-sm text-[#6e7481] leading-relaxed mt-5 max-w-[34ch]">
+                Three disciplines I move between, usually on the same project: engineering,
+                AI, and data.
+              </p>
+            </div>
 
-                <div className="border-t border-[#e6e8eb] pt-6 mt-auto">
-                  <p className="font-mono text-[10px] font-bold tracking-widest uppercase text-[#1A1A1A] mb-3">
-                    Core Stack
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {area.tools.map((t) => (
-                      <span
-                        key={t}
-                        className="text-[11px] font-mono text-[#6e7481] bg-[#f8f9fa] border border-[#e6e8eb] rounded px-2 py-1"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
+            {/* Editorial entries */}
+            <div className="flex flex-col">
+              {areas.map((area, i) => {
+                const accent = i === 1 ? 'text-[#8a6516]' : 'text-[#0c5a40]'
+                return (
+                  <Reveal key={area.title} delay={i * 80}>
+                    <div className="grid grid-cols-[auto_1fr] gap-5 md:gap-8 py-9 border-t border-[#d4e3db] first:border-t-0 first:pt-0 group">
+                      <div className="flex flex-col items-center gap-3 pt-1">
+                        <span className={`font-mono text-[11px] tabular-nums ${accent}`}>
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <span className={`${accent} opacity-75 group-hover:opacity-100 transition-opacity`}>
+                          {area.icon}
+                        </span>
+                        <span className="w-px flex-1 bg-[#d4e3db] mt-1" aria-hidden="true" />
+                      </div>
+                      <div className="flex flex-col gap-3">
+                        <h3 className="font-display text-[22px] md:text-[26px] font-normal text-[#1A1A1A] tracking-[-0.01em] leading-tight">
+                          {area.title}
+                        </h3>
+                        <p className="text-sm text-[#52585f] leading-[1.65] max-w-[62ch]">{area.desc}</p>
+                        <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-1.5">
+                          {area.tools.map((t) => (
+                            <span key={t} className="font-mono text-[11px] text-[#6e7481]">
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </Reveal>
+                )
+              })}
+            </div>
           </div>
         </div>
       </section>
@@ -208,7 +245,7 @@ export default function HomePage() {
       <div className="flex justify-center pb-16">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-widest uppercase text-[#6e7481] hover:text-[#2bc08f] transition-colors group"
+          className="inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-widest uppercase text-[#6e7481] hover:text-[#0c5a40] transition-colors group"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#d1d2d8] group-hover:bg-[#2bc08f] transition-colors" />
           ↑ Back to top
@@ -218,42 +255,131 @@ export default function HomePage() {
   )
 }
 
-function ProjectRow({ project }: { project: (typeof projects)[number] }) {
+function Reveal({
+  children,
+  className = '',
+  delay = 0,
+}: {
+  children: React.ReactNode
+  className?: string
+  delay?: number
+}) {
+  const ref = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.style.opacity = '1'
+      return
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            el.style.animation = `fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms both`
+            io.disconnect()
+          }
+        }
+      },
+      { threshold: 0.12 }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [delay])
+
+  return (
+    <div ref={ref} className={className} style={{ opacity: 0 }}>
+      {children}
+    </div>
+  )
+}
+
+function ScrollProgress() {
+  const ref = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    let raf = 0
+    const onScroll = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => {
+        const doc = document.documentElement
+        const max = doc.scrollHeight - doc.clientHeight
+        el.style.width = max > 0 ? `${(doc.scrollTop / max) * 100}%` : '0%'
+      })
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      cancelAnimationFrame(raf)
+    }
+  }, [])
+
+  return (
+    <div className="fixed top-0 inset-x-0 h-[2px] z-[60] pointer-events-none" aria-hidden="true">
+      <div
+        ref={ref}
+        className="h-full w-0"
+        style={{ background: 'linear-gradient(90deg, #2bc08f 0%, #c79a3a 100%)' }}
+      />
+    </div>
+  )
+}
+
+function ProjectRow({
+  project,
+  index,
+  flipped,
+}: {
+  project: (typeof projects)[number]
+  index: number
+  flipped: boolean
+}) {
   const demoHref = project.demoVideo ?? '#'
 
   return (
-    <article className="grid grid-cols-1 md:grid-cols-[1fr_1fr] border-b border-[#e6e8eb] last:border-b-0 bg-white hover:bg-[#f3fbf8] transition-colors group">
+    <article className="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-14 items-center py-11 md:py-16 border-b border-[#e6e8eb] last:border-b-0 group">
       {/* Thumbnail */}
-      <div className="relative w-full aspect-[16/9] md:aspect-[4/3] flex-shrink-0 md:border-r md:border-[#e6e8eb] md:border-b-0 border-b border-[#e6e8eb] overflow-hidden bg-[#f8f9fa]">
+      <div
+        className={`relative w-full aspect-[16/10] rounded-[14px] overflow-hidden bg-[#f8f9fa] border border-[#e6e8eb] ${
+          flipped ? 'md:order-2' : ''
+        }`}
+      >
         {project.image ? (
           <>
             <Image
               src={project.image}
               alt={project.title}
               fill
-              className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
+              className="object-contain p-4 transition-transform duration-700 ease-out group-hover:scale-[1.04]"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute inset-0 ring-1 ring-inset ring-black/[0.03] rounded-[14px] pointer-events-none" />
           </>
         ) : (
-          <div
-            className="w-full h-full flex items-center justify-center font-mono text-[11px] text-[#6e7481] uppercase tracking-[0.1em]"
-            style={{ background: 'linear-gradient(135deg, #0f1a47 0%, #091233 100%)' }}
-          >
+          <div className="w-full h-full flex items-center justify-center font-mono text-[11px] text-[#6e7481] uppercase tracking-[0.1em] bg-[#f3fbf8]">
             {project.category}
           </div>
         )}
       </div>
 
       {/* Content */}
-      <div className="p-7 md:p-10 flex flex-col gap-3 justify-center md:pl-12">
-        <div className="flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.1em] text-[#6e7481]">
+      <div className={`flex flex-col gap-3.5 justify-center ${flipped ? 'md:order-1' : ''}`}>
+        <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.12em]">
+          <span className="text-[#c79a3a] font-semibold tabular-nums">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <span className="w-6 h-px bg-[#d8cfbf]" aria-hidden="true" />
           <span className="text-[#0c5a40] font-medium">{project.category}</span>
-          <span>{project.duration}</span>
+          <span className="text-[#8a909b]">{project.duration}</span>
         </div>
 
-        <h3 className="font-display font-normal text-[clamp(20px,2vw,26px)] tracking-[-0.02em] leading-[1.1] m-0 text-[#1A1A1A]">
+        <h3 className="font-display font-normal text-[clamp(22px,2.4vw,30px)] tracking-[-0.02em] leading-[1.08] m-0 text-[#1A1A1A] group-hover:text-[#0c5a40] transition-colors">
           {project.title}
         </h3>
 

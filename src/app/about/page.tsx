@@ -146,6 +146,22 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; strokeWidth?:
     twitter: Twitter,
 }
 
+function SectionHeader({ index, kicker, title }: { index: string; kicker: string; title: string }) {
+    return (
+        <div className="mb-10 md:mb-14">
+            <div className="flex items-center gap-3 mb-4 font-mono text-[11px] uppercase tracking-[0.18em]">
+                <span className="text-[#8a6516] font-bold tabular-nums">{index}</span>
+                <span className="w-10 h-px bg-[#d8cfbf]" aria-hidden="true" />
+                <span className="text-[#0c5a40]">{kicker}</span>
+            </div>
+            <h2 className="font-display font-normal uppercase text-[clamp(38px,7vw,82px)] leading-[0.9] tracking-[-0.025em] text-[#1A1A1A] m-0">
+                {title}
+            </h2>
+            <div className="mt-6 h-px w-full bg-[#1A1A1A]/10" aria-hidden="true" />
+        </div>
+    )
+}
+
 export default function AboutPage() {
     const [selectedImage, setSelectedImage] = useState<{ src: string; label?: string } | null>(null)
     const [lang, setLang] = useState<'EN' | 'ES'>('EN')
@@ -213,13 +229,13 @@ export default function AboutPage() {
                 >
                     <div
                         onClick={(e: React.MouseEvent) => e.stopPropagation()}
-                        className="relative max-w-5xl w-full bg-white rounded-2xl shadow-2xl border border-[#F3F4F6] overflow-hidden flex flex-col cursor-default animate-in zoom-in-95 slide-in-from-bottom-2 duration-300"
+                        className="relative max-w-5xl w-full bg-white rounded-2xl shadow-2xl border border-[#e6e8eb] overflow-hidden flex flex-col cursor-default animate-in zoom-in-95 slide-in-from-bottom-2 duration-300"
                     >
-                        <div className="p-4 border-b border-[#F3F4F6] flex items-center justify-between bg-[#F9FAFB]">
+                        <div className="p-4 border-b border-[#e6e8eb] flex items-center justify-between bg-[#f8f9fa]">
                             <h3 className="font-display font-bold text-[#1A1A1A] text-sm tracking-tight">{selectedImage.label || 'Image Preview'}</h3>
                             <button
                                 onClick={() => setSelectedImage(null)}
-                                className="p-1 hover:bg-[#E5E7EB] rounded-lg transition-colors text-[#6B7280]"
+                                className="p-1 hover:bg-[#e6e8eb] rounded-lg transition-colors text-[#6e7481]"
                             >
                                 <X size={20} />
                             </button>
@@ -247,12 +263,12 @@ export default function AboutPage() {
                         </h1>
 
                         {/* Language Toggle */}
-                        <div className="flex items-center gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-full p-0.5 w-fit animate-fade-up stagger-2">
+                        <div className="flex items-center gap-1.5 bg-[#f8f9fa] border border-[#e6e8eb] rounded-full p-0.5 w-fit animate-fade-up stagger-2">
                             {(['EN', 'ES'] as const).map((l) => (
                                 <button
                                     key={l}
                                     onClick={() => setLang(l)}
-                                    className={`text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full transition-all ${lang === l ? 'bg-[#1A1A1A] text-white' : 'text-[#6B7280] hover:text-[#1A1A1A]'
+                                    className={`text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full transition-all ${lang === l ? 'bg-[#1A1A1A] text-white' : 'text-[#6e7481] hover:text-[#1A1A1A]'
                                         }`}
                                 >
                                     {l}
@@ -270,7 +286,7 @@ export default function AboutPage() {
                             }
                             <button
                                 onClick={() => setBioExpanded(!bioExpanded)}
-                                className="text-sm font-medium text-[#10B981] hover:text-[#0c5a40] transition-colors cursor-pointer inline-flex items-center gap-1 w-fit"
+                                className="text-sm font-medium text-[#0c5a40] hover:text-[#0c5a40] transition-colors cursor-pointer inline-flex items-center gap-1 w-fit"
                             >
                                 {bioExpanded ? 'Show less' : 'Read more'}
                                 <span className="text-[10px]">{bioExpanded ? '↑' : '→'}</span>
@@ -278,13 +294,13 @@ export default function AboutPage() {
                         </div>
 
                         {/* Education */}
-                        <div className="flex items-center gap-3 pt-4 mt-2 border-t border-[#F3F4F6] animate-fade-up stagger-3">
-                            <div className="w-10 h-10 rounded-full bg-[#10B981]/10 flex items-center justify-center text-[#10B981] font-display font-bold text-base shrink-0">
+                        <div className="flex items-center gap-3 pt-4 mt-2 border-t border-[#e6e8eb] animate-fade-up stagger-3">
+                            <div className="w-10 h-10 rounded-full bg-[#2bc08f]/10 flex items-center justify-center text-[#0c5a40] font-display font-bold text-base shrink-0">
                                 U
                             </div>
                             <div className="flex flex-col gap-0.5">
                                 <span className="text-sm font-semibold text-[#1A1A1A]">{education.degree} · {education.minor}</span>
-                                <span className="text-[11px] text-[#6B7280] font-mono">{education.school} — {education.period} | {education.location}</span>
+                                <span className="text-[11px] text-[#6e7481] font-mono">{education.school} — {education.period} | {education.location}</span>
                             </div>
                         </div>
 
@@ -298,7 +314,7 @@ export default function AboutPage() {
                                         href={link.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-10 h-10 rounded-full bg-[#F9FAFB] border border-[#E5E7EB] flex items-center justify-center text-[#6B7280] hover:text-[#10B981] hover:border-[#10B981] hover:shadow-sm transition-all"
+                                        className="w-10 h-10 rounded-full bg-[#f8f9fa] border border-[#e6e8eb] flex items-center justify-center text-[#6e7481] hover:text-[#0c5a40] hover:border-[#2bc08f] hover:shadow-sm transition-all"
                                         aria-label={link.label}
                                     >
                                         <Icon size={18} strokeWidth={2} />
@@ -312,22 +328,22 @@ export default function AboutPage() {
                     <div className="flex-col items-center gap-12 hidden lg:flex justify-end" aria-hidden="true">
                         <div className="relative h-[420px] w-full">
                             <div className="absolute top-0 right-10 w-[200px] h-[240px] polaroid rotate-6 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all z-0 hover:z-20">
-                                <div className="relative w-full h-full bg-[#F3F4F6] rounded overflow-hidden">
+                                <div className="relative w-full h-full bg-[#e6e8eb] rounded overflow-hidden">
                                     <Image src="/images/About_hero/family.jpeg" alt="" fill className="object-cover object-center" />
                                 </div>
-                                <p className="text-center mt-3 font-display text-[9px] text-[#6B7280]">Family ❤️</p>
+                                <p className="text-center mt-3 font-display text-[9px] text-[#6e7481]">Family ❤️</p>
                             </div>
                             <div className="absolute top-16 left-8 w-[220px] h-[260px] polaroid -rotate-3 z-10 hover:z-30">
-                                <div className="relative w-full h-full bg-[#E5E7EB] rounded overflow-hidden">
+                                <div className="relative w-full h-full bg-[#e6e8eb] rounded overflow-hidden">
                                     <Image src="/images/About_hero/travelling.jpeg" alt="" fill className="object-cover object-center" />
                                 </div>
-                                <p className="text-center mt-3 font-display text-[9px] text-[#6B7280]">Travelling 🌍</p>
+                                <p className="text-center mt-3 font-display text-[9px] text-[#6e7481]">Travelling 🌍</p>
                             </div>
                             <div className="absolute bottom-4 right-4 w-[170px] h-[210px] polaroid -rotate-12 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all z-0 hover:z-40">
-                                <div className="relative w-full h-full bg-[#F3F4F6] rounded overflow-hidden">
+                                <div className="relative w-full h-full bg-[#e6e8eb] rounded overflow-hidden">
                                     <Image src="/images/About_hero/toronto.jpeg" alt="" fill className="object-cover object-center" />
                                 </div>
-                                <p className="text-center mt-3 font-display text-[9px] text-[#6B7280]">Toronto 🏙️</p>
+                                <p className="text-center mt-3 font-display text-[9px] text-[#6e7481]">Toronto 🏙️</p>
                             </div>
                         </div>
 
@@ -340,7 +356,7 @@ export default function AboutPage() {
                                         href={link.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-11 h-11 rounded-full bg-[#F9FAFB] border border-[#E5E7EB] flex items-center justify-center text-[#6B7280] hover:text-[#10B981] hover:border-[#10B981] hover:shadow-md transition-all group"
+                                        className="w-11 h-11 rounded-full bg-[#f8f9fa] border border-[#e6e8eb] flex items-center justify-center text-[#6e7481] hover:text-[#0c5a40] hover:border-[#2bc08f] hover:shadow-md transition-all group"
                                         aria-label={link.label}
                                     >
                                         <Icon size={20} strokeWidth={2} className="group-hover:scale-110 transition-transform" />
@@ -353,18 +369,18 @@ export default function AboutPage() {
             </section>
 
             {/* ── Content + Sidebar ── */}
-            <div className="border-t border-[#F3F4F6]">
+            <div className="border-t border-[#e6e8eb]">
                 <div className="max-w-6xl mx-auto px-6 sm:px-12 py-16 md:py-24">
 
                     {/* Mobile Tab Bar */}
-                    <div className="flex md:hidden overflow-x-auto gap-2 pb-2 mb-8 sticky top-16 z-20 bg-white py-2 -mx-6 px-6 border-b border-[#F3F4F6] scrollbar-hide">
+                    <div className="flex md:hidden overflow-x-auto gap-2 pb-2 mb-8 sticky top-16 z-20 bg-white py-2 -mx-6 px-6 border-b border-[#e6e8eb] scrollbar-hide">
                         {sections.map((s) => (
                             <button
                                 key={s.id}
                                 onClick={() => scrollToSection(s.id)}
                                 className={`shrink-0 text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full border transition-all ${activeSection === s.id
                                     ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
-                                    : 'text-[#6B7280] border-[#E5E7EB] hover:text-[#1A1A1A] hover:border-[#1A1A1A]'
+                                    : 'text-[#6e7481] border-[#e6e8eb] hover:text-[#1A1A1A] hover:border-[#1A1A1A]'
                                     }`}
                             >
                                 {s.label}
@@ -381,13 +397,13 @@ export default function AboutPage() {
                                     onClick={() => scrollToSection(s.id)}
                                     className={`group text-left text-[11px] font-mono font-bold tracking-[0.08em] uppercase transition-all duration-200 ${activeSection === s.id
                                         ? 'text-[#1A1A1A]'
-                                        : 'text-[#6B7280] hover:text-[#1A1A1A]'
+                                        : 'text-[#6e7481] hover:text-[#1A1A1A]'
                                         }`}
                                 >
                                     <span
                                         className={`inline-block w-1.5 h-1.5 rounded-full mr-2 align-middle transition-all ${activeSection === s.id
-                                            ? 'bg-[#10B981]'
-                                            : 'bg-transparent group-hover:bg-[#D1D5DB]'
+                                            ? 'bg-[#2bc08f]'
+                                            : 'bg-transparent group-hover:bg-[#d1d2d8]'
                                             }`}
                                     />
                                     {s.label}
@@ -400,11 +416,8 @@ export default function AboutPage() {
 
                             {/* ── Communities ── */}
                             <section id="communities">
-                                <div className="flex flex-col gap-2 mb-10">
-                                    <h2 className="text-2xl font-bold text-[#1A1A1A]">My Communities</h2>
-                                    <p className="text-[#6B7280] text-sm">The people who make it all worth it ❤️</p>
-                                    <p className="text-[10px] font-mono text-[#6B7280] opacity-60">Click images to expand · use arrows to browse</p>
-                                </div>
+                                <SectionHeader index="01" kicker="The people who make it worth it" title="Communities" />
+                                <p className="text-[10px] font-mono text-[#6e7481] opacity-60 -mt-6 mb-10">Click images to expand · use arrows to browse</p>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
                                     {communities.map((comm) => {
@@ -415,29 +428,29 @@ export default function AboutPage() {
                                             <div key={comm.org} className="flex flex-col gap-3">
                                                 {/* Icon + Org */}
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-10 h-10 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB] flex items-center justify-center text-sm shadow-sm font-display font-bold text-[#1A1A1A] shrink-0">
+                                                    <div className="w-10 h-10 rounded-xl bg-[#f8f9fa] border border-[#e6e8eb] flex items-center justify-center text-sm shadow-sm font-display font-bold text-[#1A1A1A] shrink-0">
                                                         {comm.title[0]}
                                                     </div>
                                                     <div className="flex flex-col gap-0 min-w-0">
                                                         {comm.url ? (
-                                                            <a href={comm.url} target="_blank" rel="noopener noreferrer" className="font-display font-bold text-[#1A1A1A] hover:text-[#10B981] transition-colors text-sm truncate">{comm.org}</a>
+                                                            <a href={comm.url} target="_blank" rel="noopener noreferrer" className="font-display font-bold text-[#1A1A1A] hover:text-[#0c5a40] transition-colors text-sm truncate">{comm.org}</a>
                                                         ) : (
                                                             <h3 className="font-display font-bold text-[#1A1A1A] text-sm truncate">{comm.org}</h3>
                                                         )}
                                                     </div>
                                                 </div>
                                                 {/* Description */}
-                                                <p className="text-xs text-[#6B7280] leading-relaxed line-clamp-3">{comm.description}</p>
+                                                <p className="text-xs text-[#6e7481] leading-relaxed line-clamp-3">{comm.description}</p>
                                                 {/* Polaroid */}
                                                 <div
                                                     onClick={() => setSelectedImage({ src: currImg, label: currLabel })}
-                                                    className="w-[140px] h-[180px] polaroid transition-all hover:scale-105 cursor-zoom-in self-start mt-1"
+                                                    className="group w-[140px] h-[180px] polaroid transition-all hover:scale-105 cursor-zoom-in self-start mt-1"
                                                 >
-                                                    <div className="relative w-full h-[140px] bg-[#F3F4F6] rounded overflow-hidden">
-                                                        <div className="absolute inset-0 flex items-center justify-center text-[#6B7280] font-mono text-[7px] z-10 opacity-40 capitalize">{comm.title}_polaroid</div>
-                                                        <Image src={currImg} alt={currLabel} fill className="object-cover z-20" />
+                                                    <div className="relative w-full h-[140px] bg-[#e6e8eb] rounded overflow-hidden">
+                                                        <div className="absolute inset-0 flex items-center justify-center text-[#6e7481] font-mono text-[7px] z-10 opacity-40 capitalize">{comm.title}_polaroid</div>
+                                                        <Image src={currImg} alt={currLabel} fill className="object-cover z-20 grayscale-[0.4] group-hover:grayscale-0 transition-[filter] duration-500" />
                                                     </div>
-                                                    <p className="text-center mt-2 font-display text-[8px] text-[#6B7280] px-1 truncate">{currLabel}</p>
+                                                    <p className="text-center mt-2 font-display text-[8px] text-[#6e7481] px-1 truncate">{currLabel}</p>
                                                 </div>
                                                 {/* Arrows */}
                                                 {comm.images.length > 1 && (
@@ -453,12 +466,12 @@ export default function AboutPage() {
                                                                 const total = comm.images.length
                                                                 setPhotoIndex((p) => ({ ...p, [comm.org]: (prev - 1 + total) % total }))
                                                             }}
-                                                            className="w-6 h-6 rounded-full bg-[#F9FAFB] border border-[#E5E7EB] flex items-center justify-center text-[#6B7280] hover:text-[#1A1A1A] hover:border-[#1A1A1A] transition-colors text-[10px]"
+                                                            className="w-6 h-6 rounded-full bg-[#f8f9fa] border border-[#e6e8eb] flex items-center justify-center text-[#6e7481] hover:text-[#1A1A1A] hover:border-[#1A1A1A] transition-colors text-[10px]"
                                                             aria-label="Previous photo"
                                                         >
                                                             ‹
                                                         </button>
-                                                        <span className="text-[10px] font-mono text-[#6B7280] tabular-nums">
+                                                        <span className="text-[10px] font-mono text-[#6e7481] tabular-nums">
                                                             {currIdx + 1}/{comm.images.length}
                                                         </span>
                                                         <button
@@ -468,7 +481,7 @@ export default function AboutPage() {
                                                                 const total = comm.images.length
                                                                 setPhotoIndex((p) => ({ ...p, [comm.org]: (prev + 1) % total }))
                                                             }}
-                                                            className="w-6 h-6 rounded-full bg-[#F9FAFB] border border-[#E5E7EB] flex items-center justify-center text-[#6B7280] hover:text-[#1A1A1A] hover:border-[#1A1A1A] transition-colors text-[10px]"
+                                                            className="w-6 h-6 rounded-full bg-[#f8f9fa] border border-[#e6e8eb] flex items-center justify-center text-[#6e7481] hover:text-[#1A1A1A] hover:border-[#1A1A1A] transition-colors text-[10px]"
                                                             aria-label="Next photo"
                                                         >
                                                             ›
@@ -482,11 +495,11 @@ export default function AboutPage() {
                             </section>
 
                             {/* ── Exploring ── */}
-                            <section id="exploring" className="pt-12 md:pt-0 border-t md:border-t-0 border-[#F3F4F6]">
-                                <h2 className="text-sm font-bold text-[#6B7280] uppercase tracking-widest mb-6">Exploring</h2>
+                            <section id="exploring" className="pt-12 md:pt-0 border-t md:border-t-0 border-[#e6e8eb]">
+                                <SectionHeader index="02" kicker="14 countries & counting" title="Exploring" />
                                 <div className="flex flex-col gap-6">
-                                    <p className="text-lg text-[#6B7280] leading-relaxed">
-                                        14 countries and counting. Moving across continents taught me to adapt quickly and communicate clearly — even when the words aren&#39;t perfect.
+                                    <p className="text-lg text-[#6e7481] leading-relaxed">
+                                        14 countries and counting. Moving across continents taught me to adapt quickly and communicate clearly, even when the words aren&#39;t perfect.
                                     </p>
                                     <div className="flex flex-wrap gap-3">
                                         {[
@@ -501,7 +514,7 @@ export default function AboutPage() {
                                             { flag: '🇩🇴', name: 'Dom. Republic' },
                                             { flag: '✨', name: 'and more' },
                                         ].map(({ flag, name }) => (
-                                            <span key={name} className="inline-flex items-center gap-2 px-4 py-2 bg-[#F9FAFB] border border-[#F3F4F6] rounded-full text-sm text-[#1A1A1A] font-medium hover:border-[#10B981]/40 hover:bg-[#10B981]/5 transition-colors">
+                                            <span key={name} className="inline-flex items-center gap-2 px-4 py-2 bg-[#f8f9fa] border border-[#e6e8eb] rounded-full text-sm text-[#1A1A1A] font-medium hover:border-[#2bc08f]/40 hover:bg-[#2bc08f]/5 transition-colors">
                                                 <span className="text-xl">{flag}</span>
                                                 {name}
                                             </span>
@@ -517,12 +530,12 @@ export default function AboutPage() {
                                             <div
                                                 key={trip.src}
                                                 onClick={() => setSelectedImage(trip)}
-                                                className={`w-[160px] h-[200px] polaroid transition-all hover:scale-105 hover:z-10 cursor-zoom-in ${i % 2 === 0 ? 'rotate-2' : '-rotate-2'}`}
+                                                className={`group w-[160px] h-[200px] polaroid transition-all hover:scale-105 hover:z-10 cursor-zoom-in ${i % 2 === 0 ? 'rotate-2' : '-rotate-2'}`}
                                             >
-                                                <div className="relative w-full h-[150px] bg-[#F3F4F6] rounded overflow-hidden">
-                                                    <Image src={trip.src} alt={trip.label} fill className="object-cover" />
+                                                <div className="relative w-full h-[150px] bg-[#e6e8eb] rounded overflow-hidden">
+                                                    <Image src={trip.src} alt={trip.label} fill className="object-cover grayscale-[0.4] group-hover:grayscale-0 transition-[filter] duration-500" />
                                                 </div>
-                                                <p className="text-center mt-2 font-display text-[9px] text-[#6B7280]">{trip.label}</p>
+                                                <p className="text-center mt-2 font-display text-[9px] text-[#6e7481]">{trip.label}</p>
                                             </div>
                                         ))}
                                     </div>
@@ -530,8 +543,8 @@ export default function AboutPage() {
                             </section>
 
                             {/* ── Beyond Work ── */}
-                            <section id="beyond-work" className="pt-12 md:pt-0 border-t md:border-t-0 border-[#F3F4F6]">
-                                <h2 className="text-sm font-bold text-[#6B7280] uppercase tracking-widest mb-6">Beyond Work</h2>
+                            <section id="beyond-work" className="pt-12 md:pt-0 border-t md:border-t-0 border-[#e6e8eb]">
+                                <SectionHeader index="03" kicker="Off the clock" title="Beyond Work" />
                                 <div className="flex flex-col gap-12">
                                     <div className="grid sm:grid-cols-2 gap-x-12 gap-y-16">
                                         {beyondWork.map(({ emoji, title, description }) => (
@@ -539,7 +552,7 @@ export default function AboutPage() {
                                                 <h3 className="font-display font-bold text-[#1A1A1A] text-lg flex items-center gap-2">
                                                     <span className="text-2xl">{emoji}</span> {title}
                                                 </h3>
-                                                <p className="text-sm text-[#6B7280] leading-relaxed">{description}</p>
+                                                <p className="text-sm text-[#6e7481] leading-relaxed">{description}</p>
                                             </div>
                                         ))}
                                     </div>
@@ -552,12 +565,12 @@ export default function AboutPage() {
                                             <div
                                                 key={activity.src}
                                                 onClick={() => setSelectedImage(activity)}
-                                                className={`w-[160px] h-[200px] polaroid transition-all hover:scale-105 cursor-zoom-in ${i % 2 === 0 ? 'rotate-1' : '-rotate-2'}`}
+                                                className={`group w-[160px] h-[200px] polaroid transition-all hover:scale-105 cursor-zoom-in ${i % 2 === 0 ? 'rotate-1' : '-rotate-2'}`}
                                             >
-                                                <div className="relative w-full h-[150px] bg-[#F3F4F6] rounded overflow-hidden">
-                                                    <Image src={activity.src} alt={activity.label} fill className="object-cover" />
+                                                <div className="relative w-full h-[150px] bg-[#e6e8eb] rounded overflow-hidden">
+                                                    <Image src={activity.src} alt={activity.label} fill className="object-cover grayscale-[0.4] group-hover:grayscale-0 transition-[filter] duration-500" />
                                                 </div>
-                                                <p className="text-center mt-2 font-display text-[9px] text-[#6B7280]">{activity.label}</p>
+                                                <p className="text-center mt-2 font-display text-[9px] text-[#6e7481]">{activity.label}</p>
                                             </div>
                                         ))}
                                     </div>
@@ -565,10 +578,10 @@ export default function AboutPage() {
                             </section>
 
                             {/* ── Shelf ── */}
-                            <section id="shelf" className="pt-12 md:pt-0 border-t md:border-t-0 border-[#F3F4F6]">
-                                <h2 className="text-sm font-bold text-[#6B7280] uppercase tracking-widest mb-6">Shelf</h2>
+                            <section id="shelf" className="pt-12 md:pt-0 border-t md:border-t-0 border-[#e6e8eb]">
+                                <SectionHeader index="04" kicker="What I'm into" title="Shelf" />
                                 <div className="flex flex-col gap-6">
-                                    <p className="text-lg text-[#6B7280] leading-relaxed">
+                                    <p className="text-lg text-[#6e7481] leading-relaxed">
                                         I love discovering new hidden food spots, getting excited about beautifully designed stationery, and listening to audiobooks on long drives.
                                     </p>
                                     {/* Favorites Gallery */}
@@ -584,24 +597,24 @@ export default function AboutPage() {
                                             <div
                                                 key={fav.src}
                                                 onClick={() => setSelectedImage(fav)}
-                                                className={`w-[120px] h-[170px] polaroid transition-all hover:scale-110 hover:z-10 cursor-zoom-in ${i % 2 === 0 ? 'rotate-1' : '-rotate-1'}`}
+                                                className={`group w-[120px] h-[170px] polaroid transition-all hover:scale-110 hover:z-10 cursor-zoom-in ${i % 2 === 0 ? 'rotate-1' : '-rotate-1'}`}
                                             >
-                                                <div className="relative w-full h-[130px] bg-[#F3F4F6] rounded overflow-hidden">
+                                                <div className="relative w-full h-[130px] bg-[#e6e8eb] rounded overflow-hidden">
                                                     <Image
                                                         src={fav.src}
                                                         alt={fav.label ?? ''}
                                                         fill
-                                                        className={`object-cover ${fav.position || 'object-center'}`}
+                                                        className={`object-cover grayscale-[0.4] group-hover:grayscale-0 transition-[filter] duration-500 ${fav.position || 'object-center'}`}
                                                     />
                                                 </div>
-                                                <p className="text-center mt-2 font-display text-[8px] text-[#6B7280]">{fav.label}</p>
+                                                <p className="text-center mt-2 font-display text-[8px] text-[#6e7481]">{fav.label}</p>
                                             </div>
                                         ))}
                                     </div>
-                                    <div className="bg-[#F9FAFB] p-8 rounded-2xl border border-[#F3F4F6] relative overflow-hidden group">
-                                        <div className="absolute top-0 right-0 w-24 h-24 bg-[#10B981]/5 rounded-bl-full transition-transform group-hover:scale-150 duration-500" />
+                                    <div className="bg-[#f8f9fa] p-8 rounded-2xl border border-[#e6e8eb] relative overflow-hidden group">
+                                        <div className="absolute top-0 right-0 w-24 h-24 bg-[#2bc08f]/5 rounded-bl-full transition-transform group-hover:scale-150 duration-500" />
                                         <h4 className="text-xs font-bold uppercase tracking-widest text-[#1A1A1A] mb-4">Currently</h4>
-                                        <p className="text-[#6B7280] leading-relaxed text-[15px]">
+                                        <p className="text-[#6e7481] leading-relaxed text-[15px]">
                                             Reading Malcolm Gladwell. Listening to <em className="not-italic text-[#1A1A1A] font-bold">AI Chat</em>. Learning French. Training for the next football season.
                                         </p>
                                     </div>
@@ -612,12 +625,12 @@ export default function AboutPage() {
                     </div>
 
                     {/* Back to Top */}
-                    <div className="flex justify-center mt-16 pt-8 border-t border-[#F3F4F6]">
+                    <div className="flex justify-center mt-16 pt-8 border-t border-[#e6e8eb]">
                         <button
                             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                            className="inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-widest uppercase text-[#6B7280] hover:text-[#10B981] transition-colors group"
+                            className="inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-widest uppercase text-[#6e7481] hover:text-[#0c5a40] transition-colors group"
                         >
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#D1D5DB] group-hover:bg-[#10B981] transition-colors" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#d1d2d8] group-hover:bg-[#2bc08f] transition-colors" />
                             ↑ Back to top
                         </button>
                     </div>
