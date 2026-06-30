@@ -570,6 +570,76 @@ export const projects: Project[] = [
             'VANS demonstrates that voice-based browser navigation is viable as an accessibility tool today. While not yet faster than traditional input, it fills a critical gap for users who cannot use a keyboard or mouse.',
         github: 'https://github.com/RikepilB/COSC441-ChromeExtension',
     },
+    {
+        id: '10',
+        slug: 'el-umbral',
+        title: 'El Umbral — Relief Project Hub',
+        tagline:
+            'A bilingual "search before you build" hub for Venezuela earthquake relief — find an existing effort and join it, or publish yours with the stack and the help it needs.',
+        category: 'FULL STACK',
+        catColor: '#0c5a40',
+        duration: 'Jun 2026',
+        readTime: '7 min read',
+        demoVideo: 'https://elumbralvzla.org',
+        github: 'https://github.com/RikepilB/build4venezuela-projecthub',
+        stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS v4', 'Zod', 'Fuse.js', 'Vercel'],
+        results: [
+            { metric: 'Live', label: 'Shipped to elumbralvzla.org' },
+            { metric: '2', label: 'Languages — ES + EN, full parity' },
+            { metric: '10', label: 'Public read-only API endpoints' },
+            { metric: 'MIT', label: 'Open source on GitHub' },
+            { metric: '0', label: 'Databases — local-first JSON seam' },
+            { metric: 'Next 16', label: 'App Router + React 19 RSC' },
+        ],
+        overview:
+            'El Umbral is the Build4Venezuela project-discovery hub for post-earthquake relief: a "search before you build" platform so volunteers stop duplicating effort. Search an idea — if a matching effort already exists, join that repo and contribute; if not, publish yours with its tech stack and the help it needs (contributors, API credits, sponsors). A Builders directory imported from the hackathon roster shows who is available to help. It ships bilingual (Spanish-default /es with /en), runs with no database for the MVP, and exposes a public read-only API so other relief tools can build on the same catalog.',
+        problem:
+            'After the earthquake, relief volunteers kept rebuilding the same tools in parallel — burning the scarcest resource in a crisis: time. There was no single place to check whether an idea already had a team before starting from scratch, and no shared, machine-readable catalog of who was building what. El Umbral makes "does this already exist?" the first step instead of an afterthought.',
+        questions: [
+            'How do you stop volunteers from duplicating relief tools without adding friction to publishing a new one?',
+            'How can a fuzzy "already exists?" check warn loudly on near-duplicates while still letting genuinely new ideas through?',
+            'How do you ship a bilingual, no-database MVP today that can swap to a real database later without rewriting every caller?',
+        ],
+        methodology: [
+            {
+                phase: 'Phase 1',
+                title: 'Local-First Data Behind a Repository Seam',
+                detail:
+                    'All data lives in versioned JSON files behind a single typed repository in src/lib/repository — components and routes never read JSON directly. That one seam is the swap point: P1 moves to Supabase (Postgres) without touching any caller. Zod schemas in src/lib/schemas.ts are the single source of truth (types are inferred from them) and validate every external input — form, sheet, scrape, API — at the boundary.',
+                tech: ['Next.js 16', 'TypeScript', 'Zod', 'Repository Pattern'],
+            },
+            {
+                phase: 'Phase 2',
+                title: 'Fuzzy Search + Bilingual i18n',
+                detail:
+                    'A Fuse.js engine powers the core "search before you build" flow: strong matches warn loudly on the search page, and the same engine drives a pre-publish nudge so near-duplicates surface before a new project is created. The whole app is bilingual through hand-rolled dictionaries in src/lib/i18n (no third-party i18n library) — Spanish-default with English parity, every string shipped in both.',
+                tech: ['Fuse.js', 'React 19', 'i18n', 'App Router'],
+            },
+            {
+                phase: 'Phase 3',
+                title: 'Board, Publish & Builders — Server Actions',
+                detail:
+                    'The board filters projects by category, stack, language, status, and need, all driven by URL searchParams so any view is shareable. Publishing is a Zod-validated Server Action that appends to the seed set. A Builders directory imported from the hackathon Google Sheet lists available talent. Status is a lifecycle (planning to wip to testing to mvp to live) and vote counts are server-authoritative to avoid double-counting.',
+                tech: ['Server Actions', 'Zod', 'React Server Components'],
+            },
+            {
+                phase: 'Phase 4',
+                title: 'Public Read-Only API + Vercel Deploy',
+                detail:
+                    'A versioned, GET-only REST surface at /api/v1 exposes the whole catalog as JSON for other relief tools — one envelope ({ success, data, error, meta }), open CORS, a CDN-cached catalog with live /stats and /votes. Ten endpoints in all. Every color and radius is a CSS design token, so the whole app re-themes by editing token values only. It auto-deploys from main to elumbralvzla.org on Vercel.',
+                tech: ['REST API', 'Vercel', 'Design Tokens', 'CDN Caching'],
+            },
+        ],
+        keyFindings: [
+            'A single repository seam (src/lib/repository) lets the MVP run on local JSON today and swap to Postgres in P1 without changing a single component or route — the data source is an implementation detail, not an architectural commitment.',
+            'Defining Zod schemas once and inferring TypeScript types from them keeps validation and types from ever drifting apart, and makes "validate at the boundary" the default for every external input.',
+            'Reusing one Fuse.js engine for both the search page and the pre-publish nudge keeps the duplicate-check consistent everywhere — the same match that warns a searcher also warns a publisher.',
+            'Driving the board entirely from URL searchParams makes every filtered view shareable and bookmarkable, and keeps the filtering logic on the server with zero client state.',
+            'Putting all color and radius in CSS design tokens turns a full re-skin into a values-only edit — no component hardcodes a color, so re-theming never touches component code.',
+        ],
+        conclusion:
+            'El Umbral shows that crisis-response software can be both shipped-fast and built-to-last: a no-database MVP that is live and bilingual today, architected so the move to a real database, semantic search, and auth (P1 to P2) never forces a rewrite. The discipline that makes it durable — one repository seam, Zod as the single source of truth, tokens for theming, a public API others can build on — is the same discipline that let it ship in the first place. It is open source (MIT) and live at elumbralvzla.org.',
+    },
 ]
 export function getProjectBySlug(slug: string): Project | undefined {
     return projects.find((p) => p.slug === slug)
