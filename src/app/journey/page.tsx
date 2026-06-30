@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Download } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 import { experiences } from '@/data/experience'
 import { ResumePaper } from '@/components/ResumePaper'
 
@@ -26,12 +26,14 @@ export default function JourneyPage() {
                         </p>
                     </div>
                     <a
-                        href="/resume.pdf"
-                        download="RichardPillaca_Resume.pdf"
+                        href="https://drive.google.com/file/d/1VpbB1Tdf9J2r2MXrHKJCqCw3cYZMhdux/view?usp=sharing"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="View résumé on Google Drive (opens in new tab)"
                         className="shrink-0 inline-flex items-center gap-2 self-start sm:self-auto rounded-full bg-[#1A1A1A] px-5 py-3 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#0c5a40] animate-fade-up stagger-2"
                     >
-                        <Download size={15} strokeWidth={2} aria-hidden="true" />
-                        Download Résumé
+                        <ExternalLink size={15} strokeWidth={2} aria-hidden="true" />
+                        View Résumé
                     </a>
                 </div>
             </div>
