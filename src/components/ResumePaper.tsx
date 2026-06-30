@@ -23,8 +23,8 @@ export function ResumePaper({ className = '' }: { className?: string }) {
                     <span className="hidden sm:inline">|</span>
                     <span>ridi.pillaca@gmail.com</span>
                     <span className="hidden sm:inline">|</span>
-                    <a href="https://linkedin.com/in/richardpillacaburga" rel="noopener noreferrer" className="hover:text-[#1A1A1A]">
-                        linkedin.com/in/richardpillacaburga
+                    <a href="https://linkedin.com/in/richard-pillaca" rel="noopener noreferrer" className="hover:text-[#1A1A1A]">
+                        linkedin.com/in/richard-pillaca
                     </a>
                 </div>
             </header>
@@ -92,7 +92,7 @@ export function ResumePaper({ className = '' }: { className?: string }) {
                     B.Sc. Computer Science <span className="text-[#6e7481] font-normal">— Minor in Economics</span>
                 </p>
                 <p className="text-xs text-[#6e7481]">
-                    Certifications: Microsoft PL-300 (Power BI), Certified Scrum Master (CSM), Python Institute Associate
+                    Certifications: Power BI Data Analyst (Microsoft), Scrum Master (Scrum.org), Claude Certified Architect (Anthropic)
                 </p>
             </section>
         </div>
