@@ -1,0 +1,230 @@
+- generic [active] [ref=e1]:
+  - navigation "Main navigation" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Home page" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: QUE ONDA!
+      - button "Toggle navigation menu" [ref=e6]
+  - generic:
+    - list:
+      - listitem:
+        - link:
+          - /url: /
+          - text: Home
+      - listitem:
+        - link:
+          - /url: /about
+          - text: About
+      - listitem:
+        - link:
+          - /url: /journey
+          - text: Journey
+      - listitem:
+        - link:
+          - /url: /projects
+          - text: Projects
+      - listitem:
+        - link:
+          - /url: mailto:ridi.pillaca@gmail.com
+          - text: Get in touch
+          - generic: ↗
+  - main [ref=e8]:
+    - region "Introduction" [ref=e9]:
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - heading "Richard Pillaca" [level=1] [ref=e13]
+          - generic [ref=e14]:
+            - paragraph [ref=e15]: Full-stack engineer, currently focused on the frontend, building scalable interfaces with React, Next.js, and Node.js. I've shipped an AI-driven API web app and engineered systems end to end.
+            - paragraph [ref=e16]: Now going deeper into AI infrastructure and high-performance engineering.
+          - generic [ref=e17]:
+            - generic [ref=e18]: Tenacious.·Analytical.·Charismatic.
+            - generic [ref=e19]:
+              - link "LinkedIn" [ref=e20] [cursor=pointer]:
+                - /url: https://www.linkedin.com/in/richard-pillaca
+                - img [ref=e21]
+              - link "GitHub" [ref=e25] [cursor=pointer]:
+                - /url: https://github.com/RikepilB
+                - img [ref=e26]
+              - link "Instagram" [ref=e29] [cursor=pointer]:
+                - /url: https://www.instagram.com/richard_3.14llaca/
+                - img [ref=e30]
+              - link "X / Twitter" [ref=e33] [cursor=pointer]:
+                - /url: https://x.com/richard_pillaca
+                - img [ref=e34]
+        - generic [ref=e36]:
+          - img "Line-art portrait of Richard Pillaca" [ref=e37]
+          - paragraph [ref=e38]:
+            - generic [ref=e39]: 📍
+            - text: Toronto, ON
+    - generic [ref=e41]:
+      - generic [ref=e42]:
+        - heading "My work" [level=2] [ref=e43]:
+          - text: My
+          - emphasis [ref=e44]: work
+        - link "View all projects ↗" [ref=e45] [cursor=pointer]:
+          - /url: /projects
+          - text: View all projects
+          - generic [ref=e46]: ↗
+      - generic [ref=e47]:
+        - article [ref=e49]:
+          - img "Empeñalo — Fintech Marketplace" [ref=e51]
+          - generic [ref=e52]:
+            - generic [ref=e53]:
+              - generic [ref=e54]: "01"
+              - generic [ref=e56]: FULL STACK 2026
+              - generic [ref=e57]: Apr – May 2026
+            - heading "Empeñalo — Fintech Marketplace" [level=3] [ref=e58]
+            - generic [ref=e59]:
+              - generic [ref=e60]: Next.js
+              - generic [ref=e61]: React
+              - generic [ref=e62]: Tailwind
+              - generic [ref=e63]: Supabase
+              - generic [ref=e64]: Vercel
+              - generic [ref=e65]: Upstash Redis
+            - paragraph [ref=e66]: A Peruvian fintech marketplace where users pawn/secure items and receive multiple real offers from businesses.
+            - generic [ref=e67]:
+              - link "↗ Demo" [ref=e68] [cursor=pointer]:
+                - /url: https://empenalo.netlify.app/
+              - link "Details" [ref=e69] [cursor=pointer]:
+                - /url: /projects/empenalo-fintech
+              - link "Code" [ref=e70] [cursor=pointer]:
+                - /url: https://github.com/RikepilB/empeno-quick-cash
+                - img [ref=e71]
+                - text: Code
+        - article [ref=e74]:
+          - img "ScoutLane — Recruitment Platform" [ref=e76]
+          - generic [ref=e77]:
+            - generic [ref=e78]:
+              - generic [ref=e79]: "02"
+              - generic [ref=e81]: FULL STACK 2026
+              - generic [ref=e82]: Apr – May 2026
+            - heading "ScoutLane — Recruitment Platform" [level=3] [ref=e83]
+            - generic [ref=e84]:
+              - generic [ref=e85]: React
+              - generic [ref=e86]: Next.js
+              - generic [ref=e87]: Node.js
+              - generic [ref=e88]: Postgres
+              - generic [ref=e89]: AI Resume Parser
+            - paragraph [ref=e90]: AI-powered recruitment pipeline for parsing resumes, tracking candidates, and managing hiring workflows
+            - generic [ref=e91]:
+              - link "↗ Demo" [ref=e92] [cursor=pointer]:
+                - /url: https://scoutlane.vercel.app
+              - link "Details" [ref=e93] [cursor=pointer]:
+                - /url: /projects/scoutlane-recruitment
+              - link "Code" [ref=e94] [cursor=pointer]:
+                - /url: https://github.com/RikepilB/ScoutLane
+                - img [ref=e95]
+                - text: Code
+        - article [ref=e98]:
+          - img "ExamVault — Automated Exam Generation & Analysis" [ref=e100]
+          - generic [ref=e101]:
+            - generic [ref=e102]:
+              - generic [ref=e103]: "03"
+              - generic [ref=e105]: FULL STACK
+              - generic [ref=e106]: May 2025 – Aug 2025
+            - heading "ExamVault — Automated Exam Generation & Analysis" [level=3] [ref=e107]
+            - generic [ref=e108]:
+              - generic [ref=e109]: Python
+              - generic [ref=e110]: Django
+              - generic [ref=e111]: PostgreSQL
+              - generic [ref=e112]: React.js
+              - generic [ref=e113]: Tailwind CSS
+              - generic [ref=e114]: REST API
+            - paragraph [ref=e115]: "Full-stack platform: automated exam generation, analytics dashboard, and grading pipeline processing 100,000+ student records."
+            - generic [ref=e116]:
+              - link "↗ Demo" [ref=e117] [cursor=pointer]:
+                - /url: https://drive.google.com/file/d/1AWiisSM_dNwResQA2f_v2S19GIcfIIHv/view?usp=drive_link
+              - link "Details" [ref=e118] [cursor=pointer]:
+                - /url: /projects/exam-analysis-system
+              - link "Code" [ref=e119] [cursor=pointer]:
+                - /url: https://github.com/RikepilB/ExamVault
+                - img [ref=e120]
+                - text: Code
+        - article [ref=e123]:
+          - img "Bike Share Network Optimization" [ref=e125]
+          - generic [ref=e126]:
+            - generic [ref=e127]:
+              - generic [ref=e128]: "04"
+              - generic [ref=e130]: DATA SCIENCE
+              - generic [ref=e131]: Sep 2024 – Dec 2024
+            - heading "Bike Share Network Optimization" [level=3] [ref=e132]
+            - generic [ref=e133]:
+              - generic [ref=e134]: R
+              - generic [ref=e135]: RStudio
+              - generic [ref=e136]: igraph
+              - generic [ref=e137]: Ward's Clustering
+              - generic [ref=e138]: Graph Theory
+              - generic [ref=e139]: Power BI
+            - paragraph [ref=e140]: Where does a city's bike-share network actually break? I mapped 150K+ Mobi Vancouver trips as a living graph to find the hubs that hold it together — and the gaps that quietly cost it.
+            - generic [ref=e141]:
+              - link "↗ Demo" [ref=e142] [cursor=pointer]:
+                - /url: https://drive.google.com/file/d/1oUZ5A63UTlHPDytAo2pQ5On9Y-geD37a/view?usp=sharing
+              - link "Details" [ref=e143] [cursor=pointer]:
+                - /url: /projects/bike-share-optimization
+              - link "Code" [ref=e144] [cursor=pointer]:
+                - /url: https://github.com/Sumer26/COSC_421_Project_Newtork_Science
+                - img [ref=e145]
+                - text: Code
+      - link "View all projects +5 more" [ref=e148] [cursor=pointer]:
+        - /url: /projects
+        - text: View all projects
+        - generic [ref=e149]: +5 more
+    - generic [ref=e152]:
+      - generic [ref=e153]:
+        - paragraph [ref=e154]: What I do
+        - heading "Skills & Stack" [level=2] [ref=e155]:
+          - text: Skills &
+          - emphasis [ref=e156]: Stack
+        - paragraph [ref=e157]: "Three disciplines I move between, usually on the same project: engineering, AI, and data."
+      - generic [ref=e158]:
+        - generic [ref=e160]:
+          - generic [ref=e161]:
+            - generic [ref=e162]: "01"
+            - img [ref=e164]
+          - generic [ref=e169]:
+            - heading "Software Engineering" [level=3] [ref=e170]
+            - paragraph [ref=e171]: Full-stack with a frontend focus. I turn designs into responsive, event-driven interfaces and back them with modular auth, reusable components, and CI/CD pipelines.
+            - generic [ref=e172]:
+              - generic [ref=e173]: React
+              - generic [ref=e174]: Next.js
+              - generic [ref=e175]: Node.js
+              - generic [ref=e176]: TypeScript
+              - generic [ref=e177]: Django
+              - generic [ref=e178]: Laravel
+              - generic [ref=e179]: Tailwind CSS
+              - generic [ref=e180]: Docker
+              - generic [ref=e181]: CI/CD
+        - generic [ref=e183]:
+          - generic [ref=e184]:
+            - generic [ref=e185]: "02"
+            - img [ref=e187]
+          - generic [ref=e191]:
+            - heading "AI & Automation" [level=3] [ref=e192]
+            - paragraph [ref=e193]: I wire LLMs into real products, like AI that parses resumes into structured, filterable data, and automate the busywork around them with agents, RAG, and webhooks.
+            - generic [ref=e194]:
+              - generic [ref=e195]: LLM Integration
+              - generic [ref=e196]: RAG
+              - generic [ref=e197]: AI Agents
+              - generic [ref=e198]: LangGraph
+              - generic [ref=e199]: MCP
+              - generic [ref=e200]: Vercel AI
+              - generic [ref=e201]: Event-driven
+              - generic [ref=e202]: Webhooks
+        - generic [ref=e204]:
+          - generic [ref=e205]:
+            - generic [ref=e206]: "03"
+            - img [ref=e208]
+          - generic [ref=e213]:
+            - heading "Data & Analytics" [level=3] [ref=e214]
+            - paragraph [ref=e215]: Data-driven by default. I build ETL pipelines that process millions of records and turn them into Power BI dashboards and reporting that replace hours of manual work.
+            - generic [ref=e216]:
+              - generic [ref=e217]: SQL
+              - generic [ref=e218]: PostgreSQL
+              - generic [ref=e219]: Power BI / DAX
+              - generic [ref=e220]: ETL
+              - generic [ref=e221]: Pandas
+              - generic [ref=e222]: Excel
+    - button "↑ Back to top" [ref=e224]: ↑ Back to top
+  - button "Open Next.js Dev Tools" [ref=e231] [cursor=pointer]:
+    - img [ref=e232]
+  - alert [ref=e235]

@@ -43,16 +43,30 @@ public/images/                — Photos, screenshots
 - Backend/API: @.claude/rules/backend.md
 - Security (always): @.claude/rules/security.md
 
+## Skills — Loading Rule (READ THIS)
+- A skill loads ONLY at `.claude/skills/<name>/SKILL.md` — exactly ONE level deep, with valid
+  `name:` (kebab-case, no colon) + `description:` frontmatter. Category subfolders KILL discovery.
+- Past bug: a full design library sat dead at `.claude/skills/deploy/01-DESIGN/...` (3 levels deep)
+  — it existed but never loaded. All 25 skills are now flat and load. `deploy/**` is a dead archive.
+- Organize via name prefixes + `.claude/skills/AGENTS.md` index, NOT folders. Validate:
+  `for d in .claude/skills/*/SKILL.md; do echo "$d"; done; find .claude/skills -mindepth 3 -name SKILL.md`
+  (anything from the `find` = buried/dead → move it up).
+
 ## Skills Available (already installed — use don't recreate)
-- `frontend-design` — Production UI, avoids generic AI look — LOAD FOR ALL UI WORK
-- `vercel-react-best-practices` — Next.js/Vercel optimization (54 rules)
-- `tailwind-design-system` — Tailwind token patterns
-- `web-design-guidelines` — Design principles
-- `fullstack-developer` — Full-stack patterns
-- `systematic-debugging` — When something breaks
-- `subagent-driven-development` — Parallel component work
-- `requesting-code-review` — Before marking any page done
-- `brainstorming` — Planning new sections
+**Design/Frontend:** `impeccable` (redesign/audit/polish — crown jewel) · `ui-ux-pro-max` (styles,
+palettes, font pairings, UX rules) · `frontend-design` (LOAD FOR ALL UI WORK) · `frontend-patterns` ·
+`tailwind-design-system` · `ckm-design-system` (tokens) · `ckm-ui-styling` · `shadcn` · `baseline-ui`
+(UI anti-patterns/a11y) · `web-design-guidelines` · `vercel-react-best-practices`
+**Process/Quality:** `brainstorming` · `subagent-driven-development` (parallel components) ·
+`requesting-code-review` · `coding-standards` · `verification-loop` · `continuous-learning`
+**Debug/Test:** `systematic-debugging` · `tdd-workflow`
+**Backend/Deploy:** `fullstack-developer` · `backend-patterns` · `python-patterns` · `deployment-patterns`
+**Security:** `security-review` · `security-scan`
+
+## Commands
+- `/redesign <target>` — full design+frontend mode: Audit (Chrome screenshots 375/768/1280) →
+  Direction (ui-ux-pro-max + impeccable + tokens) → Implement (mobile-first, Tailwind-only) →
+  Verify (build/lint/types + a11y + visual diff). Pauses after Audit and Direction.
 
 ## Agents (use for specialized tasks)
 - `explorer` — Run FIRST before touching any file

@@ -1,23 +1,26 @@
 # Goal
-Polish the portfolio project case-study copy in `src/data/projects.ts` — make entries truthful, recruiter-attractive, and readable. This session focused on bike-share-optimization and ExamVault overviews.
+Pick and execute the next roadmap phase from `docs/plans/2026-06-23-ROADMAP-perfect-portfolio.md`. Three candidates: Phase 0 (DESIGN.md + kill navy tokens), Phase 2 (essays MDX content), Phase 3 (interactive bike-share map).
 
 ## Current state
-`pnpm build` passing (zero errors). All edits saved. Nothing committed (per user's push rules).
+- Branch: `feat/ui-polish-pass`
+- PR #4 open (`96d97b9` hero copy fix) — NOT merged yet, user reviewing
+- Build last known green (tsc clean at `96d97b9`)
+- This session: ran `/setup-pm` only. Confirmed `.claude/package-manager.json` already exists with `{"packageManager": "pnpm"}` — correct, matches `pnpm-lock.yaml` + CLAUDE.md. No code changed.
 
 ## Files in flight
-None — all edits complete and saved.
+None. Planning artifacts in `docs/plans/` are complete drafts (untracked, not committed).
 
-## Changed (this session, src/data/projects.ts)
-- **bike-share-optimization** (id '1'):
-  - Spiked truthfully: tagline hook, added 150K+ ridership-records metric, named data source (Mobi by Rogers open dataset), added Phase 4 (Power BI + predictive modeling, marked in-progress), sharpened findings + conclusion, added Power BI to stack.
-  - Made whole entry more "selling": narrative methodology titles, problem opens on rider pain.
-  - Overview finally shortened to 3 sentences (~5 lines) at user request.
-  - Kept Vancouver-only, no Toronto, 150K not "millions", dropped fabricated 15% noise claim.
-- **ExamVault / exam-analysis-system** (id '5'): overview rewritten — product pitch first (for users), then role/recruiter framing (backend exam-gen engine, analytics dashboard, Scrum Master). Only overview field changed.
+## Changed
+None this session. Prior shipped work:
+- `96d97b9` — hero copy tightened + QA fixes (PR #4, open)
+- `9e61490` — resume side-by-side on journey + bolder Skills cards
+- `f5712d0` — editorial polish pass across portfolio
 
 ## Failed attempts
-None.
+- PowerShell `git commit -m @'...'@` here-string mangled commit message into pathspecs. Fix: write to temp file → `git commit -F`. utf8 `Out-File` adds BOM to subject — strip or fix via `gh pr edit --title`.
+- `/setup-pm` references `scripts/setup-package-manager.js` — file does not exist in this repo. Don't try to run it; config is already hand-set correctly in `.claude/package-manager.json`.
 
-## Next steps
-1. User to review rendered pages and decide whether to commit.
-2. Open flag: verify ExamVault results-card metrics (100K+ records, 94% precision, z-score) are real — same hallucination check done for bike-share. Not yet verified.
+# Next steps
+1. Merge PR #4 (or confirm user wants to skip)
+2. Execute Phase 0: create `docs/DESIGN.md` taste file + delete dead navy tokens from `globals.css` (`--color-d-bg`, `--color-d-surface`, `--color-d-text`, `--color-d-border`)
+3. After Phase 0: spec Phase 2 (essays) — decide MDX files vs `body` field in `essays.ts` before writing content

@@ -1,0 +1,219 @@
+- generic [active] [ref=e1]:
+  - navigation "Main navigation" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Home page" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: QUE ONDA!
+      - button "Toggle navigation menu" [ref=e6]
+  - generic:
+    - list:
+      - listitem:
+        - link:
+          - /url: /
+          - text: Home
+      - listitem:
+        - link:
+          - /url: /about
+          - text: About
+      - listitem:
+        - link:
+          - /url: /journey
+          - text: Journey
+      - listitem:
+        - link:
+          - /url: /projects
+          - text: Projects
+      - listitem:
+        - link:
+          - /url: mailto:ridi.pillaca@gmail.com
+          - text: Get in touch
+          - generic: ↗
+  - main [ref=e8]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - heading "Career Journey" [level=1] [ref=e11]
+        - paragraph [ref=e12]: The timeline of my professional experience across engineering, data, and consulting.
+      - generic [ref=e14]:
+        - article [ref=e15] [cursor=pointer]:
+          - generic [ref=e18]:
+            - generic [ref=e19]:
+              - paragraph [ref=e20]: Jan 2026 – Present
+              - paragraph [ref=e21]: work
+            - generic [ref=e22]:
+              - heading "Web Content & UX Lead" [level=2] [ref=e23]
+              - paragraph [ref=e24]:
+                - text: BrainTrainr
+                - generic [ref=e25]: — Toronto, ON · Remote
+            - generic [ref=e26]: ▼
+          - generic [ref=e27]:
+            - paragraph [ref=e28]: Leading web content strategy and UX design for an EdTech platform, driving user engagement through Webflow and experience-centered design.
+            - list [ref=e29]:
+              - listitem [ref=e30]: Lead web content strategy and UX design using Webflow
+              - listitem [ref=e32]: Improved user experience through interaction design and content optimization
+            - generic [ref=e34]:
+              - generic [ref=e35]: Webflow
+              - generic [ref=e36]: UX Design
+              - generic [ref=e37]: Content Strategy
+              - generic [ref=e38]: Figma
+        - article [ref=e39] [cursor=pointer]:
+          - generic [ref=e42]:
+            - generic [ref=e43]:
+              - paragraph [ref=e44]: Sep 2025 – Dec 2025
+              - paragraph [ref=e45]: work
+            - generic [ref=e46]:
+              - heading "Frontend Developer" [level=2] [ref=e47]
+              - paragraph [ref=e48]:
+                - text: Karac
+                - generic [ref=e49]: — Switzerland · Remote
+            - generic [ref=e50]: ▼
+          - generic [ref=e51]:
+            - paragraph [ref=e52]: Internship building frontend features for a Swiss startup. Reduced user signup time from 2 minutes to 45 seconds through UX and performance improvements.
+            - list [ref=e53]:
+              - listitem [ref=e54]: Reduced signup flow time from 2 minutes to 45 seconds through UX redesign
+              - listitem [ref=e56]: Built responsive UI components using Laravel, Alpine.js, and Tailwind CSS
+              - listitem [ref=e58]: Collaborated with Swiss team across time zones using Agile methodology
+            - generic [ref=e60]:
+              - generic [ref=e61]: Laravel
+              - generic [ref=e62]: Alpine.js
+              - generic [ref=e63]: Tailwind CSS
+              - generic [ref=e64]: JavaScript
+        - article [ref=e65] [cursor=pointer]:
+          - generic [ref=e68]:
+            - generic [ref=e69]:
+              - paragraph [ref=e70]: May 2025 – Aug 2025
+              - paragraph [ref=e71]: work
+            - generic [ref=e72]:
+              - heading "Full-Stack Developer (Capstone)" [level=2] [ref=e73]
+              - paragraph [ref=e74]:
+                - text: UBC Faculty of Science
+                - generic [ref=e75]: — Kelowna, BC
+            - generic [ref=e76]: ▼
+          - generic [ref=e77]:
+            - paragraph [ref=e78]: Built ExamVault, a full-stack platform helping instructors create, manage, and analyze multiple-choice exams. Served as Scrum Master throughout a 4-month sprint cycle.
+            - list [ref=e79]:
+              - listitem [ref=e80]: Built backend logic for randomized exam generation and statistical grading algorithms
+              - listitem [ref=e82]: Created analytics dashboard to visualize exam results and trends over time
+              - listitem [ref=e84]: Coordinated sprints as Scrum Master, managing client feedback and cross-team delivery
+              - listitem [ref=e86]: Reduced report load times from 4 minutes to 60 seconds via SQL optimizations
+            - generic [ref=e88]:
+              - generic [ref=e89]: React.js
+              - generic [ref=e90]: Tailwind CSS
+              - generic [ref=e91]: Django
+              - generic [ref=e92]: PostgreSQL
+              - generic [ref=e93]: Docker
+              - generic [ref=e94]: GitHub Actions
+        - article [ref=e95] [cursor=pointer]:
+          - generic [ref=e98]:
+            - generic [ref=e99]:
+              - paragraph [ref=e100]: Jan 2025 – May 2025
+              - paragraph [ref=e101]: research
+            - generic [ref=e102]:
+              - heading "Research Assistant" [level=2] [ref=e103]
+              - paragraph [ref=e104]:
+                - text: University of British Columbia
+                - generic [ref=e105]: — Kelowna, BC
+            - generic [ref=e106]: ▼
+          - generic [ref=e107]:
+            - paragraph [ref=e108]: Participated in empirical research examining generative AI's impact on software quality and technical debt. The team won Best Presentation out of 10 research cohorts.
+            - list [ref=e109]:
+              - listitem [ref=e110]: Analyzed 5,000+ GitHub repositories using SonarQube and Python data pipelines
+              - listitem [ref=e112]: Applied Mann-Whitney U statistical tests to compare AI vs. human code quality
+              - listitem [ref=e114]: Won Best Presentation award out of 10 competing research cohorts
+              - listitem [ref=e116]: Earned MSR (Mining Software Repositories) conference nomination
+            - generic [ref=e118]:
+              - generic [ref=e119]: Python
+              - generic [ref=e120]: SonarQube
+              - generic [ref=e121]: GitHub API
+              - generic [ref=e122]: SciPy
+              - generic [ref=e123]: Data Mining
+        - article [ref=e124] [cursor=pointer]:
+          - generic [ref=e127]:
+            - generic [ref=e128]:
+              - paragraph [ref=e129]: Sep 2024 – Apr 2025
+              - paragraph [ref=e130]: volunteer
+            - generic [ref=e131]:
+              - heading "Vice-President Internal" [level=2] [ref=e132]
+              - paragraph [ref=e133]:
+                - text: Latin American Student Association
+                - generic [ref=e134]: — Kelowna, BC
+            - generic [ref=e135]: ▼
+          - generic [ref=e136]:
+            - paragraph [ref=e137]: Led internal operations for a student association representing the Latin American community at UBC Okanagan. Managed social media, cross-club collaborations, and event budgets.
+            - list [ref=e138]:
+              - listitem [ref=e139]: Managed social media and collaborated with student clubs to boost engagement and event participation
+              - listitem [ref=e141]: Optimized event planning under union regulations and streamlined budgets via sprint meetings, reducing costs
+            - generic [ref=e143]:
+              - generic [ref=e144]: Event Planning
+              - generic [ref=e145]: Budget Management
+              - generic [ref=e146]: Social Media
+              - generic [ref=e147]: Leadership
+        - article [ref=e148] [cursor=pointer]:
+          - generic [ref=e151]:
+            - generic [ref=e152]:
+              - paragraph [ref=e153]: Aug 2023 – Sep 2025
+              - paragraph [ref=e154]: work
+            - generic [ref=e155]:
+              - heading "Business Development Representative" [level=2] [ref=e156]
+              - paragraph [ref=e157]:
+                - text: UBC Okanagan Campus
+                - generic [ref=e158]: — Kelowna, BC · On-site
+            - generic [ref=e159]: ▼
+          - generic [ref=e160]:
+            - paragraph [ref=e161]: Supported front and back of house operations across UBC Okanagan Admin and Bookstore. Handled 80+ weekly inquiries, managed peak periods, and provided front-line IT support.
+            - list [ref=e162]:
+              - listitem [ref=e163]: Handled 80+ weekly inquiries and POS transactions, managed peak periods to cut wait times
+              - listitem [ref=e165]: Processed online orders with accurate inventory handoffs
+              - listitem [ref=e167]: Provided front-line IT support for account setup, troubleshooting, and basic diagnostics
+              - listitem [ref=e169]: Strengthened communication, organization, and problem-solving in a fast-paced student-facing environment
+            - generic [ref=e171]:
+              - generic [ref=e172]: Customer Service
+              - generic [ref=e173]: IT Support
+              - generic [ref=e174]: POS Systems
+              - generic [ref=e175]: Inventory Management
+        - article [ref=e176] [cursor=pointer]:
+          - generic [ref=e179]:
+            - generic [ref=e180]:
+              - paragraph [ref=e181]: Aug 2023 – Apr 2025
+              - paragraph [ref=e182]: volunteer
+            - generic [ref=e183]:
+              - heading "Founder & President" [level=2] [ref=e184]
+              - paragraph [ref=e185]:
+                - text: Football Enthusiast Student Club
+                - generic [ref=e186]: — Kelowna, BC
+            - generic [ref=e187]: ▼
+          - generic [ref=e188]:
+            - paragraph [ref=e189]: Founded and led a campus football club from scratch, managing a $2,500 budget and growing the community through strategic event planning.
+            - list [ref=e190]:
+              - listitem [ref=e191]: Managed $2,500 budget and coordinated event logistics for campus tournaments
+              - listitem [ref=e193]: Increased event attendance through strategic social media and campus outreach
+              - listitem [ref=e195]: Built and maintained a growing community of football enthusiasts at UBC
+            - generic [ref=e197]:
+              - generic [ref=e198]: Leadership
+              - generic [ref=e199]: Event Planning
+              - generic [ref=e200]: Budget Management
+              - generic [ref=e201]: Community Building
+            - link "🔗 View Partner →" [ref=e202]:
+              - /url: https://shorturl.at/2HhZc
+        - article [ref=e203] [cursor=pointer]:
+          - generic [ref=e206]:
+            - generic [ref=e207]:
+              - paragraph [ref=e208]: Nov 2023 – Feb 2024
+              - paragraph [ref=e209]: volunteer
+            - generic [ref=e210]:
+              - heading "Cofounder & Project coordinator" [level=2] [ref=e211]
+              - paragraph [ref=e212]:
+                - text: Okanagan Tech Industry Night
+                - generic [ref=e213]: — Kelowna, BC
+            - generic [ref=e214]: ▼
+          - generic [ref=e215]:
+            - paragraph [ref=e216]: Organized a technology industry networking event with 200+ attendees, managing invitations, sponsors, and logistics end-to-end.
+            - list [ref=e217]:
+              - listitem [ref=e218]: Organized tech event for 200+ attendees, managing invites, sponsors, and logistics
+              - listitem [ref=e220]: Connected students with industry professionals from the Okanagan tech ecosystem
+            - generic [ref=e222]:
+              - generic [ref=e223]: Event Management
+              - generic [ref=e224]: Networking
+              - generic [ref=e225]: Sponsorship
+  - button "Open Next.js Dev Tools" [ref=e231] [cursor=pointer]:
+    - img [ref=e232]
+  - alert [ref=e235]

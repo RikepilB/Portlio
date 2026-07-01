@@ -1,0 +1,225 @@
+- generic [active] [ref=e1]:
+  - navigation "Main navigation" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Home page" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: HEY!
+      - list [ref=e6]:
+        - listitem [ref=e7]:
+          - link "Home" [ref=e8] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e9]:
+          - link "About" [ref=e10] [cursor=pointer]:
+            - /url: /about
+        - listitem [ref=e11]:
+          - link "Journey" [ref=e12] [cursor=pointer]:
+            - /url: /journey
+        - listitem [ref=e13]:
+          - link "Projects" [ref=e14] [cursor=pointer]:
+            - /url: /projects
+            - text: Projects
+      - link "Get in touch ↗" [ref=e16] [cursor=pointer]:
+        - /url: mailto:ridi.pillaca@gmail.com
+        - text: Get in touch
+        - generic [ref=e17]: ↗
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - heading "Projects" [level=1] [ref=e21]
+        - paragraph [ref=e22]: Case studies in data science, research, automation, and full-stack engineering.
+      - generic [ref=e23]:
+        - group "Filter projects by category" [ref=e24]:
+          - button "Filter by All" [pressed] [ref=e25]: All
+          - button "Filter by DATA SCIENCE" [ref=e26]: DATA SCIENCE
+          - button "Filter by RESEARCH" [ref=e27]: RESEARCH
+          - button "Filter by EXCEL AUTOMATION" [ref=e28]: EXCEL AUTOMATION
+          - button "Filter by FULL STACK" [ref=e29]: FULL STACK
+        - list [ref=e30]:
+          - listitem [ref=e31]:
+            - 'link "View case study: Empeñalo — Fintech Marketplace" [ref=e32] [cursor=pointer]':
+              - /url: /projects/empenalo-fintech
+              - generic [ref=e33]:
+                - generic [ref=e34]: FULL STACK 2026
+                - generic [ref=e35]: Apr – May 2026
+              - generic [ref=e36]:
+                - heading "Empeñalo — Fintech Marketplace" [level=2] [ref=e37]
+                - paragraph [ref=e38]: A Peruvian fintech marketplace where users pawn/secure items and receive multiple real offers from businesses.
+              - generic [ref=e39]:
+                - generic [ref=e40]: Next.js
+                - generic [ref=e41]: React
+                - generic [ref=e42]: Tailwind
+                - generic [ref=e43]: Supabase
+                - generic [ref=e44]: "+2"
+              - generic [ref=e46]: Read case study →
+          - listitem [ref=e47]:
+            - 'link "View case study: ScoutLane — Recruitment Platform" [ref=e48] [cursor=pointer]':
+              - /url: /projects/scoutlane-recruitment
+              - generic [ref=e49]:
+                - generic [ref=e50]: FULL STACK 2026
+                - generic [ref=e51]: Apr – May 2026
+              - generic [ref=e52]:
+                - heading "ScoutLane — Recruitment Platform" [level=2] [ref=e53]
+                - paragraph [ref=e54]: AI-powered recruitment pipeline for parsing resumes, tracking candidates, and managing hiring workflows
+              - generic [ref=e55]:
+                - generic [ref=e56]: React
+                - generic [ref=e57]: Next.js
+                - generic [ref=e58]: Node.js
+                - generic [ref=e59]: Postgres
+                - generic [ref=e60]: "+1"
+              - generic [ref=e62]: Read case study →
+          - listitem [ref=e63]:
+            - 'link "View case study: Accounting Journal Entry Automation" [ref=e64] [cursor=pointer]':
+              - /url: /projects/accounting-automation
+              - generic [ref=e65]:
+                - generic [ref=e66]: EXCEL AUTOMATION
+                - generic [ref=e67]: Feb 2026
+              - generic [ref=e68]:
+                - heading "Accounting Journal Entry Automation" [level=2] [ref=e69]
+                - paragraph [ref=e70]: Replacing 4+ hours of manual copy-paste work with a 12-minute Power Query refresh — built for real accounting teams.
+              - generic [ref=e71]:
+                - generic [ref=e72]: Excel
+                - generic [ref=e73]: Power Query
+                - generic [ref=e74]: M Language
+                - generic [ref=e75]: VBA
+                - generic [ref=e76]: "+2"
+              - generic [ref=e78]: Read case study →
+          - listitem [ref=e79]:
+            - 'link "View case study: ExamVault — Automated Exam Generation & Analysis" [ref=e80] [cursor=pointer]':
+              - /url: /projects/exam-analysis-system
+              - generic [ref=e81]:
+                - generic [ref=e82]: FULL STACK
+                - generic [ref=e83]: May 2025 – Aug 2025
+              - generic [ref=e84]:
+                - heading "ExamVault — Automated Exam Generation & Analysis" [level=2] [ref=e85]
+                - paragraph [ref=e86]: "Full-stack platform: automated exam generation, analytics dashboard, and grading pipeline processing 100,000+ student records."
+              - generic [ref=e87]:
+                - generic [ref=e88]: Python
+                - generic [ref=e89]: Django
+                - generic [ref=e90]: PostgreSQL
+                - generic [ref=e91]: React.js
+                - generic [ref=e92]: "+4"
+              - generic [ref=e94]: Read case study →
+          - listitem [ref=e95]:
+            - 'link "View case study: AI Technical Debt in Software Repositories" [ref=e96] [cursor=pointer]':
+              - /url: /projects/ai-technical-debt-research
+              - generic [ref=e97]:
+                - generic [ref=e98]: RESEARCH
+                - generic [ref=e99]: Jan 2025 – May 2025
+              - generic [ref=e100]:
+                - heading "AI Technical Debt in Software Repositories" [level=2] [ref=e101]
+                - paragraph [ref=e102]: Does AI-generated code create more technical debt? We analyzed 5,000+ GitHub repositories to find out.
+              - generic [ref=e103]:
+                - generic [ref=e104]: Python
+                - generic [ref=e105]: GitHub API
+                - generic [ref=e106]: SonarQube
+                - generic [ref=e107]: SciPy
+                - generic [ref=e108]: "+2"
+              - generic [ref=e110]: Read case study →
+          - listitem [ref=e111]:
+            - 'link "View case study: Bike Share Network Optimization" [ref=e112] [cursor=pointer]':
+              - /url: /projects/bike-share-optimization
+              - generic [ref=e113]:
+                - generic [ref=e114]: DATA SCIENCE
+                - generic [ref=e115]: Sep 2024 – Dec 2024
+              - generic [ref=e116]:
+                - heading "Bike Share Network Optimization" [level=2] [ref=e117]
+                - paragraph [ref=e118]: Where does a city's bike-share network actually break? I mapped 150K+ Mobi Vancouver trips as a living graph to find the hubs that hold it together — and the gaps that quietly cost it.
+              - generic [ref=e119]:
+                - generic [ref=e120]: R
+                - generic [ref=e121]: RStudio
+                - generic [ref=e122]: igraph
+                - generic [ref=e123]: Ward's Clustering
+                - generic [ref=e124]: "+2"
+              - generic [ref=e126]: Read case study →
+          - listitem [ref=e127]:
+            - 'link "View case study: VANS — Voice-Activated Navigation System" [ref=e128] [cursor=pointer]':
+              - /url: /projects/vans-voice-navigation
+              - generic [ref=e129]:
+                - generic [ref=e130]: HCI RESEARCH
+                - generic [ref=e131]: Sep — Dec 2024
+              - generic [ref=e132]:
+                - heading "VANS — Voice-Activated Navigation System" [level=2] [ref=e133]
+                - paragraph [ref=e134]: Hands-free Chrome extension translating speech into browser actions — empirically benchmarked against keyboard/mouse.
+              - generic [ref=e135]:
+                - generic [ref=e136]: JavaScript
+                - generic [ref=e137]: Web Speech API
+                - generic [ref=e138]: Chrome Extension
+                - generic [ref=e139]: HTML5
+                - generic [ref=e140]: "+1"
+              - generic [ref=e142]: Read case study →
+          - listitem [ref=e143]:
+            - 'link "View case study: Sublime — E-Ticketing Platform" [ref=e144] [cursor=pointer]':
+              - /url: /projects/sublime-event-ticketing
+              - generic [ref=e145]:
+                - generic [ref=e146]: FULL STACK
+                - generic [ref=e147]: Jan 2024 – Apr 2024
+              - generic [ref=e148]:
+                - heading "Sublime — E-Ticketing Platform" [level=2] [ref=e149]
+                - paragraph [ref=e150]: Event ticketing platform with secure payment processing and user account management — built with Django and Docker.
+              - generic [ref=e151]:
+                - generic [ref=e152]: Python
+                - generic [ref=e153]: Django
+                - generic [ref=e154]: Docker
+                - generic [ref=e155]: PostgreSQL
+                - generic [ref=e156]: "+3"
+              - generic [ref=e158]: Read case study →
+          - listitem [ref=e159]:
+            - 'link "View case study: Bookstore" [ref=e160] [cursor=pointer]':
+              - /url: /projects/bookstore-app
+              - generic [ref=e161]:
+                - generic [ref=e162]: FULL STACK
+                - generic [ref=e163]: Sep 2023 – Nov 2023
+              - generic [ref=e164]:
+                - heading "Bookstore" [level=2] [ref=e165]
+                - paragraph [ref=e166]: Mobile inventory tracking app with intuitive UI and Firebase backend.
+              - generic [ref=e167]:
+                - generic [ref=e168]: Android Studio
+                - generic [ref=e169]: Java
+                - generic [ref=e170]: Figma
+                - generic [ref=e171]: Firebase
+                - generic [ref=e172]: "+2"
+              - generic [ref=e174]: Read case study →
+  - contentinfo "Site footer" [ref=e175]:
+    - generic [ref=e176]:
+      - generic [ref=e177]:
+        - generic [ref=e178]:
+          - generic [ref=e180]:
+            - generic [ref=e181]: Richard Pillaca
+            - paragraph [ref=e182]: Data Analyst & BI Developer based in Toronto. Building scalable pipelines, intelligent tools, and automated workflows.
+          - generic [ref=e183]:
+            - generic [ref=e184]: Fun Fact
+            - paragraph [ref=e185]: A day on Venus is longer than a year on Venus.
+        - generic [ref=e186]:
+          - paragraph [ref=e187]: Menu
+          - list [ref=e188]:
+            - listitem [ref=e189]:
+              - link "Home" [ref=e190] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e191]:
+              - link "About" [ref=e192] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e193]:
+              - link "Journey" [ref=e194] [cursor=pointer]:
+                - /url: /journey
+            - listitem [ref=e195]:
+              - link "Projects" [ref=e196] [cursor=pointer]:
+                - /url: /projects
+        - generic [ref=e197]:
+          - paragraph [ref=e198]: Connect
+          - list [ref=e199]:
+            - listitem [ref=e200]:
+              - link "Email" [ref=e201] [cursor=pointer]:
+                - /url: mailto:ridi.pillaca@gmail.com
+            - listitem [ref=e202]:
+              - link "LinkedIn ↗" [ref=e203] [cursor=pointer]:
+                - /url: https://www.linkedin.com/in/richard-pillaca
+            - listitem [ref=e204]:
+              - link "GitHub ↗" [ref=e205] [cursor=pointer]:
+                - /url: https://github.com/RikepilB
+      - generic [ref=e206]:
+        - paragraph [ref=e207]: © 2026 Richard Pillaca Burga.
+        - generic [ref=e208]:
+          - generic [ref=e209]: Built with Next.js 16 & Tailwind CSS
+          - generic [ref=e211]: Deployed on Vercel
+  - button "Open Next.js Dev Tools" [ref=e217] [cursor=pointer]:
+    - img [ref=e218]
