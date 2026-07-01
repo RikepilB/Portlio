@@ -8,6 +8,7 @@ import { projects } from '@/data/projects'
 import { socialLinks } from '@/data/social'
 
 const featuredSlugs = [
+  'el-umbral',
   'empenalo-fintech',
   'scoutlane-recruitment',
   'exam-analysis-system',
