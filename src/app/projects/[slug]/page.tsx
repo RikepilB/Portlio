@@ -187,7 +187,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 bg-[#0c5a40] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#0a4a34] transition-colors duration-150"
                     >
-                        <span className="text-lg">▶️</span> Watch Demo Video
+                        {project.demoVideo.includes('drive.google.com') ? (
+                            <>
+                                <span className="text-lg">▶️</span> Watch Demo Video
+                            </>
+                        ) : (
+                            <>View Live Demo →</>
+                        )}
                     </a>
                 )}
             </div>
