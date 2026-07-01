@@ -580,6 +580,8 @@ export const projects: Project[] = [
         catColor: '#0c5a40',
         duration: 'Jun 2026',
         readTime: '7 min read',
+        image: '/images/elumbral.png',
+        images: ['/images/elumbral.png'],
         demoVideo: 'https://elumbralvzla.org',
         github: 'https://github.com/RikepilB/build4venezuela-projecthub',
         stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS v4', 'Zod', 'Fuse.js', 'Vercel'],
