@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { projects } from '@/data/projects'
 
-const categories = ['All', 'DATA SCIENCE', 'RESEARCH', 'EXCEL AUTOMATION', 'FULL STACK']
+const categories = ['All', ...Array.from(new Set(projects.map((p) => p.category)))]
 
 export default function ProjectsPage() {
     const [active, setActive] = useState('All')
@@ -35,7 +35,7 @@ export default function ProjectsPage() {
                     Projects
                 </h1>
                 <p className="text-lg text-[#6e7481] max-w-xl leading-relaxed animate-fade-up stagger-1">
-                    Case studies in data science, research, automation, and full-stack engineering.
+                    Case studies in data science, research, automation, full-stack and AI engineering.
                 </p>
             </div>
 

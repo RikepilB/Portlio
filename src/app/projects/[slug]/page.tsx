@@ -171,15 +171,17 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
             {/* Links */}
             <div className="border-t border-neutral-100 pt-8 mt-8 flex flex-wrap gap-3">
-                <Link
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`View ${project.title} on GitHub (opens in new tab)`}
-                    className="inline-flex items-center gap-2 bg-neutral-900 text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-neutral-700 transition-colors duration-150"
-                >
-                    View on GitHub →
-                </Link>
+                {project.github && (
+                    <Link
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`View ${project.title} on GitHub (opens in new tab)`}
+                        className="inline-flex items-center gap-2 bg-neutral-900 text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-neutral-700 transition-colors duration-150"
+                    >
+                        View on GitHub →
+                    </Link>
+                )}
                 {project.demoVideo && !project.demoVideo.startsWith('PLACEHOLDER') && (
                     <a
                         href={project.demoVideo}

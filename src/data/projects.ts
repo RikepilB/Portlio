@@ -642,6 +642,404 @@ export const projects: Project[] = [
         conclusion:
             'El Umbral shows that crisis-response software can be both shipped-fast and built-to-last: a no-database MVP that is live and bilingual today, architected so the move to a real database, semantic search, and auth (P1 to P2) never forces a rewrite. The discipline that makes it durable — one repository seam, Zod as the single source of truth, tokens for theming, a public API others can build on — is the same discipline that let it ship in the first place. It is open source (MIT) and live at elumbralvzla.org.',
     },
+    {
+        id: '11',
+        slug: 'aquatwin-water-metering',
+        category: 'FULL STACK 2026',
+        catColor: '#0c5a40',
+        title: 'AquaTwin — Virtual Water Metering for Data Centers',
+        tagline:
+            'Data centers know their power draw to the watt — and almost nothing about their water. AquaTwin turns the telemetry tenants already have into audited, per-tenant water bills and compliance reports.',
+        duration: 'Mar 2026 – Jul 2026',
+        readTime: '7 min read',
+        overview:
+            'AquaTwin is a virtual water-metering SaaS for data-center colocation tenants. It ingests IT-load and GPU power telemetry, converts power draw into estimated water consumption (a 1.8 L/kWh industry baseline, weather-adjusted and capped by a WUE_max formula), and writes every calculation into an immutable billing audit trail. On top sit tenant registration, per-tenant billing dashboards, PDF invoice generation, and BRSR sustainability-compliance reports. Built as a three-tier modular monolith: Next.js 16 frontend, FastAPI application tier, Supabase Postgres as the system of record — both tiers deployed on Vercel.',
+        problem:
+            'Data centers mostly measure only direct cooling water, missing upstream Scope-3 water that can be an order of magnitude larger (hydro evaporates ~17 L/kWh versus ~0.004 for wind), and nobody attributes water to individual tenants or GPUs. India is the wedge: its data centers consumed roughly 150 billion liters in 2024, and SEBI\'s BRSR Core makes audited water disclosure mandatory for the top 1,000 listed companies from FY2026. AquaTwin fills that gap by inferring water from power telemetry operators already collect — with an audit trail strong enough to bill and report against.',
+        questions: [
+            'Can per-tenant water consumption be estimated credibly from IT-load telemetry alone, without physical water meters?',
+            'How do you make a billing table trustworthy enough for compliance — provably append-only, with the full calculation preserved per row?',
+            'How does a multi-tenant ingest path stay secure when devices, not humans, are writing the data?',
+            'What does it take to move a working prototype to something actually stable in production?',
+        ],
+        methodology: [
+            {
+                phase: 'Phase 1',
+                title: 'Telemetry Ingest & the Water Math',
+                detail:
+                    'Ingest endpoints (single + batch) validate the tenant\'s JWT, then compute water liters server-side: a 1.8 L/kWh baseline adjusted by cooling-degree-day weather data from OpenWeather and capped by WUE_max = 0.4 × K1 × K2 × K3. The math lives in dedicated services (virtual_metering.py, wue_max.py), each with its own test file — the formula is code under test, not a spreadsheet assumption. Inserts run under the service role into append-only tables; no client ever writes telemetry directly.',
+                tech: ['FastAPI', 'Pydantic', 'OpenWeather API', 'pytest'],
+            },
+            {
+                phase: 'Phase 2',
+                title: 'Immutable, Audit-Logged Billing',
+                detail:
+                    'The billing_audit_logs table is immutable twice over: UPDATE/DELETE privileges are revoked, and BEFORE triggers raise exceptions on any update or delete attempt. Each row stores the complete calculation breakdown as JSON, so any invoice line can be re-derived and audited later. Row-level security covers every tenant table, and rate limiting (slowapi) guards the API tier.',
+                tech: ['PostgreSQL', 'Supabase', 'RLS', 'SQL Triggers'],
+            },
+            {
+                phase: 'Phase 3',
+                title: 'Billing Dashboards, Invoices & BRSR Reports',
+                detail:
+                    'Tenants get a Next.js 16 dashboard (React 19, Tailwind 4, Recharts) over their own consumption, PDF invoices generated with ReportLab, and a BRSR compliance report endpoint targeting India\'s mandatory water-disclosure regime. Frontend and FastAPI deploy as two Vercel projects, with security headers on the frontend and a keep-alive cron protecting the free-tier database.',
+                tech: ['Next.js 16', 'React 19', 'Recharts', 'ReportLab', 'Vercel'],
+            },
+            {
+                phase: 'Phase 4',
+                title: 'Chaos Audit → Production Hardening',
+                detail:
+                    'A 16-test-case chaos-engineering audit against live production scored overall stability 4/10 — the headline failure being login 100% broken because a wrong Supabase project ref was baked into the JS bundle at build time. The fix pass corrected all four Vercel env vars, force-busted the build cache, redeployed all routes, eliminated raw error-message leakage from every router, and re-scored at ~8/10. The audit and fixes are documented in the repo, failure by failure.',
+                tech: ['Chaos Testing', 'Playwright', 'Vercel', 'CI'],
+            },
+        ],
+        results: [
+            { metric: '4→8/10', label: 'production-stability score, before/after the chaos-audit fixes' },
+            { metric: '31', label: 'tests — 16 pytest (water math, telemetry, reports) + 15 Playwright E2E' },
+            { metric: '1.8 L/kWh', label: 'power-to-water baseline behind every audit-logged billing row' },
+        ],
+        keyFindings: [
+            'Environment configuration is a production feature: the single worst outage (100% broken login) was a wrong project ref baked into the client bundle — invisible locally, fatal in prod, and only caught by auditing the deployed site instead of the codebase.',
+            'Immutability you can prove beats immutability you promise: revoking privileges AND raising exceptions from triggers means even a privileged bug can\'t silently rewrite a billing row.',
+            'Storing the full calculation JSON per billing row turns "trust our number" into "re-derive our number" — the difference between a dashboard and an audit trail.',
+            'Estimating water from power telemetry tenants already emit means zero new hardware — the adoption cost of the product is an API key, not a meter install.',
+        ],
+        conclusion:
+            'AquaTwin is live (two Vercel deployments, health-checked API) and early: no custom domain yet, the AI-agent layer is scaffolded but not implemented, and the chaos audit that found production at 4/10 is part of the story rather than hidden from it. What it demonstrates is the full arc — a real regulatory problem, physics-based estimation logic under test, compliance-grade data discipline, and the unglamorous production hardening that followed. The repository is being prepared for open-sourcing after a credential-hygiene pass.',
+        github: '',
+        stack: ['Next.js 16', 'React 19', 'TypeScript', 'FastAPI', 'Python', 'Supabase', 'PostgreSQL', 'Tailwind 4', 'Recharts', 'ReportLab', 'Vercel'],
+    },
+    {
+        id: '12',
+        slug: 'findleads',
+        category: 'FULL STACK 2026',
+        catColor: '#8a6516',
+        title: 'FindLeads — Lead Generation with a Built-in CRM',
+        tagline:
+            'A business with no website is a web developer\'s best prospect. FindLeads searches Google Places for them, flags the website-less as tier-1 leads, and wraps a tiny CRM around the results.',
+        duration: 'Jul 2026',
+        readTime: '5 min read',
+        overview:
+            'FindLeads is a personal lead-generation tool: it searches the official Google Places API (Text Search New) for businesses by category and location, flags businesses without a website as tier-1 prospects for web-design outreach, and layers a lightweight CRM on top — per-business notes, a contacted toggle, CSV export. Next.js 16 App Router with React 19, Neon Postgres via Drizzle ORM, Zod validation at every boundary, and a deliberately queue-less async job design: a job row in the database, background work via Next.js after(), and client-side polling.',
+        problem:
+            'Prospecting for freelance web work means hours of manual map-scrolling to answer one question: which real, operating businesses near me have no website? The data exists in Google Places, but raw API results are unusable for follow-up — no memory of who was already contacted, no notes, no export. The interesting engineering constraint was scope discipline: one user, no auth, no queue infrastructure — how much durability can a plain database row and careful concurrency design deliver?',
+        questions: [
+            'Can a resumable background job survive crashes and duplicate workers using nothing but Postgres and atomic updates?',
+            'How should durable CRM state coexist with re-runnable search snapshots so a re-scrape never wipes your notes?',
+            'How far does a test-first discipline go on a one-week, one-person MVP?',
+        ],
+        methodology: [
+            {
+                phase: 'Phase 1',
+                title: 'Places Search & Tier-1 Flagging',
+                detail:
+                    'Search jobs call Google Places Text Search (New) by category + free-text location. Every response is validated with Zod before anything touches the database, and businesses with no website field become tier-1 leads. Results are stored as per-job snapshots so each search run is reproducible.',
+                tech: ['Next.js 16', 'Google Places API', 'Zod'],
+            },
+            {
+                phase: 'Phase 2',
+                title: 'A Queue-less, Resumable Job Worker',
+                detail:
+                    'Instead of Redis or a queue service, jobs are database rows processed via Next.js after() with client polling over SWR. The worker checkpoints progress and reclaims work through single-UPDATE atomic claims, so a crashed or duplicated worker never double-processes — behavior pinned down by integration tests against a real Neon test database.',
+                tech: ['Neon Postgres', 'Drizzle ORM', 'SWR'],
+            },
+            {
+                phase: 'Phase 3',
+                title: 'CRM Layer & the Durable/Snapshot Split',
+                detail:
+                    'Durable CRM state (notes, contacted status) lives in a businesses table keyed by place_id, deliberately separated from per-job lead snapshots — re-scraping a city never resets what you know about a business. CSV export closes the loop for actual outreach. 103 tests (unit + real-DB integration) cover the pipeline; test code outweighs product code roughly 1.25:1.',
+                tech: ['TypeScript', 'Vitest', 'Tailwind 4'],
+            },
+        ],
+        results: [
+            { metric: '103', label: 'tests green — unit plus integration against a real Neon database' },
+            { metric: '27/27', label: 'MVP requirements shipped and verified across 5 planned phases' },
+            { metric: '1.25:1', label: 'test-to-product code ratio (≈1,800 vs ≈1,440 lines)' },
+        ],
+        keyFindings: [
+            'Postgres is a perfectly good job queue at single-user scale: an atomic single-UPDATE claim gives you crash-safety and duplicate-worker safety with zero new infrastructure.',
+            'Splitting durable identity (keyed by place_id) from run snapshots is what makes a scraper re-runnable — state you care about should never live in state you regenerate.',
+            'On AI-assisted builds, the test suite is the contract: 103 tests written alongside one week of implementation is what made "feature-complete" a verifiable claim instead of a feeling.',
+        ],
+        conclusion:
+            'FindLeads is a complete, working MVP built in about a week — and honestly scoped: single-user by design, localhost-only so far, with its own 15-item severity-ordered gap audit committed to the repo. It\'s the clearest small example of the workflow behind the bigger projects: plan in phases, validate at boundaries, test against real infrastructure, and write down what\'s still weak.',
+        github: 'https://github.com/RikepilB/findleads',
+        stack: ['Next.js 16', 'React 19', 'TypeScript', 'Neon Postgres', 'Drizzle ORM', 'Zod', 'SWR', 'Tailwind 4', 'Vitest'],
+    },
+    {
+        id: '13',
+        slug: 'peru-tech-map',
+        category: 'OPEN SOURCE',
+        catColor: '#b45309',
+        title: 'Peru Grid — Mapping the Peruvian Tech Ecosystem',
+        tagline:
+            'Toronto has a beloved open-source tech map. Peru didn\'t. Peru Grid maps 53 researched startups, consultancies, incubators and funds across Lima and Arequipa — in one dependency-free HTML file.',
+        duration: 'Jul 2026',
+        readTime: '4 min read',
+        overview:
+            'Peru Grid is an interactive, terminal-styled map of the Lima and Arequipa tech ecosystems, rendered with MapLibre GL JS on OpenFreeMap vector tiles — no API keys, no build step, no framework, zero npm dependencies. The whole application is one 766-line HTML file plus two JSON datasets fetched at runtime. Visitors fly between the two cities, click markers for company details, and browse a live headline ticker. The structure is adapted, with credit, from BUILD416\'s toronto-tech-map, extended with a city switcher and per-city coordinate validation.',
+        problem:
+            'Peru\'s tech scene is real but illegible — startups, consultancies, incubators and funds exist across Lima and Arequipa, yet there\'s no single open place to see them. Every entry here was researched and verified (SUNAT/RUC registries, Crunchbase, YC directories) rather than scraped; unverifiable or defunct candidates were dropped instead of padded in.',
+        questions: [
+            'How much interactive map can you ship with literally zero dependencies and no build pipeline?',
+            'How do you keep a community dataset honest — verified entries in, hype out?',
+            'Can CI meaningfully guard a data project with no application code?',
+        ],
+        methodology: [
+            {
+                phase: 'Phase 1',
+                title: 'One-File Architecture',
+                detail:
+                    'MapLibre GL JS over OpenFreeMap tiles (OpenMapTiles schema) needs no API key, so the entire app is a single static HTML file with inline JS/CSS — deployable on any static host, forkable by anyone for any other city. Data lives in two JSON files (companies, ticker headlines) fetched at runtime.',
+                tech: ['MapLibre GL JS', 'OpenFreeMap', 'Vanilla JS'],
+            },
+            {
+                phase: 'Phase 2',
+                title: 'Verified Dataset, Not a Scrape',
+                detail:
+                    '53 organizations — 38 Lima, 15 Arequipa: 25 startups, 9 consultancies, 8 incubators, 4 coworking spaces, 4 funds, 2 acquired, 1 nonprofit — each cross-checked against official registries (SUNAT/RUC) and public sources (Crunchbase, YC) before inclusion. Six candidates were dropped as unverifiable or defunct. Code ships MIT; the datasets ship CC BY 4.0.',
+                tech: ['JSON', 'CC BY 4.0', 'MIT'],
+            },
+            {
+                phase: 'Phase 3',
+                title: 'Guardrails in CI and at Runtime',
+                detail:
+                    'GitHub Actions validates on every push that both JSON files parse and every entry carries name, city, coordinates and funding type. At load time, entries outside their city\'s bounding box are skipped with a console warning — a bad coordinate can never silently render a marker in the ocean.',
+                tech: ['GitHub Actions', 'CI Validation'],
+            },
+        ],
+        results: [
+            { metric: '53', label: 'researched Lima & Arequipa tech organizations mapped' },
+            { metric: '0', label: 'dependencies — one HTML file, two JSON datasets, no build step' },
+            { metric: '766', label: 'lines — the entire application in a single file' },
+        ],
+        keyFindings: [
+            'Zero-dependency is a feature for civic projects: anyone can fork one HTML file and two JSON files for their own city without touching npm.',
+            'For open datasets, the curation rule matters more than the count — dropping six unverifiable entries is what makes the other 53 worth trusting.',
+            'CI has a job even with no application code: schema-validating the data on every push keeps community contributions from breaking the map.',
+        ],
+        conclusion:
+            'Peru Grid is young — built in a burst, public on GitHub, not yet hosted at a public URL, with a community submission form still to be wired up. It\'s open source end to end (MIT code, CC BY 4.0 data) and designed to be forked: the honest pitch is a verified starting point for making Peru\'s tech ecosystem visible, not a finished atlas.',
+        github: 'https://github.com/RikepilB/peru-tech-map',
+        stack: ['MapLibre GL JS', 'OpenFreeMap', 'Vanilla JS', 'GitHub Actions'],
+    },
+    {
+        id: '14',
+        slug: 'read-video',
+        category: 'AI ENGINEERING',
+        catColor: '#1d4ed8',
+        title: 'read-video — Teaching AI Agents to Watch Video',
+        tagline:
+            'An AI coding agent can read images and PDFs — not video. read-video decomposes any video into frames plus a transcript, and prices the whole job before spending a cent or a token.',
+        duration: 'Jun 2026 – Jul 2026',
+        readTime: '5 min read',
+        overview:
+            'read-video is an open-source (MIT) Claude Code skill that gives AI agents genuine video comprehension: point it at a local file or a URL (YouTube, Loom, Vimeo…) and it extracts frames for the visual track and a transcript for the audio track — the two things an agent can actually consume. Its defining feature is the cost gate: a probe → estimate → run pipeline that prices the entire job (transcription dollars and agent-token cost) up front, defaults to free local transcription with faster-whisper, and only touches paid cloud backends after explicit approval. The engine is a single 997-line Python CLI built on the standard library.',
+        problem:
+            'Agents fake video understanding by reading titles and comments. Actually watching costs real money — frames dominate agent-token spend, and cloud transcription bills by the minute — so a naive implementation surprises users with the bill after the fact. The design problem was making video comprehension both real and pre-approved: never spend before showing the price.',
+        questions: [
+            'What\'s the cheapest honest path to a transcript — and how often is it free?',
+            'Can one skill serve multiple agent harnesses (Claude Code, Codex, Gemini CLI, Copilot CLI) from a single install?',
+            'Does the skill measurably beat an agent improvising with ffmpeg on its own?',
+        ],
+        methodology: [
+            {
+                phase: 'Phase 1',
+                title: 'Probe → Estimate → Run, with a Cost Gate',
+                detail:
+                    'probe inspects the input (duration, resolution, audio, existing captions); estimate computes the full cost — transcription dollars per backend and projected agent-token spend from frame count — before any work; run only executes after the user (or a zero-dollar threshold) approves. Nine transcription paths are ordered cheapest-and-most-private first: sidecar subtitles, URL captions, local faster-whisper and trx (all free) before Groq, OpenAI, OpenRouter and Gemini.',
+                tech: ['Python', 'ffmpeg', 'yt-dlp', 'faster-whisper'],
+            },
+            {
+                phase: 'Phase 2',
+                title: 'A Stdlib-Only Engine',
+                detail:
+                    'The paid-API paths use hand-built multipart requests over urllib — no SDKs — so the free paths never pay an import cost and a missing optional dependency can never break probe or estimate. 67 pytest functions across 11 files pin down chunking, deduplication, cost estimation, frame extraction, and hardening (including an anchor fix against lookalike-domain spoofing).',
+                tech: ['Python stdlib', 'pytest'],
+            },
+            {
+                phase: 'Phase 3',
+                title: 'Eval-Driven Skill Design',
+                detail:
+                    'The skill was benchmarked with an eval loop against a no-skill baseline: with the skill loaded, the agent passed 14 of 15 assertions (93.3%) across visual-summary, audio-comprehension and cost-gate scenarios, versus 66.7% baseline. One install script wires it into four harnesses: Claude Code, Codex, Gemini CLI and Copilot CLI.',
+                tech: ['LLM Evals', 'Claude Code', 'PowerShell', 'Bash'],
+            },
+        ],
+        results: [
+            { metric: '93.3%', label: 'eval assertions passed with the skill, vs 66.7% baseline without it' },
+            { metric: '9', label: 'transcription backends, ordered free-and-local first' },
+            { metric: '67', label: 'tests over a 997-line stdlib-only engine' },
+        ],
+        keyFindings: [
+            'Cost transparency is a UX feature for agents: showing the price before the work turns "the AI ran up my bill" into an informed yes/no.',
+            'Local-first ordering (captions → Whisper on-device → paid APIs) makes the free path the default path — most videos never cost a cent to read.',
+            'Evals beat vibes for skill design: a measured 93.3%-vs-66.7% gap is what separates "the skill helps" from hoping it does.',
+        ],
+        conclusion:
+            'read-video is the most complete open-source piece in this portfolio: MIT-licensed with contribution docs, issue templates, a demo GIF, 46 commits of real iteration, and a measured eval improvement. It\'s also honest about scale — the eval set is small and iteration continues — but the shape is what production agent-tooling looks like: priced, tested, local-first, multi-harness.',
+        github: 'https://github.com/RikepilB/read-video',
+        stack: ['Python', 'ffmpeg', 'yt-dlp', 'faster-whisper', 'pytest', 'Claude Code'],
+    },
+    {
+        id: '15',
+        slug: 'resume-scorer',
+        category: 'AI ENGINEERING',
+        catColor: '#1d4ed8',
+        title: 'ResumeScorer — Reverse-Engineering the Resume Screener',
+        tagline:
+            'If a bot is going to score your resume, score it yourself first. ResumeScorer runs my resumes through an open-source hiring-agent pipeline across three LLM backends — and turns the numbers into edit plans.',
+        duration: 'Jun 2026',
+        readTime: '4 min read',
+        overview:
+            'ResumeScorer is a local resume-scoring lab built around HackerRank\'s open-source interviewstreet/hiring-agent pipeline (PDF → LLM section extraction → GitHub verification → a 120-point rubric). Thin PowerShell wrappers (219 lines total) drive the pipeline across three LLM backends — GPT-4o-mini via OpenRouter as the canonical scorer, DeepSeek, and a fully local Ollama gemma3 fallback for privacy — plus a small Python job-finder that pulls postings from HN, GitHub READMEs and ATS boards. A companion Claude Code skill and subagent convert raw score reports into prioritized, strictly honest edit plans: they propose wording and structure changes, never invented content.',
+        problem:
+            'Automated screeners increasingly gate the first round of hiring, and their scoring logic is opaque to candidates. Rather than guess, the move is empirical: run the same open-source screener recruiters could run, decompose its rubric (35 points open source, 30 self projects, 25 production signals, 10 technical skills, plus bonus), benchmark real resumes against it, and let the numbers direct the edits.',
+        questions: [
+            'What does an LLM screener actually reward, in points, section by section?',
+            'How stable are scores across different LLM backends — is the rubric or the model doing the work?',
+            'Where do my own resumes verifiably lose points, and which edits recover them honestly?',
+        ],
+        methodology: [
+            {
+                phase: 'Phase 1',
+                title: 'Wrap, Don\'t Rebuild',
+                detail:
+                    'The scoring pipeline is HackerRank\'s OSS code, kept in its own clone; this repo adds deliberately thin orchestration — four PowerShell scripts totaling 219 lines — plus configuration for three backends: OpenRouter GPT-4o-mini (canonical), DeepSeek chat, and CPU-forced local gemma3 via Ollama for scoring anything sensitive offline.',
+                tech: ['PowerShell', 'Python', 'OpenRouter', 'Ollama'],
+            },
+            {
+                phase: 'Phase 2',
+                title: 'Benchmark & Decompose the Rubric',
+                detail:
+                    'An 18-resume benchmark (17 scored, one deterministic parser failure — documented, not hidden) established the baseline: my own resumes scored 44–59/100, with Open Source at 0/35 across the board — the single biggest verified gap, and the direct motivation for the open-source work now in this portfolio. The 120-point rubric is fully decomposed in the repo\'s docs.',
+                tech: ['GPT-4o-mini', 'DeepSeek', 'gemma3'],
+            },
+            {
+                phase: 'Phase 3',
+                title: 'Score → Honest Edit Plan',
+                detail:
+                    'A score-resume Claude Code skill plus a resume-optimizer subagent read the score report and produce a ranked, weight-aware edit plan under a hard honesty constraint: rephrase and restructure only, never fabricate experience. An 18-item severity-ordered self-audit documents exactly where the lab itself is weak.',
+                tech: ['Claude Code', 'LLM Agents'],
+            },
+        ],
+        results: [
+            { metric: '18', label: 'resumes benchmarked against the 120-point screener rubric' },
+            { metric: '3', label: 'LLM backends compared — cloud canonical, cloud alt, fully local' },
+            { metric: '0/35', label: 'the open-source score that motivated actually shipping open source' },
+        ],
+        keyFindings: [
+            'Screener rubrics are legible once you run them: open-source contributions carried the largest single weight (35/120) — more than technical skills — which few candidates would guess.',
+            'The local-model fallback matters: scoring other people\'s resumes through cloud APIs is a privacy decision, not just a cost one.',
+            'The loop only works with an honesty constraint — an optimizer that invents content would maximize the score and destroy the artifact\'s purpose.',
+        ],
+        conclusion:
+            'ResumeScorer is a lab, not a product — no UI, thin-by-design wrappers around credited external OSS, results kept private. Its value is the feedback loop it created: a measured 0/35 open-source score is why read-video, Peru Grid and the skills work below exist in public. Sometimes the most useful thing a tool tells you is what to go build next.',
+        github: 'https://github.com/RikepilB/ResumeScorer',
+        stack: ['Python', 'PowerShell', 'OpenRouter', 'Ollama', 'Claude Code'],
+    },
+    {
+        id: '16',
+        slug: 'agentic-skills-lab',
+        category: 'AI ENGINEERING',
+        catColor: '#1d4ed8',
+        title: 'Agentic Skills Lab — Version Control for AI Capabilities',
+        tagline:
+            'AI coding agents are only as good as the instructions they load — and most people\'s live in unversioned dotfiles. Mine are a git-tracked library: 33 skills with history, security gates, and a publish pipeline.',
+        duration: 'Jun 2026 – ongoing',
+        readTime: '5 min read',
+        overview:
+            'The Agentic Skills Lab is the system behind every AI-assisted project in this portfolio: a version-controlled library of 33 personally-authored Claude Code skills — session-continuity handoff trees, repo scaffolding, video comprehension, second-brain search, resume scoring — whose live copies deploy to four different agent harnesses. Around it sits real supply-chain discipline: every external skill is statically scanned before install, flagged ones get clean-room rewrites instead of copies, and a confirm-gated sync pipeline separates editing from deploying. Two skills are published open source so far (project-scaffold and handoff-to-issues), with more graduating as they\'re sanitized.',
+        problem:
+            'Agent skills are executable instructions with real privileges — and the ecosystem treats them like wallpaper: unversioned home-directory files, installed from strangers\' repos unreviewed. Two problems compound: your own skills evolve with zero history (an edit that degrades a skill is silently permanent), and third-party skills are a supply-chain risk (several popular ones fail static analysis with HIGH findings). The lab treats both as engineering problems.',
+        questions: [
+            'What does version control look like for AI capabilities that live outside any repo by design?',
+            'How do you consume the ecosystem\'s good ideas without inheriting its supply-chain risk?',
+            'Can skill quality be compared empirically instead of by feel?',
+        ],
+        methodology: [
+            {
+                phase: 'Phase 1',
+                title: 'A Git-Tracked Mirror with Deliberate Deploys',
+                detail:
+                    'Every skill\'s source of truth lives in a git repo; live copies at the agent-harness locations are deploy targets, not editing surfaces. A dual sync pipeline (PowerShell + bash) pulls live drift in and pushes edits out behind an explicit confirmation — deploying a skill overwrites what four different AI tools load, so it\'s a decision, not a save.',
+                tech: ['Git', 'PowerShell', 'Bash', 'Markdown'],
+            },
+            {
+                phase: 'Phase 2',
+                title: 'Scan-Before-Install, Clean-Room on Failure',
+                detail:
+                    'Every external skill, plugin or MCP server gets a static security scan before it\'s enabled; HIGH/CRITICAL findings are a hard stop. Flagged-but-good ideas get clean-room rewrites — re-implemented from scratch with the flagged behavior excluded, provenance and scan verdicts recorded per skill. Seven current skills exist this way, including a five-skill second-brain family rewritten from a scanned repo rather than installed from it.',
+                tech: ['SkillSpector', 'Static Analysis'],
+            },
+            {
+                phase: 'Phase 3',
+                title: 'Battle Tests & Publishing',
+                detail:
+                    'Competing skills are compared on identical tasks against a scored rubric — graft what wins back in. Skills graduate to open source once generalized and scrubbed of personal context: the public claude-skills repo currently ships project-scaffold (an idempotent AI-native repo bootstrapper: README, agent rulebooks, guardrails, handoff tree, CI in one pass) and handoff-to-issues (turns session handoff trees into deduped GitHub issues).',
+                tech: ['Claude Code', 'GitHub', 'LLM Evals'],
+            },
+        ],
+        results: [
+            { metric: '33', label: 'personally-authored skills under version control, deployed to 4 harnesses' },
+            { metric: '7', label: 'clean-room rewrites of security-flagged external skills' },
+            { metric: '2', label: 'skills published open source so far (project-scaffold, handoff-to-issues)' },
+        ],
+        keyFindings: [
+            'Skills are code and deserve code\'s discipline: history, review, deliberate deploys — an unversioned live skill is a production system with no rollback.',
+            'The scan-before-install gate pays for itself: multiple popular community skills failed static analysis, and the clean-room pattern captures their ideas without their risk.',
+            'Editing where you version and deploying on purpose (confirm-gated push) is the difference between a library and a pile of dotfiles.',
+        ],
+        conclusion:
+            'This is infrastructure for a way of working: every other project on this page was built with these skills loaded — the handoff trees that survive context loss, the scaffolds that make a repo agent-readable, the audits that keep claims honest. The library itself stays private (it encodes personal context by design); what generalizes gets published, two skills at a time.',
+        github: 'https://github.com/RikepilB/claude-skills',
+        stack: ['Claude Code', 'Markdown', 'PowerShell', 'Bash', 'Git', 'Node.js'],
+    },
+    {
+        id: '17',
+        slug: 'skillvault',
+        category: 'AI ENGINEERING',
+        catColor: '#1d4ed8',
+        title: 'SkillVault — Curated Skill Packs for AI Coding Agents',
+        tagline:
+            'The community has written hundreds of agent skills; most projects need about five of them at any given moment. SkillVault is the curation: 25 vetted third-party skills, staged by project lifecycle.',
+        duration: 'Jul 2026 – ongoing',
+        readTime: '3 min read',
+        overview:
+            'SkillVault is a curated starter-pack of 25 third-party Claude Code skills — 289 files of community work, hand-picked and organized into five project-lifecycle stages (design, security, debug, backend, process) so a new project copies in exactly what its current stage needs instead of everything. An agent-readable index maps each skill to trigger keywords and use cases. The curation is the work here, and the repo says so: none of the skill content is mine; the selection, staging, security-vetting and indexing are.',
+        problem:
+            'Agent-skill discovery is a firehose: awesome-lists with hundreds of entries, no quality signal, no sense of when in a project\'s life each skill matters. Installing everything bloats the agent\'s context and the attack surface; installing nothing wastes the community\'s best work. The missing layer is opinionated curation with a lifecycle map — and a security gate in front of the door.',
+        questions: [
+            'Which community skills actually earn a place in a working stack, stage by stage?',
+            'How does a curated set stay consumable by agents, not just humans?',
+        ],
+        methodology: [
+            {
+                phase: 'Phase 1',
+                title: 'Select & Stage by Lifecycle',
+                detail:
+                    '25 skills organized into five stages — 11 design (UI auditing, design tokens, Tailwind systems), 2 security, 2 debugging, 4 backend, 6 process (TDD, code review, verification loops) — so a project at the design stage copies the design pack, not the world. Everything passes the same scan-before-install gate as the rest of the toolchain.',
+                tech: ['Claude Code', 'Markdown'],
+            },
+            {
+                phase: 'Phase 2',
+                title: 'Index for Agents',
+                detail:
+                    'An AGENTS.md index gives every skill trigger keywords and a one-line use case, making the vault navigable by the agents that consume it. Several live projects — including this portfolio site — run skill sets sourced from it.',
+                tech: ['Git', 'AGENTS.md'],
+            },
+        ],
+        results: [
+            { metric: '25', label: 'vetted third-party skills curated (289 files)' },
+            { metric: '5', label: 'lifecycle stages: design, security, debug, backend, process' },
+        ],
+        keyFindings: [
+            'Curation is a real contribution in an ecosystem drowning in options — the value is what\'s excluded and when what\'s included applies.',
+            'Explicit non-authorship is the honest frame: organizing other people\'s best work is useful precisely because it says so.',
+        ],
+        conclusion:
+            'SkillVault is a shelf, not a product — young, single-purpose, and already consumed by the other projects on this page. Together with the Skills Lab it splits the problem cleanly: the lab develops what I author; the vault stages the best of what everyone else did.',
+        github: 'https://github.com/RikepilB/SkillVault',
+        stack: ['Claude Code', 'Markdown', 'Git'],
+    },
 ]
 export function getProjectBySlug(slug: string): Project | undefined {
     return projects.find((p) => p.slug === slug)
