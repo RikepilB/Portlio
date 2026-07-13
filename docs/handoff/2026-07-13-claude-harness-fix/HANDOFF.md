@@ -352,3 +352,6 @@ Fix the "click twice → empty page with felt background" navigation bug; restyl
 - Optional: warm the scrapbook polaroid paper (currently cool mist-ice) if the cool tone reads off against felt
 - Nothing committed — commit when user requests
 - Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` (assistant cannot run `/export`)
+
+### Follow-up (same session)
+- Home "Skills & Stack" intro → split the two paragraphs into a 2-col layout (para1 left brighter `text-ink-on-felt`, para2 right with `border-l-2 border-gold/40` accent) to fix the "too simple" flat stacked look (`src/app/[locale]/page.tsx`). lint/tsc/build green; browser-verified.
