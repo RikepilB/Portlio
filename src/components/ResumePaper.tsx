@@ -1,100 +1,114 @@
-import { experiences } from '@/data/experience'
+'use client'
 
-const summary =
-    'Software Engineer and Data Analyst combining Python/TypeScript full-stack development with rigorous data modeling. Proven ability to build scalable pipelines, automate CI/CD workflows, and architect React/Django systems. Known for turning complex requirements into resilient production code.'
+import { useMemo } from 'react'
+import { getExperiences } from '@/data/locale'
+import { useDictionary, useLocale } from '@/contexts/LocaleContext'
 
-const coreSkills = ['Python', 'TypeScript', 'SQL', 'React/Next.js', 'Django', 'Docker', 'PostgreSQL', 'GitHub Actions']
+const coreSkills = [
+  'Python',
+  'TypeScript',
+  'SQL',
+  'React/Next.js',
+  'Django',
+  'Docker',
+  'PostgreSQL',
+  'GitHub Actions',
+]
 
-/**
- * The styled "paper" resume. Shared by /resume and the /journey side-by-side view.
- * Pure presentational component — no client hooks.
- */
+/** Satin-paper résumé sheet — embedded on Journey. */
 export function ResumePaper({ className = '' }: { className?: string }) {
-    return (
-        <div
-            className={`bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] sm:rounded-2xl border-y sm:border border-[#e6e8eb] px-8 sm:px-12 py-12 ${className}`}
-        >
-            {/* Header */}
-            <header className="border-b border-[#e6e8eb] pb-8 mb-8 text-center sm:text-left">
-                <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#1A1A1A] mb-2">Richard Pillaca</h2>
-                <p className="text-[#0c5a40] font-mono text-sm tracking-wide mb-4">SOFTWARE ENGINEER &amp; DATA ANALYST</p>
-                <div className="flex flex-wrap justify-center sm:justify-start items-center gap-x-4 gap-y-2 text-xs font-mono text-[#6e7481]">
-                    <span>Toronto, ON</span>
-                    <span className="hidden sm:inline">|</span>
-                    <span>ridi.pillaca@gmail.com</span>
-                    <span className="hidden sm:inline">|</span>
-                    <a href="https://linkedin.com/in/richard-pillaca" rel="noopener noreferrer" className="hover:text-[#1A1A1A]">
-                        linkedin.com/in/richard-pillaca
-                    </a>
-                </div>
-            </header>
+  const { locale } = useLocale()
+  const dict = useDictionary()
+  const experiences = useMemo(() => getExperiences(locale), [locale])
 
-            {/* Summary */}
-            <section className="mb-10">
-                <h3 className="text-[11px] font-bold tracking-widest uppercase text-[#1A1A1A] border-b border-[#e6e8eb] pb-2 mb-4">
-                    Summary
-                </h3>
-                <p className="text-sm text-[#6e7481] leading-relaxed">{summary}</p>
-            </section>
-
-            {/* Core Competencies */}
-            <section className="mb-10">
-                <h3 className="text-[11px] font-bold tracking-widest uppercase text-[#1A1A1A] border-b border-[#e6e8eb] pb-2 mb-4">
-                    Core Competencies
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                    {coreSkills.map((skill) => (
-                        <span key={skill} className="text-xs font-mono text-[#1A1A1A] bg-[#f8f9fa] border border-[#e6e8eb] rounded px-2.5 py-1">
-                            {skill}
-                        </span>
-                    ))}
-                </div>
-            </section>
-
-            {/* Experience */}
-            <section className="mb-10">
-                <h3 className="text-[11px] font-bold tracking-widest uppercase text-[#1A1A1A] border-b border-[#e6e8eb] pb-2 mb-6">
-                    Experience
-                </h3>
-                <div className="flex flex-col gap-8">
-                    {experiences.slice(0, 4).map((exp) => (
-                        <div key={exp.id}>
-                            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-1">
-                                <h4 className="text-[15px] font-bold text-[#1A1A1A]">{exp.role}</h4>
-                                <span className="text-xs font-mono text-[#6e7481]">{exp.period}</span>
-                            </div>
-                            <p className="text-sm font-medium text-[#0c5a40] mb-3">
-                                {exp.org} <span className="text-[#6e7481] font-normal">— {exp.location}</span>
-                            </p>
-                            <ul className="space-y-2">
-                                {exp.bullets.map((b, i) => (
-                                    <li key={i} className="relative pl-4 text-xs text-[#6e7481] leading-relaxed">
-                                        <span className="absolute left-0 top-1.5 w-[3px] h-[3px] rounded-full bg-[#1A1A1A]" />
-                                        {b}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            {/* Education */}
-            <section>
-                <h3 className="text-[11px] font-bold tracking-widest uppercase text-[#1A1A1A] border-b border-[#e6e8eb] pb-2 mb-4">
-                    Education
-                </h3>
-                <div className="flex flex-col sm:flex-row justify-between items-baseline mb-1">
-                    <h4 className="text-[15px] font-bold text-[#1A1A1A]">University of British Columbia</h4>
-                    <span className="text-xs font-mono text-[#6e7481]">2021 – 2025</span>
-                </div>
-                <p className="text-sm text-[#0c5a40] font-medium mb-1">
-                    B.Sc. Computer Science <span className="text-[#6e7481] font-normal">— Minor in Economics</span>
-                </p>
-                <p className="text-xs text-[#6e7481]">
-                    Certifications: Power BI Data Analyst (Microsoft), Scrum Master (Scrum.org), Claude Certified Architect (Anthropic)
-                </p>
-            </section>
+  return (
+    <div
+      className={`satin-panel border-y px-8 py-12 shadow-felt sm:rounded-2xl sm:border sm:px-12 ${className}`}
+    >
+      <header className="mb-8 border-b border-rose/25 pb-8 text-center sm:text-left">
+        <h2 className="mb-2 font-display text-3xl font-bold text-[#1a1a1a] sm:text-4xl">
+          Richard Pillaca
+        </h2>
+        <p className="mb-4 font-mono text-sm tracking-wide text-rose-shadow">{dict.resume.title}</p>
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-mono text-xs text-[#6e7481] sm:justify-start">
+          <span>{dict.resume.location}</span>
+          <span className="hidden sm:inline">|</span>
+          <span>ridi.pillaca@gmail.com</span>
+          <span className="hidden sm:inline">|</span>
+          <a
+            href="https://linkedin.com/in/richard-pillaca"
+            rel="noopener noreferrer"
+            className="hover:text-rose-shadow"
+          >
+            linkedin.com/in/richard-pillaca
+          </a>
         </div>
-    )
+      </header>
+
+      <section className="mb-10">
+        <h3 className="mb-4 border-b border-rose/25 pb-2 text-[11px] font-bold uppercase tracking-widest text-[#1a1a1a]">
+          {dict.resume.summaryHeading}
+        </h3>
+        <p className="text-sm leading-relaxed text-[#6e7481]">{dict.resume.summary}</p>
+      </section>
+
+      <section className="mb-10">
+        <h3 className="mb-4 border-b border-rose/25 pb-2 text-[11px] font-bold uppercase tracking-widest text-[#1a1a1a]">
+          {dict.resume.competenciesHeading}
+        </h3>
+        <div className="flex flex-wrap gap-2">
+          {coreSkills.map((skill) => (
+            <span
+              key={skill}
+              className="rounded border border-rose/20 bg-pearl-soft px-2.5 py-1 font-mono text-xs text-[#1a1a1a]"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      <section className="mb-10">
+        <h3 className="mb-6 border-b border-rose/25 pb-2 text-[11px] font-bold uppercase tracking-widest text-[#1a1a1a]">
+          {dict.resume.experienceHeading}
+        </h3>
+        <div className="flex flex-col gap-8">
+          {experiences.slice(0, 4).map((exp) => (
+            <div key={exp.id}>
+              <div className="mb-1 flex flex-col justify-between sm:flex-row sm:items-baseline">
+                <h4 className="text-[15px] font-bold text-[#1a1a1a]">{exp.role}</h4>
+                <span className="font-mono text-xs text-[#6e7481]">{exp.period}</span>
+              </div>
+              <p className="mb-3 text-sm font-medium text-rose-shadow">
+                {exp.org} <span className="font-normal text-[#6e7481]">— {exp.location}</span>
+              </p>
+              <ul className="space-y-2">
+                {exp.bullets.map((b, i) => (
+                  <li key={i} className="relative pl-4 text-xs leading-relaxed text-[#6e7481]">
+                    <span className="absolute left-0 top-1.5 h-[3px] w-[3px] rounded-full bg-rose" />
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h3 className="mb-4 border-b border-rose/25 pb-2 text-[11px] font-bold uppercase tracking-widest text-[#1a1a1a]">
+          {dict.resume.educationHeading}
+        </h3>
+        <div className="mb-1 flex flex-col items-baseline justify-between sm:flex-row">
+          <h4 className="text-[15px] font-bold text-[#1a1a1a]">{dict.resume.school}</h4>
+          <span className="font-mono text-xs text-[#6e7481]">{dict.resume.schoolPeriod}</span>
+        </div>
+        <p className="mb-1 text-sm font-medium text-rose-shadow">
+          {dict.resume.degree}{' '}
+          <span className="font-normal text-[#6e7481]">— {dict.resume.minor}</span>
+        </p>
+        <p className="text-xs text-[#6e7481]">{dict.resume.certifications}</p>
+      </section>
+    </div>
+  )
 }

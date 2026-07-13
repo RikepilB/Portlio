@@ -1,22 +1,26 @@
-# Project: Richard Pillaca — Portfolio Website v2
+# Project: Richard Pillaca — Portfolio Website v3 (Felt & Gold)
 # Stack: Next.js 16 → TypeScript → Tailwind → Vercel
-# Blueprint: @docs/PRD.md | Progress: @docs/progress.txt | Arch: @docs/ARCHITECTURE.md
+# Blueprint: @docs/v3/PRD.md | Brand: @docs/v3/branding.md | Design: @docs/v3/design.md
+# Decisions: @docs/decisions.md | Arch: @docs/ARCHITECTURE.md
 
 Rulebook, five sections: **Role → Style → Constraints → Workflow → Quality.**
 
 ## 1. Role
 
-Claude Code is building richardpillaca.com — the personal portfolio site for Richard Pillaca Burga, Data Analyst & BI Developer — as a pure-static Next.js 16 site deployed on Vercel.
+Claude Code is building richardpillaca.com — the personal portfolio site for Richard Pillaca Burga, Software & Data Engineer — as a pure-static Next.js 16 site deployed on Vercel.
 
 ### What We're Building
-Personal portfolio for Richard Pillaca Burga — Data Analyst & BI Developer.
-4 case study projects + essays section + personal About page.
-Design: Michelle Liu (minimal/clean) + Vipul Soni (project depth) + Noah Barbaros (essays).
+Personal portfolio for Richard Pillaca Burga — Software & Data Engineer.
+The project collection, essays, skills, journey, resume, case studies, and personal About page
+are all data-led. `src/data/` is authoritative for project count, names, content, metrics, dates,
+tags, and existing media.
+Design: sage felt + gold foil re-skin on the proven v2 page structure. Follow the v3 blueprint
+above; do not derive the design from velvet archive sources or legacy documentation.
 
 ### Tech Stack
 - Framework: Next.js 16, App Router, TypeScript strict mode
 - Styling: Tailwind CSS only — no inline styles, no CSS modules
-- Content: TypeScript data objects in `src/data/` + MDX for essays
+- Content: TypeScript data objects in `src/data/`, including the current essay placeholder model
 - Deploy: Vercel (push to main → auto-deploy, preview URL per PR)
 - No database — pure static content
 
@@ -39,16 +43,22 @@ Rules are documentation + guardrails; skills are executable workflows — load b
 
 ## 3. Constraints (never do)
 
-- ❌ No dark navy/teal — that's the AI-generated look we're replacing
-- ❌ No Inter/Roboto/Arial fonts — pick something with personality
+- ❌ No velvet-charcoal/copper direction (rejected); no dark navy/teal legacy palette
+- ❌ No Geist, Newsreader, Inter, Roboto, Arial, Ogg, or Playfair Display
+- ✅ Use Manrope/Montserrat for display + UI, Cormorant Garamond italic / Cinzel for stamped
+  accents, JetBrains Mono for technical metadata
 - ❌ No hardcoded colors — Tailwind classes or CSS custom properties only
+- ❌ No inline styles or hardcoded project content in presentation components
+- ❌ Do not change v2 page composition (section order, embedded Skills/Resume, nav IA)
+- ❌ Skills/Resume are not primary nav tabs — redirect `/skills → /`, `/resume → /journey`
 - ❌ `any` type is a lint error — TypeScript strict, always
+- ✅ Selective `framer-motion` + `shadcn/ui` allowed; CSS fallback + reduced-motion required
 
 ### Content (all text ready — do NOT rewrite or invent metrics)
-- All 4 project case studies: ready in existing prototype JSX
-- About page personal sections: ready in docs/PRD.md
-- Skills, certifications, experience: ready in prototype JSX
-- Essays: NOT written yet — MDX placeholder structure only
+- All project, experience, and personal content is in `src/data/`; use that data as-is
+- About page personal sections and the vision board must use existing data and media
+- Skills stay embedded on Home; Resume stays embedded on Journey
+- Essays: NOT written yet — current TypeScript-data placeholder model only; do not add MDX
 
 ## 4. Workflow
 
@@ -61,18 +71,23 @@ Rules are documentation + guardrails; skills are executable workflows — load b
 ### App Router Structure
 ```
 src/app/
-├── page.tsx                  — Home (/)
-├── projects/page.tsx         — Gallery (/projects)
-├── projects/[slug]/page.tsx  — Case study (/projects/bike-share-optimization etc.)
-├── essays/page.tsx           — Essays list (/essays)
-├── essays/[slug]/page.tsx    — Individual post (MDX)
-├── about/page.tsx            — About (/about)
+├── page.tsx                  — Home (/) — hero, image-led work, embedded Skills
+├── projects/page.tsx         — Gallery (/projects) — felt cards
+├── projects/[slug]/page.tsx  — Case study detail
+├── essays/page.tsx           — Essays list (preserved, not primary nav)
+├── essays/[slug]/page.tsx    — Individual essay
+├── about/page.tsx            — About (/about) — pearl + rose-gold vision board
+├── journey/page.tsx          — Journey (/journey) — timeline + embedded Resume
+├── skills/page.tsx           — Redirects to /
+├── resume/page.tsx           — Redirects to /journey
 └── layout.tsx                — Root layout with Nav + Footer
 
+Primary nav: Home, About, Journey, Projects (+ Get in touch)
+
 src/components/layout/       — Nav, Footer
-src/components/ui/            — ProjectCard, EssayCard, MetricCard, SkillTag
-src/data/                     — projects.ts, essays.ts, personal.ts (all content here)
-src/lib/                      — Utilities, MDX helpers
+src/components/ui/           — ProjectCard, EssayCard, MetricCard, TechTag, GrainOverlay, Reveal
+src/data/                    — Authoritative site content
+src/lib/                      — Utilities
 public/images/                — Photos, screenshots
 ```
 
@@ -119,7 +134,7 @@ public/images/                — Photos, screenshots
 
 ### Design Workflow (replaces deleted `/redesign` command)
 ```
-Audit (375/768/1280) → Direction (ui-ux-pro-max + impeccable) → Implement (frontend-design, mobile-first) → Verify (lint/tsc/build + web-design-guidelines)
+Read v3 blueprint → Audit (375/768/1280) → Implement (frontend-design, mobile-first) → Verify (lint/tsc/build + web-design-guidelines)
 ```
 
 ### Agents (project-local — all 15 in `.claude/agents/`)
@@ -149,9 +164,10 @@ Audit (375/768/1280) → Direction (ui-ux-pro-max + impeccable) → Implement (f
 explorer → load frontend-design + vercel-react-best-practices → build mobile-first (375→768→1280) → build-error-resolver (if red) → code-reviewer → verification-loop skill
 ```
 
-### Project Slugs
-- `bike-share-optimization` | `ai-technical-debt-research`
-- `accounting-automation` | `exam-analysis-system`
+### Project scope
+
+`src/data/projects.ts` is authoritative for project slugs, names, content, metrics, dates, tags,
+and media. Do not maintain a fixed project list here.
 
 ## 5. Quality (before delivering)
 

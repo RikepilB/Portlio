@@ -11,10 +11,26 @@ import re
 import sys
 from pathlib import Path
 
-# Project root relative to this script
-PROJECT_ROOT = Path(__file__).parent.parent.parent.parent.parent
-TOKENS_PATH = PROJECT_ROOT / 'assets' / 'design-tokens.json'
-BACKGROUNDS_CSV = Path(__file__).parent.parent / 'data' / 'slide-backgrounds.csv'
+# scripts/ → ckm-design-system/ → skills/ → .claude/ → project root
+# Walk up for package.json so depth stays correct if the skill moves.
+def _find_project_root(start: Path) -> Path:
+    for candidate in [start, *start.parents]:
+        if (candidate / 'package.json').is_file():
+            return candidate
+    # Fallback: 4 parents from scripts/ lands on .claude; prefer repo root via parents[3]
+    # if package.json is missing (scripts → skill → skills → .claude → repo = parents[4])
+    return start.parents[4]
+
+
+_SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = _find_project_root(_SCRIPT_DIR)
+_SKILL_ROOT = _SCRIPT_DIR.parent
+_TOKEN_CANDIDATES = (
+    PROJECT_ROOT / 'assets' / 'design-tokens.json',
+    _SKILL_ROOT / 'templates' / 'design-tokens-starter.json',
+)
+TOKENS_PATH = next((p for p in _TOKEN_CANDIDATES if p.is_file()), _TOKEN_CANDIDATES[0])
+BACKGROUNDS_CSV = _SKILL_ROOT / 'data' / 'slide-backgrounds.csv'
 
 
 def resolve_token_reference(ref: str, tokens: dict) -> str:

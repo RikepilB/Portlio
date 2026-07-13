@@ -19,8 +19,21 @@ from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 
 # Project root relative to this script
-PROJECT_ROOT = Path(__file__).parent.parent.parent.parent.parent
-TOKENS_JSON_PATH = PROJECT_ROOT / 'assets' / 'design-tokens.json'
+def _find_project_root(start: Path) -> Path:
+    for candidate in [start, *start.parents]:
+        if (candidate / 'package.json').is_file():
+            return candidate
+    return start.parents[4]
+
+
+_SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = _find_project_root(_SCRIPT_DIR)
+_SKILL_ROOT = _SCRIPT_DIR.parent
+_TOKEN_JSON_CANDIDATES = (
+    PROJECT_ROOT / 'assets' / 'design-tokens.json',
+    _SKILL_ROOT / 'templates' / 'design-tokens-starter.json',
+)
+TOKENS_JSON_PATH = next((p for p in _TOKEN_JSON_CANDIDATES if p.is_file()), _TOKEN_JSON_CANDIDATES[0])
 TOKENS_CSS_PATH = PROJECT_ROOT / 'assets' / 'design-tokens.css'
 
 # Asset directories to validate

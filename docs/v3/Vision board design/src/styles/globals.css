@@ -1,0 +1,49 @@
+/* Silver / blue-grey metallic editorial palette */
+:root {
+  --vb-bg-1: #e6ebef; /* ice light — top-left */
+  --vb-bg-2: #d0d7de; /* main satin blue-grey */
+  --vb-bg-3: #c2c9d0; /* fog grey — bottom-right */
+  --vb-paper: #f5f7f9; /* cool near-white card */
+  --vb-paper-2: #e7ecef; /* recessed panel */
+  --vb-ink: #2f3542; /* anthracite */
+  --vb-ink-soft: #57606f; /* mid slate */
+  --vb-muted: #a2acb5; /* silver-grey */
+  --vb-accent: #2f3542; /* dark contrast blocks */
+  --vb-accent-soft: #8a929b; /* brushed steel */
+  --vb-line: #c2c9d0; /* hairline */
+}
+
+.font-display {
+  font-family: 'Montserrat', system-ui, sans-serif;
+}
+.font-serif-thin {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.font-sans-body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.font-mono-tag {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Liquid chrome silver render for display text */
+.text-chrome {
+  background-image: linear-gradient(
+    175deg,
+    #ffffff 0%,
+    #e2e8ec 22%,
+    #a2acb5 48%,
+    #6d7681 62%,
+    #c7ced4 82%,
+    #ffffff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.6)) drop-shadow(0 2px 3px rgba(47, 53, 66, 0.18));
+  transition: filter 0.3s ease;
+}
+.text-chrome:hover {
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7)) drop-shadow(0 2px 4px rgba(47, 53, 66, 0.22));
+}

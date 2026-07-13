@@ -1,60 +1,96 @@
+'use client'
+
+import { useCallback, useRef, useState, type MouseEvent } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import type { Project } from '@/data/projects'
-import { TechTag } from './TechTag'
+import { useDictionary, useLocale } from '@/contexts/LocaleContext'
+import { localePath } from '@/lib/locale-path'
+import { cn } from '@/lib/utils'
+import { ProjectImagePlaceholder } from '@/components/ui/ProjectImagePlaceholder'
 
 interface ProjectCardProps {
-    project: Project
+  project: Project
+  index?: number
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
-    const displayMetrics = project.results.slice(0, 2)
-    const displayStack = project.stack.slice(0, 3)
+export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
+  const { locale } = useLocale()
+  const dict = useDictionary()
+  const linkRef = useRef<HTMLAnchorElement>(null)
+  const [imageFailed, setImageFailed] = useState(false)
+  const showImage = Boolean(project.image) && !imageFailed
 
-    return (
-        <Link
-            href={`/projects/${project.slug}`}
-            aria-label={`View case study: ${project.title}`}
-            className="group flex flex-col gap-4 p-6 border border-neutral-200 rounded-xl bg-white hover:border-neutral-300 hover:shadow-md transition-all duration-200 ease-out"
-        >
-            {/* Category tag */}
+  const onMove = useCallback((event: MouseEvent<HTMLAnchorElement>) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const el = linkRef.current
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    const x = ((event.clientX - rect.left) / rect.width) * 100
+    el.style.setProperty('--foil-x', `${Math.max(0, Math.min(100, x))}%`)
+  }, [])
+
+  return (
+    <Link
+      ref={linkRef}
+      href={localePath(locale, `/projects/${project.slug}`)}
+      aria-label={`${dict.projects.viewCaseAriaPrefix} ${project.title}`}
+      onMouseMove={onMove}
+      className={cn(
+        'group felt-panel relative flex h-full flex-col overflow-hidden rounded-2xl p-0 transition-transform duration-300 hover:-translate-y-1'
+      )}
+    >
+      <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-felt-border bg-felt-deep/50">
+        {showImage ? (
+          <Image
+            src={project.image!}
+            alt={project.title}
+            fill
+            className="object-contain p-4 transition-transform duration-700 group-hover:scale-[1.03]"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            onError={() => setImageFailed(true)}
+          />
+        ) : (
+          <ProjectImagePlaceholder
+            title={project.title}
+            category={project.category}
+            index={index}
+            metric={project.results[0]?.metric}
+          />
+        )}
+      </div>
+
+      <div className="flex flex-1 flex-col gap-4 p-7 md:p-8">
+        <div className="flex items-center justify-between gap-3">
+          <span className="font-accent text-[13px] uppercase tracking-[0.18em] text-gold-bright italic">
+            {project.category}
+          </span>
+          <span className="font-mono text-xs text-muted">{project.duration}</span>
+        </div>
+
+        <h2 className="font-display text-2xl font-bold leading-snug text-matte">{project.title}</h2>
+        <p className="text-sm leading-relaxed text-ink-on-felt">{project.tagline}</p>
+
+        <div className="mt-auto flex flex-wrap gap-2 pt-2">
+          {project.stack.slice(0, 4).map((tech) => (
             <span
-                className="inline-block self-start text-xs font-bold tracking-widest uppercase px-2 py-0.5 rounded"
-                style={{ color: project.catColor, backgroundColor: `${project.catColor}15` }}
+              key={tech}
+              className="rounded border border-rule bg-felt-deep/35 px-2.5 py-1 font-mono text-xs text-muted"
             >
-                {project.category}
+              {tech}
             </span>
+          ))}
+          {project.stack.length > 4 ? (
+            <span className="flex items-center px-1 text-xs font-medium text-muted">
+              +{project.stack.length - 4}
+            </span>
+          ) : null}
+        </div>
 
-            {/* Title + tagline */}
-            <div className="flex flex-col gap-1.5">
-                <h3 className="text-xl font-bold font-display text-neutral-900 leading-snug group-hover:text-amber-700 transition-colors duration-150">
-                    {project.title}
-                </h3>
-                <p className="text-sm text-neutral-500 leading-relaxed line-clamp-2">{project.tagline}</p>
-            </div>
-
-            {/* Key metrics */}
-            <div className="flex gap-4 border-t border-neutral-100 pt-4">
-                {displayMetrics.map((r) => (
-                    <div key={r.label} className="flex flex-col gap-0.5">
-                        <span className="text-lg font-bold text-neutral-900 font-display leading-none">
-                            {r.metric}
-                        </span>
-                        <span className="text-xs text-neutral-400 leading-tight">{r.label}</span>
-                    </div>
-                ))}
-            </div>
-
-            {/* Tech stack */}
-            <div className="flex flex-wrap gap-1.5 mt-auto">
-                {displayStack.map((tech) => (
-                    <TechTag key={tech} label={tech} />
-                ))}
-                {project.stack.length > 3 && (
-                    <span className="text-xs text-neutral-400 font-mono self-center">
-                        +{project.stack.length - 3} more
-                    </span>
-                )}
-            </div>
-        </Link>
-    )
+        <div className="mt-4 border-t border-rule pt-5">
+          <span className="foil-link text-sm font-semibold">{dict.projects.viewCase} →</span>
+        </div>
+      </div>
+    </Link>
+  )
 }
