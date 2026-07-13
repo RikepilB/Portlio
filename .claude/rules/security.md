@@ -1,32 +1,29 @@
-# Security Rules
-> ALWAYS LOADED — applies to all code in this project
+# Security Guidelines
 
-## Hard Rules (never break these)
-- Never use string concatenation to build SQL queries
-- Never hardcode API keys, tokens, or passwords
-- Never disable SSL/TLS verification
-- Never use wildcard CORS in production
-- Never store secrets in CLAUDE.md or any .claude/ file
+## Mandatory Security Checks
 
-## Input Handling
-- Validate all user input before processing
-- Escape all output that will be rendered as HTML
-- Use parameterized queries for all database operations
-- Sanitize file paths — check for directory traversal
+Before ANY commit:
+- [ ] No hardcoded secrets (API keys, passwords, tokens)
+- [ ] All user inputs validated
+- [ ] SQL injection prevention (parameterized queries)
+- [ ] XSS prevention (sanitized HTML)
+- [ ] CSRF protection enabled
+- [ ] Authentication/authorization verified
+- [ ] Rate limiting on all endpoints
+- [ ] Error messages don't leak sensitive data
 
-## Auth
-- Use constant-time comparison for tokens/secrets
-- Check authorization on every protected route
-- Never log passwords, tokens, or PII
+## Secret Management
 
-## Dependencies
-- Flag any new npm/pip package for review
-- Check for known vulnerabilities before adding dependencies
+- NEVER hardcode secrets in source code
+- ALWAYS use environment variables or a secret manager
+- Validate that required secrets are present at startup
+- Rotate any secrets that may have been exposed
 
-## Before finalizing any API endpoint
-- [ ] Input validated
-- [ ] Auth checked
-- [ ] No secrets in response
-- [ ] Rate limiting in place
-- [ ] Error messages do not leak internal details
+## Security Response Protocol
 
+If security issue found:
+1. STOP immediately
+2. Use **security-reviewer** agent
+3. Fix CRITICAL issues before continuing
+4. Rotate any exposed secrets
+5. Review entire codebase for similar issues

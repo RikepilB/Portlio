@@ -1,0 +1,357 @@
+# Session — 2026-07-13 — claude-harness-fix
+
+> Per-session digest. Full archive: `transcript.md` (run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md`).
+
+## Goal
+Fix the Portfolio Claude Code harness: wire `.claude/CLAUDE.md` to all project skills, rules, and agents; resolve harness drift; follow-on fixes for Cursor Agent install, GSD hooks, and a Windows script bug.
+
+## What was done (concrete one-liners)
+- Harness audit → mapped drift: 14 rules / 25 skills / 15 agents mostly unreferenced; `/redesign` command gone; `rules/agents.md` pointed at `~/.claude/agents/`
+- Harness plan → `.cursor/plans/update_claude_harness_6238ea0a.plan.md` (user chose `.claude/CLAUDE.md` only — no root redirect)
+- `.claude/CLAUDE.md` → tiered rules map (14), skills routing (25), agents table (15), design workflow, quality cross-refs — 163 lines
+- `.claude/rules/agents.md` → project-local `.claude/agents/` paths + all 15 agents synced with CLAUDE.md
+- Cursor Agent on Windows → Git Bash `curl | bash` fails (MINGW64); use PowerShell `irm 'https://cursor.com/install?win32=true' | iex`
+- GSD hooks disabled (global) → stripped `gsd-*` from `~/.claude/settings.json`; added `~/.claude/remove-gsd-hooks.ps1` for post-`/gsd-update` re-run
+- `embed-tokens.cjs` → `findProjectRoot` uses `path.dirname(dir) === dir` (Windows-safe); committed `91ead58`
+
+## Files changed
+- `.claude/CLAUDE.md` — canonical harness: rules tiers, skills protocol + routing, agents catalog, pipeline
+- `.claude/rules/agents.md` — fixed agent paths; full 15-agent table
+- `.claude/skills/ckm-design-system/scripts/embed-tokens.cjs` — cross-platform filesystem root detection
+- `docs/handoff/HANDOFF.md` — father current state + session index (this bookend)
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this file
+
+**Outside repo (user machine):**
+- `~/.claude/settings.json` — GSD hook registrations removed
+- `~/.claude/remove-gsd-hooks.ps1` — re-apply hook removal after GSD updates
+
+## Failed attempts
+- Git Bash `curl https://cursor.com/install -fsS | bash` → `Unsupported operating system: MINGW64_NT-10.0-26200`
+- Root `CLAUDE.md` redirect — user chose `.claude/CLAUDE.md` only
+
+## Next steps
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` for full session archive
+- Optional: same Windows root-walk fix in `.claude/skills/impeccable/scripts/pin.mjs`
+- Optional: rewrite `Portfolio-architecture.md` TODO placeholders for static-site reality
+- Commit handoff bookend if not already on branch
+
+## Files in this folder
+- `HANDOFF.md` — this file (curated digest)
+- `transcript.md` — full `/export` of the session (raw archive; user must run `/export`)
+
+## Addendum — v3 documentation planning
+
+### Goal
+Organize the new Gemini design inputs, establish the v3 documentation hierarchy, and update the Claude harness before implementing the redesigned portfolio.
+
+### What was done (concrete one-liners)
+- `docs/v3/gemini-code-*` audit → classified seven new exports as visual-token, typography, component-concept, PRD, and brand-positioning reference inputs; identified duplicate token drafts.
+- V3 direction confirmed → adopt the velvet-charcoal/copper/editorial visual system while retaining the existing site data as the content source of truth.
+
+### Files changed
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — appended this v3-planning checkpoint.
+- `docs/handoff/HANDOFF.md` — refreshed rolling state and session index.
+
+### Failed attempts
+- None.
+
+### Next steps
+- Create canonical `docs/v3/branding.md`, `docs/v3/PRD.md`, and `docs/v3/design.md`; move or rename Gemini exports into a clearly marked source-inputs location; then update `.claude/CLAUDE.md` before implementation planning.
+
+## Addendum — immersive v3 redesign
+
+### Goal
+Plan and implement an immersive redesign of Home, Projects, Journey, and About, while preserving existing portfolio content and using only repository media.
+
+### What was done (concrete one-liners)
+- Redesign direction confirmed → immersive velvet/copper editorial experience for Home, Projects, Journey, and About.
+- About-page media constraint confirmed → vision board must use existing repository images/assets, with motion and no placeholders or new video files.
+- Redesign planning dispatched → page structure, asset inventory, documentation migration, and implementation boundaries are being mapped before code changes.
+
+### Files changed
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — appended immersive-redesign planning checkpoint.
+- `docs/handoff/HANDOFF.md` — refreshed rolling state and consolidated this session’s index entry.
+
+### Failed attempts
+- None.
+
+### Next steps
+- Review the redesign plan, approve the canonical v3 documentation and page architecture, then implement the documentation/harness migration followed by the page redesign.
+
+## Addendum — velvet v3 rejected; felt/gold re-skin planned
+
+### Goal
+Replace the rejected velvet-charcoal v3 with a sage-felt/gold-foil re-skin that preserves the proven v2 page structure (skills on Home, resume embedded in Journey, image-led project rows, no Skills/Resume tabs).
+
+### What was done (concrete one-liners)
+- Velvet v3 implementation reviewed and rejected by user → all page rewrites are uncommitted and will be reverted via `git checkout HEAD -- <paths>`; docs/tsconfig/GrainOverlay/Reveal work is kept.
+- New design direction ingested → `docs/v3/gemini-code-1783950531012.md` (layout), `gemini-code-1783950527479.md` (felt/gold tokens), `gemini-code-1783950524749.md` (PRD) + `FeltProjectCard` reference component supersede the velvet/copper canon.
+- Decisions confirmed → framer-motion installed for selective effects with CSS fallback; shadcn/ui added as primitives layer; Skills/Resume removed as nav tabs with `/skills → /` and `/resume → /journey` redirects.
+- Plan written and refined → `.cursor/plans/felt_and_gold_redesign_87a3c14f.plan.md`, now including a mandatory skill workflow (impeccable gates → ui-ux-pro-max design-system MASTER → ckm three-layer tokens → baseline-ui constraints).
+
+### Files changed
+- `.cursor/plans/felt_and_gold_redesign_87a3c14f.plan.md` — felt/gold re-skin plan + skill-workflow section.
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this checkpoint.
+- `docs/handoff/HANDOFF.md` — refreshed rolling state + index entry.
+
+### Failed attempts
+- Velvet-charcoal/copper v3 redesign (whole prior arc) → rejected on review: too simple, broke v2 responsive layout and structure, removed images/embedded skills/resume. Kept only as uncommitted diff pending revert.
+
+### Next steps
+- On plan approval: impeccable/ui-ux-pro-max setup → restore v2 app files from git → move new gemini sources + rewrite v3 canon and `.claude/CLAUDE.md` to felt/gold → add framer-motion + shadcn/ui → re-skin Home/Projects/Journey/About → lint/tsc/build → `pnpm dev` for user review.
+
+## Addendum — felt/gold redesign executed (Phases 0–5)
+
+### Goal
+Reorganize `docs/v3`, archive overlaps, and implement the felt/gold re-skin on restored v2 structure.
+
+### What was done (concrete one-liners)
+- Docs reorg → felt Gemini inputs moved to `docs/v3/sources/`; velvet sources → `docs/archive/v3-sources-velvet/`; v2 PRD/plans → `docs/archive/v2/`; velvet plan → `docs/archive/v3-plans/`.
+- v2 restore → `git checkout HEAD --` app pages/components; deleted `src/components/projects/`; kept GrainOverlay/Reveal; extended tsconfig exclusions.
+- Canon + harness → rewrote `docs/v3/{branding,PRD,design}.md`; updated `.claude/CLAUDE.md` + `AGENTS.md`; added `PRODUCT.md`/`DESIGN.md`; ADR in `docs/decisions.md`.
+- Foundation → `framer-motion` + shadcn primitives (button/card/badge/dialog); felt/gold `@theme` tokens; Manrope/Montserrat/Cormorant/JetBrains fonts; Nav/Footer restyle; `/skills` and `/resume` redirects.
+- Pages → Home center-balanced foil hero + image rows + Skills; Projects FeltProjectCard; Journey felt timeline + satin ResumePaper; About pearl/rose vision board.
+- Verify → `pnpm lint` + `tsc --noEmit` + `pnpm build` all green; review at http://localhost:3000.
+
+### Failed attempts
+- None in this execution pass.
+
+### Next steps
+- User design review at http://localhost:3000 (375 / 768 / 1280).
+- Optional: restyle essays/case-study detail pages to felt/gold; commit when requested.
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` for full archive.
+
+## Addendum — About vision board + home mist-scroll brainstorm
+
+### Goal
+Redesign About’s Communities / Exploring / Beyond Work / Shelf into a Figma-style vision board (hero unchanged; keep current copy/images), and later make Home a full infinite scroll (Home → Journey → About → Projects → Essays) with Ricardo Chance–style mist wipe / colorway-flip transitions.
+
+### What was done (concrete one-liners)
+- Context mapped → current About sections + `docs/v3/Vision board design/` draft (`vision-board.tsx`, `communities.tsx`, etc.) + Home structure; design.md already calls for an existing-media vision board.
+- Brainstorming started → scope clarified as two tracks (vision board vs mist wipe); user asked to move slowly and guide changes.
+- Priority question asked → A vision-board-only / B mist-wipe-only / C both in sequence (Communities first); awaiting user choice. No code written (hard-gate).
+
+### Files changed
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum.
+- `docs/handoff/HANDOFF.md` — refreshed rolling state + session index line.
+
+### Failed attempts
+- None.
+
+### Next steps
+- User picks execution mode (subagent-driven vs inline); start Task 1 — board primitives. Design + plan written.
+
+### Transcript note
+- Native Cursor `/export` unavailable in this harness → curated archive written to `transcript.md` (this folder).
+
+## Addendum — design + plan approved path
+
+### Goal
+Lock Approach 1 design and implementation plan for Communities vision board then one Home mist wipe.
+
+### What was done (concrete one-liners)
+- Decisions locked → sequence C; draggable board; postcard expand; titles on board; session-only +.
+- Design doc → `docs/plans/2026-07-13-about-vision-board-mist-wipe-design.md`
+- Implementation plan → `docs/superpowers/plans/2026-07-13-communities-vision-board-mist-wipe.md`
+
+### Files changed
+- `docs/plans/2026-07-13-about-vision-board-mist-wipe-design.md`
+- `docs/superpowers/plans/2026-07-13-communities-vision-board-mist-wipe.md`
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+
+### Failed attempts
+- None.
+
+### Next steps
+- Execute plan Task 1 (board primitives) after user chooses subagent-driven vs inline execution.
+
+## Addendum — Phase 1 Communities vision board shipped
+
+### Goal
+Implement Approach 1: port board primitives into `src/components/about/`, wire `/about` lower half to a draggable vision board; pause mist wipe until user OK.
+
+### What was done (concrete one-liners)
+- Board primitives → `src/components/about/vision-board.tsx` (`BoardCanvas`, `DraggablePiece`, `PolaroidCard`, `NoteCard`, `QuoteCard`, `TagChip`)
+- Postcard expand → `src/components/about/PostcardModal.tsx`
+- Session `+` → `src/components/about/CommunitiesBoard.tsx` (notes/images, session-only)
+- About wire-up → `AboutVisionBoard.tsx` unified tall collage (Communities + Exploring + Beyond Work + Shelf); hero kept in `src/app/about/page.tsx`
+- Verify → `pnpm lint` / `npx tsc --noEmit` / `pnpm build` green at checkpoints
+- Mist wipe (Task 5) → intentionally paused pending user review
+
+### Files changed
+- `src/components/about/types.ts` — Community + board piece types
+- `src/components/about/vision-board.tsx` — canvas + draggable pieces + card primitives
+- `src/components/about/PostcardModal.tsx` — community postcard modal
+- `src/components/about/CommunitiesBoard.tsx` — session add control + board state hooks
+- `src/components/about/AboutVisionBoard.tsx` — unified collage composition
+- `src/components/about/VisionBoardShell.tsx` — tab shell (largely superseded by unified board)
+- `src/app/about/page.tsx` — hero + `<AboutVisionBoard />`
+- `tsconfig.json` — excludes `docs/v3/Vision board design` draft from `tsc`
+
+### Failed attempts
+- Subagent-driven execution hit API limits → finished Tasks 1–4 inline instead
+- Absolute collage via fragile Tailwind position strings → pieces stuck in one line; fixed with real `position: absolute` + `%` placements on `md+`
+
+### Next steps
+- User review of `/about` vision board; then Task 5 mist wipe on Home (hero → My Work) if approved
+
+## Addendum — About hero + board polish
+
+### Goal
+User polish pass: restore missing BrainTrainr/Alianza images, fix face crops (torso-only), mist page bg from silver “H”, black-gradient hero title, longer bio, stronger education card, denser collage, remove Back to top.
+
+### What was done (concrete one-liners)
+- BrainTrainr + Alianza Latina → real polaroids via `COMMUNITY_SLOTS` (were NoteCards only)
+- Face framing → `object-top` on people polaroids (LASO, Wealthsimple, sports, shelf, etc.)
+- Page bg → `.theme-mist` `#c5ccd4` (matches silver-foil “H”); title → `.text-ink-foil` black gradient
+- Bio default → first 4 paragraphs + Read more; education → rose high-contrast card
+- Back to top → removed from About page
+- Collage → tighter placements so pieces sit closer together
+
+### Files changed
+- `src/components/about/AboutVisionBoard.tsx` — slots for BrainTrainr/Alianza; denser layout; `object-top` crops; postcard click helpers restored
+- `src/components/about/vision-board.tsx` — `PolaroidCard` `objectPosition` default `object-top`
+- `src/app/about/page.tsx` — longer bio, education styling, no Back to top, ink-foil title
+- `src/app/globals.css` — `.theme-mist` bg + `.text-ink-foil`
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+- `docs/handoff/HANDOFF.md` — refreshed Current state + session index line
+
+### Failed attempts
+- Accidental removal of postcard pointer helpers while editing slots → restored before verify
+
+### Next steps
+- Hard-refresh `/about` and confirm faces + BrainTrainr/Alianza polaroids; then greenlight Task 5 mist wipe (or further board tweaks)
+- Reminder: run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` (assistant cannot run `/export`)
+
+## Addendum — bio rewrite + board layout + travel crops
+
+### Goal
+Replace About EN/ES bio with new builder-focused copy (collapsed ~7 lines); rebalance vision board across full width; fix UK/Peru/Toronto sky-only crops; add more dark/light community notes and learnings.
+
+### What was done (concrete one-liners)
+- Bio EN/ES → three-paragraph product/builder copy in `src/app/about/page.tsx`; collapsed preview uses `line-clamp-7` + Read more
+- Communities collage → 4-column even placements (no empty middle); Exploring/Beyond/Shelf follow same tracks
+- Travel polaroids → UK/Toronto `object-bottom`, Peru `object-[center_85%]` so faces/landmarks show
+- Communities content → added Learning, Ship the room, Mentorship loop, quote, topic TagChips (dark accent + light paper)
+
+### Files changed
+- `src/app/about/page.tsx` — new `bioEN` / `bioES`; line-clamp collapsed bio
+- `src/components/about/AboutVisionBoard.tsx` — layout rebalance; travel crops; extra community cards; taller canvas
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+- `docs/handoff/HANDOFF.md` — refreshed Current state + session index line
+
+### Failed attempts
+- None this pass
+
+### Next steps
+- User review `/about` (bio + board + travel crops); then Task 5 mist wipe if approved
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md`
+
+## Addendum — scrapbook collage + section stickers
+
+### Goal
+Keep About as one continuous vision board (not sectioned blocks): small label stickers for Communities/Exploring/Beyond Work/Shelf; weave text cards into photo rows; fix UK/Toronto face framing; lock final EN/ES bio.
+
+### What was done (concrete one-liners)
+- Bio → final 3-paragraph EN/ES product/builder copy with `line-clamp-7` collapsed preview
+- Travel crops → UK `object-[center_42%]`, Toronto `object-[center_38%]`, Peru `object-[center_72%]` (mid-frame faces)
+- `SectionLabel` → tiny dark/light sticker cards (not full section headings/breaks)
+- Collage → text interleaved with photos (Learning between Scale/BrainTrainr; quote by Alianza; How I show up by Cursor; same pattern through Exploring/Beyond/Shelf)
+- `/gsd-debug` → opened; no active sessions; waiting on user issue description (no debug file created)
+
+### Files changed
+- `src/app/about/page.tsx` — final bioEN/bioES
+- `src/components/about/vision-board.tsx` — `SectionLabel` component
+- `src/components/about/AboutVisionBoard.tsx` — dense interleaved placements + stickers
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+- `docs/handoff/HANDOFF.md` — refreshed Current state + session index line
+
+### Failed attempts
+- Big `SectionHeading` section breaks → user rejected; replaced with small sticker labels
+- `object-bottom` on UK/Toronto → heads clipped; switched to mid-frame object-position
+
+### Next steps
+- User review scrapbook density on `/about`; further drag/overlap tweaks if needed
+- Provide bug description to resume `/gsd-debug`, or greenlight Task 5 mist wipe
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md`
+
+## Addendum — global scroll chrome + route/scroll transitions
+
+### Goal
+Unify scroll UX across all pages (progress bar + back-to-top) and apply the v3 motion contract: route transitions, scroll-driven reveals, and filter-panel transitions — with reduced-motion fallbacks.
+
+### What was done (concrete one-liners)
+- Global scroll progress → `ScrollProgress` extracted to layout; gold bar on felt routes, silver gradient on `/about`; smooth width easing
+- Global back-to-top → `BackToTop` fixed bottom-right after ~320px scroll; mist/silver styling on About; respects `prefers-reduced-motion`
+- Route transitions → `PageTransition` in `[locale]/layout.tsx` (framer-motion fade/slide); scroll-to-top + focus `#main-content` on pathname change
+- Scroll reveals → shared `Reveal` fixed (`animate-fade-up` + IntersectionObserver); Home project rows + skills; Journey timeline + resume; About vision board
+- Projects filter transition → `AnimatePresence` on discipline tab switch (same pattern as vision-board tabs)
+- About silver readability → darker `.text-silver-foil` gradient + anthracite shadow; flipped `.theme-mist` + softer `.side-light-mist`
+- Home → hero bio removed; copy moved to Skills & Stack intro
+- Projects → 4 filters only (`All` + three disciplines via `src/lib/disciplines.ts`); metadata-led `ProjectImagePlaceholder` when no image
+- Verify → `pnpm lint` + `npx tsc --noEmit` + `pnpm build` green
+
+### Files changed
+- `src/components/layout/ScrollProgress.tsx` — site-wide progress bar (new)
+- `src/components/layout/BackToTop.tsx` — site-wide back-to-top (new)
+- `src/components/layout/PageTransition.tsx` — route fade/slide transitions (new)
+- `src/app/[locale]/layout.tsx` — mounts ScrollProgress, PageTransition, BackToTop; `main#main-content`
+- `src/components/ui/Reveal.tsx` — shared scroll-reveal primitive (fixed)
+- `src/app/[locale]/page.tsx` — uses shared Reveal; removed inline ScrollProgress/back-to-top
+- `src/app/[locale]/projects/page.tsx` — AnimatePresence on filter grid
+- `src/app/[locale]/journey/page.tsx` — Reveal on timeline + resume column
+- `src/app/[locale]/about/page.tsx` — Reveal on vision board; mist/silver hero (prior passes)
+- `src/app/globals.css` — silver-foil + theme-mist readability tweaks
+- `src/lib/disciplines.ts` — category→discipline mapping (new)
+- `src/components/ui/ProjectImagePlaceholder.tsx` — missing-image fallback (new)
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+- `docs/handoff/HANDOFF.md` — refreshed Current state + session index line
+
+### Failed attempts
+- None this pass
+
+### Next steps
+- User review scroll progress + page transitions + back-to-top on Home/About/Projects/Journey (375 / 1280)
+- Greenlight Task 5 Home mist wipe when ready; or commit when requested
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` for full session archive (assistant cannot run `/export`)
+
+---
+
+## Addendum — nav transition fix + About felt/gold re-skin + home heading cleanup
+
+### Goal
+Fix the "click twice → empty page with felt background" navigation bug; restyle About to match Journey (felt/gold); tidy home headings.
+
+### What was done
+- Nav empty-page/two-clicks bug → replaced `<AnimatePresence mode="wait">` in the persistent `[locale]/layout.tsx` with canonical `src/app/[locale]/template.tsx` (remounts per navigation, enter-only animation). Deleted dead `PageTransition.tsx`. Verified in browser: first-click nav loads content.
+- Bug 1 (`parents[4]` / 5×`.parent` in ckm skill python scripts) → verified NOT real; 5 levels = repo root, and no `assets/` exists in this repo. Left untouched.
+- Home headings → "My work" + "Skills & Stack" now uniform white one-font (dropped gold-italic `<em>`); deleted "WHAT I DO" eyebrow (`src/app/[locale]/page.tsx`).
+- About re-skin mist→felt/gold → `bg-felt` + `side-light`, gold/matte/muted tokens, felt education card w/ gold avatar, felt social buttons, `border-rule` divider (`src/app/[locale]/about/page.tsx`).
+- About title → heading is now **"Who are you?" in gold** (`text-gold-bright`); small "About" eyebrow deleted. dict `about.heading`/`about.label` swapped (en+es).
+- Vision board hint → "↔ Drag the cards · press Read" top-right by the `+` control; new `hint` prop on `AboutVisionBoard`; `about.boardHint` added (en+es); `+` control recolored felt.
+- ScrollProgress/BackToTop → removed the `/about` mist branch (About is felt now); always gold/felt.
+- Verify → `pnpm lint` + `npx tsc --noEmit` + `pnpm build` green; browser-drove Home + About.
+
+### Files changed
+- `src/app/[locale]/template.tsx` — route enter transition (new; replaces PageTransition)
+- `src/app/[locale]/layout.tsx` — drop PageTransition wrapper
+- `src/components/layout/PageTransition.tsx` — DELETED (dead)
+- `src/app/[locale]/page.tsx` — uniform white headings; removed whatIDo eyebrow
+- `src/app/[locale]/about/page.tsx` — felt/gold re-skin; gold "Who are you?" heading; eyebrow removed; board hint wired
+- `src/components/about/AboutVisionBoard.tsx` — `hint` prop + top-right hint render
+- `src/components/about/CommunitiesBoard.tsx` — `+` add-control recolored felt
+- `src/components/layout/ScrollProgress.tsx` — removed mist branch (always gold)
+- `src/components/layout/BackToTop.tsx` — removed mist branch (always felt/gold)
+- `src/i18n/dictionaries/en.ts` / `es.ts` — about.heading="Who are you?", about.boardHint added
+
+### Failed attempts
+- None
+
+### Next steps
+- User review About felt/gold + gold heading + board hint (375 / 1280)
+- Optional: warm the scrapbook polaroid paper (currently cool mist-ice) if the cool tone reads off against felt
+- Nothing committed — commit when user requests
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` (assistant cannot run `/export`)
+
+### Follow-up (same session)
+- Home "Skills & Stack" intro → split the two paragraphs into a 2-col layout (para1 left brighter `text-ink-on-felt`, para2 right with `border-l-2 border-gold/40` accent) to fix the "too simple" flat stacked look (`src/app/[locale]/page.tsx`). lint/tsc/build green; browser-verified.

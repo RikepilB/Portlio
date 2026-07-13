@@ -1,23 +1,22 @@
 # Goal
-Polish the portfolio project case-study copy in `src/data/projects.ts` — make entries truthful, recruiter-attractive, and readable. This session focused on bike-share-optimization and ExamVault overviews.
+Fix the Portfolio Claude Code harness: reconnect and optimize `CLAUDE.md`, reorganize `.claude/rules/`, and wire references to all `.claude/skills`, `.claude/agents`, and distribution docs so every harness file has a clear use.
 
 ## Current state
-`pnpm build` passing (zero errors). All edits saved. Nothing committed (per user's push rules).
+- Harness fix plan ready at `.cursor/plans/fix_claude_harness_453ff0c8.plan.md` — not executed yet.
+- Branch `feat/portfolio-additions` at `c5e3abf`. Site code untouched; no build/lint this session.
+- Harness drift: root `CLAUDE.md` missing (buried in `.claude/CLAUDE.md`); rules/agents/skills/commands disconnected.
+- Skills model: keep 25 project-local skills (user confirmed).
 
 ## Files in flight
-None — all edits complete and saved.
+- `.cursor/plans/fix_claude_harness_453ff0c8.plan.md` — 10-todo harness fix plan; awaiting execution approval.
+- No `.claude/` harness files edited yet.
 
-## Changed (this session, src/data/projects.ts)
-- **bike-share-optimization** (id '1'):
-  - Spiked truthfully: tagline hook, added 150K+ ridership-records metric, named data source (Mobi by Rogers open dataset), added Phase 4 (Power BI + predictive modeling, marked in-progress), sharpened findings + conclusion, added Power BI to stack.
-  - Made whole entry more "selling": narrative methodology titles, problem opens on rider pain.
-  - Overview finally shortened to 3 sentences (~5 lines) at user request.
-  - Kept Vancouver-only, no Toronto, 150K not "millions", dropped fabricated 15% noise claim.
-- **ExamVault / exam-analysis-system** (id '5'): overview rewritten — product pitch first (for users), then role/recruiter framing (backend exam-gen engine, analytics dashboard, Scrum Master). Only overview field changed.
+## Changed
+- `handoff.md` (root) — refreshed this stop.
+- `docs/handoff/HANDOFF.md` — father `## Current state` replaced.
 
 ## Failed attempts
-None.
+- None this session. June 2026 `project-scaffold` partially applied then drifted (`rules/common/`, `commands/` never committed).
 
-## Next steps
-1. User to review rendered pages and decide whether to commit.
-2. Open flag: verify ExamVault results-card metrics (100K+ records, 94% precision, z-score) are real — same hallucination check done for bike-share. Not yet verified.
+# Next steps
+Execute the harness plan — first action: create root `CLAUDE.md` and `.claude/CLAUDE.md` redirect stub.

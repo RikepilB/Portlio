@@ -1,11 +1,11 @@
-# Architecture: Portfolio Website v2
+# Architecture: Portfolio Website
 
 ## Tech Decisions
 | Decision | Choice | Why |
 |----------|--------|-----|
 | Framework | Next.js 16 App Router | Best for Vercel + page routing + SEO |
-| Styling | Tailwind CSS | Utility-first, no runtime overhead |
-| Content | TypeScript data files + MDX | No CMS needed, type-safe content |
+| Styling | Tailwind CSS v4 | Utility-first, no runtime overhead |
+| Content | TypeScript data files in `src/data/` | No CMS needed, type-safe content |
 | Deployment | Vercel | Zero config, preview URLs per PR |
 | Font loading | next/font | Optimized, no layout shift |
 | Images | next/image | Automatic optimization + WebP |
@@ -13,51 +13,47 @@
 ## Site Map
 ```
 richardpillaca.com/
-├── /                          → Home
-├── /projects                  → Gallery of 4 projects
-│   ├── /projects/bike-share-optimization
-│   ├── /projects/ai-technical-debt-research
-│   ├── /projects/accounting-automation
-│   └── /projects/exam-analysis-system
-├── /essays                    → Blog list
-│   └── /essays/[slug]         → Individual post (MDX)
-├── /about                     → Personal + professional About
-└── (contact is footer section on every page)
+├── /                          → Home (hero, featured work, embedded skills)
+├── /about                     → Personal narrative + vision board
+├── /journey                   → Experience timeline + embedded resume
+├── /projects                  → Filterable project gallery
+│   └── /projects/[slug]       → Case study detail
+├── /essays                    → Essays list (preserved route)
+│   └── /essays/[slug]         → Individual essay
+├── /skills                    → Redirects to /
+└── /resume                    → Redirects to /journey
 ```
+
+Primary nav: Home, About, Journey, Projects (+ Get in touch CTA).
 
 ## Component Hierarchy
 ```
 layout.tsx (Root)
-├── <Nav />                    — Fixed top, links to all pages
-├── {children}                 — Page content
-└── <Footer />                 — Contact links, email, GitHub, LinkedIn
+├── <Nav />
+├── {children}
+└── <Footer />
 
-page.tsx (Home)
-├── <HeroSection />            — Name, title, CTA
-├── <FeaturedProjects />       — 4 <ProjectCard /> components
-├── <RecentEssays />           — 2-3 <EssayCard /> components
-└── <ContactCTA />
-
-[slug]/page.tsx (Project)
-├── <ProjectHeader />          — Title, tags, meta
-├── <ProjectOverview />        — Summary paragraphs
-├── <ProblemSection />         — Highlighted problem box
-├── <MethodologySection />     — Phased breakdown
-├── <MetricCards />            — Big numbers
-├── <FindingsSection />        — Key insights
-└── <ProjectFooter />          — Tech stack + GitHub link
+src/
+├── app/                 # App Router pages
+├── components/
+│   ├── layout/          # Nav, Footer
+│   └── ui/              # Cards, tags, overlays
+├── data/                # projects, essays, experience, social (authoritative)
+└── lib/                 # cn helper, utilities
 ```
 
 ## Data Layer
 ```
 src/data/
-├── projects.ts    — Array of ProjectData objects (all 4 projects)
-├── essays.ts      — Essay metadata (title, date, slug, tags)
-└── personal.ts    — Skills, certifications, experience timeline
+├── projects.ts      — All portfolio projects (authoritative)
+├── essays.ts        — Essay metadata
+├── experience.ts    — Journey timeline
+└── social.ts        — Contact / social links
 ```
 
 ## Key Patterns
-- Dynamic routes use generateStaticParams() for all project slugs
-- Essays are MDX files in src/content/essays/ rendered with next-mdx-remote
-- All images via next/image with explicit width/height to prevent CLS
-- No client components unless: form input, scroll detection, mobile menu
+- Dynamic routes use `generateStaticParams()` for project and essay slugs
+- Essays use the TypeScript data placeholder model (no MDX architecture unless explicitly scoped)
+- All images via `next/image` with explicit dimensions where possible
+- Client components only for interaction islands (filters, mobile menu, motion)
+- Design contracts live in `docs/v3/` (branding, PRD, design)

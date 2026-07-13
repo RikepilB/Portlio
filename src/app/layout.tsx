@@ -1,19 +1,26 @@
 import type { Metadata } from 'next'
-import { Geist, Newsreader, JetBrains_Mono } from 'next/font/google'
-import { Nav } from '@/components/layout/Nav'
-import { Footer } from '@/components/layout/Footer'
+import { Manrope, Montserrat, Cormorant_Garamond, JetBrains_Mono } from 'next/font/google'
+import { GrainOverlay } from '@/components/ui/GrainOverlay'
 import './globals.css'
 
-const geist = Geist({
+const manrope = Manrope({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
 })
 
-const newsreader = Newsreader({
+const montserrat = Montserrat({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
+  weight: ['600', '700', '800'],
+})
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  variable: '--font-accent',
+  display: 'swap',
+  weight: ['400', '500', '600'],
   style: ['normal', 'italic'],
 })
 
@@ -26,7 +33,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Richard Pillaca',
   description:
-    'Portfolio of Richard Pillaca Burga — Software & Data Engineer based in Toronto. Building scalable products, data pipelines, and robust software systems.',
+    'Portfolio of Richard Pillaca Burga — Software & Data Engineer based in Toronto.',
   openGraph: {
     title: 'Richard Pillaca',
     description: 'Software & Data projects, scalable solutions, and robust systems — built in Toronto.',
@@ -39,11 +46,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geist.variable} ${newsreader.variable} ${jetbrainsMono.variable}`}>
-      <body className="font-sans antialiased bg-bg text-ink min-h-screen">
-        <Nav />
-        <main>{children}</main>
-        <Footer />
+    <html
+      lang="en"
+      className={`${manrope.variable} ${montserrat.variable} ${cormorant.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="font-sans antialiased bg-felt text-matte min-h-screen">
+        <GrainOverlay />
+        {children}
       </body>
     </html>
   )

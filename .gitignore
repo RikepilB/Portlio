@@ -57,3 +57,6 @@ testsprite_tests/tmp/
 
 # Temporary files
 *.tmp
+
+# local redesign reference scratch (not site code)
+redisgn/

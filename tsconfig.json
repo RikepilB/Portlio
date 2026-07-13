@@ -36,6 +36,11 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "redisgn",
+    "docs/v3/sources",
+    "docs/v3/Vision board design",
+    "docs/archive/v3-sources-velvet",
+    "docs/archive/v3-plans"
   ]
 }

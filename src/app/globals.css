@@ -1,45 +1,72 @@
 @import "tailwindcss";
 
-/* ── Richard Pillaca Portfolio v2 — Design System ──────── */
+/* ── Richard Pillaca Portfolio v3 — Felt & Gold ─────────── */
 /* Tailwind v4 CSS-first config */
 
 @theme {
   /* Fonts */
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-display), ui-serif, Georgia, serif;
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-accent: var(--font-accent), ui-serif, Georgia, serif;
   --font-mono: var(--font-mono), ui-monospace, Menlo, monospace;
 
-  /* Light palette */
-  --color-bg: #f8f9fa;
-  --color-bg-soft: #f3fbf8;
-  --color-surface: #ffffff;
-  --color-ink: #1a1a1a;
-  --color-ink-2: #474747;
-  --color-muted: #6e7481;
-  --color-muted-2: #8a909b;
-  --color-rule: #e6e8eb;
-  --color-rule-2: #d1d2d8;
-  --color-accent: #2bc08f;
-  --color-accent-hover: #26bf8c;
-  --color-accent-soft: #ecfdf6;
-  --color-accent-ink: #0c5a40;
+  /* Felt / gold primary canvas */
+  --color-felt: #607466;
+  --color-felt-soft: #708275;
+  --color-felt-deep: #4f6258;
+  --color-felt-border: rgba(255, 255, 255, 0.14);
 
-  /* Gold — secondary accent (green + gold combo, terraform-derived) */
-  --color-gold: #c79a3a;
-  --color-gold-bright: #e0b452;
-  --color-gold-soft: #f7eed8;
-  --color-gold-ink: #8a6516;
+  --color-gold: #d4af37;
+  --color-gold-bright: #f2e3c6;
+  --color-gold-shadow: #aa7c11;
+  --color-gold-soft: rgba(212, 175, 55, 0.16);
 
-  /* Dark palette */
-  --color-d-bg: #091233;
-  --color-d-bg-2: #0f1a47;
-  --color-d-ink: #f8f9fa;
-  --color-d-ink-2: #d1d2d8;
-  --color-d-muted: #b0b4ba;
-  --color-d-rule: rgba(176, 180, 186, 0.18);
-  --color-d-rule-2: rgba(176, 180, 186, 0.32);
-  --color-d-accent: #37c394;
-  --color-d-accent-soft: rgba(55, 195, 148, 0.12);
+  --color-matte: #ffffff;
+  --color-ink-on-felt: #eaeced;
+
+  /* Mist / silver complementary (About — Dewy Set packaging) */
+  --color-mist: #d0d7de;
+  --color-mist-soft: #e4e9ee;
+  --color-mist-ice: #f0f3f6;
+  --color-mist-deep: #b8c2cc;
+  --color-silver: #a8b0ba;
+  --color-silver-bright: #f4f6f8;
+  --color-silver-shadow: #5c6570;
+  --color-anthracite: #2f3542;
+
+  /* Pearl / rose kept for satin ResumePaper */
+  --color-pearl: #fdfbf7;
+  --color-pearl-soft: #eaeceb;
+  --color-rose: #c58e7f;
+  --color-rose-bright: #faece9;
+  --color-rose-shadow: #735147;
+
+  /* Semantic aliases used across v2 structure */
+  --color-bg: #607466;
+  --color-bg-soft: #708275;
+  --color-surface: #708275;
+  --color-ink: #ffffff;
+  --color-ink-2: #eaeced;
+  --color-muted: rgba(255, 255, 255, 0.72);
+  --color-muted-2: rgba(255, 255, 255, 0.55);
+  --color-rule: rgba(255, 255, 255, 0.16);
+  --color-rule-2: rgba(255, 255, 255, 0.28);
+  --color-accent: #d4af37;
+  --color-accent-hover: #f2e3c6;
+  --color-accent-soft: rgba(212, 175, 55, 0.16);
+  --color-accent-ink: #f2e3c6;
+  --color-gold-ink: #aa7c11;
+
+  /* Dark aliases kept for gradual migration */
+  --color-d-bg: #4f6258;
+  --color-d-bg-2: #607466;
+  --color-d-ink: #ffffff;
+  --color-d-ink-2: #eaeced;
+  --color-d-muted: rgba(255, 255, 255, 0.65);
+  --color-d-rule: rgba(255, 255, 255, 0.16);
+  --color-d-rule-2: rgba(255, 255, 255, 0.28);
+  --color-d-accent: #d4af37;
+  --color-d-accent-soft: rgba(212, 175, 55, 0.16);
 
   /* Geometry */
   --radius-lg: 14px;
@@ -49,7 +76,8 @@
 
   /* Shadows */
   --shadow-polaroid: 0 1px 2px rgba(0, 0, 0, 0.04), 0 18px 40px -20px rgba(20, 16, 8, 0.25), 0 4px 10px -4px rgba(20, 16, 8, 0.10);
-  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 12px 40px -18px rgba(32, 40, 34, 0.45);
+  --shadow-felt: 0 18px 50px -24px rgba(20, 28, 22, 0.55);
 
   /* Animation */
   --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -76,27 +104,26 @@
   }
 
   body {
-    background-color: var(--color-bg);
-    color: var(--color-ink);
+    background-color: var(--color-felt);
+    color: var(--color-matte);
     line-height: 1.55;
     letter-spacing: -0.01em;
-    /* Contain off-canvas decorative elements without breaking position: sticky */
     overflow-x: clip;
   }
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: -0.02em;
   }
 
   ::selection {
-    background-color: var(--color-accent);
-    color: var(--color-ink);
+    background-color: var(--color-gold);
+    color: var(--color-felt-deep);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-gold);
     outline-offset: 4px;
     border-radius: 4px;
   }
@@ -111,7 +138,7 @@
   border: 1px solid var(--color-rule);
   padding: 4px 10px;
   border-radius: 4px;
-  background: var(--color-bg);
+  background: color-mix(in srgb, var(--color-felt-deep) 40%, transparent);
 }
 
 @utility stagger-1 { animation-delay: 0.1s; }
@@ -125,7 +152,87 @@
   padding: 0 var(--spacing-gutter);
 }
 
-/* ── Regular CSS Classes (hover/pseudo not allowed in @utility) ── */
+@utility font-accent {
+  font-family: var(--font-accent);
+}
+
+@utility text-foil {
+  background-image: linear-gradient(135deg, var(--color-gold-bright), var(--color-gold), var(--color-gold-shadow));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility felt-panel {
+  background-color: var(--color-felt);
+  border: 1px solid var(--color-felt-border);
+  box-shadow: var(--shadow-felt);
+}
+
+@utility satin-panel {
+  background-color: var(--color-pearl);
+  color: #1a1a1a;
+  border: 1px solid color-mix(in srgb, var(--color-rose) 25%, transparent);
+}
+
+/* ── Texture & lighting ─────────────────────────────────── */
+
+.grain-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  width: 100%;
+  height: 100%;
+  opacity: 0.04;
+  mix-blend-mode: soft-light;
+}
+
+.side-light {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 60% at 12% 8%,
+    rgba(242, 227, 198, 0.18) 0%,
+    transparent 55%
+  );
+}
+
+@utility project-placeholder-wash {
+  background:
+    radial-gradient(ellipse 70% 60% at 18% 20%, rgba(242, 227, 198, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 45% at 88% 78%, rgba(212, 175, 55, 0.14) 0%, transparent 50%);
+}
+
+@utility project-placeholder-stripe {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(242, 227, 198, 0.45),
+    rgba(212, 175, 55, 0.55),
+    transparent
+  );
+}
+
+.foil-link {
+  background-image: linear-gradient(
+    135deg,
+    var(--foil-x, var(--color-gold-bright)),
+    var(--color-gold),
+    var(--color-gold-shadow)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: filter 0.2s ease;
+}
+
+.foil-link:hover {
+  filter: brightness(1.08);
+}
+
+/* ── Regular CSS Classes ────────────────────────────────── */
 
 @keyframes pulse-ring {
   0%, 100% { transform: scale(1); opacity: 0.25; }
@@ -149,25 +256,25 @@
 }
 
 .work-btn-demo {
-  background: var(--color-ink);
-  color: #fff;
-  border-color: var(--color-ink);
+  background: var(--color-matte);
+  color: var(--color-felt-deep);
+  border-color: var(--color-matte);
 }
 
 .work-btn-demo:hover {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-ink);
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-felt-deep);
 }
 
 .work-btn-details {
-  color: var(--color-ink);
+  color: var(--color-matte);
   border-color: var(--color-rule-2);
 }
 
 .work-btn-details:hover {
-  border-color: var(--color-accent-ink);
-  color: var(--color-accent-ink);
+  border-color: var(--color-gold);
+  color: var(--color-gold-bright);
 }
 
 .work-btn-code {
@@ -176,24 +283,24 @@
 }
 
 .work-btn-code:hover {
-  color: var(--color-ink);
-  border-color: var(--color-ink);
+  color: var(--color-matte);
+  border-color: var(--color-matte);
 }
 
 .skill-tag {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--color-ink);
+  color: var(--color-matte);
   border: 1px solid var(--color-rule);
   padding: 5px 10px;
   border-radius: 4px;
-  background: var(--color-surface);
+  background: color-mix(in srgb, var(--color-felt-deep) 35%, transparent);
   transition: all 0.2s ease;
 }
 
 .skill-tag:hover {
-  border-color: var(--color-accent);
-  background: var(--color-accent-soft);
+  border-color: var(--color-gold);
+  background: var(--color-gold-soft);
 }
 
 .section-link {
@@ -201,13 +308,13 @@
   font-size: 11.5px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-accent-ink);
+  color: var(--color-gold-bright);
   display: inline-flex;
   align-items: center;
   gap: 8px;
   transition: gap 0.2s ease;
   padding-bottom: 2px;
-  border-bottom: 1px solid var(--color-accent-ink);
+  border-bottom: 1px solid var(--color-gold);
 }
 
 .section-link:hover {
@@ -218,7 +325,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--color-gold);
   position: relative;
 }
 
@@ -227,23 +334,95 @@
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--color-gold);
   opacity: 0.25;
   animation: pulse-ring 2.2s ease-in-out infinite;
 }
 
 .polaroid {
-  background: #fff;
+  background: var(--color-mist-ice);
   padding: 16px 16px 36px;
   border-radius: 6px;
   box-shadow: var(--shadow-polaroid);
   transform: rotate(-3deg);
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  border: 1px solid var(--color-rule);
+  border: 1px solid color-mix(in srgb, var(--color-silver) 40%, transparent);
+  color: var(--color-anthracite);
 }
 
 .polaroid:hover {
   transform: rotate(0deg) scale(1.03);
+}
+
+/* About route — page bg matches silver-foil “H” (#c5ccd4) */
+.theme-mist {
+  background-color: #c5ccd4;
+  background-image: linear-gradient(
+    145deg,
+    #c5ccd4 0%,
+    #d0d7de 48%,
+    #e4e9ee 100%
+  );
+  color: var(--color-anthracite);
+}
+
+.theme-mist :focus-visible {
+  outline-color: var(--color-silver-shadow);
+}
+
+.theme-mist .side-light-mist {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 75% 55% at 8% 12%,
+    rgba(244, 246, 248, 0.28) 0%,
+    transparent 58%
+  );
+}
+
+.text-silver-foil {
+  background-image: linear-gradient(
+    135deg,
+    #c5ccd4 0%,
+    var(--color-silver) 40%,
+    #7a8490 70%,
+    var(--color-silver-shadow) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(47, 53, 66, 0.18));
+}
+
+/* About hero title — black gradient */
+.text-ink-foil {
+  background-image: linear-gradient(
+    135deg,
+    #1a1a1a 0%,
+    #2f3542 45%,
+    #000000 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-silver-foil {
+    background-image: none;
+    color: var(--color-silver-shadow);
+    filter: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+  }
+
+  .text-ink-foil {
+    background-image: none;
+    color: #1a1a1a;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+  }
 }
 
 /* ── Shell responsive ───────────────────────────────────── */
@@ -253,7 +432,7 @@
   }
 }
 
-/* ── Reduced motion — respect user OS preference ────────── */
+/* ── Reduced motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -262,5 +441,12 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .foil-link {
+    background-image: none;
+    color: var(--color-gold);
+    -webkit-background-clip: unset;
+    background-clip: unset;
   }
 }
