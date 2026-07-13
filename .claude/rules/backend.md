@@ -6,13 +6,6 @@
 - Zod schemas for all request body validation
 - Return typed response objects — never raw `any`
 
-## Python
-- Type hints on all functions
-- Google-style docstrings
-- snake_case naming
-- No bare `except` — always catch specific exception types
-- Prefer Pydantic over raw dicts
-
 ## Database
 - CTEs over subqueries in SQL
 - Explicit JOINs only — no implicit joins

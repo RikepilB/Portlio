@@ -19,6 +19,7 @@ Run `project-scaffold` to standardize the repo as AI-native, then migrate the le
 
 - **2026-07-01 continuation (catch-up only, read-only):** ran `/catch-up`. Discovered PR #16 (`feat/add-el-umbral-project`) and PR #17 (`feat/update-resume-content`) are both now **merged** (were open at prior write-up). Current branch `feat/landing-featured-projects` still has 2 unpushed commits (`602a52a`, `44125e0`) on top of that, tested green, no PR yet. No code changed this turn.
 - **2026-07-01 `/gsd-fast` ship:** user asked to feature El Umbral on the home page — confirmed already done (commits `602a52a`/`44125e0`, `src/app/page.tsx:11` `featuredSlugs`). Ran lint/tsc/build (all green), pushed `feat/landing-featured-projects`, opened PR #18, squash-merged with `--delete-branch` per user's standing go-ahead. `main` now at `e5ad7c1`. Local branch deleted, checked out back to `main`.
+- **2026-07-01 `/handoff-to-issues` (read-only on tree):** harvested father `Current state` + this session's `Next steps` against `gh issue list --state open` (14 open: #5–#15, #19–#21). All 6 prior next-steps items already tracked as existing issues or already done (PR #18 shipped). Found exactly 1 untracked item: "swap El Umbral's placeholder og-image for a real UI screenshot" (enhancement, 2 subtasks). Presented for the mandatory single-confirm gate; `AskUserQuestion` got no response within 60s — **did not create the issue** (skill requires explicit confirm before any GitHub write). Also flagged, but did not action (out of this skill's create-only scope): issue #14 ("open PRs for el-umbral/resume-update branches") is now stale since both PRs merged — needs manual close.
 
 ## Files changed
 - `handoff.md` (root, legacy) — left in place untouched as historical record; hooks now prefer the tree (TREE > flat > legacy, per `compact-handoff.js` detection logic) so this file is no longer the active target.
@@ -45,7 +46,8 @@ Run `project-scaffold` to standardize the repo as AI-native, then migrate the le
 4. #13 — review the 44 scaffolded files before committing (TODO stubs: `CLAUDE.local.md`, `opencode.json`, `.mcp.json`, `docs/decisions.md`, CI workflow).
 5. #12 — clean root clutter (stray `,` `,+` `bottom` `e.type` `legacy` files, screenshot jpegs, decide on `ADD-PROJECT-EL-UMBRAL.md`).
 6. #15 — résumé polish: phone number in public `ResumePaper.tsx` embed (privacy call), Drive-link on `/resume` page too (user only asked for `/journey`).
-7. Optional: swap El Umbral's `public/images/elumbral.png` (currently the site's og-image share card) for a real UI screenshot if a literal app screenshot is wanted later.
+7. Optional: swap El Umbral's `public/images/elumbral.png` (currently the site's og-image share card) for a real UI screenshot if a literal app screenshot is wanted later. Proposed as a GitHub issue via `/handoff-to-issues` on 2026-07-01 but not created — user confirm timed out; re-run `/handoff-to-issues` or ask directly to file it.
+8. Close stale issue #14 manually — both PRs it tracked (#16, #17) are merged.
 
 ## Files in this folder
 - `HANDOFF.md` — this file (curated digest)

@@ -21,19 +21,20 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ---
 
-## Current state — 2026-07-01
+## Current state — 2026-07-13
 
-PR #4, #16, #17, and #18 (`feat(home): feature El Umbral in My Work section`) are all **merged** into `main` (now at `e5ad7c1`). Home page "My Work" now shows El Umbral + 4 recent apps (Empeñalo, ScoutLane, ExamVault, Bike Share), El Umbral has a project image. All feature branches for this work deleted (local + remote); local repo is on `main`. Remaining local-only branches: `feat/add-el-umbral-project`, `feat/ui-polish-pass`, `feat/update-resume-content`, `redesign/landing-page-v2` (all already merged content, safe to prune). Repo scaffold from `project-scaffold` (44 new files) plus root clutter (`,`, `,+`, `bottom`, `e.type`, screenshots, `legacy/`) remain uncommitted/unreviewed. GitHub issues #5–#13, #15 still open, none started; #14 (open the two PRs) is stale — close it.
+**Claude harness fix — plan ready, not executed.** `feat/portfolio-additions` @ `c5e3abf`. Plan: `.cursor/plans/fix_claude_harness_453ff0c8.plan.md`. Handoff files touched this stop (root + father tree) — 2026-07-13. **Next:** execute → root `CLAUDE.md` first.
 
 ---
 
 ## Session index (append-only, newest first)
 
+- [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — audited Claude harness drift; wrote fix plan (`.cursor/plans/fix_claude_harness_453ff0c8.plan.md`); confirmed project-local skills; refreshed root `handoff.md` + father handoff tree — execution pending
 - [2026-06-30-scaffold-and-handoff-migration](2026-06-30-scaffold-and-handoff-migration/HANDOFF.md) — ran `project-scaffold` + migrated legacy `handoff.md`; deep-catch-up roadmap briefing; added El Umbral project (`7259831`) and updated résumé PDF + journey/embedded data (`0e48ad9`); mirrored next-steps to GitHub issues #11–#15; tested + pushed both branches and opened PR #16, PR #17; reordered home "My Work" to 5 newest projects + gave El Umbral an image (`602a52a`, `44125e0`, not pushed)
 
 <!-- compact-handoff:auto-snapshot -->
-<!-- Latest auto-snapshot: docs/handoff/2026-06-30-scaffold-and-handoff-migration/snapshot-015422.md -->
-## Latest auto snapshot — 2026-07-01T01:54:22.287Z
-- Session folder: `docs/handoff/2026-06-30-scaffold-and-handoff-migration/`
-- Snapshot file: `docs/handoff/2026-06-30-scaffold-and-handoff-migration/snapshot-015422.md`
-- Branch: feat/landing-featured-projects
+<!-- Latest auto-snapshot: docs/handoff/2026-07-02-98bb9341/snapshot-002022.md -->
+## Latest auto snapshot — 2026-07-02T00:20:22.015Z
+- Session folder: `docs/handoff/2026-07-02-98bb9341/`
+- Snapshot file: `docs/handoff/2026-07-02-98bb9341/snapshot-002022.md`
+- Branch: main
