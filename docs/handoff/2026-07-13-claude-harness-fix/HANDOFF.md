@@ -355,3 +355,27 @@ Fix the "click twice → empty page with felt background" navigation bug; restyl
 
 ### Follow-up (same session)
 - Home "Skills & Stack" intro → split the two paragraphs into a 2-col layout (para1 left brighter `text-ink-on-felt`, para2 right with `border-l-2 border-gold/40` accent) to fix the "too simple" flat stacked look (`src/app/[locale]/page.tsx`). lint/tsc/build green; browser-verified.
+
+## Addendum — PR #22 CI fix, merge, prod deploy
+
+### Goal
+Fix failing CI on PR #22 (7 case-study additions), commit/push, merge, confirm prod deploy.
+
+### What was done (concrete one-liners)
+- Diagnosed CI failure → `pnpm/action-setup@v4` had no version to resolve (no `packageManager` field, no `version:` in workflow) → `Error: No pnpm version is specified.`
+- Fix → added `"packageManager": "pnpm@10.30.3"` to `package.json` (pinned to locally installed version)
+- Verified locally → `pnpm lint` / `pnpm typecheck` / `pnpm build` all green (56 pages prerendered)
+- Committed + pushed `23d24c6` to `feat/portfolio-additions` → CI re-ran green (build 46s)
+- PR #22 → all 4 checks SUCCESS, mergeable → squash-merged into `main`
+- `main` CI green post-merge; Vercel auto-deploy triggered from push
+
+### Files changed
+- `package.json` — added `packageManager: pnpm@10.30.3`
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+
+### Failed attempts
+- None
+
+### Next steps
+- Local `main` branch is behind origin — `git pull` next time on `main`
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` (assistant cannot run `/export`)
