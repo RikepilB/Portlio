@@ -379,3 +379,59 @@ Fix failing CI on PR #22 (7 case-study additions), commit/push, merge, confirm p
 ### Next steps
 - Local `main` branch is behind origin — `git pull` next time on `main`
 - Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` (assistant cannot run `/export`)
+
+## Addendum — gsd-ship blocked (no .planning/) + handoff docs committed
+
+### Goal
+Run `/gsd-ship`; if blocked, at minimum land the pending handoff-doc edits.
+
+### What was done (concrete one-liners)
+- `/gsd-ship` invoked → blocked: no `.planning/` dir (no ROADMAP/phase dirs/VERIFICATION.md) — this repo doesn't use GSD phase tracking; PR #22 (only branch work) already merged
+- User chose "skip gsd-ship, commit handoff docs" → committed the two pending handoff.md edits directly on `feat/portfolio-additions` (`52ece8b`), not pushed
+
+### Files changed
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md`, `docs/handoff/HANDOFF.md` — committed in `52ece8b`
+
+### Failed attempts
+- None
+
+### Next steps
+- Push `52ece8b` if the doc commit should reach origin
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md`
+
+## Addendum — OG/social share image wired up
+
+### Goal
+Make a link-preview photo for richardpillaca.com so any shared link shows an image (user supplied a local screenshot).
+
+### What was done (concrete one-liners)
+- Copied user's screenshot → `public/images/og-image.png` (955×726, read via PNG header bytes)
+- `src/app/layout.tsx` → added `metadataBase: new URL('https://richardpillaca.com')`, `openGraph.images` (url/width/height/alt), and `twitter: { card: 'summary_large_image', images: [...] }`
+- Confirmed `[locale]/page.tsx` and `about/page.tsx` only import icon components under `Twitter`/no metadata override — root OG image applies site-wide
+- Verify → `pnpm lint` / `tsc --noEmit` / `pnpm build` all green
+- Flagged to user: source image is 1.32:1, not standard OG 1.91:1 — some platforms (esp. crop-heavy previews) may crop the bottom social-icons row; offered to crop/pad to 1200×630, awaiting answer
+
+### Files changed
+- `public/images/og-image.png` — new (copied from `C:\Users\a2021\OneDrive\Pictures\Capturas de pantalla\Screenshot 2026-07-13 185744.png`)
+- `src/app/layout.tsx` — metadataBase + openGraph.images + twitter card
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+
+### Failed attempts
+- None
+
+### Next steps
+- Awaiting user decision: keep og-image.png as-is, or crop/pad to 1200×630 for a cleaner 1.91:1 crop
+- Nothing committed yet for this change — commit when user confirms the image is final
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md`
+
+### Follow-up 2 (same session)
+- PostcardModal scroll-jump/size bug → root cause: modal rendered inside `<Reveal>` whose `animate-fade-up` transform made it the containing block for `position:fixed`, so `closeRef.focus()` scrolled the page mid-board on open/close. Fixed by `createPortal(..., document.body)` (escapes transformed ancestor) + enlarged (`max-w-6xl`, image `md:min-h-[540px]`/`w-[62%]`, `max-h-[90vh]`, bigger heading/desc). `src/components/about/PostcardModal.tsx`.
+- Browser-verified: open at scrollY=1500 → no jump; overlay covers viewport, dialog viewport-centered @1152px; Esc close → scrollY still 1500.
+- Social icons more visible (home + about) → muted grey → `text-matte` on `bg-felt-deep/60` + `border-white/20`, larger (h-11/h-12, icon 20-22), gold hover (`src/app/[locale]/page.tsx`, `src/app/[locale]/about/page.tsx`).
+- lint/tsc/build green.
+
+### Follow-up 3 (same session)
+- Case-study detail page (`src/app/[locale]/projects/[slug]/page.tsx`) was never re-skinned — all `neutral-*`/`amber` light-theme text = unreadable dark-grey on felt. Full felt/gold re-skin: category→gold-accent italic, body→`text-ink-on-felt`/`text-muted`, headings→`text-matte`, problem callout→`border-gold` + `bg-felt-deep/40`, numbered lists→gold, findings/gallery→felt cards, CTAs→matte + gold-bordered.
+- Removed Results/metrics section (the "4 → 8/10" numbers user asked to drop); dropped now-unused `MetricCard` import.
+- `TechTag` re-skinned to felt (`border-rule`/`bg-felt-deep/35`/`text-muted`) — only used on this page.
+- lint/tsc/build green; browser-verified el-umbral case study readable + numbers gone.

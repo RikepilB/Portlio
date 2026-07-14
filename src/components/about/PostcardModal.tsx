@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useId, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Community } from '@/components/about/types'
@@ -43,13 +44,13 @@ export function PostcardModal({
     }
   }, [open, onClose, onPrev, onNext])
 
-  if (!open || !community) return null
+  if (!open || !community || typeof document === 'undefined') return null
 
   const src = community.images[imageIndex] ?? community.images[0]
   const label = community.labels[imageIndex] ?? community.boardCaption
   const hasMany = community.images.length > 1
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-[100] flex cursor-zoom-out items-center justify-center bg-mist-ice/85 p-4 backdrop-blur-md sm:p-8"
       onClick={onClose}
@@ -60,9 +61,9 @@ export function PostcardModal({
         aria-modal="true"
         aria-labelledby={titleId}
         onClick={(e) => e.stopPropagation()}
-        className="relative flex w-full max-w-5xl cursor-default flex-col overflow-hidden rounded-2xl border border-silver/35 bg-mist-ice shadow-2xl md:flex-row"
+        className="relative flex max-h-[90vh] w-full max-w-6xl cursor-default flex-col overflow-hidden rounded-2xl border border-silver/35 bg-mist-ice shadow-2xl md:flex-row"
       >
-        <div className="relative aspect-[4/3] w-full bg-mist-soft md:aspect-auto md:min-h-[320px] md:w-[58%]">
+        <div className="relative aspect-[4/3] w-full bg-mist-soft md:aspect-auto md:min-h-[540px] md:w-[62%]">
           <Image src={src} alt={label} fill className="object-contain p-2" priority sizes="(max-width: 768px) 100vw, 60vw" />
           {hasMany ? (
             <div className="absolute inset-x-0 bottom-3 flex items-center justify-center gap-3">
@@ -89,10 +90,10 @@ export function PostcardModal({
           ) : null}
         </div>
 
-        <div className="flex w-full flex-col gap-4 border-t border-silver/35 p-6 md:w-[42%] md:border-l md:border-t-0 md:p-8">
+        <div className="flex w-full flex-col gap-4 overflow-y-auto border-t border-silver/35 p-6 md:w-[38%] md:border-l md:border-t-0 md:p-9">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
-              <h3 id={titleId} className="font-display text-xl font-bold tracking-tight text-anthracite">
+              <h3 id={titleId} className="font-display text-2xl font-bold tracking-tight text-anthracite">
                 {community.boardCaption}
               </h3>
               {community.url ? (
@@ -121,11 +122,12 @@ export function PostcardModal({
               <X size={20} />
             </button>
           </div>
-          <p className="m-0 font-sans text-[14px] font-light leading-relaxed text-anthracite/85">
+          <p className="m-0 font-sans text-[15px] font-light leading-relaxed text-anthracite/85">
             {community.description}
           </p>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }

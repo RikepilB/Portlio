@@ -31,6 +31,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://richardpillaca.com'),
   title: 'Richard Pillaca',
   description:
     'Portfolio of Richard Pillaca Burga — Software & Data Engineer based in Toronto.',
@@ -38,6 +39,20 @@ export const metadata: Metadata = {
     title: 'Richard Pillaca',
     description: 'Software & Data projects, scalable solutions, and robust systems — built in Toronto.',
     type: 'website',
+    images: [
+      {
+        url: '/images/og-image.png',
+        width: 955,
+        height: 726,
+        alt: 'Richard Pillaca — Software & Data Engineer',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Richard Pillaca',
+    description: 'Software & Data projects, scalable solutions, and robust systems — built in Toronto.',
+    images: ['/images/og-image.png'],
   },
   icons: {
     icon: '/favicon.png',

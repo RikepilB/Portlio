@@ -94,10 +94,10 @@ export default function HomePage() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex h-10 w-10 items-center justify-center rounded-full border border-rule bg-felt-deep/35 text-muted transition-all hover:border-gold hover:text-gold-bright hover:shadow-md"
+                      className="group flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-felt-deep/60 text-matte transition-all hover:border-gold hover:bg-gold-soft hover:text-gold-bright hover:shadow-md"
                       aria-label={link.label}
                     >
-                      <Icon size={18} strokeWidth={2} className="transition-transform group-hover:scale-110" />
+                      <Icon size={20} strokeWidth={2} className="transition-transform group-hover:scale-110" />
                     </a>
                   )
                 })}
