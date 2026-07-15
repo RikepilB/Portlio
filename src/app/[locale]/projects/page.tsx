@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { getProjects } from '@/data/locale'
+import { isComingSoon, type Project } from '@/data/projects'
 import { ProjectCard } from '@/components/ui/ProjectCard'
 import { useDictionary, useLocale } from '@/contexts/LocaleContext'
 import { cn } from '@/lib/utils'
@@ -13,6 +14,29 @@ import {
 } from '@/lib/disciplines'
 
 type FilterKey = 'all' | DisciplineKey
+
+function sortProjects(projects: Project[]): Project[] {
+  return [...projects].sort((a, b) => {
+    const getLatestYear = (d: string) => {
+      const years = d.match(/\d{4}/g)
+      return years ? parseInt(years[years.length - 1]) : 0
+    }
+    const yearDiff = getLatestYear(b.duration) - getLatestYear(a.duration)
+    if (yearDiff !== 0) return yearDiff
+    const months = [
+      'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec',
+      'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic',
+    ]
+    const getLatestMonth = (d: string) => {
+      const found = d
+        .toLowerCase()
+        .match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|ene|abr|ago|dic)\b/g)
+      if (!found || found.length === 0) return 0
+      return months.indexOf(found[found.length - 1]) + 1
+    }
+    return getLatestMonth(b.duration) - getLatestMonth(a.duration)
+  })
+}
 
 export default function ProjectsPage() {
   const { locale } = useLocale()
@@ -31,25 +55,8 @@ export default function ProjectsPage() {
   ]
 
   const filtered = projects.filter((p) => projectMatchesDisciplineKey(p.category, active))
-
-  const sorted = [...filtered].sort((a, b) => {
-    const getLatestYear = (d: string) => {
-      const years = d.match(/\d{4}/g)
-      return years ? parseInt(years[years.length - 1]) : 0
-    }
-    const yearDiff = getLatestYear(b.duration) - getLatestYear(a.duration)
-    if (yearDiff !== 0) return yearDiff
-    const months = [
-      'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec',
-      'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic',
-    ]
-    const getLatestMonth = (d: string) => {
-      const found = d.toLowerCase().match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|ene|abr|ago|dic)\b/g)
-      if (!found || found.length === 0) return 0
-      return months.indexOf(found[found.length - 1]) + 1
-    }
-    return getLatestMonth(b.duration) - getLatestMonth(a.duration)
-  })
+  const shipped = sortProjects(filtered.filter((p) => !isComingSoon(p)))
+  const comingSoon = sortProjects(filtered.filter((p) => isComingSoon(p)))
 
   return (
     <div className="min-h-screen bg-felt">
@@ -96,14 +103,38 @@ export default function ProjectsPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={prefersReducedMotion ? undefined : { opacity: 0, y: -6 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="grid gap-8 md:grid-cols-2"
-            role="list"
+            className="flex flex-col gap-16"
           >
-            {sorted.map((project, i) => (
-              <article key={project.id} role="listitem">
-                <ProjectCard project={project} index={i} />
-              </article>
-            ))}
+            <div className="grid gap-8 md:grid-cols-2" role="list">
+              {shipped.map((project, i) => (
+                <article key={project.id} role="listitem">
+                  <ProjectCard project={project} index={i} />
+                </article>
+              ))}
+            </div>
+
+            {comingSoon.length > 0 ? (
+              <section aria-labelledby="coming-soon-heading">
+                <div className="mb-8 max-w-xl">
+                  <h2
+                    id="coming-soon-heading"
+                    className="font-display text-2xl font-bold tracking-[-0.02em] text-matte sm:text-3xl"
+                  >
+                    {dict.projects.comingSoonTitle}
+                  </h2>
+                  <p className="mt-2 text-sm leading-relaxed text-muted sm:text-base">
+                    {dict.projects.comingSoonSubtitle}
+                  </p>
+                </div>
+                <div className="grid gap-8 md:grid-cols-2" role="list">
+                  {comingSoon.map((project, i) => (
+                    <article key={project.id} role="listitem">
+                      <ProjectCard project={project} index={i} />
+                    </article>
+                  ))}
+                </div>
+              </section>
+            ) : null}
           </motion.div>
         </AnimatePresence>
       </div>

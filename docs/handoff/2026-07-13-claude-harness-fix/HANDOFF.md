@@ -355,3 +355,216 @@ Fix the "click twice → empty page with felt background" navigation bug; restyl
 
 ### Follow-up (same session)
 - Home "Skills & Stack" intro → split the two paragraphs into a 2-col layout (para1 left brighter `text-ink-on-felt`, para2 right with `border-l-2 border-gold/40` accent) to fix the "too simple" flat stacked look (`src/app/[locale]/page.tsx`). lint/tsc/build green; browser-verified.
+
+## Addendum — PR #22 CI fix, merge, prod deploy
+
+### Goal
+Fix failing CI on PR #22 (7 case-study additions), commit/push, merge, confirm prod deploy.
+
+### What was done (concrete one-liners)
+- Diagnosed CI failure → `pnpm/action-setup@v4` had no version to resolve (no `packageManager` field, no `version:` in workflow) → `Error: No pnpm version is specified.`
+- Fix → added `"packageManager": "pnpm@10.30.3"` to `package.json` (pinned to locally installed version)
+- Verified locally → `pnpm lint` / `pnpm typecheck` / `pnpm build` all green (56 pages prerendered)
+- Committed + pushed `23d24c6` to `feat/portfolio-additions` → CI re-ran green (build 46s)
+- PR #22 → all 4 checks SUCCESS, mergeable → squash-merged into `main`
+- `main` CI green post-merge; Vercel auto-deploy triggered from push
+
+### Files changed
+- `package.json` — added `packageManager: pnpm@10.30.3`
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+
+### Failed attempts
+- None
+
+### Next steps
+- Local `main` branch is behind origin — `git pull` next time on `main`
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` (assistant cannot run `/export`)
+
+## Addendum — gsd-ship blocked (no .planning/) + handoff docs committed
+
+### Goal
+Run `/gsd-ship`; if blocked, at minimum land the pending handoff-doc edits.
+
+### What was done (concrete one-liners)
+- `/gsd-ship` invoked → blocked: no `.planning/` dir (no ROADMAP/phase dirs/VERIFICATION.md) — this repo doesn't use GSD phase tracking; PR #22 (only branch work) already merged
+- User chose "skip gsd-ship, commit handoff docs" → committed the two pending handoff.md edits directly on `feat/portfolio-additions` (`52ece8b`), not pushed
+
+### Files changed
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md`, `docs/handoff/HANDOFF.md` — committed in `52ece8b`
+
+### Failed attempts
+- None
+
+### Next steps
+- Push `52ece8b` if the doc commit should reach origin
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md`
+
+## Addendum — OG/social share image wired up
+
+### Goal
+Make a link-preview photo for richardpillaca.com so any shared link shows an image (user supplied a local screenshot).
+
+### What was done (concrete one-liners)
+- Copied user's screenshot → `public/images/og-image.png` (955×726, read via PNG header bytes)
+- `src/app/layout.tsx` → added `metadataBase: new URL('https://richardpillaca.com')`, `openGraph.images` (url/width/height/alt), and `twitter: { card: 'summary_large_image', images: [...] }`
+- Confirmed `[locale]/page.tsx` and `about/page.tsx` only import icon components under `Twitter`/no metadata override — root OG image applies site-wide
+- Verify → `pnpm lint` / `tsc --noEmit` / `pnpm build` all green
+- Flagged to user: source image is 1.32:1, not standard OG 1.91:1 — some platforms (esp. crop-heavy previews) may crop the bottom social-icons row; offered to crop/pad to 1200×630, awaiting answer
+
+### Files changed
+- `public/images/og-image.png` — new (copied from `C:\Users\a2021\OneDrive\Pictures\Capturas de pantalla\Screenshot 2026-07-13 185744.png`)
+- `src/app/layout.tsx` — metadataBase + openGraph.images + twitter card
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+
+### Failed attempts
+- None
+
+### Next steps
+- Awaiting user decision: keep og-image.png as-is, or crop/pad to 1200×630 for a cleaner 1.91:1 crop
+- Nothing committed yet for this change — commit when user confirms the image is final
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md`
+
+### Follow-up 2 (same session)
+- PostcardModal scroll-jump/size bug → root cause: modal rendered inside `<Reveal>` whose `animate-fade-up` transform made it the containing block for `position:fixed`, so `closeRef.focus()` scrolled the page mid-board on open/close. Fixed by `createPortal(..., document.body)` (escapes transformed ancestor) + enlarged (`max-w-6xl`, image `md:min-h-[540px]`/`w-[62%]`, `max-h-[90vh]`, bigger heading/desc). `src/components/about/PostcardModal.tsx`.
+- Browser-verified: open at scrollY=1500 → no jump; overlay covers viewport, dialog viewport-centered @1152px; Esc close → scrollY still 1500.
+- Social icons more visible (home + about) → muted grey → `text-matte` on `bg-felt-deep/60` + `border-white/20`, larger (h-11/h-12, icon 20-22), gold hover (`src/app/[locale]/page.tsx`, `src/app/[locale]/about/page.tsx`).
+- lint/tsc/build green.
+
+### Follow-up 3 (same session)
+- Case-study detail page (`src/app/[locale]/projects/[slug]/page.tsx`) was never re-skinned — all `neutral-*`/`amber` light-theme text = unreadable dark-grey on felt. Full felt/gold re-skin: category→gold-accent italic, body→`text-ink-on-felt`/`text-muted`, headings→`text-matte`, problem callout→`border-gold` + `bg-felt-deep/40`, numbered lists→gold, findings/gallery→felt cards, CTAs→matte + gold-bordered.
+- Removed Results/metrics section (the "4 → 8/10" numbers user asked to drop); dropped now-unused `MetricCard` import.
+- `TechTag` re-skinned to felt (`border-rule`/`bg-felt-deep/35`/`text-muted`) — only used on this page.
+- lint/tsc/build green; browser-verified el-umbral case study readable + numbers gone.
+
+## Addendum — full EN/ES i18n + navbar language switch (2026-07-14)
+
+### Goal
+Make the portfolio have a full Spanish and full English version, with a language switch on the navbar.
+
+### What was done (concrete one-liners)
+- Locale routing → `src/middleware.ts` + `src/app/[locale]/` (all pages moved under `/en` and `/es`; `/` redirects to `/en`)
+- UI dictionaries → `src/i18n/dictionaries/en.ts` + `es.ts` + `LocaleProvider` / `useLocale` / `LocaleSwitcher` in nav (desktop + mobile)
+- Content locales → `src/data/locale.ts` getters; Spanish overlays for 17 projects (`projects-es-overlays.ts`), experience (`experience-es.ts`), essays (`essays-es.ts`)
+- Wired Home / About / Journey / Projects / case studies / essays / ResumePaper / Footer / ProjectCard / EssayCard to locale-aware paths + dicts
+- About page → dropped local EN/ES bio toggle; language is site-wide from navbar
+- Redirects updated → `/skills`→`/en`, `/resume`→`/en/journey`, locale-scoped variants in `next.config.ts`
+- Verify → `pnpm lint` / `tsc --noEmit` / `pnpm build` green (56 static pages for both locales); `pnpm dev` running at http://localhost:3000
+
+### Files changed
+- `src/middleware.ts` — locale prefix redirect
+- `src/i18n/config.ts`, `get-dictionary.ts`, `dictionaries/en.ts`, `dictionaries/es.ts` — i18n core
+- `src/contexts/LocaleContext.tsx`, `src/components/layout/LocaleSwitcher.tsx` — provider + EN|ES toggle
+- `src/lib/locale-path.ts`, `src/data/locale.ts` — path helpers + localized data getters
+- `src/data/projects-es-overlays.ts`, `experience-es.ts`, `essays-es.ts` — Spanish content
+- `src/app/layout.tsx` — root shell only (Nav/Footer moved to locale layout)
+- `src/app/[locale]/layout.tsx` + all pages under `[locale]/` — locale-scoped App Router
+- `src/components/layout/Nav.tsx`, `Footer.tsx`, `ProjectCard.tsx`, `EssayCard.tsx`, `ResumePaper.tsx` — locale-aware
+- `src/lib/disciplines.ts` — locale-independent discipline keys + ES category mapping
+- `next.config.ts` — locale-aware redirects
+- `docs/handoff/HANDOFF.md` — father current state + this index line
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+
+### Failed attempts
+- Dictionary helpers as functions (`moreProjects: (n) => ...`) → Next.js prerender error (functions can't cross RSC→client boundary); replaced with plain string prefixes
+
+### Next steps
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` for full session archive
+- Manual QA of `/es` pages (spot-check project case studies + About vision board)
+- Commit i18n changes when ready (currently uncommitted on `feat/portfolio-additions`)
+
+## Addendum — project-page readability audit + greener image frames (2026-07-14)
+
+### Goal
+User reported project detail pages still had dark/unreadable text and asked to lighten colors "for all projects"; also asked home-page project image frames read more green/on-brand.
+
+### What was done (concrete one-liners)
+- Root-caused the "not saved" readability complaint → the felt/gold case-study re-skin (Follow-up 3 above) was already committed in `a540de8`, but only on `feat/portfolio-additions`, never merged to `main`/deployed — live site still showed the old dark-grey-on-felt version.
+- Browser-verified (Playwright, `localhost` not `127.0.0.1` — HMR websocket is blocked cross-origin on `127.0.0.1` and causes spurious full-page reloads/navigation) that `/projects`, home "My work" rows, and multiple case-study pages (AquaTwin, Empeñalo) all render with readable light text on felt already.
+- Greener frames → added `--color-felt-frame: #3c4f42` token (`src/app/globals.css`); re-tinted `project-placeholder-wash` from gold/cream toward green; swapped `bg-felt-deep/NN` → `bg-felt-frame` on `ProjectImagePlaceholder.tsx`, `ProjectCard.tsx`, and home `ProjectRow` image container (`src/app/[locale]/page.tsx`) so image frames read as distinct green picture-frames instead of blending into the page bg.
+- Verify → `pnpm lint` / `npx tsc --noEmit` / `pnpm build` all green (56 pages).
+- Found + reverted unrelated pre-existing uncommitted corruption in `src/i18n/dictionaries/en.ts` (About bio: "a  full-stack eiuungineer" instead of "a full-stack engineer") — not caused by this session, left reverted and flagged to user, not fixed (out of scope).
+
+### Files changed
+- `src/app/globals.css` — `--color-felt-frame` token; greener `project-placeholder-wash`
+- `src/components/ui/ProjectImagePlaceholder.tsx` — `bg-felt-frame`
+- `src/components/ui/ProjectCard.tsx` — `bg-felt-frame`
+- `src/app/[locale]/page.tsx` — home `ProjectRow` image frame → `bg-felt-frame`
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+- `docs/handoff/HANDOFF.md` — refreshed Current state + session index line
+
+### Failed attempts
+- None this pass — the "unreadable text" turned out to be a deploy-gap, not a code bug.
+
+### Next steps
+- User decides: commit + push `feat/portfolio-additions` + merge to `main` (auto-deploys) — nothing committed yet this pass, awaiting go-ahead.
+- Optional: fix the unrelated garbled About bio text in `src/i18n/dictionaries/en.ts` (currently reverted to last-committed, correct version).
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` (assistant cannot run `/export`)
+
+## Addendum — About bios restored + Coming soon projects + Peru Grid shot (2026-07-14/15)
+
+### Goal
+Restore long-form EN/ES About bios after handoff-paste corruption; debug/fix i18n parity; ship that fix; then move unfinished projects to Coming soon (AquaTwin concept-only), strip placeholder badge junk, and put Peru Grid on Home with a real screenshot.
+
+### What was done (concrete one-liners)
+- About bios → wrote 8-paragraph EN + ES copy into `src/i18n/dictionaries/en.ts` / `es.ts`; restored wiped `education` + `polaroids` on EN after handoff boilerplate overwrite
+- `/gsd-debug` → session `.planning/debug/resolved/i18n-bio-corruption.md`; EN↔ES structural walk issueCount 0; root cause = paste corruption, not type bugs
+- Ship bios/frames → commit `b1cdc27` on `feat/portfolio-additions`, push, PR #23, `vercel --prod` → https://richardpillaca.com (also later local `5fce9ae` bio update)
+- Coming soon → `status: 'coming-soon'` on AquaTwin, FindLeads, read-video, ResumeScorer, Agentic Skills Lab, SkillVault; Projects page split shipped vs Coming soon
+- AquaTwin → concept-only EN/ES (empty methodology/results/stack); case study hides empty sections + Coming soon badge
+- Placeholders → removed index / initials / metric chrome from `ProjectImagePlaceholder.tsx` (and call sites)
+- Peru Grid → screenshot `public/images/peru-grid.png` from perugrid.com; wired image + live demo; added `peru-tech-map` to home `featuredSlugs`
+- Verify → `pnpm lint` / `tsc --noEmit` / `pnpm build` green after projects pass (uncommitted locally except prior ship commits)
+
+### Files changed
+- `src/i18n/dictionaries/en.ts`, `es.ts` — long-form About bios; Coming soon / case-study strings
+- `src/data/projects.ts` — `ProjectStatus` + `isComingSoon`; coming-soon flags; AquaTwin concept slim; Peru Grid media/demo
+- `src/data/projects-es-overlays.ts` — AquaTwin concept ES; Peru conclusion live URL
+- `src/app/[locale]/projects/page.tsx` — Coming soon section
+- `src/app/[locale]/projects/[slug]/page.tsx` — conditional sections + badge
+- `src/app/[locale]/page.tsx` — Peru on home featured; placeholder props cleaned
+- `src/components/ui/ProjectCard.tsx`, `ProjectImagePlaceholder.tsx` — no badge junk; coming-soon CTA
+- `public/images/peru-grid.png` — new screenshot
+- `.planning/debug/resolved/i18n-bio-corruption.md` — resolved debug session (earlier ship)
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+- `docs/handoff/HANDOFF.md` — refreshed Current state + session index line
+
+### Failed attempts
+- `pnpm dlx tsx` EN/ES parity script hung → killed; re-ran successfully with `jiti`
+- Early EN bio paste had handoff instructions in `about.bio` (root cause of i18n debug) → replaced with real bios
+
+### Next steps
+- Commit + push remaining Coming soon / Peru Grid / placeholder changes (currently dirty on `feat/portfolio-additions`)
+- Merge PR #23 (or new PR) to `main` if prod should include latest project IA
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` (assistant cannot run `/export`)
+
+## Addendum — VANS coming soon + hydration + mockup blend (2026-07-15)
+
+### Goal
+Park VANS for a v2 refresh (drop unrelated image); silence Grammarly body hydration noise; fix home/project screenshots that were cropped too tight so the full frame shows and soft-fades into felt.
+
+### What was done (concrete one-liners)
+- VANS → removed `/images/mainpage.jpg`; set `status: 'coming-soon'`; EN/ES conclusions note v2 in progress (`projects.ts`, `projects-es-overlays.ts`)
+- Hydration → `/gsd-debugger`: Grammarly injects `data-gr-*` on `<body>` — added `suppressHydrationWarning` on body in `layout.tsx`; Reveal reduced-motion now uses `useSyncExternalStore` (debug file `.planning/debug/grammarly-body-hydration.md`)
+- Home mockups → `object-contain` + padding; dropped hard dark frame; `project-mockup-blend` / `-flip` CSS mask fades outer edges into felt (`page.tsx`, `globals.css`)
+- Project cards → same contain + soft mask treatment (`ProjectCard.tsx`)
+
+### Files changed
+- `src/data/projects.ts` — VANS coming-soon + no image; prior coming-soon/Peru work still present
+- `src/data/projects-es-overlays.ts` — VANS v2 note in ES conclusion
+- `src/app/layout.tsx` — body `suppressHydrationWarning`
+- `src/components/ui/Reveal.tsx` — reduced-motion via `useSyncExternalStore`
+- `src/app/globals.css` — `project-mockup-blend` / `project-mockup-blend-flip` utilities
+- `src/app/[locale]/page.tsx` — home ProjectRow contain + mask
+- `src/components/ui/ProjectCard.tsx` — gallery cards contain + mask
+- `.planning/debug/grammarly-body-hydration.md` — hydration debug session
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+- `docs/handoff/HANDOFF.md` — refreshed Current state + session index line
+
+### Failed attempts
+- None this pass (Grammarly attrs are extension noise, not app SSR bugs)
+
+### Next steps
+- Commit + push the full dirty set on `feat/portfolio-additions` (Coming soon, Peru Grid shot, VANS, hydration, mockup blend)
+- User hard-refresh with Grammarly on → confirm body hydration warning gone; eyeball home mockup blend
+- When VANS v2 ships → real screenshots + exit Coming soon
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` (assistant cannot run `/export`)

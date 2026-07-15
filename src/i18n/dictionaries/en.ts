@@ -99,6 +99,10 @@ export const dictionaryEn = {
     filterByPrefix: 'Filter by',
     viewCase: 'View case analysis',
     viewCaseAriaPrefix: 'View case analysis:',
+    comingSoonTitle: 'Coming soon',
+    comingSoonSubtitle: 'Concepts and builds in progress — no live demos or screenshots yet.',
+    comingSoonCta: 'Coming soon →',
+    comingSoonAriaPrefix: 'Coming soon:',
     disciplines: ['Software Engineering', 'AI & Automation', 'Data & Analytics'] as const,
   },
   caseStudy: {
@@ -117,6 +121,7 @@ export const dictionaryEn = {
     githubAriaPrefix: 'View on GitHub:',
     watchDemo: 'Watch Demo Video',
     liveDemo: 'View Live Demo →',
+    comingSoonBadge: 'Coming soon',
   },
   journey: {
     title: 'Career Journey',
@@ -158,9 +163,14 @@ export const dictionaryEn = {
     imagePreview: 'Image Preview',
     closePreview: 'Close image preview',
     bio: [
-      'I am a full-stack engineer with a frontend focus, building scalable interfaces using React, Next.js, and Node.js. I have launched AI-powered products and designed end-to-end systems, taking them from concept to production.',
-      'My experience includes improving platform onboarding to streamline registration, leading a five-person team to build a student management system, and developing a recruitment app featuring AI-driven automation.',
-      'My strengths lie in strong communication, self-directed learning, and a product-centric mindset. When facing a challenge, I prefer to launch a lean version, measure results, and iterate rather than over-engineering the solution. My background in economics drives me to always consider costs and returns, and I am currently deepening my expertise in AI infrastructure and performance optimization to continue my professional growth.',
+      "My name is Richard Pillaca, and I'm a full-stack engineer with a frontend and AI focus. I build scalable, human-centered products with JavaScript, TypeScript, React, Next.js, Node.js, and Python, across UX, data, and AI-powered features.",
+      'My career is centered on building technology that acts as a bridge rather than a barrier. I grew up in Peru, in a vibrant, multifaceted culture shaped by collective work, deep community ties, and respect for the land. Seeing how limited infrastructure can stall potential pushed me to Canada to study computer science at UBC.',
+      'From day one, I balanced part-time jobs and community leadership with intensive coursework in software engineering, learning to focus on results while managing competing priorities. At UBC, I co-founded Okanagan Tech Industry Night, a 200+ attendee event connecting student startups with industry leaders, and served as VP Internal for the Latin American Student Association.',
+      'As a research assistant, I co-authored an empirical study on AI technical debt nominated for MSR 2025. For my capstone with the UBC Faculty of Science, I built an exam analysis system that automated grading for large cohorts and cut grading time from hours to minutes.',
+      'After graduation, I was accepted into the MSc Commodity Trading program at the University of Geneva but postponed it to gain industry experience. Moving to Toronto, I joined Hispanotech and started a remote internship as a frontend developer at Karac, optimizing authentication systems and user flows.',
+      "Since then, my work has evolved through frontend and full-stack roles at Karac, freelance projects, hackathons, and community builds—covering everything from modular authentication to high-volume data processing. These experiences taught me to balance analytical logic with user needs and to lead development cycles as a Scrum Master using agile methods.",
+      "Today I'm a full-stack developer at ReliablyME, building trust infrastructure for human-AI work, and I lead UI/UX and web for BrainTrainr, an Indigenous- and Latino-led AI education nonprofit. I focus on data and AI, turning messy data into insights while pursuing AWS certification, AI/ML automation, and personal R&D projects.",
+      "Outside of work, I stay active through football, running, and exploring the outdoors. I'm learning French, stay up to date through AI and business podcasts, and I'm in the early stages of building my own business, merging technical mastery with a founder's perspective.",
     ],
     education: {
       degree: 'B.Sc. Computer Science',

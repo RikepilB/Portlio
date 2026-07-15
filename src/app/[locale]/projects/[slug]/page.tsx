@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { locales, isLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/get-dictionary'
 import { getProjectBySlug, getProjects } from '@/data/locale'
+import { isComingSoon } from '@/data/projects'
 import { localePath } from '@/lib/locale-path'
 import { TechTag } from '@/components/ui/TechTag'
 import { MetricCard } from '@/components/ui/MetricCard'
@@ -41,128 +42,148 @@ export default async function ProjectPage({
   const project = getProjectBySlug(slug, locale)
   if (!project) notFound()
 
+  const comingSoon = isComingSoon(project)
+
   return (
-    <article className="max-w-3xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
+    <article className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
       <Link
         href={localePath(locale, '/projects')}
         aria-label={dict.caseStudy.backAria}
-        className="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-amber-700 transition-colors duration-150 mb-10"
+        className="mb-10 inline-flex items-center gap-1.5 text-sm text-muted transition-colors duration-150 hover:text-gold-bright"
       >
         ← {dict.caseStudy.back}
       </Link>
 
-      <header className="flex flex-col gap-4 mb-12">
-        <div className="flex items-center gap-3 flex-wrap">
-          <span
-            className="text-xs font-bold tracking-widest uppercase px-2 py-0.5 rounded"
-            style={{ color: project.catColor, backgroundColor: `${project.catColor}15` }}
-          >
+      <header className="mb-12 flex flex-col gap-4">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="font-accent text-[13px] uppercase italic tracking-[0.18em] text-gold-bright">
             {project.category}
           </span>
-          <span className="text-sm text-neutral-400 font-mono">{project.duration}</span>
-          <span className="text-sm text-neutral-400 font-mono">{project.readTime}</span>
+          <span className="font-mono text-sm text-muted">{project.duration}</span>
+          {project.readTime ? (
+            <span className="font-mono text-sm text-muted">{project.readTime}</span>
+          ) : null}
+          {comingSoon ? (
+            <span className="rounded-full border border-gold/40 bg-gold-soft px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-gold-bright">
+              {dict.caseStudy.comingSoonBadge}
+            </span>
+          ) : null}
         </div>
-        <h1 className="text-4xl sm:text-5xl font-bold font-display text-neutral-900 leading-tight">
+        <h1 className="font-display text-4xl font-bold leading-tight text-matte sm:text-5xl">
           {project.title}
         </h1>
-        <p className="text-lg sm:text-xl text-neutral-500 leading-relaxed">{project.tagline}</p>
-        <div className="flex flex-wrap gap-2 pt-1">
-          {project.stack.map((tech) => (
-            <TechTag key={tech} label={tech} />
-          ))}
-        </div>
+        <p className="text-lg leading-relaxed text-ink-on-felt sm:text-xl">{project.tagline}</p>
+        {project.stack.length > 0 ? (
+          <div className="flex flex-wrap gap-2 pt-1">
+            {project.stack.map((tech) => (
+              <TechTag key={tech} label={tech} />
+            ))}
+          </div>
+        ) : null}
       </header>
 
       <section className="mb-10" aria-label={dict.caseStudy.overview}>
-        <h2 className="text-xl font-bold font-display text-neutral-900 mb-3">{dict.caseStudy.overview}</h2>
-        <p className="text-neutral-600 leading-relaxed">{project.overview}</p>
+        <h2 className="mb-3 font-display text-xl font-bold text-matte">{dict.caseStudy.overview}</h2>
+        <p className="leading-relaxed text-ink-on-felt">{project.overview}</p>
       </section>
 
-      <section className="mb-10" aria-label={dict.caseStudy.problem}>
-        <div className="bg-amber-50 border-l-4 border-amber-700 p-5 rounded-r-lg">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-amber-800 mb-2">
-            {dict.caseStudy.problem}
-          </h2>
-          <p className="text-neutral-700 leading-relaxed">{project.problem}</p>
-        </div>
-      </section>
+      {project.problem ? (
+        <section className="mb-10" aria-label={dict.caseStudy.problem}>
+          <div className="rounded-r-lg border-l-4 border-gold bg-felt-deep/40 p-5">
+            <h2 className="mb-2 text-sm font-bold uppercase tracking-widest text-gold-bright">
+              {dict.caseStudy.problem}
+            </h2>
+            <p className="leading-relaxed text-ink-on-felt">{project.problem}</p>
+          </div>
+        </section>
+      ) : null}
 
-      <section className="mb-10" aria-label={dict.caseStudy.questions}>
-        <h2 className="text-xl font-bold font-display text-neutral-900 mb-4">{dict.caseStudy.questions}</h2>
-        <ol className="flex flex-col gap-3 list-none">
-          {project.questions.map((q, i) => (
-            <li key={i} className="flex gap-3">
-              <span className="text-sm font-bold text-amber-700 font-mono shrink-0 mt-0.5">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <p className="text-neutral-600 leading-relaxed">{q}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="mb-10" aria-label={dict.caseStudy.methodology}>
-        <h2 className="text-xl font-bold font-display text-neutral-900 mb-6">{dict.caseStudy.methodology}</h2>
-        <div className="flex flex-col gap-6">
-          {project.methodology.map((m, i) => (
-            <div key={i} className="flex flex-col sm:flex-row gap-4">
-              <div className="shrink-0 w-full sm:w-28">
-                <span className="text-xs font-bold tracking-widest uppercase text-neutral-400 font-mono">
-                  {m.phase}
+      {project.questions.length > 0 ? (
+        <section className="mb-10" aria-label={dict.caseStudy.questions}>
+          <h2 className="mb-4 font-display text-xl font-bold text-matte">{dict.caseStudy.questions}</h2>
+          <ol className="flex list-none flex-col gap-3">
+            {project.questions.map((q, i) => (
+              <li key={i} className="flex gap-3">
+                <span className="mt-0.5 shrink-0 font-mono text-sm font-bold text-gold-bright">
+                  {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="text-sm font-semibold text-neutral-900 mt-0.5 font-display">{m.title}</p>
-              </div>
-              <div className="flex-1 border-l border-neutral-100 pl-4 sm:pl-6">
-                <p className="text-sm text-neutral-600 leading-relaxed mb-3">{m.detail}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {m.tech.map((t) => (
-                    <TechTag key={t} label={t} />
-                  ))}
+                <p className="leading-relaxed text-muted">{q}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ) : null}
+
+      {project.methodology.length > 0 ? (
+        <section className="mb-10" aria-label={dict.caseStudy.methodology}>
+          <h2 className="mb-6 font-display text-xl font-bold text-matte">{dict.caseStudy.methodology}</h2>
+          <div className="flex flex-col gap-6">
+            {project.methodology.map((m, i) => (
+              <div key={i} className="flex flex-col gap-4 sm:flex-row">
+                <div className="w-full shrink-0 sm:w-28">
+                  <span className="font-mono text-xs font-bold uppercase tracking-widest text-gold">
+                    {m.phase}
+                  </span>
+                  <p className="mt-0.5 font-display text-sm font-semibold text-matte">{m.title}</p>
+                </div>
+                <div className="flex-1 border-l border-rule pl-4 sm:pl-6">
+                  <p className="mb-3 text-sm leading-relaxed text-muted">{m.detail}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {m.tech.map((t) => (
+                      <TechTag key={t} label={t} />
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
-      <section className="mb-10" aria-label={dict.caseStudy.results}>
-        <h2 className="text-xl font-bold font-display text-neutral-900 mb-4">{dict.caseStudy.results}</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          {project.results.map((r) => (
-            <MetricCard key={r.label} metric={r.metric} label={r.label} />
-          ))}
-        </div>
-      </section>
+      {project.results.length > 0 ? (
+        <section className="mb-10" aria-label={dict.caseStudy.results}>
+          <h2 className="mb-4 font-display text-xl font-bold text-matte">{dict.caseStudy.results}</h2>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {project.results.map((r) => (
+              <MetricCard key={r.label} metric={r.metric} label={r.label} />
+            ))}
+          </div>
+        </section>
+      ) : null}
 
-      <section className="mb-10" aria-label={dict.caseStudy.findings}>
-        <h2 className="text-xl font-bold font-display text-neutral-900 mb-4">{dict.caseStudy.findings}</h2>
-        <div className="flex flex-col gap-4">
-          {project.keyFindings.map((finding, i) => (
-            <div key={i} className="flex gap-3 bg-neutral-50 border border-neutral-100 rounded-lg p-4">
-              <span className="text-sm font-bold text-amber-700 font-mono shrink-0 mt-0.5">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <p className="text-sm text-neutral-700 leading-relaxed">{finding}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {project.keyFindings.length > 0 ? (
+        <section className="mb-10" aria-label={dict.caseStudy.findings}>
+          <h2 className="mb-4 font-display text-xl font-bold text-matte">{dict.caseStudy.findings}</h2>
+          <div className="flex flex-col gap-4">
+            {project.keyFindings.map((finding, i) => (
+              <div key={i} className="flex gap-3 rounded-lg border border-rule bg-felt-deep/35 p-4">
+                <span className="mt-0.5 shrink-0 font-mono text-sm font-bold text-gold-bright">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="text-sm leading-relaxed text-ink-on-felt">{finding}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
-      <section className="mb-10" aria-label={dict.caseStudy.conclusion}>
-        <h2 className="text-xl font-bold font-display text-neutral-900 mb-3">{dict.caseStudy.conclusion}</h2>
-        <p className="text-neutral-600 leading-relaxed">{project.conclusion}</p>
-      </section>
+      {project.conclusion ? (
+        <section className="mb-10" aria-label={dict.caseStudy.conclusion}>
+          <h2 className="mb-3 font-display text-xl font-bold text-matte">{dict.caseStudy.conclusion}</h2>
+          <p className="leading-relaxed text-ink-on-felt">{project.conclusion}</p>
+        </section>
+      ) : null}
 
-      {project.images && project.images.length > 0 && (
+      {project.images && project.images.length > 0 ? (
         <section className="mb-10" aria-label={dict.caseStudy.gallery}>
-          <h2 className="text-xl font-bold font-display text-neutral-900 mb-4">{dict.caseStudy.gallery}</h2>
+          <h2 className="mb-4 font-display text-xl font-bold text-matte">{dict.caseStudy.gallery}</h2>
           <div
             className={`grid gap-4 ${project.images.length === 1 ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'}`}
           >
             {project.images.map((src, i) => (
               <div
                 key={i}
-                className="relative w-full aspect-video rounded-xl overflow-hidden border border-neutral-100 bg-neutral-50"
+                className="relative aspect-video w-full overflow-hidden rounded-xl border border-rule bg-felt-deep/35"
               >
                 <Image
                   src={src}
@@ -175,37 +196,40 @@ export default async function ProjectPage({
             ))}
           </div>
         </section>
-      )}
+      ) : null}
 
-      <div className="border-t border-neutral-100 pt-8 mt-8 flex flex-wrap gap-3">
-        {project.github ? (
-          <Link
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${dict.caseStudy.githubAriaPrefix} ${project.title}`}
-            className="inline-flex items-center gap-2 bg-neutral-900 text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-neutral-700 transition-colors duration-150"
-          >
-            {dict.caseStudy.github}
-          </Link>
-        ) : null}
-        {project.demoVideo && !project.demoVideo.startsWith('PLACEHOLDER') ? (
-          <a
-            href={project.demoVideo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#0c5a40] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#0a4a34] transition-colors duration-150"
-          >
-            {project.demoVideo.includes('drive.google.com') ? (
-              <>
-                <span className="text-lg">▶️</span> {dict.caseStudy.watchDemo}
-              </>
-            ) : (
-              <>{dict.caseStudy.liveDemo}</>
-            )}
-          </a>
-        ) : null}
-      </div>
+      {(project.github ||
+        (project.demoVideo && !project.demoVideo.startsWith('PLACEHOLDER'))) && (
+        <div className="mt-8 flex flex-wrap gap-3 border-t border-rule pt-8">
+          {project.github ? (
+            <Link
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${dict.caseStudy.githubAriaPrefix} ${project.title}`}
+              className="inline-flex items-center gap-2 rounded-lg bg-matte px-5 py-2.5 text-sm font-semibold text-felt-deep transition-colors duration-150 hover:bg-gold"
+            >
+              {dict.caseStudy.github}
+            </Link>
+          ) : null}
+          {project.demoVideo && !project.demoVideo.startsWith('PLACEHOLDER') ? (
+            <a
+              href={project.demoVideo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-gold/40 bg-gold-soft px-5 py-2.5 text-sm font-semibold text-gold-bright transition-colors duration-150 hover:bg-gold hover:text-felt-deep"
+            >
+              {project.demoVideo.includes('drive.google.com') ? (
+                <>
+                  <span className="text-lg">▶️</span> {dict.caseStudy.watchDemo}
+                </>
+              ) : (
+                <>{dict.caseStudy.liveDemo}</>
+              )}
+            </a>
+          ) : null}
+        </div>
+      )}
     </article>
   )
 }

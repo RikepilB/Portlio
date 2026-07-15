@@ -10,6 +10,8 @@ export interface Result {
     label: string
 }
 
+export type ProjectStatus = 'shipped' | 'coming-soon'
+
 export interface Project {
     id: string
     slug: string
@@ -28,9 +30,15 @@ export interface Project {
     conclusion: string
     github: string
     stack: string[]
+    /** Defaults to shipped when omitted. */
+    status?: ProjectStatus
     image?: string // thumbnail for the card
     images?: string[] // gallery for case study page
     demoVideo?: string // Google Drive or external link for video demos
+}
+
+export function isComingSoon(project: Project): boolean {
+    return project.status === 'coming-soon'
 }
 
 export const projects: Project[] = [
@@ -522,9 +530,9 @@ export const projects: Project[] = [
             'Hands-free Chrome extension translating speech into browser actions — empirically benchmarked against keyboard/mouse.',
         category: 'HCI RESEARCH',
         catColor: '#8a6516',
+        status: 'coming-soon',
         duration: 'Sep — Dec 2024',
         readTime: '6 min read',
-        image: '/images/mainpage.jpg',
         stack: ['JavaScript', 'Web Speech API', 'Chrome Extension', 'HTML5', 'UX Research'],
         results: [
             { metric: '10 tasks', label: 'Within-subjects study design' },
@@ -567,7 +575,7 @@ export const projects: Project[] = [
             'Participants preferred voice for simple commands (scroll, search) but keyboard for precise actions (small link clicks).',
         ],
         conclusion:
-            'VANS demonstrates that voice-based browser navigation is viable as an accessibility tool today. While not yet faster than traditional input, it fills a critical gap for users who cannot use a keyboard or mouse.',
+            'VANS demonstrates that voice-based browser navigation is viable as an accessibility tool today. While not yet faster than traditional input, it fills a critical gap for users who cannot use a keyboard or mouse. A next-level v2 update is in progress — this entry stays in Coming soon until the new version ships with accurate project visuals.',
         github: 'https://github.com/RikepilB/COSC441-ChromeExtension',
     },
     {
@@ -647,72 +655,31 @@ export const projects: Project[] = [
         slug: 'aquatwin-water-metering',
         category: 'FULL STACK 2026',
         catColor: '#0c5a40',
+        status: 'coming-soon',
         title: 'AquaTwin — Virtual Water Metering for Data Centers',
         tagline:
             'Data centers know their power draw to the watt — and almost nothing about their water. AquaTwin turns the telemetry tenants already have into audited, per-tenant water bills and compliance reports.',
         duration: 'Mar 2026 – Jul 2026',
-        readTime: '7 min read',
+        readTime: '3 min read',
         overview:
-            'AquaTwin is a virtual water-metering SaaS for data-center colocation tenants. It ingests IT-load and GPU power telemetry, converts power draw into estimated water consumption (a 1.8 L/kWh industry baseline, weather-adjusted and capped by a WUE_max formula), and writes every calculation into an immutable billing audit trail. On top sit tenant registration, per-tenant billing dashboards, PDF invoice generation, and BRSR sustainability-compliance reports. Built as a three-tier modular monolith: Next.js 16 frontend, FastAPI application tier, Supabase Postgres as the system of record — both tiers deployed on Vercel.',
+            'AquaTwin is a concept for virtual water metering in data-center colocation: estimate each tenant\'s water use from the power telemetry operators already collect, so water can be billed and reported with the same clarity as electricity — without installing new meters.',
         problem:
-            'Data centers mostly measure only direct cooling water, missing upstream Scope-3 water that can be an order of magnitude larger (hydro evaporates ~17 L/kWh versus ~0.004 for wind), and nobody attributes water to individual tenants or GPUs. India is the wedge: its data centers consumed roughly 150 billion liters in 2024, and SEBI\'s BRSR Core makes audited water disclosure mandatory for the top 1,000 listed companies from FY2026. AquaTwin fills that gap by inferring water from power telemetry operators already collect — with an audit trail strong enough to bill and report against.',
-        questions: [
-            'Can per-tenant water consumption be estimated credibly from IT-load telemetry alone, without physical water meters?',
-            'How do you make a billing table trustworthy enough for compliance — provably append-only, with the full calculation preserved per row?',
-            'How does a multi-tenant ingest path stay secure when devices, not humans, are writing the data?',
-            'What does it take to move a working prototype to something actually stable in production?',
-        ],
-        methodology: [
-            {
-                phase: 'Phase 1',
-                title: 'Telemetry Ingest & the Water Math',
-                detail:
-                    'Ingest endpoints (single + batch) validate the tenant\'s JWT, then compute water liters server-side: a 1.8 L/kWh baseline adjusted by cooling-degree-day weather data from OpenWeather and capped by WUE_max = 0.4 × K1 × K2 × K3. The math lives in dedicated services (virtual_metering.py, wue_max.py), each with its own test file — the formula is code under test, not a spreadsheet assumption. Inserts run under the service role into append-only tables; no client ever writes telemetry directly.',
-                tech: ['FastAPI', 'Pydantic', 'OpenWeather API', 'pytest'],
-            },
-            {
-                phase: 'Phase 2',
-                title: 'Immutable, Audit-Logged Billing',
-                detail:
-                    'The billing_audit_logs table is immutable twice over: UPDATE/DELETE privileges are revoked, and BEFORE triggers raise exceptions on any update or delete attempt. Each row stores the complete calculation breakdown as JSON, so any invoice line can be re-derived and audited later. Row-level security covers every tenant table, and rate limiting (slowapi) guards the API tier.',
-                tech: ['PostgreSQL', 'Supabase', 'RLS', 'SQL Triggers'],
-            },
-            {
-                phase: 'Phase 3',
-                title: 'Billing Dashboards, Invoices & BRSR Reports',
-                detail:
-                    'Tenants get a Next.js 16 dashboard (React 19, Tailwind 4, Recharts) over their own consumption, PDF invoices generated with ReportLab, and a BRSR compliance report endpoint targeting India\'s mandatory water-disclosure regime. Frontend and FastAPI deploy as two Vercel projects, with security headers on the frontend and a keep-alive cron protecting the free-tier database.',
-                tech: ['Next.js 16', 'React 19', 'Recharts', 'ReportLab', 'Vercel'],
-            },
-            {
-                phase: 'Phase 4',
-                title: 'Chaos Audit → Production Hardening',
-                detail:
-                    'A 16-test-case chaos-engineering audit against live production scored overall stability 4/10 — the headline failure being login 100% broken because a wrong Supabase project ref was baked into the JS bundle at build time. The fix pass corrected all four Vercel env vars, force-busted the build cache, redeployed all routes, eliminated raw error-message leakage from every router, and re-scored at ~8/10. The audit and fixes are documented in the repo, failure by failure.',
-                tech: ['Chaos Testing', 'Playwright', 'Vercel', 'CI'],
-            },
-        ],
-        results: [
-            { metric: '4→8/10', label: 'production-stability score, before/after the chaos-audit fixes' },
-            { metric: '31', label: 'tests — 16 pytest (water math, telemetry, reports) + 15 Playwright E2E' },
-            { metric: '1.8 L/kWh', label: 'power-to-water baseline behind every audit-logged billing row' },
-        ],
-        keyFindings: [
-            'Environment configuration is a production feature: the single worst outage (100% broken login) was a wrong project ref baked into the client bundle — invisible locally, fatal in prod, and only caught by auditing the deployed site instead of the codebase.',
-            'Immutability you can prove beats immutability you promise: revoking privileges AND raising exceptions from triggers means even a privileged bug can\'t silently rewrite a billing row.',
-            'Storing the full calculation JSON per billing row turns "trust our number" into "re-derive our number" — the difference between a dashboard and an audit trail.',
-            'Estimating water from power telemetry tenants already emit means zero new hardware — the adoption cost of the product is an API key, not a meter install.',
-        ],
+            'Data centers usually measure only direct cooling water and rarely attribute consumption to individual tenants. As water disclosure and sustainability reporting get stricter, operators need a way to turn existing power signals into credible, per-tenant water figures.',
+        questions: [],
+        methodology: [],
+        results: [],
+        keyFindings: [],
         conclusion:
-            'AquaTwin is live (two Vercel deployments, health-checked API) and early: no custom domain yet, the AI-agent layer is scaffolded but not implemented, and the chaos audit that found production at 4/10 is part of the story rather than hidden from it. What it demonstrates is the full arc — a real regulatory problem, physics-based estimation logic under test, compliance-grade data discipline, and the unglamorous production hardening that followed. The repository is being prepared for open-sourcing after a credential-hygiene pass.',
+            'Concept stage — shipping the product surface and public case study once the build is ready to show.',
         github: '',
-        stack: ['Next.js 16', 'React 19', 'TypeScript', 'FastAPI', 'Python', 'Supabase', 'PostgreSQL', 'Tailwind 4', 'Recharts', 'ReportLab', 'Vercel'],
+        stack: [],
     },
     {
         id: '12',
         slug: 'findleads',
         category: 'FULL STACK 2026',
         catColor: '#8a6516',
+        status: 'coming-soon',
         title: 'FindLeads — Lead Generation with a Built-in CRM',
         tagline:
             'A business with no website is a web developer\'s best prospect. FindLeads searches Google Places for them, flags the website-less as tier-1 leads, and wraps a tiny CRM around the results.',
@@ -775,6 +742,9 @@ export const projects: Project[] = [
             'Toronto has a beloved open-source tech map. Peru didn\'t. Peru Grid maps 53 researched startups, consultancies, incubators and funds across Lima and Arequipa — in one dependency-free HTML file.',
         duration: 'Jul 2026',
         readTime: '4 min read',
+        image: '/images/peru-grid.png',
+        images: ['/images/peru-grid.png'],
+        demoVideo: 'https://www.perugrid.com/',
         overview:
             'Peru Grid is an interactive, terminal-styled map of the Lima and Arequipa tech ecosystems, rendered with MapLibre GL JS on OpenFreeMap vector tiles — no API keys, no build step, no framework, zero npm dependencies. The whole application is one 766-line HTML file plus two JSON datasets fetched at runtime. Visitors fly between the two cities, click markers for company details, and browse a live headline ticker. The structure is adapted, with credit, from BUILD416\'s toronto-tech-map, extended with a city switcher and per-city coordinate validation.',
         problem:
@@ -818,7 +788,7 @@ export const projects: Project[] = [
             'CI has a job even with no application code: schema-validating the data on every push keeps community contributions from breaking the map.',
         ],
         conclusion:
-            'Peru Grid is young — built in a burst, public on GitHub, not yet hosted at a public URL, with a community submission form still to be wired up. It\'s open source end to end (MIT code, CC BY 4.0 data) and designed to be forked: the honest pitch is a verified starting point for making Peru\'s tech ecosystem visible, not a finished atlas.',
+            'Peru Grid is live at perugrid.com — open source end to end (MIT code, CC BY 4.0 data) and designed to be forked. The honest pitch is a verified starting point for making Peru\'s tech ecosystem visible, not a finished atlas; community submissions continue to grow the map.',
         github: 'https://github.com/RikepilB/peru-tech-map',
         stack: ['MapLibre GL JS', 'OpenFreeMap', 'Vanilla JS', 'GitHub Actions'],
     },
@@ -827,6 +797,7 @@ export const projects: Project[] = [
         slug: 'read-video',
         category: 'AI ENGINEERING',
         catColor: '#1d4ed8',
+        status: 'coming-soon',
         title: 'read-video — Teaching AI Agents to Watch Video',
         tagline:
             'An AI coding agent can read images and PDFs — not video. read-video decomposes any video into frames plus a transcript, and prices the whole job before spending a cent or a token.',
@@ -884,6 +855,7 @@ export const projects: Project[] = [
         slug: 'resume-scorer',
         category: 'AI ENGINEERING',
         catColor: '#1d4ed8',
+        status: 'coming-soon',
         title: 'ResumeScorer — Reverse-Engineering the Resume Screener',
         tagline:
             'If a bot is going to score your resume, score it yourself first. ResumeScorer runs my resumes through an open-source hiring-agent pipeline across three LLM backends — and turns the numbers into edit plans.',
@@ -941,6 +913,7 @@ export const projects: Project[] = [
         slug: 'agentic-skills-lab',
         category: 'AI ENGINEERING',
         catColor: '#1d4ed8',
+        status: 'coming-soon',
         title: 'Agentic Skills Lab — Version Control for AI Capabilities',
         tagline:
             'AI coding agents are only as good as the instructions they load — and most people\'s live in unversioned dotfiles. Mine are a git-tracked library: 33 skills with history, security gates, and a publish pipeline.',
@@ -998,6 +971,7 @@ export const projects: Project[] = [
         slug: 'skillvault',
         category: 'AI ENGINEERING',
         catColor: '#1d4ed8',
+        status: 'coming-soon',
         title: 'SkillVault — Curated Skill Packs for AI Coding Agents',
         tagline:
             'The community has written hundreds of agent skills; most projects need about five of them at any given moment. SkillVault is the curation: 25 vetted third-party skills, staged by project lifecycle.',

@@ -214,10 +214,10 @@ export default function AboutPage() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-felt-deep/35 border border-rule flex items-center justify-center text-muted hover:text-gold-bright hover:border-gold hover:shadow-sm transition-all"
+                    className="w-11 h-11 rounded-full bg-felt-deep/60 border border-white/20 flex items-center justify-center text-matte hover:text-gold-bright hover:border-gold hover:bg-gold-soft hover:shadow-sm transition-all"
                     aria-label={link.label}
                   >
-                    <Icon size={18} strokeWidth={2} />
+                    <Icon size={20} strokeWidth={2} />
                   </a>
                 )
               })}
@@ -255,10 +255,10 @@ export default function AboutPage() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-11 h-11 rounded-full bg-felt-deep/35 border border-rule flex items-center justify-center text-muted hover:text-gold-bright hover:border-gold hover:shadow-md transition-all group"
+                    className="w-12 h-12 rounded-full bg-felt-deep/60 border border-white/20 flex items-center justify-center text-matte hover:text-gold-bright hover:border-gold hover:bg-gold-soft hover:shadow-md transition-all group"
                     aria-label={link.label}
                   >
-                    <Icon size={20} strokeWidth={2} className="group-hover:scale-110 transition-transform" />
+                    <Icon size={22} strokeWidth={2} className="group-hover:scale-110 transition-transform" />
                   </a>
                 )
               })}

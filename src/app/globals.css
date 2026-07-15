@@ -14,6 +14,7 @@
   --color-felt: #607466;
   --color-felt-soft: #708275;
   --color-felt-deep: #4f6258;
+  --color-felt-frame: #3c4f42;
   --color-felt-border: rgba(255, 255, 255, 0.14);
 
   --color-gold: #d4af37;
@@ -201,7 +202,7 @@
 
 @utility project-placeholder-wash {
   background:
-    radial-gradient(ellipse 70% 60% at 18% 20%, rgba(242, 227, 198, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 18% 20%, rgba(112, 130, 117, 0.55) 0%, transparent 55%),
     radial-gradient(ellipse 50% 45% at 88% 78%, rgba(212, 175, 55, 0.14) 0%, transparent 50%);
 }
 

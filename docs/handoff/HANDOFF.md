@@ -21,14 +21,35 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ---
 
-## Current state — 2026-07-13
+## Current state — 2026-07-15 (later)
 
-**Felt/gold re-skin on v2 structure + i18n `[locale]` routes; nav transition bug fixed; About unified to felt/gold.** Page transitions now use `src/app/[locale]/template.tsx` (remounts per nav) — fixes the "click twice → empty felt page" bug that `AnimatePresence mode="wait"` in the persistent layout caused; `PageTransition.tsx` deleted. About re-skinned mist→**felt/gold** to match Journey: gold **"Who are you?"** heading (eyebrow removed), felt education card, felt social buttons, white scrapbook polaroids on felt, top-right vision-board hint "↔ Drag the cards · press Read". Home: "My work" + "Skills & Stack" uniform white (dropped gold-italic + "WHAT I DO" eyebrow). ScrollProgress/BackToTop now always gold/felt (dropped `/about` mist branch). Note: Bug-1 (`parents[4]` in ckm skill python scripts) verified NOT real — left untouched. `pnpm lint` / `tsc` / `build` green; Home+About browser-verified. Mist wipe (Task 5) still paused. Nothing committed. Branch: `feat/portfolio-additions`.
+**Coming soon IA + mockup blend + hydration quieting — still uncommitted on `feat/portfolio-additions`.** Shipped earlier: About bios (`b1cdc27`/`5fce9ae`, PR #23, prod). Local dirty work now includes: Coming soon bucket (AquaTwin concept-only, FindLeads, read-video, ResumeScorer, Skills Lab, SkillVault, **VANS** without unrelated `mainpage.jpg`); Peru Grid screenshot + home featured; placeholder badge junk removed; home/project cards use `object-contain` + soft CSS `mask-image` blend into felt; Grammarly body hydration suppressed (`layout.tsx`) + Reveal `useSyncExternalStore`. Mist wipe still paused. Await commit/push of the dirty set.
+
+## Previous state — 2026-07-15
+
+**About bios restored and shipped; Coming soon + Peru Grid changes coded, not fully shipped.** Long-form EN/ES About bios fixed after handoff-paste corruption (`b1cdc27` + `5fce9ae` on `feat/portfolio-additions`; PR #23; prod deploy to richardpillaca.com for the bio/frame ship). Newest local work (uncommitted): `status: 'coming-soon'` for AquaTwin (concept-only), FindLeads, read-video, ResumeScorer, Agentic Skills Lab, SkillVault; Projects page Coming soon section; placeholder badges/numbers removed; Peru Grid screenshot at `public/images/peru-grid.png` + home featured row + live demo. Branch: `feat/portfolio-additions`. lint/tsc/build green on latest verify. Mist wipe still paused.
+
+## Previous state — 2026-07-14 (later)
+
+**Project-detail readability fixed + greener image frames; awaiting go-ahead to commit/ship.** User reported project case-study pages still looked dark/unreadable and asked for greener project-image frames on the home page. Root cause: the felt/gold text re-skin was already committed (`a540de8`) but only on `feat/portfolio-additions`, never merged to `main` — the live site was still serving the old pre-fix build. Browser-verified (Playwright via `localhost`, not `127.0.0.1` — that origin blocks the dev HMR websocket and causes spurious full-page reloads) that `/projects`, home "My work", and several case studies already render readable light text on felt. Added `--color-felt-frame` (#3c4f42) token + retinted `project-placeholder-wash` so project image frames (`ProjectCard.tsx`, `ProjectImagePlaceholder.tsx`, home `ProjectRow` in `[locale]/page.tsx`) read as distinct green frames instead of blending into the page bg. lint/tsc/build all green. Also found and reverted unrelated pre-existing uncommitted corruption in `src/i18n/dictionaries/en.ts` (garbled About-bio text, not from this session) — left reverted, not fixed, flagged to user. **Nothing committed yet this pass** — awaiting user decision on commit + push + merge-to-main (auto-deploys).
+
+## Previous state — 2026-07-14
+
+**Full EN/ES i18n shipped locally (uncommitted).** Site routes under `/en` and `/es` via `src/middleware.ts` + `src/app/[locale]/`. Navbar has EN|ES switch (`LocaleSwitcher`); dictionaries cover UI chrome; Spanish content for 17 projects, experience, and essays. About local bio toggle removed — language is site-wide. `pnpm lint` / `tsc` / `build` green (56 pages); `pnpm dev` at http://localhost:3000. Branch: `feat/portfolio-additions`. **Not committed yet.**
+
+**Prior (same branch, still relevant):** Felt/gold re-skin + nav/postcard/case-study fixes done earlier; OG image at `public/images/og-image.png` (non-1.91:1 crop decision still open). Mist wipe still paused. PR #22 (case studies) already on `main`.
 
 ---
 
 ## Session index (append-only, newest first)
 
+- [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — VANS→coming soon (dropped unrelated image); Grammarly body hydration silenced + Reveal reduced-motion fix; home/card mockups `object-contain` + soft edge mask blend (uncommitted)
+- [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — About bios restored/shipped (`b1cdc27`/`5fce9ae`, PR #23, prod); Coming soon IA + AquaTwin concept-only; Peru Grid screenshot on home; placeholder badge junk removed (latest code mostly uncommitted)
+- [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — project-detail readability root-caused as a deploy gap (fix already in `a540de8`, unmerged); added `--color-felt-frame` token, greener project-image frames on cards/placeholder/home; lint/tsc/build green; nothing committed, awaiting ship go-ahead
+- [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — full EN/ES i18n: `[locale]` routes, navbar EN|ES switch, Spanish projects/experience/essays overlays, build green, `pnpm dev` running
+- [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — nav two-clicks/empty-page fixed (`template.tsx`); About mist→felt/gold + gold "Who are you?" + board hint; PostcardModal portal fix + enlarge; case-study page felt/gold re-skin + removed "4→8/10" metrics; home headings uniform white + 2-col skills intro; social icons brightened; Bug-1 verified not-real
+- [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — OG/social share image added (`public/images/og-image.png` + `layout.tsx` metadataBase/openGraph/twitter); `/gsd-ship` blocked (no `.planning/`), handoff docs committed instead (`52ece8b`)
+- [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — PR #22 CI fix (pinned `packageManager: pnpm@10.30.3`), commit `23d24c6`, CI green, squash-merged to `main`, prod deploy triggered
 - [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — nav two-clicks/empty-page bug fixed via `template.tsx` (deleted PageTransition); About re-skinned mist→felt/gold + gold "Who are you?" heading + board hint; home headings uniform white; Bug-1 verified not-real
 - [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — global ScrollProgress + BackToTop + PageTransition; shared Reveal site-wide; projects filter AnimatePresence; silver-foil readability; discipline filters + placeholders
 - [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — scrapbook interleave (text+images), SectionLabel stickers, UK/Toronto mid-crops, final bio; mist wipe + gsd-debug still waiting
