@@ -435,3 +435,67 @@ Make a link-preview photo for richardpillaca.com so any shared link shows an ima
 - Removed Results/metrics section (the "4 → 8/10" numbers user asked to drop); dropped now-unused `MetricCard` import.
 - `TechTag` re-skinned to felt (`border-rule`/`bg-felt-deep/35`/`text-muted`) — only used on this page.
 - lint/tsc/build green; browser-verified el-umbral case study readable + numbers gone.
+
+## Addendum — full EN/ES i18n + navbar language switch (2026-07-14)
+
+### Goal
+Make the portfolio have a full Spanish and full English version, with a language switch on the navbar.
+
+### What was done (concrete one-liners)
+- Locale routing → `src/middleware.ts` + `src/app/[locale]/` (all pages moved under `/en` and `/es`; `/` redirects to `/en`)
+- UI dictionaries → `src/i18n/dictionaries/en.ts` + `es.ts` + `LocaleProvider` / `useLocale` / `LocaleSwitcher` in nav (desktop + mobile)
+- Content locales → `src/data/locale.ts` getters; Spanish overlays for 17 projects (`projects-es-overlays.ts`), experience (`experience-es.ts`), essays (`essays-es.ts`)
+- Wired Home / About / Journey / Projects / case studies / essays / ResumePaper / Footer / ProjectCard / EssayCard to locale-aware paths + dicts
+- About page → dropped local EN/ES bio toggle; language is site-wide from navbar
+- Redirects updated → `/skills`→`/en`, `/resume`→`/en/journey`, locale-scoped variants in `next.config.ts`
+- Verify → `pnpm lint` / `tsc --noEmit` / `pnpm build` green (56 static pages for both locales); `pnpm dev` running at http://localhost:3000
+
+### Files changed
+- `src/middleware.ts` — locale prefix redirect
+- `src/i18n/config.ts`, `get-dictionary.ts`, `dictionaries/en.ts`, `dictionaries/es.ts` — i18n core
+- `src/contexts/LocaleContext.tsx`, `src/components/layout/LocaleSwitcher.tsx` — provider + EN|ES toggle
+- `src/lib/locale-path.ts`, `src/data/locale.ts` — path helpers + localized data getters
+- `src/data/projects-es-overlays.ts`, `experience-es.ts`, `essays-es.ts` — Spanish content
+- `src/app/layout.tsx` — root shell only (Nav/Footer moved to locale layout)
+- `src/app/[locale]/layout.tsx` + all pages under `[locale]/` — locale-scoped App Router
+- `src/components/layout/Nav.tsx`, `Footer.tsx`, `ProjectCard.tsx`, `EssayCard.tsx`, `ResumePaper.tsx` — locale-aware
+- `src/lib/disciplines.ts` — locale-independent discipline keys + ES category mapping
+- `next.config.ts` — locale-aware redirects
+- `docs/handoff/HANDOFF.md` — father current state + this index line
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+
+### Failed attempts
+- Dictionary helpers as functions (`moreProjects: (n) => ...`) → Next.js prerender error (functions can't cross RSC→client boundary); replaced with plain string prefixes
+
+### Next steps
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` for full session archive
+- Manual QA of `/es` pages (spot-check project case studies + About vision board)
+- Commit i18n changes when ready (currently uncommitted on `feat/portfolio-additions`)
+
+## Addendum — project-page readability audit + greener image frames (2026-07-14)
+
+### Goal
+User reported project detail pages still had dark/unreadable text and asked to lighten colors "for all projects"; also asked home-page project image frames read more green/on-brand.
+
+### What was done (concrete one-liners)
+- Root-caused the "not saved" readability complaint → the felt/gold case-study re-skin (Follow-up 3 above) was already committed in `a540de8`, but only on `feat/portfolio-additions`, never merged to `main`/deployed — live site still showed the old dark-grey-on-felt version.
+- Browser-verified (Playwright, `localhost` not `127.0.0.1` — HMR websocket is blocked cross-origin on `127.0.0.1` and causes spurious full-page reloads/navigation) that `/projects`, home "My work" rows, and multiple case-study pages (AquaTwin, Empeñalo) all render with readable light text on felt already.
+- Greener frames → added `--color-felt-frame: #3c4f42` token (`src/app/globals.css`); re-tinted `project-placeholder-wash` from gold/cream toward green; swapped `bg-felt-deep/NN` → `bg-felt-frame` on `ProjectImagePlaceholder.tsx`, `ProjectCard.tsx`, and home `ProjectRow` image container (`src/app/[locale]/page.tsx`) so image frames read as distinct green picture-frames instead of blending into the page bg.
+- Verify → `pnpm lint` / `npx tsc --noEmit` / `pnpm build` all green (56 pages).
+- Found + reverted unrelated pre-existing uncommitted corruption in `src/i18n/dictionaries/en.ts` (About bio: "a  full-stack eiuungineer" instead of "a full-stack engineer") — not caused by this session, left reverted and flagged to user, not fixed (out of scope).
+
+### Files changed
+- `src/app/globals.css` — `--color-felt-frame` token; greener `project-placeholder-wash`
+- `src/components/ui/ProjectImagePlaceholder.tsx` — `bg-felt-frame`
+- `src/components/ui/ProjectCard.tsx` — `bg-felt-frame`
+- `src/app/[locale]/page.tsx` — home `ProjectRow` image frame → `bg-felt-frame`
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+- `docs/handoff/HANDOFF.md` — refreshed Current state + session index line
+
+### Failed attempts
+- None this pass — the "unreadable text" turned out to be a deploy-gap, not a code bug.
+
+### Next steps
+- User decides: commit + push `feat/portfolio-additions` + merge to `main` (auto-deploys) — nothing committed yet this pass, awaiting go-ahead.
+- Optional: fix the unrelated garbled About bio text in `src/i18n/dictionaries/en.ts` (currently reverted to last-committed, correct version).
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` (assistant cannot run `/export`)

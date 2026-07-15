@@ -217,7 +217,7 @@ function ProjectRow({
   return (
     <article className="group grid grid-cols-1 items-center gap-7 border-b border-rule py-11 last:border-b-0 md:grid-cols-2 md:gap-14 md:py-16">
       <div
-        className={`relative aspect-[16/10] w-full overflow-hidden rounded-[14px] border border-rule bg-felt-deep/40 ${
+        className={`relative aspect-[16/10] w-full overflow-hidden rounded-[14px] border border-rule bg-felt-frame ${
           flipped ? 'md:order-2' : ''
         }`}
       >

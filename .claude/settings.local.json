@@ -1,1 +1,16 @@
-{}
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Stop-Process -Id 59872 -Force)",
+      "Bash(pnpm dev *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://127.0.0.1:3000/en/projects --max-time 5)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "Skill(gsd-audit-fix)",
+      "Skill(gsd-audit-fix:*)",
+      "mcp__plugin_playwright_playwright__browser_resize",
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"Name='node.exe'\" | Where-Object { $_.CommandLine -match 'next dev' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force })"
+    ]
+  }
+}

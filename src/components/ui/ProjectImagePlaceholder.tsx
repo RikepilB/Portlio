@@ -26,7 +26,7 @@ export function ProjectImagePlaceholder({
   return (
     <div
       className={cn(
-        'relative flex h-full w-full flex-col justify-between overflow-hidden bg-felt-deep/70 p-6',
+        'relative flex h-full w-full flex-col justify-between overflow-hidden bg-felt-frame p-6',
         className
       )}
       aria-hidden="true"

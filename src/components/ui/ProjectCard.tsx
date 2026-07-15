@@ -40,7 +40,7 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
         'group felt-panel relative flex h-full flex-col overflow-hidden rounded-2xl p-0 transition-transform duration-300 hover:-translate-y-1'
       )}
     >
-      <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-felt-border bg-felt-deep/50">
+      <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-felt-border bg-felt-frame">
         {showImage ? (
           <Image
             src={project.image!}
