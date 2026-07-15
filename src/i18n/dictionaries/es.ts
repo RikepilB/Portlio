@@ -99,6 +99,10 @@ export const dictionaryEs = {
     filterByPrefix: 'Filtrar por',
     viewCase: 'Ver caso de estudio',
     viewCaseAriaPrefix: 'Ver caso de estudio:',
+    comingSoonTitle: 'Próximamente',
+    comingSoonSubtitle: 'Conceptos y builds en progreso — aún sin demos en vivo ni capturas.',
+    comingSoonCta: 'Próximamente →',
+    comingSoonAriaPrefix: 'Próximamente:',
     disciplines: ['Ingeniería de software', 'IA y automatización', 'Datos y analítica'] as const,
   },
   caseStudy: {
@@ -117,6 +121,7 @@ export const dictionaryEs = {
     githubAriaPrefix: 'Ver en GitHub:',
     watchDemo: 'Ver video demo',
     liveDemo: 'Ver demo en vivo →',
+    comingSoonBadge: 'Próximamente',
   },
   journey: {
     title: 'Trayectoria profesional',

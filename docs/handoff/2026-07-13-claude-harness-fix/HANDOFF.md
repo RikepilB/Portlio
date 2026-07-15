@@ -499,3 +499,72 @@ User reported project detail pages still had dark/unreadable text and asked to l
 - User decides: commit + push `feat/portfolio-additions` + merge to `main` (auto-deploys) — nothing committed yet this pass, awaiting go-ahead.
 - Optional: fix the unrelated garbled About bio text in `src/i18n/dictionaries/en.ts` (currently reverted to last-committed, correct version).
 - Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` (assistant cannot run `/export`)
+
+## Addendum — About bios restored + Coming soon projects + Peru Grid shot (2026-07-14/15)
+
+### Goal
+Restore long-form EN/ES About bios after handoff-paste corruption; debug/fix i18n parity; ship that fix; then move unfinished projects to Coming soon (AquaTwin concept-only), strip placeholder badge junk, and put Peru Grid on Home with a real screenshot.
+
+### What was done (concrete one-liners)
+- About bios → wrote 8-paragraph EN + ES copy into `src/i18n/dictionaries/en.ts` / `es.ts`; restored wiped `education` + `polaroids` on EN after handoff boilerplate overwrite
+- `/gsd-debug` → session `.planning/debug/resolved/i18n-bio-corruption.md`; EN↔ES structural walk issueCount 0; root cause = paste corruption, not type bugs
+- Ship bios/frames → commit `b1cdc27` on `feat/portfolio-additions`, push, PR #23, `vercel --prod` → https://richardpillaca.com (also later local `5fce9ae` bio update)
+- Coming soon → `status: 'coming-soon'` on AquaTwin, FindLeads, read-video, ResumeScorer, Agentic Skills Lab, SkillVault; Projects page split shipped vs Coming soon
+- AquaTwin → concept-only EN/ES (empty methodology/results/stack); case study hides empty sections + Coming soon badge
+- Placeholders → removed index / initials / metric chrome from `ProjectImagePlaceholder.tsx` (and call sites)
+- Peru Grid → screenshot `public/images/peru-grid.png` from perugrid.com; wired image + live demo; added `peru-tech-map` to home `featuredSlugs`
+- Verify → `pnpm lint` / `tsc --noEmit` / `pnpm build` green after projects pass (uncommitted locally except prior ship commits)
+
+### Files changed
+- `src/i18n/dictionaries/en.ts`, `es.ts` — long-form About bios; Coming soon / case-study strings
+- `src/data/projects.ts` — `ProjectStatus` + `isComingSoon`; coming-soon flags; AquaTwin concept slim; Peru Grid media/demo
+- `src/data/projects-es-overlays.ts` — AquaTwin concept ES; Peru conclusion live URL
+- `src/app/[locale]/projects/page.tsx` — Coming soon section
+- `src/app/[locale]/projects/[slug]/page.tsx` — conditional sections + badge
+- `src/app/[locale]/page.tsx` — Peru on home featured; placeholder props cleaned
+- `src/components/ui/ProjectCard.tsx`, `ProjectImagePlaceholder.tsx` — no badge junk; coming-soon CTA
+- `public/images/peru-grid.png` — new screenshot
+- `.planning/debug/resolved/i18n-bio-corruption.md` — resolved debug session (earlier ship)
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+- `docs/handoff/HANDOFF.md` — refreshed Current state + session index line
+
+### Failed attempts
+- `pnpm dlx tsx` EN/ES parity script hung → killed; re-ran successfully with `jiti`
+- Early EN bio paste had handoff instructions in `about.bio` (root cause of i18n debug) → replaced with real bios
+
+### Next steps
+- Commit + push remaining Coming soon / Peru Grid / placeholder changes (currently dirty on `feat/portfolio-additions`)
+- Merge PR #23 (or new PR) to `main` if prod should include latest project IA
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` (assistant cannot run `/export`)
+
+## Addendum — VANS coming soon + hydration + mockup blend (2026-07-15)
+
+### Goal
+Park VANS for a v2 refresh (drop unrelated image); silence Grammarly body hydration noise; fix home/project screenshots that were cropped too tight so the full frame shows and soft-fades into felt.
+
+### What was done (concrete one-liners)
+- VANS → removed `/images/mainpage.jpg`; set `status: 'coming-soon'`; EN/ES conclusions note v2 in progress (`projects.ts`, `projects-es-overlays.ts`)
+- Hydration → `/gsd-debugger`: Grammarly injects `data-gr-*` on `<body>` — added `suppressHydrationWarning` on body in `layout.tsx`; Reveal reduced-motion now uses `useSyncExternalStore` (debug file `.planning/debug/grammarly-body-hydration.md`)
+- Home mockups → `object-contain` + padding; dropped hard dark frame; `project-mockup-blend` / `-flip` CSS mask fades outer edges into felt (`page.tsx`, `globals.css`)
+- Project cards → same contain + soft mask treatment (`ProjectCard.tsx`)
+
+### Files changed
+- `src/data/projects.ts` — VANS coming-soon + no image; prior coming-soon/Peru work still present
+- `src/data/projects-es-overlays.ts` — VANS v2 note in ES conclusion
+- `src/app/layout.tsx` — body `suppressHydrationWarning`
+- `src/components/ui/Reveal.tsx` — reduced-motion via `useSyncExternalStore`
+- `src/app/globals.css` — `project-mockup-blend` / `project-mockup-blend-flip` utilities
+- `src/app/[locale]/page.tsx` — home ProjectRow contain + mask
+- `src/components/ui/ProjectCard.tsx` — gallery cards contain + mask
+- `.planning/debug/grammarly-body-hydration.md` — hydration debug session
+- `docs/handoff/2026-07-13-claude-harness-fix/HANDOFF.md` — this addendum
+- `docs/handoff/HANDOFF.md` — refreshed Current state + session index line
+
+### Failed attempts
+- None this pass (Grammarly attrs are extension noise, not app SSR bugs)
+
+### Next steps
+- Commit + push the full dirty set on `feat/portfolio-additions` (Coming soon, Peru Grid shot, VANS, hydration, mockup blend)
+- User hard-refresh with Grammarly on → confirm body hydration warning gone; eyeball home mockup blend
+- When VANS v2 ships → real screenshots + exit Coming soon
+- Run `/export docs/handoff/2026-07-13-claude-harness-fix/transcript.md` (assistant cannot run `/export`)

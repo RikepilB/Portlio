@@ -66,7 +66,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${manrope.variable} ${montserrat.variable} ${cormorant.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-sans antialiased bg-felt text-matte min-h-screen">
+      <body
+        className="font-sans antialiased bg-felt text-matte min-h-screen"
+        suppressHydrationWarning
+      >
         <GrainOverlay />
         {children}
       </body>

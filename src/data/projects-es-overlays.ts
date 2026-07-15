@@ -478,7 +478,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
             'Los participantes prefirieron voz para comandos simples (scroll, búsqueda) pero teclado para acciones precisas (clics en enlaces pequeños).',
         ],
         conclusion:
-            'VANS demuestra que la navegación del navegador basada en voz es viable como herramienta de accesibilidad hoy. Aunque aún no es más rápida que la entrada tradicional, llena un vacío crítico para usuarios que no pueden usar teclado o ratón.',
+            'VANS demuestra que la navegación del navegador basada en voz es viable como herramienta de accesibilidad hoy. Aunque aún no es más rápida que la entrada tradicional, llena un vacío crítico para usuarios que no pueden usar teclado o ratón. Una actualización v2 de siguiente nivel está en progreso — esta ficha permanece en Próximamente hasta que la nueva versión se publique con capturas reales del proyecto.',
     },
     'el-umbral': {
         category: 'FULL STACK',
@@ -548,60 +548,17 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
         title: 'AquaTwin — Medición virtual de agua para centros de datos',
         tagline:
             'Los centros de datos conocen su consumo eléctrico al vatio — y casi nada sobre su agua. AquaTwin convierte la telemetría que los tenants ya tienen en facturas de agua auditadas por tenant e informes de cumplimiento.',
-        readTime: '7 min de lectura',
+        readTime: '3 min de lectura',
         overview:
-            'AquaTwin es un SaaS de medición virtual de agua para tenants de colocation en centros de datos. Ingesta telemetría de carga IT y GPU, convierte el consumo eléctrico en consumo estimado de agua (baseline industrial de 1.8 L/kWh, ajustado por clima y limitado por fórmula WUE_max), y escribe cada cálculo en una pista de auditoría de facturación inmutable. Encima: registro de tenants, dashboards de facturación por tenant, generación de facturas PDF e informes de cumplimiento de sostenibilidad BRSR. Construido como monolito modular de tres capas: frontend Next.js 16, capa de aplicación FastAPI, Supabase Postgres como fuente de verdad del sistema — ambas capas desplegadas en Vercel.',
+            'AquaTwin es un concepto de medición virtual de agua para colocation en centros de datos: estimar el uso de agua de cada tenant a partir de la telemetría de potencia que los operadores ya recopilan, para poder facturar e informar el agua con la misma claridad que la electricidad — sin instalar medidores nuevos.',
         problem:
-            'Los centros de datos mayormente miden solo agua de enfriamiento directo, perdiendo agua Scope-3 upstream que puede ser un orden de magnitud mayor (la hidroeléctrica evapora ~17 L/kWh versus ~0.004 para eólica), y nadie atribuye agua a tenants o GPUs individuales. India es la cuña: sus centros de datos consumieron aproximadamente 150 mil millones de litros en 2024, y el BRSR Core de SEBI hace obligatoria la divulgación auditada de agua para las 1.000 empresas listadas principales desde FY2026. AquaTwin llena ese vacío infiriendo agua de telemetría de potencia que los operadores ya recopilan — con una pista de auditoría lo bastante sólida para facturar e informar.',
-        questions: [
-            '¿Se puede estimar credibly el consumo de agua por tenant solo con telemetría de carga IT, sin medidores físicos de agua?',
-            '¿Cómo haces que una tabla de facturación sea confiable para cumplimiento — demostrablemente append-only, con el cálculo completo preservado por fila?',
-            '¿Cómo se mantiene seguro un path de ingest multi-tenant cuando los dispositivos, no humanos, escriben los datos?',
-            '¿Qué se necesita para mover un prototipo funcional a algo realmente estable en producción?',
-        ],
-        methodology: [
-            {
-                phase: 'Fase 1',
-                title: 'Ingest de telemetría y la matemática del agua',
-                detail:
-                    'Los endpoints de ingest (single + batch) validan el JWT del tenant, luego computan litros de agua server-side: baseline de 1.8 L/kWh ajustado por datos climáticos de grados-día de enfriamiento de OpenWeather y limitado por WUE_max = 0.4 × K1 × K2 × K3. La matemática vive en servicios dedicados (virtual_metering.py, wue_max.py), cada uno con su propio archivo de test — la fórmula es código bajo test, no una suposición de hoja de cálculo. Los inserts corren bajo service role en tablas append-only; ningún cliente escribe telemetría directamente.',
-                tech: ['FastAPI', 'Pydantic', 'OpenWeather API', 'pytest'],
-            },
-            {
-                phase: 'Fase 2',
-                title: 'Facturación inmutable con audit log',
-                detail:
-                    'La tabla billing_audit_logs es inmutable dos veces: se revocan privilegios UPDATE/DELETE, y triggers BEFORE lanzan excepciones en cualquier intento de update o delete. Cada fila almacena el desglose completo del cálculo como JSON, así cualquier línea de factura puede re-derivarse y auditarse después. Row-level security cubre cada tabla de tenant, y rate limiting (slowapi) protege la capa API.',
-                tech: ['PostgreSQL', 'Supabase', 'RLS', 'SQL Triggers'],
-            },
-            {
-                phase: 'Fase 3',
-                title: 'Dashboards de facturación, facturas e informes BRSR',
-                detail:
-                    'Los tenants obtienen un dashboard Next.js 16 (React 19, Tailwind 4, Recharts) sobre su propio consumo, facturas PDF generadas con ReportLab, y un endpoint de informe de cumplimiento BRSR orientado al régimen obligatorio de divulgación de agua de India. Frontend y FastAPI se despliegan como dos proyectos Vercel, con security headers en el frontend y un cron keep-alive protegiendo la base de datos free-tier.',
-                tech: ['Next.js 16', 'React 19', 'Recharts', 'ReportLab', 'Vercel'],
-            },
-            {
-                phase: 'Fase 4',
-                title: 'Auditoría de caos → endurecimiento de producción',
-                detail:
-                    'Una auditoría de chaos engineering de 16 casos de test contra producción en vivo puntó estabilidad general 4/10 — el fallo principal siendo login 100% roto porque un project ref incorrecto de Supabase estaba baked en el bundle JS en build time. El pase de fixes corrigió las cuatro env vars de Vercel, forzó bust del build cache, re-desplegó todas las rutas, eliminó filtración de mensajes de error crudos de cada router, y re-puntó en ~8/10. La auditoría y fixes están documentados en el repo, fallo por fallo.',
-                tech: ['Chaos Testing', 'Playwright', 'Vercel', 'CI'],
-            },
-        ],
-        results: [
-            { metric: '4→8/10', label: 'puntaje de estabilidad en producción, antes/después de fixes de auditoría de caos' },
-            { metric: '31', label: 'tests — 16 pytest (matemática de agua, telemetría, informes) + 15 Playwright E2E' },
-            { metric: '1.8 L/kWh', label: 'baseline potencia-a-agua detrás de cada fila de facturación con audit log' },
-        ],
-        keyFindings: [
-            'La configuración de entorno es una feature de producción: el peor outage (login 100% roto) fue un project ref incorrecto baked en el bundle cliente — invisible localmente, fatal en prod, y solo detectado auditando el sitio desplegado en lugar del codebase.',
-            'Inmutabilidad que puedes probar supera inmutabilidad que prometes: revocar privilegios Y lanzar excepciones desde triggers significa que incluso un bug privilegiado no puede reescribir silenciosamente una fila de facturación.',
-            'Almacenar el JSON completo del cálculo por fila de facturación convierte "confía en nuestro número" en "re-deriva nuestro número" — la diferencia entre un dashboard y una pista de auditoría.',
-            'Estimar agua de telemetría de potencia que los tenants ya emiten significa cero hardware nuevo — el costo de adopción del producto es una API key, no instalar un medidor.',
-        ],
+            'Los centros de datos suelen medir solo el agua de enfriamiento directo y rara vez atribuyen el consumo a tenants individuales. Con divulgación de agua e informes de sostenibilidad cada vez más estrictos, los operadores necesitan convertir las señales de potencia existentes en cifras creíbles por tenant.',
+        questions: [],
+        methodology: [],
+        results: [],
+        keyFindings: [],
         conclusion:
-            'AquaTwin está en vivo (dos despliegues Vercel, API con health check) y es temprano: sin dominio custom aún, la capa de agente IA está scaffolded pero no implementada, y la auditoría de caos que encontró producción en 4/10 es parte de la historia en lugar de ocultarse. Lo que demuestra es el arco completo — un problema regulatorio real, lógica de estimación basada en física bajo test, disciplina de datos de grado cumplimiento, y el endurecimiento de producción poco glamoroso que siguió. El repositorio se está preparando para open-source tras un pase de higiene de credenciales.',
+            'Etapa de concepto — la superficie del producto y el caso de estudio público saldrán cuando el build esté listo para mostrarse.',
     },
     'findleads': {
         category: 'FULL STACK 2026',
@@ -703,7 +660,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
             'CI tiene trabajo incluso sin código de aplicación: validar schema de datos en cada push mantiene contribuciones comunitarias sin romper el mapa.',
         ],
         conclusion:
-            'Peru Grid es joven — construido en un sprint, público en GitHub, aún sin URL pública, con un formulario de envío comunitario por conectar. Es open source de punta a punta (código MIT, datos CC BY 4.0) y diseñado para forkearse: el pitch honesto es un punto de partida verificado para hacer visible el ecosistema tech peruano, no un atlas terminado.',
+            'Peru Grid está en vivo en perugrid.com — open source de punta a punta (código MIT, datos CC BY 4.0) y diseñado para forkearse. El pitch honesto es un punto de partida verificado para hacer visible el ecosistema tech peruano, no un atlas terminado; los envíos de la comunidad siguen creciendo el mapa.',
     },
     'read-video': {
         category: 'INGENIERÍA IA',

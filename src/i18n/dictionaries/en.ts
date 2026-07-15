@@ -99,6 +99,10 @@ export const dictionaryEn = {
     filterByPrefix: 'Filter by',
     viewCase: 'View case analysis',
     viewCaseAriaPrefix: 'View case analysis:',
+    comingSoonTitle: 'Coming soon',
+    comingSoonSubtitle: 'Concepts and builds in progress — no live demos or screenshots yet.',
+    comingSoonCta: 'Coming soon →',
+    comingSoonAriaPrefix: 'Coming soon:',
     disciplines: ['Software Engineering', 'AI & Automation', 'Data & Analytics'] as const,
   },
   caseStudy: {
@@ -117,6 +121,7 @@ export const dictionaryEn = {
     githubAriaPrefix: 'View on GitHub:',
     watchDemo: 'Watch Demo Video',
     liveDemo: 'View Live Demo →',
+    comingSoonBadge: 'Coming soon',
   },
   journey: {
     title: 'Career Journey',

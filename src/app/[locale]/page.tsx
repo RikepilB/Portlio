@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Github, Linkedin, Instagram, Twitter, Database, Code2, Sparkles } from 'lucide-react'
 import { getProjects } from '@/data/locale'
-import type { Project } from '@/data/projects'
+import { isComingSoon, type Project } from '@/data/projects'
 import { socialLinks } from '@/data/social'
 import { useDictionary, useLocale } from '@/contexts/LocaleContext'
 import { localePath } from '@/lib/locale-path'
@@ -20,6 +20,7 @@ const featuredSlugs = [
   'scoutlane-recruitment',
   'exam-analysis-system',
   'bike-share-optimization',
+  'peru-tech-map',
 ]
 
 const areaIcons = [
@@ -42,8 +43,8 @@ export default function HomePage() {
 
   const featuredProjects = featuredSlugs
     .map((slug) => projects.find((p) => p.slug === slug))
-    .filter((p): p is Project => p !== undefined)
-  const remainingCount = projects.length - featuredProjects.length
+    .filter((p): p is Project => p !== undefined && !isComingSoon(p))
+  const remainingCount = projects.filter((p) => !isComingSoon(p)).length - featuredProjects.length
 
   const areas = dict.home.areas.map((area, i) => ({
     ...area,
@@ -217,28 +218,24 @@ function ProjectRow({
   return (
     <article className="group grid grid-cols-1 items-center gap-7 border-b border-rule py-11 last:border-b-0 md:grid-cols-2 md:gap-14 md:py-16">
       <div
-        className={`relative aspect-[16/10] w-full overflow-hidden rounded-[14px] border border-rule bg-felt-frame ${
+        className={`relative aspect-[16/10] w-full overflow-visible ${
           flipped ? 'md:order-2' : ''
         }`}
       >
         {project.image ? (
-          <>
+          <div className="absolute inset-0">
             <Image
               src={project.image}
               alt={project.title}
               fill
-              className="object-contain p-4 transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              className="object-contain object-center p-3 transition-transform duration-700 ease-out group-hover:scale-[1.02] md:p-5"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
-            <div className="pointer-events-none absolute inset-0 rounded-[14px] ring-1 ring-inset ring-white/5" />
-          </>
+          </div>
         ) : (
-          <ProjectImagePlaceholder
-            title={project.title}
-            category={project.category}
-            index={index}
-            metric={project.results[0]?.metric}
-          />
+          <div className="absolute inset-0 overflow-hidden rounded-[14px] border border-rule bg-felt-frame">
+            <ProjectImagePlaceholder title={project.title} category={project.category} />
+          </div>
         )}
       </div>
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 
 interface RevealProps {
@@ -9,8 +9,20 @@ interface RevealProps {
   className?: string
 }
 
-function prefersReducedMotion() {
-  return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
+
+function subscribeReducedMotion(onStoreChange: () => void) {
+  const mq = window.matchMedia(REDUCED_MOTION_QUERY)
+  mq.addEventListener('change', onStoreChange)
+  return () => mq.removeEventListener('change', onStoreChange)
+}
+
+function getReducedMotionSnapshot() {
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches
+}
+
+function getReducedMotionServerSnapshot() {
+  return false
 }
 
 function isInViewport(el: HTMLElement) {
@@ -21,19 +33,25 @@ function isInViewport(el: HTMLElement) {
 
 export function Reveal({ children, delayMs = 0, className }: RevealProps) {
   const elementRef = useRef<HTMLDivElement>(null)
-  const [isRevealed, setIsRevealed] = useState(prefersReducedMotion)
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot,
+  )
+  const [isRevealed, setIsRevealed] = useState(false)
+  const visible = prefersReducedMotion || isRevealed
 
   useEffect(() => {
-    if (prefersReducedMotion()) return
+    if (prefersReducedMotion) return
 
     const element = elementRef.current
     if (!element) return
 
-    // Route transitions remount content; if already on-screen, reveal immediately
-    // so IntersectionObserver races don't leave sections stuck at opacity-0.
+    // Route transitions remount content; if already on-screen, reveal on the
+    // next frame so IntersectionObserver races don't leave opacity-0 stuck.
     if (isInViewport(element)) {
-      setIsRevealed(true)
-      return
+      const frame = requestAnimationFrame(() => setIsRevealed(true))
+      return () => cancelAnimationFrame(frame)
     }
 
     const observer = new IntersectionObserver(
@@ -47,13 +65,13 @@ export function Reveal({ children, delayMs = 0, className }: RevealProps) {
 
     observer.observe(element)
     return () => observer.disconnect()
-  }, [])
+  }, [prefersReducedMotion])
 
   return (
     <div
       ref={elementRef}
-      className={cn(isRevealed ? 'animate-fade-up' : 'opacity-0', className)}
-      style={isRevealed && delayMs > 0 ? { animationDelay: `${delayMs}ms` } : undefined}
+      className={cn(visible ? 'animate-fade-up' : 'opacity-0', className)}
+      style={visible && delayMs > 0 ? { animationDelay: `${delayMs}ms` } : undefined}
     >
       {children}
     </div>
