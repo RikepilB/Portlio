@@ -158,7 +158,7 @@ export const dictionaryEn = {
     imagePreview: 'Image Preview',
     closePreview: 'Close image preview',
     bio: [
-      "My name is Richard, and I'm a full-stack engineer with a frontend and AI focus. I build scalable, human-centered products with JavaScript, TypeScript, React, Next.js, Node.js, and Python, across UX, data, and AI-powered features.",
+      "My name is Richard Pillaca, and I'm a full-stack engineer with a frontend and AI focus. I build scalable, human-centered products with JavaScript, TypeScript, React, Next.js, Node.js, and Python, across UX, data, and AI-powered features.",
       'My career is centered on building technology that acts as a bridge rather than a barrier. I grew up in Peru, in a vibrant, multifaceted culture shaped by collective work, deep community ties, and respect for the land. Seeing how limited infrastructure can stall potential pushed me to Canada to study computer science at UBC.',
       'From day one, I balanced part-time jobs and community leadership with intensive coursework in software engineering, learning to focus on results while managing competing priorities. At UBC, I co-founded Okanagan Tech Industry Night, a 200+ attendee event connecting student startups with industry leaders, and served as VP Internal for the Latin American Student Association.',
       'As a research assistant, I co-authored an empirical study on AI technical debt nominated for MSR 2025. For my capstone with the UBC Faculty of Science, I built an exam analysis system that automated grading for large cohorts and cut grading time from hours to minutes.',
