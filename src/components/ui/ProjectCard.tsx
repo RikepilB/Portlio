@@ -14,7 +14,7 @@ interface ProjectCardProps {
   index?: number
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
   const { locale } = useLocale()
   const dict = useDictionary()
   const linkRef = useRef<HTMLAnchorElement>(null)
@@ -56,7 +56,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
             onError={() => setImageFailed(true)}
           />
         ) : (
-          <ProjectImagePlaceholder title={project.title} category={project.category} />
+          <ProjectImagePlaceholder
+            title={project.title}
+            category={project.category}
+            index={index}
+            metric={project.results[0]?.metric}
+          />
         )}
       </div>
 

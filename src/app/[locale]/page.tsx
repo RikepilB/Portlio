@@ -234,7 +234,12 @@ function ProjectRow({
           </div>
         ) : (
           <div className="absolute inset-0 overflow-hidden rounded-[14px] border border-rule bg-felt-frame">
-            <ProjectImagePlaceholder title={project.title} category={project.category} />
+            <ProjectImagePlaceholder
+              title={project.title}
+              category={project.category}
+              index={index}
+              metric={project.results[0]?.metric}
+            />
           </div>
         )}
       </div>

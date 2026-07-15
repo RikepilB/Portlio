@@ -7,6 +7,7 @@ import { getProjectBySlug, getProjects } from '@/data/locale'
 import { isComingSoon } from '@/data/projects'
 import { localePath } from '@/lib/locale-path'
 import { TechTag } from '@/components/ui/TechTag'
+import { MetricCard } from '@/components/ui/MetricCard'
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -134,6 +135,17 @@ export default async function ProjectPage({
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {project.results.length > 0 ? (
+        <section className="mb-10" aria-label={dict.caseStudy.results}>
+          <h2 className="mb-4 font-display text-xl font-bold text-matte">{dict.caseStudy.results}</h2>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {project.results.map((r) => (
+              <MetricCard key={r.label} metric={r.metric} label={r.label} />
             ))}
           </div>
         </section>
