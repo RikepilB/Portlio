@@ -70,12 +70,19 @@ None.
   lint/tsc/build (all clean), pushed. `gh pr view 24` confirmed `mergeable: MERGEABLE`.
 - Re-armed the same background checks-then-squash-merge watch for the new commit.
 
+## Update — merged (same session, final turn)
+
+- Second background watch (`b5mdnat57`) came back green: CodeRabbit, Vercel, Vercel Preview
+  Comments, `build` all `pass`. Squash-merged PR #24 → `main` at `e060d42` (`mergedAt`
+  2026-07-18T06:10:30Z). Verified directly against `origin/main` (not just the merge report):
+  `read-video` entry now `status: 'shipped'` on `main`. Vercel prod deploy triggered
+  automatically on merge (auto-deploy from `main`, per project convention).
+
 ## Next steps
-- **Check the second background PR-checks/merge task result (`b5mdnat57`)** — confirm PR #24
-  actually merged this time. If checks failed, the script does NOT merge — surface the failure
-  and fix instead of retrying blindly.
-- If merged: verify the live prod deploy (richardpillaca.com) shows read-video as shipped and the
-  peru-grid/el-umbral home order swap.
+- Verify the live prod deploy at richardpillaca.com once Vercel's prod build finishes — confirm
+  read-video shows as shipped and peru-grid sits above el-umbral on the home page.
+- Run `/export docs/handoff/2026-07-18-read-video-portfolio-entry/transcript.md` (assistant can't
+  run this — reminder for the user) to capture the full session transcript.
 - Optional (carried over, not done): swap the gif thumbnail for a static screenshot of the
   GitHub Pages landing page — Next `Image` serves the gif as a static first frame on the card by
   default; full animation only shows via a plain `<img>` or `unoptimized`.
