@@ -667,15 +667,16 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
         title: 'read-video — Enseñando a agentes IA a ver video',
         tagline:
             'Un agente de codificación con IA puede leer imágenes y PDFs — no video. read-video descompone cualquier video en frames más transcripción, y cotiza todo el trabajo antes de gastar un centavo o un token.',
-        readTime: '5 min de lectura',
+        readTime: '6 min de lectura',
         overview:
-            'read-video es una skill open-source (MIT) de Claude Code que da a agentes IA comprensión genuina de video: apúntala a un archivo local o URL (YouTube, Loom, Vimeo…) y extrae frames para la pista visual y transcripción para la pista de audio — las dos cosas que un agente puede consumir realmente. Su feature definitoria es la puerta de costo: un pipeline probe → estimate → run que cotiza todo el trabajo (dólares de transcripción y costo de tokens del agente) por adelantado, usa transcripción local gratuita por defecto con faster-whisper, y solo toca backends cloud de pago tras aprobación explícita. El motor es un CLI Python de 997 líneas construido sobre la stdlib.',
+            'read-video es una skill open-source (MIT) de Claude Code / Codex que da a agentes IA comprensión genuina de video: apúntala a un archivo local o URL (YouTube, Loom, Vimeo…) y extrae frames para la pista visual y transcripción para la pista de audio — las dos cosas que un agente puede consumir realmente. Su feature definitoria es la puerta de costo: un pipeline probe → estimate → run que cotiza todo el trabajo (dólares de transcripción y costo de tokens del agente) por adelantado, usa transcripción local gratuita por defecto con faster-whisper, y solo toca backends cloud de pago tras aprobación explícita. El motor es un CLI Python de 1,300 líneas construido sobre la stdlib, con un protocolo opcional legible por máquina (`manifest`, `--envelope`, códigos de salida determinísticos) añadido para agentes que lo llaman. Demo/landing page en vivo: https://rikepilb.github.io/read-video/.',
         problem:
-            'Los agentes fingen comprensión de video leyendo títulos y comentarios. Ver de verdad cuesta dinero real — los frames dominan el gasto en tokens del agente, y la transcripción cloud factura por minuto — así una implementación naive sorprende a usuarios con la factura después. El problema de diseño fue hacer la comprensión de video real y pre-aprobada: nunca gastar antes de mostrar el precio.',
+            'Los agentes fingen comprensión de video leyendo títulos y comentarios. Ver de verdad cuesta dinero real — los frames dominan el gasto en tokens del agente, y la transcripción cloud factura por minuto — así una implementación naive sorprende a usuarios con la factura después. El problema de diseño fue hacer la comprensión de video real y pre-aprobada: nunca gastar antes de mostrar el precio, y nunca dejar que el audio salga de la máquina sin consentimiento explícito.',
         questions: [
             '¿Cuál es el camino más barato y honesto a una transcripción — y qué tan seguido es gratis?',
             '¿Puede una skill servir múltiples harnesses de agente (Claude Code, Codex, Gemini CLI, Copilot CLI) desde una sola instalación?',
             '¿La skill supera mediblemente a un agente improvisando con ffmpeg por su cuenta?',
+            '¿Qué pasa cuando un agente de codificación extiende el mismo codebase meses después — el diseño original resiste una revisión adversarial real?',
         ],
         methodology: [
             {
@@ -689,7 +690,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
                 phase: 'Fase 2',
                 title: 'Un motor solo stdlib',
                 detail:
-                    'Los paths de API de pago usan requests multipart hechos a mano sobre urllib — sin SDKs — así los paths gratuitos nunca pagan costo de import y una dependencia opcional faltante nunca puede romper probe o estimate. 67 funciones pytest en 11 archivos fijan chunking, deduplicación, estimación de costo, extracción de frames y hardening (incluyendo un fix anchor contra spoofing de dominios parecidos).',
+                    'Los paths de API de pago usan requests multipart hechos a mano sobre urllib — sin SDKs — así los paths gratuitos nunca pagan costo de import y una dependencia opcional faltante nunca puede romper probe o estimate. 120 casos pytest en 17 archivos fijan chunking, deduplicación, estimación de costo, extracción de frames y hardening (incluyendo un fix anchor contra spoofing de dominios parecidos y una suite de tests a nivel subprocess para el contrato del CLI de agente).',
                 tech: ['Python stdlib', 'pytest'],
             },
             {
@@ -699,19 +700,28 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
                     'La skill se benchmarkó con un loop de eval contra baseline sin skill: con la skill cargada, el agente pasó 14 de 15 assertions (93.3%) en escenarios de resumen visual, comprensión de audio y puerta de costo, versus 66.7% baseline. Un script de instalación la conecta a cuatro harnesses: Claude Code, Codex, Gemini CLI y Copilot CLI.',
                 tech: ['LLM Evals', 'Claude Code', 'PowerShell', 'Bash'],
             },
+            {
+                phase: 'Fase 4',
+                title: 'Build Week: protocolos de agente, revisión adversarial, seguridad honesta',
+                detail:
+                    'Extendida para OpenAI Build Week 2026 con Codex + GPT-5.6: tiers de transcripción local adaptativos, contabilidad de costo nativa GPT-5.6 por patches de 32×32, y un protocolo CLI opcional orientado a agentes (`manifest`, `--envelope`/`--compact`, una taxonomía determinística de códigos de salida con metadata de reintentabilidad). Una revisión de código adversarial contra la nueva puerta de costo/consentimiento reveló 9 hallazgos; los 6 defectos reales se corrigieron con tests de regresión antes de lanzar — incluyendo uno detectado solo al correr de verdad los comandos documentados, no por unit tests. Un escáner de seguridad estático marcó el flujo de datos intencional env-key-a-API-cloud como CRITICAL; en vez de ocultarlo, el hallazgo se divulga y explica en un `SECURITY.md` que el propio reporte del escáner verifica.',
+                tech: ['Codex', 'GPT-5.6', 'Revisión de Código Adversarial', 'Protocolos de Agente', 'GitHub Pages'],
+            },
         ],
         results: [
             { metric: '93.3%', label: 'assertions de eval pasadas con la skill, vs 66.7% baseline sin ella' },
             { metric: '9', label: 'backends de transcripción, ordenados gratis-y-local primero' },
-            { metric: '67', label: 'tests sobre un motor de 997 líneas solo stdlib' },
+            { metric: '120', label: 'tests sobre un motor de 1,300 líneas solo stdlib' },
+            { metric: '6', label: 'bugs reales encontrados por revisión adversarial y corregidos antes de lanzar' },
         ],
         keyFindings: [
             'La transparencia de costo es una feature UX para agentes: mostrar el precio antes del trabajo convierte "la IA me subió la factura" en un sí/no informado.',
             'El orden local-first (captions → Whisper on-device → APIs de pago) hace del path gratuito el default — la mayoría de videos nunca cuestan un centavo leer.',
             'Los evals superan las vibes para diseño de skills: un gap medido 93.3%-vs-66.7% es lo que separa "la skill ayuda" de esperar que lo haga.',
+            'La revisión adversarial más correr de verdad los comandos documentados detectó una regresión real que los unit tests pasaron por alto: un fix en otra parte del mismo diff cambió silenciosamente lo que demostraba el propio ejemplo de prueba-de-privacidad del README.',
         ],
         conclusion:
-            'read-video es la pieza open-source más completa de este portfolio: licencia MIT con docs de contribución, plantillas de issues, GIF demo, 46 commits de iteración real, y una mejora de eval medida. También es honesto sobre escala — el set de eval es pequeño e itera — pero la forma es lo que se parece a tooling de agente en producción: cotizado, testeado, local-first, multi-harness.',
+            'read-video es la pieza open-source más completa de este portfolio: licencia MIT con docs de contribución, plantillas de issues, GIF demo, una landing page en vivo en GitHub Pages (https://rikepilb.github.io/read-video/), 60+ commits de iteración real, y una mejora de eval medida. También es honesto sobre escala — el set de eval es pequeño e itera — pero la forma es lo que se parece a tooling de agente en producción: cotizado, testeado, local-first, multi-harness, y revisado como software real en vez de lanzado por vibes. Enviado a OpenAI Build Week 2026 (track Developer Tools).',
     },
     'resume-scorer': {
         category: 'INGENIERÍA IA',
