@@ -21,7 +21,11 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ---
 
-## Current state — 2026-07-15 (later)
+## Current state — 2026-07-18
+
+**read-video shipped + home reorder — merged with `origin/main` (PR #23) and pushed for PR #24.** Read the sibling `PROYECTOS/read-video` repo (it had a prewritten `docs/portfolio-entry.md` update, used as source of truth). `src/data/projects.ts` id `14`: `status: 'shipped'`, added `image`/`images` (`public/images/read-video.gif`, copied from the repo's demo gif), `demoVideo` → live GitHub Pages link (`https://rikepilb.github.io/read-video/`), added Phase 4 (Build Week: agent protocols, adversarial review, security disclosure), updated numbers (1,300-line engine, 120 tests/17 files, 60+ commits). Matching Spanish translation added to `projects-es-overlays.ts`. Home `featuredSlugs` reordered so `peru-tech-map` sits before `el-umbral`. Committed on `feat/portfolio-additions`, pushed, PR #24 opened against `main`; `origin/main` had since gained PR #23 (About bios) so `feat/portfolio-additions` was merged forward (`git merge origin/main`) to resolve — conflicts were only in `docs/handoff/HANDOFF.md` and the read-video `status` field (both trivially "ours wins, theirs was stale/superseded"); `page.tsx` auto-merged a duplicate `peru-tech-map` entry, hand-fixed. lint/tsc/build all green post-merge. Awaiting CI on PR #24, then squash-merge.
+
+## Previous state — 2026-07-15 (later)
 
 **Coming soon IA + mockup blend + hydration quieting — still uncommitted on `feat/portfolio-additions`.** Shipped earlier: About bios (`b1cdc27`/`5fce9ae`, PR #23, prod). Local dirty work now includes: Coming soon bucket (AquaTwin concept-only, FindLeads, read-video, ResumeScorer, Skills Lab, SkillVault, **VANS** without unrelated `mainpage.jpg`); Peru Grid screenshot + home featured; placeholder badge junk removed; home/project cards use `object-contain` + soft CSS `mask-image` blend into felt; Grammarly body hydration suppressed (`layout.tsx`) + Reveal `useSyncExternalStore`. Mist wipe still paused. Await commit/push of the dirty set.
 
@@ -43,6 +47,7 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ## Session index (append-only, newest first)
 
+- [2026-07-18-read-video-portfolio-entry](2026-07-18-read-video-portfolio-entry/HANDOFF.md) — read-video shipped (live demo, gif, Build Week Phase 4, EN+ES) + home reorder; committed `d2a45b9`, merged forward with PR #23, PR #24 opened
 - [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — VANS→coming soon (dropped unrelated image); Grammarly body hydration silenced + Reveal reduced-motion fix; home/card mockups `object-contain` + soft edge mask blend (uncommitted)
 - [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — About bios restored/shipped (`b1cdc27`/`5fce9ae`, PR #23, prod); Coming soon IA + AquaTwin concept-only; Peru Grid screenshot on home; placeholder badge junk removed (latest code mostly uncommitted)
 - [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — project-detail readability root-caused as a deploy gap (fix already in `a540de8`, unmerged); added `--color-felt-frame` token, greener project-image frames on cards/placeholder/home; lint/tsc/build green; nothing committed, awaiting ship go-ahead

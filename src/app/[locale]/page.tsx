@@ -15,12 +15,12 @@ import { ProjectImagePlaceholder } from '@/components/ui/ProjectImagePlaceholder
 import { Reveal } from '@/components/ui/Reveal'
 
 const featuredSlugs = [
+  'peru-tech-map',
   'el-umbral',
   'empenalo-fintech',
   'scoutlane-recruitment',
   'exam-analysis-system',
   'bike-share-optimization',
-  'peru-tech-map',
 ]
 
 const areaIcons = [

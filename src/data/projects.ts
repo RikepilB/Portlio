@@ -797,20 +797,24 @@ export const projects: Project[] = [
         slug: 'read-video',
         category: 'AI ENGINEERING',
         catColor: '#1d4ed8',
-        status: 'coming-soon',
+        status: 'shipped',
+        image: '/images/read-video.gif',
+        images: ['/images/read-video.gif'],
+        demoVideo: 'https://rikepilb.github.io/read-video/',
         title: 'read-video — Teaching AI Agents to Watch Video',
         tagline:
             'An AI coding agent can read images and PDFs — not video. read-video decomposes any video into frames plus a transcript, and prices the whole job before spending a cent or a token.',
         duration: 'Jun 2026 – Jul 2026',
-        readTime: '5 min read',
+        readTime: '6 min read',
         overview:
-            'read-video is an open-source (MIT) Claude Code skill that gives AI agents genuine video comprehension: point it at a local file or a URL (YouTube, Loom, Vimeo…) and it extracts frames for the visual track and a transcript for the audio track — the two things an agent can actually consume. Its defining feature is the cost gate: a probe → estimate → run pipeline that prices the entire job (transcription dollars and agent-token cost) up front, defaults to free local transcription with faster-whisper, and only touches paid cloud backends after explicit approval. The engine is a single 997-line Python CLI built on the standard library.',
+            'read-video is an open-source (MIT) Claude Code / Codex skill that gives AI agents genuine video comprehension: point it at a local file or a URL (YouTube, Loom, Vimeo…) and it extracts frames for the visual track and a transcript for the audio track — the two things an agent can actually consume. Its defining feature is the cost gate: a probe → estimate → run pipeline that prices the entire job (transcription dollars and agent-token cost) up front, defaults to free local transcription with faster-whisper, and only touches paid cloud backends after explicit approval. The engine is a single 1,300-line Python CLI built on the standard library, with an opt-in machine-readable protocol (`manifest`, `--envelope`, deterministic exit codes) added for agent callers. Live demo/landing page: https://rikepilb.github.io/read-video/.',
         problem:
-            'Agents fake video understanding by reading titles and comments. Actually watching costs real money — frames dominate agent-token spend, and cloud transcription bills by the minute — so a naive implementation surprises users with the bill after the fact. The design problem was making video comprehension both real and pre-approved: never spend before showing the price.',
+            'Agents fake video understanding by reading titles and comments. Actually watching costs real money — frames dominate agent-token spend, and cloud transcription bills by the minute — so a naive implementation surprises users with the bill after the fact. The design problem was making video comprehension both real and pre-approved: never spend before showing the price, and never let audio leave the machine without explicit consent.',
         questions: [
             'What\'s the cheapest honest path to a transcript — and how often is it free?',
             'Can one skill serve multiple agent harnesses (Claude Code, Codex, Gemini CLI, Copilot CLI) from a single install?',
             'Does the skill measurably beat an agent improvising with ffmpeg on its own?',
+            'What happens when a coding agent extends the same codebase months later — does the original design hold up under real adversarial review?',
         ],
         methodology: [
             {
@@ -824,7 +828,7 @@ export const projects: Project[] = [
                 phase: 'Phase 2',
                 title: 'A Stdlib-Only Engine',
                 detail:
-                    'The paid-API paths use hand-built multipart requests over urllib — no SDKs — so the free paths never pay an import cost and a missing optional dependency can never break probe or estimate. 67 pytest functions across 11 files pin down chunking, deduplication, cost estimation, frame extraction, and hardening (including an anchor fix against lookalike-domain spoofing).',
+                    'The paid-API paths use hand-built multipart requests over urllib — no SDKs — so the free paths never pay an import cost and a missing optional dependency can never break probe or estimate. 120 pytest cases across 17 files pin down chunking, deduplication, cost estimation, frame extraction, and hardening (including an anchor fix against lookalike-domain spoofing and a subprocess-level test suite for the agent CLI contract).',
                 tech: ['Python stdlib', 'pytest'],
             },
             {
@@ -834,21 +838,30 @@ export const projects: Project[] = [
                     'The skill was benchmarked with an eval loop against a no-skill baseline: with the skill loaded, the agent passed 14 of 15 assertions (93.3%) across visual-summary, audio-comprehension and cost-gate scenarios, versus 66.7% baseline. One install script wires it into four harnesses: Claude Code, Codex, Gemini CLI and Copilot CLI.',
                 tech: ['LLM Evals', 'Claude Code', 'PowerShell', 'Bash'],
             },
+            {
+                phase: 'Phase 4',
+                title: 'Build Week: Agent Protocols, Adversarial Review, Honest Security',
+                detail:
+                    'Extended for OpenAI Build Week 2026 with Codex + GPT-5.6: adaptive local transcription tiers, GPT-5.6-native 32×32 patch cost accounting, and an opt-in agent-facing CLI protocol (`manifest`, `--envelope`/`--compact`, a deterministic exit-code taxonomy with retryability metadata). An adversarial code-review pass against the new cost/consent gate surfaced 9 findings; the 6 real defects were fixed with regression tests before shipping — including one caught only by actually running the documented commands, not by unit tests alone. A static security scanner flagged the intentional env-key-to-cloud-API data flow as CRITICAL; rather than hide it, the finding is disclosed and explained in a `SECURITY.md` the scanner\'s own report cross-checks against.',
+                tech: ['Codex', 'GPT-5.6', 'Adversarial Code Review', 'Agent Protocols', 'GitHub Pages'],
+            },
         ],
         results: [
             { metric: '93.3%', label: 'eval assertions passed with the skill, vs 66.7% baseline without it' },
             { metric: '9', label: 'transcription backends, ordered free-and-local first' },
-            { metric: '67', label: 'tests over a 997-line stdlib-only engine' },
+            { metric: '120', label: 'tests over a 1,300-line stdlib-only engine' },
+            { metric: '6', label: 'real bugs found by adversarial review and fixed before shipping' },
         ],
         keyFindings: [
             'Cost transparency is a UX feature for agents: showing the price before the work turns "the AI ran up my bill" into an informed yes/no.',
             'Local-first ordering (captions → Whisper on-device → paid APIs) makes the free path the default path — most videos never cost a cent to read.',
             'Evals beat vibes for skill design: a measured 93.3%-vs-66.7% gap is what separates "the skill helps" from hoping it does.',
+            'Adversarial review plus actually running the documented commands caught a real regression unit tests missed entirely: a bug fix elsewhere in the same diff silently changed what the README\'s own privacy-proof example demonstrated.',
         ],
         conclusion:
-            'read-video is the most complete open-source piece in this portfolio: MIT-licensed with contribution docs, issue templates, a demo GIF, 46 commits of real iteration, and a measured eval improvement. It\'s also honest about scale — the eval set is small and iteration continues — but the shape is what production agent-tooling looks like: priced, tested, local-first, multi-harness.',
+            'read-video is the most complete open-source piece in this portfolio: MIT-licensed with contribution docs, issue templates, a demo GIF, a live GitHub Pages landing page (https://rikepilb.github.io/read-video/), 60+ commits of real iteration, and a measured eval improvement. It\'s also honest about scale — the eval set is small and iteration continues — but the shape is what production agent-tooling looks like: priced, tested, local-first, multi-harness, and reviewed like real software rather than shipped on vibes. Submitted to OpenAI Build Week 2026 (Developer Tools track).',
         github: 'https://github.com/RikepilB/read-video',
-        stack: ['Python', 'ffmpeg', 'yt-dlp', 'faster-whisper', 'pytest', 'Claude Code'],
+        stack: ['Python', 'ffmpeg', 'yt-dlp', 'faster-whisper', 'pytest', 'Claude Code', 'Codex', 'GPT-5.6'],
     },
     {
         id: '15',
