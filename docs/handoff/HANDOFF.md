@@ -21,7 +21,11 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ---
 
-## Current state — 2026-07-18
+## Current state — 2026-07-18 (later)
+
+**ScoutLane + FindLeads + read-video audited and refreshed, home showcase re-curated — merged to `main` via PR #25 (`2a1168c`).** Standing session `/goal`: check ScoutLane/read-video/FindLeads, get all up to date with real images, showcase the best/most recent on home. Ran 3 parallel Explore agents against the sibling repos, verified every claim directly (ran real test suites, checked real DB, took real screenshots) rather than trusting stale docs. ScoutLane: current screenshot (`public/images/scoutlane.png`), verified 236 tests/36 files, refreshed stack (Auth.js RBAC, pg-boss async workers, Resend, GCS, webhooks). FindLeads: promoted `coming-soon` → `shipped` (27/27 requirements confirmed, 123 tests/24 files verified), got a real screenshot by running the app locally against its actual provisioned Neon DB (`public/images/findleads.png`). read-video: test count corrected 120→110, noted the live landing page's "Voidscape" rebrand. Home `featuredSlugs` re-curated to `findleads, peru-tech-map, read-video, el-umbral, scoutlane-recruitment, exam-analysis-system` (dropped the 2024-era `bike-share-optimization` and `empenalo-fintech`). lint/tsc/build all green. Committed `8347466`, merged forward past PR #24's squash landing on main (`1a3d2bb`, 5 files — verified each conflict was ours-strictly-superset before resolving), pushed, PR #25, CI green (CodeRabbit/Vercel/build), squash-merged to `main` at `2a1168c`.
+
+## Previous state — 2026-07-18
 
 **read-video shipped + home reorder — merged to `main` via PR #24 (`e060d42`).** Read the sibling `PROYECTOS/read-video` repo (it had a prewritten `docs/portfolio-entry.md` update, used as source of truth). `src/data/projects.ts` id `14`: `status: 'shipped'`, added `image`/`images` (`public/images/read-video.gif`, copied from the repo's demo gif), `demoVideo` → live GitHub Pages link (`https://rikepilb.github.io/read-video/`), added Phase 4 (Build Week: agent protocols, adversarial review, security disclosure), updated numbers (1,300-line engine, 120 tests/17 files, 60+ commits). Matching Spanish translation added to `projects-es-overlays.ts`. Home `featuredSlugs` reordered so `peru-tech-map` sits before `el-umbral`. Committed on `feat/portfolio-additions`, pushed, PR #24 opened against `main`; `origin/main` had since gained PR #23 (About bios) so `feat/portfolio-additions` was merged forward (`git merge origin/main`) to resolve — conflicts were only in `docs/handoff/HANDOFF.md` and the read-video `status` field (both trivially "ours wins, theirs was stale/superseded"); `page.tsx` auto-merged a duplicate `peru-tech-map` entry, hand-fixed. lint/tsc/build all green post-merge. CI passed (CodeRabbit, Vercel, build), PR #24 squash-merged to `main` at `e060d42`; Vercel prod deploy auto-triggered.
 
@@ -47,6 +51,7 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ## Session index (append-only, newest first)
 
+- [2026-07-18-read-video-portfolio-entry](2026-07-18-read-video-portfolio-entry/HANDOFF.md) — `/goal`: audited ScoutLane/read-video/FindLeads live, verified real numbers + screenshots, FindLeads shipped, home showcase re-curated; PR #25 merged to main (`2a1168c`)
 - [2026-07-18-read-video-portfolio-entry](2026-07-18-read-video-portfolio-entry/HANDOFF.md) — read-video shipped (live demo, gif, Build Week Phase 4, EN+ES) + home reorder; committed `d2a45b9`, merged forward with PR #23, PR #24 opened
 - [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — VANS→coming soon (dropped unrelated image); Grammarly body hydration silenced + Reveal reduced-motion fix; home/card mockups `object-contain` + soft edge mask blend (uncommitted)
 - [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — About bios restored/shipped (`b1cdc27`/`5fce9ae`, PR #23, prod); Coming soon IA + AquaTwin concept-only; Peru Grid screenshot on home; placeholder badge junk removed (latest code mostly uncommitted)
