@@ -51,11 +51,29 @@ None.
   --squash`), matching the repo's existing squash-merge convention (see `875e182 (#23)` on
   `main`). Still running as of this handoff update — **not confirmed merged yet**.
 
+## Update — merge conflict found and resolved (same session, follow-up turn)
+
+- First background checks/merge attempt failed: PR #24 was not mergeable (`origin/main` had
+  advanced with PR #23 after this branch was created; not a checks failure).
+- `git fetch origin main` + `git merge origin/main` on `feat/portfolio-additions` surfaced real
+  conflicts:
+  - `src/data/projects.ts` — read-video `status` field only (`'shipped'` vs `origin/main`'s
+    untouched `'coming-soon'`); kept ours, origin/main simply predates this update.
+  - `docs/handoff/HANDOFF.md` — both current-state and session-index sections; kept ours (a
+    strict superset — origin/main's version was just missing this session's entries).
+  - `src/app/[locale]/page.tsx` — auto-merged *without* conflict markers but produced a
+    duplicate `'peru-tech-map'` entry in `featuredSlugs` (git's line-based merge doesn't
+    understand list semantics: main had appended it at the end via PR #23, this session had
+    already moved it to the front) — caught by reading the file, not by git, and hand-fixed by
+    deleting the duplicate.
+- Committed merge `cf92c6d` ("merge: resolve PR #24 conflicts with origin/main"), re-ran
+  lint/tsc/build (all clean), pushed. `gh pr view 24` confirmed `mergeable: MERGEABLE`.
+- Re-armed the same background checks-then-squash-merge watch for the new commit.
+
 ## Next steps
-- **Check the background PR-checks/merge task result** — confirm PR #24 actually merged
-  (Vercel + any other checks were still pending when this was written). If checks failed, the
-  background script deliberately does NOT merge — surface the failure and fix instead of retrying
-  blindly.
+- **Check the second background PR-checks/merge task result (`b5mdnat57`)** — confirm PR #24
+  actually merged this time. If checks failed, the script does NOT merge — surface the failure
+  and fix instead of retrying blindly.
 - If merged: verify the live prod deploy (richardpillaca.com) shows read-video as shipped and the
   peru-grid/el-umbral home order swap.
 - Optional (carried over, not done): swap the gif thumbnail for a static screenshot of the
