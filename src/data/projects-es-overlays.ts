@@ -386,50 +386,53 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
         category: 'FULL STACK 2026',
         title: 'ScoutLane — Plataforma de reclutamiento',
         tagline:
-            'Pipeline de reclutamiento con IA para parsear currículums, rastrear candidatos y gestionar flujos de contratación',
+            'Plataforma de reclutamiento con IA: páginas públicas de vacantes, parseo de currículums, pipelines drag-and-drop, admin por roles, y la infraestructura de email/storage/webhooks que un equipo real de contratación necesita.',
         readTime: '7 min de lectura',
         overview:
-            'ScoutLane es una plataforma de reclutamiento que combina parseo de currículums con IA y gestión de pipeline, ayudando a equipos a publicar vacantes, procesar postulaciones, gestionar candidatos y analizar el rendimiento de contratación por rol.',
+            'ScoutLane es una plataforma de reclutamiento que combina parseo de currículums con IA y gestión completa de pipeline: páginas públicas de carrera con formularios de postulación personalizados, un panel admin Kanban drag-and-drop, control de acceso por roles, y la infraestructura de producción — workers de trabajos async, email transaccional, storage cloud de archivos, webhooks salientes — que un equipo real de contratación opera día a día.',
         problem:
-            'Los equipos de reclutamiento pasan horas revisando currículums manualmente y rastreando candidatos en hojas de cálculo. ScoutLane automatiza el parseo de currículums y proporciona gestión estructurada de pipeline para reducir el time-to-hire.',
+            'Los equipos de reclutamiento pasan horas revisando currículums manualmente y rastreando candidatos en hojas de cálculo. ScoutLane automatiza el parseo de currículums y proporciona gestión estructurada de pipeline para reducir el time-to-hire, sin dejar los huecos operativos — auth, permisos, notificaciones, integraciones — que convierten un demo en software no lanzable.',
         questions: [
             '¿Cómo puede la IA extraer de forma confiable datos estructurados de currículums no estructurados?',
             '¿Qué vistas de pipeline dan a los reclutadores la mejor visibilidad del progreso de candidatos?',
+            '¿Qué necesita un pipeline de parseo de currículums más allá del happy path para correr sin supervisión — reintentos, workers async, separación de roles?',
         ],
         methodology: [
             {
                 phase: 'Fase 1',
                 title: 'Motor de parseo de currículums',
                 detail:
-                    'Construí un parser de currículums con IA que extrae historial educativo, experiencia laboral, habilidades e información de contacto de PDFs y DOCX subidos. Normalicé la salida en perfiles estructurados de candidatos.',
-                tech: ['Node.js', 'AI Resume Parser', 'Postgres'],
+                    'Construí un parser de currículums con IA (OpenRouter, modelo configurable) que extrae historial educativo, experiencia laboral, habilidades e información de contacto de PDFs y DOCX subidos, normalizado en perfiles estructurados de candidatos y procesado asíncronamente vía workers pg-boss para que un parseo lento nunca bloquee el flujo de postulación.',
+                tech: ['OpenRouter', 'pg-boss', 'Prisma', 'PostgreSQL'],
             },
             {
                 phase: 'Fase 2',
                 title: 'Portal de vacantes y postulaciones',
                 detail:
-                    'Construí páginas públicas de listado de vacantes con formularios de postulación. Los candidatos suben currículums que se parsean automáticamente y enrutan a la etapa correcta del pipeline.',
-                tech: ['React', 'Next.js', 'Postgres'],
+                    'Construí páginas públicas de carrera con filtros de departamento/ubicación y formularios de postulación personalizados por template de vacante. Los candidatos suben currículums que se parsean automáticamente y enrutan a la etapa correcta del pipeline; Resend maneja las confirmaciones de email transaccional.',
+                tech: ['Next.js 16', 'React', 'Resend', 'Google Cloud Storage'],
             },
             {
                 phase: 'Fase 3',
-                title: 'Panel admin y pipelines',
+                title: 'Panel admin, RBAC e integraciones',
                 detail:
-                    'Creé panel admin interno con CRUD de vacantes, vistas kanban y lista de pipeline, automatizaciones por etapa y analítica por rol. Los reclutadores pueden arrastrar candidatos entre etapas y disparar emails automatizados.',
-                tech: ['React', 'Next.js', 'Node.js'],
+                    'Construí un panel admin por roles (Admin / Recruiter / Hiring Manager vía sesiones JWT de Auth.js) con pipelines Kanban drag-and-drop (dnd-kit), analítica Recharts, gestión de templates de vacante, gestión de equipo, e integraciones de webhooks salientes para sistemas externos — más una suite completa de tests Vitest + Playwright (236 tests, 36 archivos) y CI (lint → typecheck → test → build).',
+                tech: ['Auth.js', 'dnd-kit', 'Recharts', 'Vitest', 'Playwright'],
             },
         ],
         results: [
-            { metric: 'AI-powered', label: 'Motor de parseo de currículums' },
-            { metric: 'Kanban', label: 'Vistas de gestión de pipeline' },
+            { metric: '236', label: 'tests pasando en 36 archivos (Vitest + Playwright)' },
+            { metric: '3', label: 'niveles de acceso por rol — Admin, Recruiter, Hiring Manager' },
+            { metric: 'Async', label: 'workers de parseo de currículums y email vía pg-boss' },
         ],
         keyFindings: [
             'El parseo de currículums con IA redujo la entrada manual de datos en ~80%, permitiendo a reclutadores enfocarse en evaluación de candidatos.',
             'Las vistas kanban de pipeline mejoraron la visibilidad del equipo sobre cuellos de botella — candidatos estancados se volvieron inmediatamente visibles.',
-            'La analítica por rol reveló qué canales de sourcing produjeron candidatos de mayor calidad.',
+            'Mover el parseo de currículums a workers async pg-boss mantuvo el flujo de postulación rápido sin importar la latencia de respuesta de la IA — una lección que el diseño síncrono anterior no sobrevivió bajo carga real.',
+            'El control de acceso por rol (Admin/Recruiter/Hiring Manager) importó más que cualquier feature individual — equipos reales de contratación necesitan límites de permisos antes de confiarle a una herramienta los datos de candidatos.',
         ],
         conclusion:
-            'ScoutLane cierra la brecha entre automatización con IA y criterio humano en reclutamiento. El enfoque de pipeline estructurado convierte procesos de contratación caóticos en flujos medibles y mejorables.',
+            'ScoutLane cierra la brecha entre automatización con IA y criterio humano en reclutamiento. Lo que empezó como un pipeline de parseo de currículums creció hasta ser infraestructura completa de reclutamiento — páginas públicas de carrera, RBAC, workers async, email, storage, webhooks, y una suite de tests real — porque eso es lo que requiere lanzar software para un equipo real de contratación, no solo lo que necesita un demo. En vivo en scoutlane.vercel.app.',
     },
     'vans-voice-navigation': {
         category: 'INVESTIGACIÓN IHC',
@@ -594,19 +597,19 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
                 phase: 'Fase 3',
                 title: 'Capa CRM y split durable/snapshot',
                 detail:
-                    'El estado CRM durable (notas, status contactado) vive en una tabla businesses keyed por place_id, deliberadamente separado de snapshots de leads por job — re-scrapear una ciudad nunca resetea lo que sabes de un negocio. Exportación CSV cierra el loop para outreach real. 103 tests (unit + integración con DB real) cubren el pipeline; el código de test supera al de producto aproximadamente 1.25:1.',
+                    'El estado CRM durable (notas, status contactado) vive en una tabla businesses keyed por place_id, deliberadamente separado de snapshots de leads por job — re-scrapear una ciudad nunca resetea lo que sabes de un negocio. Exportación CSV cierra el loop para outreach real. 123 tests (unit + integración con DB real) cubren el pipeline; el código de test supera al de producto aproximadamente 1.35:1.',
                 tech: ['TypeScript', 'Vitest', 'Tailwind 4'],
             },
         ],
         results: [
-            { metric: '103', label: 'tests en verde — unit más integración contra base Neon real' },
+            { metric: '123', label: 'tests en verde en 24 archivos — unit más integración contra base Neon real' },
             { metric: '27/27', label: 'requisitos MVP entregados y verificados en 5 fases planificadas' },
-            { metric: '1.25:1', label: 'ratio código test/producto (≈1.800 vs ≈1.440 líneas)' },
+            { metric: '1.35:1', label: 'ratio código test/producto (≈2.000 vs ≈1.490 líneas)' },
         ],
         keyFindings: [
             'Postgres es una cola de jobs perfectamente válida a escala de un solo usuario: un claim atómico single-UPDATE te da crash-safety y duplicate-worker safety con cero infraestructura nueva.',
             'Separar identidad durable (keyed por place_id) de snapshots de corrida es lo que hace un scraper re-ejecutable — el estado que te importa nunca debe vivir en estado que regeneras.',
-            'En builds asistidos por IA, la suite de tests es el contrato: 103 tests escritos junto a una semana de implementación es lo que hizo "feature-complete" una afirmación verificable en lugar de una sensación.',
+            'En builds asistidos por IA, la suite de tests es el contrato: 123 tests escritos junto a la implementación es lo que hizo "feature-complete" una afirmación verificable en lugar de una sensación.',
         ],
         conclusion:
             'FindLeads es un MVP completo y funcional construido en aproximadamente una semana — y honestamente scoped: single-user por diseño, localhost-only hasta ahora, con su propia auditoría de brechas de 15 ítems ordenados por severidad commiteada al repo. Es el ejemplo pequeño más claro del workflow detrás de los proyectos más grandes: planificar en fases, validar en límites, testear contra infraestructura real, y escribir lo que aún es débil.',
@@ -669,7 +672,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
             'Un agente de codificación con IA puede leer imágenes y PDFs — no video. read-video descompone cualquier video en frames más transcripción, y cotiza todo el trabajo antes de gastar un centavo o un token.',
         readTime: '6 min de lectura',
         overview:
-            'read-video es una skill open-source (MIT) de Claude Code / Codex que da a agentes IA comprensión genuina de video: apúntala a un archivo local o URL (YouTube, Loom, Vimeo…) y extrae frames para la pista visual y transcripción para la pista de audio — las dos cosas que un agente puede consumir realmente. Su feature definitoria es la puerta de costo: un pipeline probe → estimate → run que cotiza todo el trabajo (dólares de transcripción y costo de tokens del agente) por adelantado, usa transcripción local gratuita por defecto con faster-whisper, y solo toca backends cloud de pago tras aprobación explícita. El motor es un CLI Python de 1,300 líneas construido sobre la stdlib, con un protocolo opcional legible por máquina (`manifest`, `--envelope`, códigos de salida determinísticos) añadido para agentes que lo llaman. Demo/landing page en vivo: https://rikepilb.github.io/read-video/.',
+            'read-video es una skill open-source (MIT) de Claude Code / Codex que da a agentes IA comprensión genuina de video: apúntala a un archivo local o URL (YouTube, Loom, Vimeo…) y extrae frames para la pista visual y transcripción para la pista de audio — las dos cosas que un agente puede consumir realmente. Su feature definitoria es la puerta de costo: un pipeline probe → estimate → run que cotiza todo el trabajo (dólares de transcripción y costo de tokens del agente) por adelantado, usa transcripción local gratuita por defecto con faster-whisper, y solo toca backends cloud de pago tras aprobación explícita. El motor es un CLI Python de 1,300 líneas construido sobre la stdlib, con un protocolo opcional legible por máquina (`manifest`, `--envelope`, códigos de salida determinísticos) añadido para agentes que lo llaman. La landing page pública — en vivo en https://rikepilb.github.io/read-video/ — presenta la herramienta bajo el nombre de trabajo "Voidscape", su puerta de entrada consumer-facing sobre el mismo motor.',
         problem:
             'Los agentes fingen comprensión de video leyendo títulos y comentarios. Ver de verdad cuesta dinero real — los frames dominan el gasto en tokens del agente, y la transcripción cloud factura por minuto — así una implementación naive sorprende a usuarios con la factura después. El problema de diseño fue hacer la comprensión de video real y pre-aprobada: nunca gastar antes de mostrar el precio, y nunca dejar que el audio salga de la máquina sin consentimiento explícito.',
         questions: [
@@ -690,7 +693,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
                 phase: 'Fase 2',
                 title: 'Un motor solo stdlib',
                 detail:
-                    'Los paths de API de pago usan requests multipart hechos a mano sobre urllib — sin SDKs — así los paths gratuitos nunca pagan costo de import y una dependencia opcional faltante nunca puede romper probe o estimate. 120 casos pytest en 17 archivos fijan chunking, deduplicación, estimación de costo, extracción de frames y hardening (incluyendo un fix anchor contra spoofing de dominios parecidos y una suite de tests a nivel subprocess para el contrato del CLI de agente).',
+                    'Los paths de API de pago usan requests multipart hechos a mano sobre urllib — sin SDKs — así los paths gratuitos nunca pagan costo de import y una dependencia opcional faltante nunca puede romper probe o estimate. 110 casos pytest en 17 archivos fijan chunking, deduplicación, estimación de costo, extracción de frames y hardening (incluyendo un fix anchor contra spoofing de dominios parecidos y una suite de tests a nivel subprocess para el contrato del CLI de agente).',
                 tech: ['Python stdlib', 'pytest'],
             },
             {
@@ -711,7 +714,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
         results: [
             { metric: '93.3%', label: 'assertions de eval pasadas con la skill, vs 66.7% baseline sin ella' },
             { metric: '9', label: 'backends de transcripción, ordenados gratis-y-local primero' },
-            { metric: '120', label: 'tests sobre un motor de 1,300 líneas solo stdlib' },
+            { metric: '110', label: 'tests sobre un motor de 1,300 líneas solo stdlib' },
             { metric: '6', label: 'bugs reales encontrados por revisión adversarial y corregidos antes de lanzar' },
         ],
         keyFindings: [
