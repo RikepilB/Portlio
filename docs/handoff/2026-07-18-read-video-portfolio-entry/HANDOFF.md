@@ -28,12 +28,39 @@ it out of "coming soon."
 ## Failed attempts
 None.
 
+## Update — home order swap + ship (same session, follow-up turns)
+
+- User asked to also put `peru-tech-map` above `el-umbral` on the home page → swapped the two
+  entries at the top of `featuredSlugs` in `src/app/[locale]/page.tsx` (only occurrence of that
+  list in the codebase, checked). lint/tsc re-verified clean.
+- User ran `/gsd-ship "commit, push and ship"`. `gsd_run query init.phase-op` returned
+  `phase_found: false`, `roadmap_exists: false` — this repo has no `.planning/ROADMAP.md`/phase
+  artifacts, so the GSD phase-based ship workflow doesn't apply here (same blocker hit previously
+  in the sibling `read-video` repo). Fell back to the plain-language ask in the command args:
+  manual commit → push → PR → merge-when-green.
+- Before committing, diffed `src/data/projects.ts` / `projects-es-overlays.ts` / `page.tsx`
+  against `origin/main` to confirm the local branch (which already has a prior merge commit
+  `a84a5e9` resolving PR #23 conflicts) wasn't stale or about to clobber anything — diff was clean,
+  isolated to the intended read-video + ordering changes.
+- Committed `d2a45b9` on `feat/portfolio-additions` (7 files: projects.ts, projects-es-overlays.ts,
+  page.tsx, read-video.gif, handoff tree). Left `.agents/`/`.codex/` untracked dirs alone —
+  pre-existing, unrelated to this session.
+- Pushed, opened **PR #24**: https://github.com/RikepilB/Portlio/pull/24 (base `main`).
+- User said "merge when read[y]" → started a background poll (`gh pr checks 24`) that waits for
+  all checks to resolve, then squash-merges automatically if everything passes (`gh pr merge 24
+  --squash`), matching the repo's existing squash-merge convention (see `875e182 (#23)` on
+  `main`). Still running as of this handoff update — **not confirmed merged yet**.
+
 ## Next steps
-- Not committed yet (user didn't ask) — review the diff, then commit/push on `feat/portfolio-additions` when ready.
-- Optional: swap the gif thumbnail for a static screenshot of the GitHub Pages landing page if a
-  static image reads better on the project card than the animated gif (Next `Image` will serve
-  the gif as a static first frame in the card by default; full animation only shows if rendered
-  with a plain `<img>` or `unoptimized`).
+- **Check the background PR-checks/merge task result** — confirm PR #24 actually merged
+  (Vercel + any other checks were still pending when this was written). If checks failed, the
+  background script deliberately does NOT merge — surface the failure and fix instead of retrying
+  blindly.
+- If merged: verify the live prod deploy (richardpillaca.com) shows read-video as shipped and the
+  peru-grid/el-umbral home order swap.
+- Optional (carried over, not done): swap the gif thumbnail for a static screenshot of the
+  GitHub Pages landing page — Next `Image` serves the gif as a static first frame on the card by
+  default; full animation only shows via a plain `<img>` or `unoptimized`.
 
 ## Files in this folder
 - `HANDOFF.md` — this file (curated digest)
