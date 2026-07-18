@@ -469,57 +469,60 @@ export const projects: Project[] = [
         slug: 'scoutlane-recruitment',
         title: 'ScoutLane — Recruitment Platform',
         tagline:
-            'AI-powered recruitment pipeline for parsing resumes, tracking candidates, and managing hiring workflows',
+            'AI-powered recruitment platform: public career pages, resume parsing, drag-and-drop pipelines, role-based admin, and the email/storage/webhook infrastructure a real hiring team needs.',
         category: 'FULL STACK 2026',
         catColor: '#0c5a40',
-        duration: 'Apr – May 2026',
+        duration: 'Apr – Jul 2026',
         readTime: '7 min read',
         image: '/images/scoutlane.png',
         images: ['/images/scoutlane.png'],
         demoVideo: 'https://scoutlane.vercel.app',
-        stack: ['React', 'Next.js', 'Node.js', 'Postgres', 'AI Resume Parser'],
+        stack: ['Next.js 16', 'React', 'TypeScript', 'Prisma', 'PostgreSQL', 'Auth.js', 'OpenRouter', 'Tailwind CSS 4'],
         results: [
-            { metric: 'AI-powered', label: 'Resume parsing engine' },
-            { metric: 'Kanban', label: 'Pipeline management views' },
+            { metric: '236', label: 'tests passing across 36 files (Vitest + Playwright)' },
+            { metric: '3', label: 'role-based access tiers — Admin, Recruiter, Hiring Manager' },
+            { metric: 'Async', label: 'resume-parsing & email workers via pg-boss' },
         ],
         overview:
-            'ScoutLane is a recruitment platform that combines AI-powered resume parsing with pipeline management, helping teams publish jobs, process applications, manage candidates, and analyze hiring performance per role.',
+            'ScoutLane is a recruitment platform that combines AI-powered resume parsing with full pipeline management: public career pages with custom application forms, a drag-and-drop Kanban admin dashboard, role-based access control, and the production infrastructure — async job workers, transactional email, cloud file storage, outbound webhooks — a real hiring team runs on day to day.',
         problem:
-            'Recruitment teams spend hours manually reviewing resumes and tracking candidates across spreadsheets. ScoutLane automates resume parsing and provides structured pipeline management to reduce time-to-hire.',
+            'Recruitment teams spend hours manually reviewing resumes and tracking candidates across spreadsheets. ScoutLane automates resume parsing and provides structured pipeline management to reduce time-to-hire, without leaving the operational gaps — auth, permissions, notifications, integrations — that turn a demo into unshippable software.',
         questions: [
             'How can AI reliably extract structured data from unstructured resumes?',
             'What pipeline views give recruiters the best visibility into candidate progress?',
+            'What does a resume-parsing pipeline need beyond the happy path to run unattended — retries, async workers, role separation?',
         ],
         methodology: [
             {
                 phase: 'Phase 1',
                 title: 'Resume Parsing Engine',
                 detail:
-                    'Built AI-powered resume parser that extracts education history, work experience, skills, and contact information from uploaded PDFs and DOCX files. Normalized output into structured candidate profiles.',
-                tech: ['Node.js', 'AI Resume Parser', 'Postgres'],
+                    'Built an AI-powered resume parser (OpenRouter, model-configurable) that extracts education history, work experience, skills, and contact information from uploaded PDFs and DOCX files, normalized into structured candidate profiles and processed asynchronously via pg-boss workers so a slow parse never blocks the application flow.',
+                tech: ['OpenRouter', 'pg-boss', 'Prisma', 'PostgreSQL'],
             },
             {
                 phase: 'Phase 2',
                 title: 'Job Portal & Applications',
                 detail:
-                    'Built public-facing job listing pages with application forms. Candidates upload resumes which are automatically parsed and routed to the correct pipeline stage.',
-                tech: ['React', 'Next.js', 'Postgres'],
+                    'Built public-facing career pages with department/location filters and custom application forms per job template. Candidates upload resumes which are automatically parsed and routed to the correct pipeline stage; Resend handles transactional email confirmations.',
+                tech: ['Next.js 16', 'React', 'Resend', 'Google Cloud Storage'],
             },
             {
                 phase: 'Phase 3',
-                title: 'Admin Dashboard & Pipelines',
+                title: 'Admin Dashboard, RBAC & Integrations',
                 detail:
-                    'Created internal admin dashboard with job CRUD, kanban and list pipeline views, stage-based automations, and per-role analytics. Recruiters can drag candidates between stages and trigger automated emails.',
-                tech: ['React', 'Next.js', 'Node.js'],
+                    'Built a role-based admin dashboard (Admin / Recruiter / Hiring Manager via Auth.js JWT sessions) with drag-and-drop Kanban pipelines (dnd-kit), Recharts analytics, job template management, team management, and outbound webhook integrations for external systems — plus a full Vitest + Playwright test suite (236 tests, 36 files) and CI (lint → typecheck → test → build).',
+                tech: ['Auth.js', 'dnd-kit', 'Recharts', 'Vitest', 'Playwright'],
             },
         ],
         keyFindings: [
             'AI resume parsing reduced manual data entry by ~80%, letting recruiters focus on candidate evaluation.',
             'Kanban pipeline views improved team visibility into bottlenecks — stuck candidates became immediately visible.',
-            'Per-role analytics revealed which sourcing channels produced the highest-quality candidates.',
+            'Moving resume parsing to async pg-boss workers kept the application flow fast regardless of AI response latency — a lesson the earlier synchronous design didn\'t survive under real load.',
+            'Role-based access (Admin/Recruiter/Hiring Manager) turned out to matter more than any single feature — real hiring teams need permission boundaries before they\'ll trust a tool with candidate data.',
         ],
         conclusion:
-            'ScoutLane bridges the gap between AI automation and human recruitment judgment. The structured pipeline approach turns chaotic hiring processes into measurable, improvable workflows.',
+            'ScoutLane bridges the gap between AI automation and human recruitment judgment. What started as a resume-parsing pipeline grew into full recruitment infrastructure — public career pages, RBAC, async workers, email, storage, webhooks, and a real test suite — because that\'s what shipping software for an actual hiring team requires, not just what a demo needs. Live at scoutlane.vercel.app.',
         github: 'https://github.com/RikepilB/ScoutLane',
     },
     {
@@ -679,7 +682,9 @@ export const projects: Project[] = [
         slug: 'findleads',
         category: 'FULL STACK 2026',
         catColor: '#8a6516',
-        status: 'coming-soon',
+        status: 'shipped',
+        image: '/images/findleads.png',
+        images: ['/images/findleads.png'],
         title: 'FindLeads — Lead Generation with a Built-in CRM',
         tagline:
             'A business with no website is a web developer\'s best prospect. FindLeads searches Google Places for them, flags the website-less as tier-1 leads, and wraps a tiny CRM around the results.',
@@ -713,19 +718,19 @@ export const projects: Project[] = [
                 phase: 'Phase 3',
                 title: 'CRM Layer & the Durable/Snapshot Split',
                 detail:
-                    'Durable CRM state (notes, contacted status) lives in a businesses table keyed by place_id, deliberately separated from per-job lead snapshots — re-scraping a city never resets what you know about a business. CSV export closes the loop for actual outreach. 103 tests (unit + real-DB integration) cover the pipeline; test code outweighs product code roughly 1.25:1.',
+                    'Durable CRM state (notes, contacted status) lives in a businesses table keyed by place_id, deliberately separated from per-job lead snapshots — re-scraping a city never resets what you know about a business. CSV export closes the loop for actual outreach. 123 tests (unit + real-DB integration) cover the pipeline; test code outweighs product code roughly 1.35:1.',
                 tech: ['TypeScript', 'Vitest', 'Tailwind 4'],
             },
         ],
         results: [
-            { metric: '103', label: 'tests green — unit plus integration against a real Neon database' },
+            { metric: '123', label: 'tests green across 24 files — unit plus integration against a real Neon database' },
             { metric: '27/27', label: 'MVP requirements shipped and verified across 5 planned phases' },
-            { metric: '1.25:1', label: 'test-to-product code ratio (≈1,800 vs ≈1,440 lines)' },
+            { metric: '1.35:1', label: 'test-to-product code ratio (≈2,000 vs ≈1,490 lines)' },
         ],
         keyFindings: [
             'Postgres is a perfectly good job queue at single-user scale: an atomic single-UPDATE claim gives you crash-safety and duplicate-worker safety with zero new infrastructure.',
             'Splitting durable identity (keyed by place_id) from run snapshots is what makes a scraper re-runnable — state you care about should never live in state you regenerate.',
-            'On AI-assisted builds, the test suite is the contract: 103 tests written alongside one week of implementation is what made "feature-complete" a verifiable claim instead of a feeling.',
+            'On AI-assisted builds, the test suite is the contract: 123 tests written alongside the implementation is what made "feature-complete" a verifiable claim instead of a feeling.',
         ],
         conclusion:
             'FindLeads is a complete, working MVP built in about a week — and honestly scoped: single-user by design, localhost-only so far, with its own 15-item severity-ordered gap audit committed to the repo. It\'s the clearest small example of the workflow behind the bigger projects: plan in phases, validate at boundaries, test against real infrastructure, and write down what\'s still weak.',
@@ -807,7 +812,7 @@ export const projects: Project[] = [
         duration: 'Jun 2026 – Jul 2026',
         readTime: '6 min read',
         overview:
-            'read-video is an open-source (MIT) Claude Code / Codex skill that gives AI agents genuine video comprehension: point it at a local file or a URL (YouTube, Loom, Vimeo…) and it extracts frames for the visual track and a transcript for the audio track — the two things an agent can actually consume. Its defining feature is the cost gate: a probe → estimate → run pipeline that prices the entire job (transcription dollars and agent-token cost) up front, defaults to free local transcription with faster-whisper, and only touches paid cloud backends after explicit approval. The engine is a single 1,300-line Python CLI built on the standard library, with an opt-in machine-readable protocol (`manifest`, `--envelope`, deterministic exit codes) added for agent callers. Live demo/landing page: https://rikepilb.github.io/read-video/.',
+            'read-video is an open-source (MIT) Claude Code / Codex skill that gives AI agents genuine video comprehension: point it at a local file or a URL (YouTube, Loom, Vimeo…) and it extracts frames for the visual track and a transcript for the audio track — the two things an agent can actually consume. Its defining feature is the cost gate: a probe → estimate → run pipeline that prices the entire job (transcription dollars and agent-token cost) up front, defaults to free local transcription with faster-whisper, and only touches paid cloud backends after explicit approval. The engine is a single 1,300-line Python CLI built on the standard library, with an opt-in machine-readable protocol (`manifest`, `--envelope`, deterministic exit codes) added for agent callers. The public landing page — live at https://rikepilb.github.io/read-video/ — presents the tool under the working name "Voidscape," its consumer-facing front door onto the same engine.',
         problem:
             'Agents fake video understanding by reading titles and comments. Actually watching costs real money — frames dominate agent-token spend, and cloud transcription bills by the minute — so a naive implementation surprises users with the bill after the fact. The design problem was making video comprehension both real and pre-approved: never spend before showing the price, and never let audio leave the machine without explicit consent.',
         questions: [
@@ -828,7 +833,7 @@ export const projects: Project[] = [
                 phase: 'Phase 2',
                 title: 'A Stdlib-Only Engine',
                 detail:
-                    'The paid-API paths use hand-built multipart requests over urllib — no SDKs — so the free paths never pay an import cost and a missing optional dependency can never break probe or estimate. 120 pytest cases across 17 files pin down chunking, deduplication, cost estimation, frame extraction, and hardening (including an anchor fix against lookalike-domain spoofing and a subprocess-level test suite for the agent CLI contract).',
+                    'The paid-API paths use hand-built multipart requests over urllib — no SDKs — so the free paths never pay an import cost and a missing optional dependency can never break probe or estimate. 110 pytest cases across 17 files pin down chunking, deduplication, cost estimation, frame extraction, and hardening (including an anchor fix against lookalike-domain spoofing and a subprocess-level test suite for the agent CLI contract).',
                 tech: ['Python stdlib', 'pytest'],
             },
             {
@@ -849,7 +854,7 @@ export const projects: Project[] = [
         results: [
             { metric: '93.3%', label: 'eval assertions passed with the skill, vs 66.7% baseline without it' },
             { metric: '9', label: 'transcription backends, ordered free-and-local first' },
-            { metric: '120', label: 'tests over a 1,300-line stdlib-only engine' },
+            { metric: '110', label: 'tests over a 1,300-line stdlib-only engine' },
             { metric: '6', label: 'real bugs found by adversarial review and fixed before shipping' },
         ],
         keyFindings: [
