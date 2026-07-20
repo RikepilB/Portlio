@@ -693,6 +693,7 @@ export const projects: Project[] = [
         inProgress: true,
         image: '/images/findleads-landing.png',
         images: ['/images/findleads-landing.png'],
+        demoVideo: 'https://findleads-opal.vercel.app/',
         title: 'FindLeads — Lead Generation with a Built-in CRM',
         tagline:
             'A business with no website is a web developer\'s best prospect. FindLeads searches Google Places for them, flags the website-less as tier-1 leads, and wraps a tiny CRM around the results.',
