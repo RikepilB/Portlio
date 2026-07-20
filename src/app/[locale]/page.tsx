@@ -17,7 +17,7 @@ import { Reveal } from '@/components/ui/Reveal'
 const featuredSlugs = [
   'findleads',
   'peru-tech-map',
-  'read-video',
+  'voidscape',
   'el-umbral',
   'scoutlane-recruitment',
   'exam-analysis-system',
@@ -250,6 +250,11 @@ function ProjectRow({
           <span className="h-px w-6 bg-rule-2" aria-hidden="true" />
           <span className="font-accent italic text-gold-bright">{project.category}</span>
           <span className="text-muted-2">{project.duration}</span>
+          {project.inProgress ? (
+            <span className="rounded-full border border-gold/40 bg-gold-soft px-2 py-0.5 text-[9px] font-semibold tracking-[0.1em] text-gold">
+              IN PROGRESS
+            </span>
+          ) : null}
         </div>
 
         <h3 className="m-0 font-display text-[clamp(22px,2.4vw,30px)] font-bold leading-[1.08] tracking-[-0.02em] text-matte transition-colors group-hover:text-gold-bright">

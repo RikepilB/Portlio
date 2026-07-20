@@ -199,6 +199,7 @@ export default async function ProjectPage({
       ) : null}
 
       {(project.github ||
+        project.codebaseMapUrl ||
         (project.demoVideo && !project.demoVideo.startsWith('PLACEHOLDER'))) && (
         <div className="mt-8 flex flex-wrap gap-3 border-t border-rule pt-8">
           {project.github ? (
@@ -226,6 +227,16 @@ export default async function ProjectPage({
               ) : (
                 <>{dict.caseStudy.liveDemo}</>
               )}
+            </a>
+          ) : null}
+          {project.codebaseMapUrl ? (
+            <a
+              href={project.codebaseMapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-rule bg-felt-deep/35 px-5 py-2.5 text-sm font-semibold text-ink-on-felt transition-colors duration-150 hover:border-gold hover:text-gold-bright"
+            >
+              {dict.caseStudy.codebaseMap}
             </a>
           ) : null}
         </div>

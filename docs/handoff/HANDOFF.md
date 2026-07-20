@@ -21,7 +21,17 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ---
 
-## Current state — 2026-07-18
+## Current state — 2026-07-20
+
+**Voidscape rename + in-progress tags + Foglamp codebase-map scans shipped: PR #26 opened against `main`.** Fixed the ScoutLane home/gallery thumbnail (had regressed to a vertical crop; restored the original horizontal `public/images/scoutlane.png` from commit `2b0f622`). Renamed the read-video project to Voidscape end-to-end in `src/data/projects.ts` + `projects-es-overlays.ts` (slug, title, GitHub URL `RikepilB/void-scape`, demo URL, overview/conclusion copy) to match the already-renamed local + GitHub repo. Added `Project.inProgress` and tagged Voidscape, FindLeads, Peru Grid, ScoutLane, ExamVault with a small "IN PROGRESS" pill on home and gallery cards. Drafted an X post about portfolio v1 (delivered in chat only). With explicit user consent, ran Foglamp AI architecture scans on 4 sibling repos (void-scape, peru-tech-map, ScoutLane-main, Examvault) via 4 parallel agents, published to foglamp.dev, screenshotted each via the Chrome extension, and added a "Codebase Map" README section to each of those 4 repos (uncommitted there — sitting on top of large pre-existing unrelated dirty state in those repos, left for the user to decide). Added `Project.codebaseMapUrl` + a "Codebase Map" button on the case-study page for those same 4 projects, plus the scan screenshot in each project's gallery. Ran `/gsd-ship`: independent code-review agent found no issues; committed `630df7b`; pushed `feat/portfolio-additions`; opened PR #26 (https://github.com/RikepilB/Portlio/pull/26). Note: `pnpm build` currently fails on a pre-existing Tailwind/PostCSS bug unrelated to this change (reproduced identically after `git stash` on `main`) — flagged in the PR body, not fixed.
+
+**Verification update:** merge conflicts with `main` were resolved while preserving the Voidscape data, home order, horizontal ScoutLane image, and append-only handoff history. `pnpm lint`, `npx tsc --noEmit`, and a clean tracked-tree `pnpm build` all pass. The earlier Tailwind crash was traced to untracked transcript exports containing Windows path escapes, not repository code.
+
+## Previous state — 2026-07-18 (later)
+
+**ScoutLane + FindLeads + read-video audited and refreshed, home showcase re-curated — merged to `main` via PR #25 (`2a1168c`).** Standing session `/goal`: check ScoutLane/read-video/FindLeads, get all up to date with real images, showcase the best/most recent on home. Ran 3 parallel Explore agents against the sibling repos, verified every claim directly (ran real test suites, checked real DB, took real screenshots) rather than trusting stale docs. ScoutLane: current screenshot (`public/images/scoutlane.png`), verified 236 tests/36 files, refreshed stack (Auth.js RBAC, pg-boss async workers, Resend, GCS, webhooks). FindLeads: promoted `coming-soon` → `shipped` (27/27 requirements confirmed, 123 tests/24 files verified), got a real screenshot by running the app locally against its actual provisioned Neon DB (`public/images/findleads.png`). read-video: test count corrected 120→110, noted the live landing page's "Voidscape" rebrand. Home `featuredSlugs` re-curated to `findleads, peru-tech-map, read-video, el-umbral, scoutlane-recruitment, exam-analysis-system` (dropped the 2024-era `bike-share-optimization` and `empenalo-fintech`). lint/tsc/build all green. Committed `8347466`, merged forward past PR #24's squash landing on main (`1a3d2bb`, 5 files — verified each conflict was ours-strictly-superset before resolving), pushed, PR #25, CI green (CodeRabbit/Vercel/build), squash-merged to `main` at `2a1168c`.
+
+## Previous state — 2026-07-18
 
 **read-video shipped + home reorder — merged to `main` via PR #24 (`e060d42`).** Read the sibling `PROYECTOS/read-video` repo (it had a prewritten `docs/portfolio-entry.md` update, used as source of truth). `src/data/projects.ts` id `14`: `status: 'shipped'`, added `image`/`images` (`public/images/read-video.gif`, copied from the repo's demo gif), `demoVideo` → live GitHub Pages link (`https://rikepilb.github.io/read-video/`), added Phase 4 (Build Week: agent protocols, adversarial review, security disclosure), updated numbers (1,300-line engine, 120 tests/17 files, 60+ commits). Matching Spanish translation added to `projects-es-overlays.ts`. Home `featuredSlugs` reordered so `peru-tech-map` sits before `el-umbral`. Committed on `feat/portfolio-additions`, pushed, PR #24 opened against `main`; `origin/main` had since gained PR #23 (About bios) so `feat/portfolio-additions` was merged forward (`git merge origin/main`) to resolve — conflicts were only in `docs/handoff/HANDOFF.md` and the read-video `status` field (both trivially "ours wins, theirs was stale/superseded"); `page.tsx` auto-merged a duplicate `peru-tech-map` entry, hand-fixed. lint/tsc/build all green post-merge. CI passed (CodeRabbit, Vercel, build), PR #24 squash-merged to `main` at `e060d42`; Vercel prod deploy auto-triggered.
 
@@ -47,6 +57,8 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ## Session index (append-only, newest first)
 
+- [2026-07-20-voidscape-rename-foglamp-scans](2026-07-20-voidscape-rename-foglamp-scans/HANDOFF.md) — ScoutLane thumbnail fix, read-video renamed to Voidscape (EN/ES), in-progress tags on 5 projects, Foglamp codebase-map scans on 4 sibling repos wired into case studies + those repos README; PR #26 opened against main
+- [2026-07-18-read-video-portfolio-entry](2026-07-18-read-video-portfolio-entry/HANDOFF.md) — `/goal`: audited ScoutLane/read-video/FindLeads live, verified real numbers + screenshots, FindLeads shipped, home showcase re-curated; PR #25 merged to main (`2a1168c`)
 - [2026-07-18-read-video-portfolio-entry](2026-07-18-read-video-portfolio-entry/HANDOFF.md) — read-video shipped (live demo, gif, Build Week Phase 4, EN+ES) + home reorder; committed `d2a45b9`, merged forward with PR #23, PR #24 opened
 - [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — VANS→coming soon (dropped unrelated image); Grammarly body hydration silenced + Reveal reduced-motion fix; home/card mockups `object-contain` + soft edge mask blend (uncommitted)
 - [2026-07-13-claude-harness-fix](2026-07-13-claude-harness-fix/HANDOFF.md) — About bios restored/shipped (`b1cdc27`/`5fce9ae`, PR #23, prod); Coming soon IA + AquaTwin concept-only; Peru Grid screenshot on home; placeholder badge junk removed (latest code mostly uncommitted)
@@ -74,3 +86,12 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 - Session folder: `docs/handoff/2026-07-02-98bb9341/`
 - Snapshot file: `docs/handoff/2026-07-02-98bb9341/snapshot-002022.md`
 - Branch: main
+
+## Session index
+
+- 2026-07-18 13:41 - Codex export 019f64cf-81eb-7050-b7f3-c43f80156902: [2026-07-18-codex-019f64cf81eb](2026-07-18-codex-019f64cf81eb/HANDOFF.md). Archivo de contexto; no reemplaza Current state.
+- 2026-07-18 13:41 - Codex export 019f64cf-81c5-73c2-9ec3-b4ecedad6ad5: [2026-07-18-codex-019f64cf81c5](2026-07-18-codex-019f64cf81c5/HANDOFF.md). Archivo de contexto; no reemplaza Current state.
+- 2026-07-18 13:41 - Codex export 019f64cf-81df-7c83-bbf8-20dfb1ebb36c: [2026-07-18-codex-019f64cf81df](2026-07-18-codex-019f64cf81df/HANDOFF.md). Archivo de contexto; no reemplaza Current state.
+- 2026-07-18 13:41 - Codex export 019f64cf-9b5f-7a32-909e-eb45e7982933: [2026-07-18-codex-019f64cf9b5f](2026-07-18-codex-019f64cf9b5f/HANDOFF.md). Archivo de contexto; no reemplaza Current state.
+- 2026-07-18 13:41 - Codex export 019f64cf-e6b1-73e2-9d97-d073ca7c06cb: [2026-07-18-codex-019f64cfe6b1](2026-07-18-codex-019f64cfe6b1/HANDOFF.md). Archivo de contexto; no reemplaza Current state.
+- 2026-07-18 13:41 - Codex export 019f64cf-f256-7b93-8c3d-63a82f3b6e3d: [2026-07-18-codex-019f64cff256](2026-07-18-codex-019f64cff256/HANDOFF.md). Archivo de contexto; no reemplaza Current state.

@@ -67,8 +67,13 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
 
       <div className="flex flex-1 flex-col gap-4 p-7 md:p-8">
         <div className="flex items-center justify-between gap-3">
-          <span className="font-accent text-[13px] uppercase tracking-[0.18em] text-gold-bright italic">
+          <span className="flex items-center gap-2 font-accent text-[13px] uppercase tracking-[0.18em] text-gold-bright italic">
             {project.category}
+            {project.inProgress ? (
+              <span className="rounded-full border border-gold/40 bg-gold-soft px-2 py-0.5 font-mono text-[9px] font-semibold not-italic tracking-[0.1em] text-gold">
+                IN PROGRESS
+              </span>
+            ) : null}
           </span>
           <span className="font-mono text-xs text-muted">{project.duration}</span>
         </div>

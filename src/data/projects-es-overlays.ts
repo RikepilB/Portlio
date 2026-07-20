@@ -665,14 +665,14 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
         conclusion:
             'Peru Grid está en vivo en perugrid.com — open source de punta a punta (código MIT, datos CC BY 4.0) y diseñado para forkearse. El pitch honesto es un punto de partida verificado para hacer visible el ecosistema tech peruano, no un atlas terminado; los envíos de la comunidad siguen creciendo el mapa.',
     },
-    'read-video': {
+    'voidscape': {
         category: 'INGENIERÍA IA',
-        title: 'read-video — Enseñando a agentes IA a ver video',
+        title: 'Voidscape — Enseñando a agentes IA a ver video',
         tagline:
-            'Un agente de codificación con IA puede leer imágenes y PDFs — no video. read-video descompone cualquier video en frames más transcripción, y cotiza todo el trabajo antes de gastar un centavo o un token.',
+            'Un agente de codificación con IA puede leer imágenes y PDFs — no video. Voidscape descompone cualquier video en frames más transcripción, y cotiza todo el trabajo antes de gastar un centavo o un token.',
         readTime: '6 min de lectura',
         overview:
-            'read-video es una skill open-source (MIT) de Claude Code / Codex que da a agentes IA comprensión genuina de video: apúntala a un archivo local o URL (YouTube, Loom, Vimeo…) y extrae frames para la pista visual y transcripción para la pista de audio — las dos cosas que un agente puede consumir realmente. Su feature definitoria es la puerta de costo: un pipeline probe → estimate → run que cotiza todo el trabajo (dólares de transcripción y costo de tokens del agente) por adelantado, usa transcripción local gratuita por defecto con faster-whisper, y solo toca backends cloud de pago tras aprobación explícita. El motor es un CLI Python de 1,300 líneas construido sobre la stdlib, con un protocolo opcional legible por máquina (`manifest`, `--envelope`, códigos de salida determinísticos) añadido para agentes que lo llaman. La landing page pública — en vivo en https://rikepilb.github.io/read-video/ — presenta la herramienta bajo el nombre de trabajo "Voidscape", su puerta de entrada consumer-facing sobre el mismo motor.',
+            'Voidscape es una skill open-source (MIT) de Claude Code / Codex que da a agentes IA comprensión genuina de video: apúntala a un archivo local o URL (YouTube, Loom, Vimeo…) y extrae frames para la pista visual y transcripción para la pista de audio — las dos cosas que un agente puede consumir realmente. Su feature definitoria es la puerta de costo: un pipeline probe → estimate → run que cotiza todo el trabajo (dólares de transcripción y costo de tokens del agente) por adelantado, usa transcripción local gratuita por defecto con faster-whisper, y solo toca backends cloud de pago tras aprobación explícita. El motor es un CLI Python de 1,300 líneas construido sobre la stdlib, con un protocolo opcional legible por máquina (`manifest`, `--envelope`, códigos de salida determinísticos) añadido para agentes que lo llaman. La landing page pública está en vivo en https://rikepilb.github.io/void-scape/.',
         problem:
             'Los agentes fingen comprensión de video leyendo títulos y comentarios. Ver de verdad cuesta dinero real — los frames dominan el gasto en tokens del agente, y la transcripción cloud factura por minuto — así una implementación naive sorprende a usuarios con la factura después. El problema de diseño fue hacer la comprensión de video real y pre-aprobada: nunca gastar antes de mostrar el precio, y nunca dejar que el audio salga de la máquina sin consentimiento explícito.',
         questions: [
@@ -724,7 +724,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
             'La revisión adversarial más correr de verdad los comandos documentados detectó una regresión real que los unit tests pasaron por alto: un fix en otra parte del mismo diff cambió silenciosamente lo que demostraba el propio ejemplo de prueba-de-privacidad del README.',
         ],
         conclusion:
-            'read-video es la pieza open-source más completa de este portfolio: licencia MIT con docs de contribución, plantillas de issues, GIF demo, una landing page en vivo en GitHub Pages (https://rikepilb.github.io/read-video/), 60+ commits de iteración real, y una mejora de eval medida. También es honesto sobre escala — el set de eval es pequeño e itera — pero la forma es lo que se parece a tooling de agente en producción: cotizado, testeado, local-first, multi-harness, y revisado como software real en vez de lanzado por vibes. Enviado a OpenAI Build Week 2026 (track Developer Tools).',
+            'Voidscape es la pieza open-source más completa de este portfolio: licencia MIT con docs de contribución, plantillas de issues, GIF demo, una landing page en vivo en GitHub Pages (https://rikepilb.github.io/void-scape/), 60+ commits de iteración real, y una mejora de eval medida. También es honesto sobre escala — el set de eval es pequeño e itera — pero la forma es lo que se parece a tooling de agente en producción: cotizado, testeado, local-first, multi-harness, y revisado como software real en vez de lanzado por vibes. Enviado a OpenAI Build Week 2026 (track Developer Tools).',
     },
     'resume-scorer': {
         category: 'INGENIERÍA IA',
@@ -775,7 +775,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
             'El loop solo funciona con restricción de honestidad — un optimizador que inventa contenido maximizaría el puntaje y destruiría el propósito del artefacto.',
         ],
         conclusion:
-            'ResumeScorer es un lab, no un producto — sin UI, wrappers delgados por diseño alrededor de OSS externo acreditado, resultados privados. Su valor es el loop de feedback que creó: un puntaje open-source medido de 0/35 es por qué read-video, Peru Grid y el trabajo de skills abajo existen en público. A veces lo más útil que te dice una herramienta es qué construir después.',
+            'ResumeScorer es un lab, no un producto — sin UI, wrappers delgados por diseño alrededor de OSS externo acreditado, resultados privados. Su valor es el loop de feedback que creó: un puntaje open-source medido de 0/35 es por qué Voidscape, Peru Grid y el trabajo de skills abajo existen en público. A veces lo más útil que te dice una herramienta es qué construir después.',
     },
     'agentic-skills-lab': {
         category: 'INGENIERÍA IA',

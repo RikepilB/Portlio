@@ -121,6 +121,7 @@ export const dictionaryEs = {
     githubAriaPrefix: 'Ver en GitHub:',
     watchDemo: 'Ver video demo',
     liveDemo: 'Ver demo en vivo →',
+    codebaseMap: 'Mapa del codebase →',
     comingSoonBadge: 'Próximamente',
   },
   journey: {
