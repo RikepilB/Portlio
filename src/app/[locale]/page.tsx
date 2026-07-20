@@ -15,9 +15,9 @@ import { ProjectImagePlaceholder } from '@/components/ui/ProjectImagePlaceholder
 import { Reveal } from '@/components/ui/Reveal'
 
 const featuredSlugs = [
+  'voidscape',
   'findleads',
   'peru-tech-map',
-  'voidscape',
   'el-umbral',
   'scoutlane-recruitment',
   'exam-analysis-system',
@@ -250,6 +250,11 @@ function ProjectRow({
           <span className="h-px w-6 bg-rule-2" aria-hidden="true" />
           <span className="font-accent italic text-gold-bright">{project.category}</span>
           <span className="text-muted-2">{project.duration}</span>
+          {project.category === 'AI ENGINEERING' ? (
+            <span className="rounded border border-accent/30 bg-accent-soft px-1.5 py-0.5 font-mono text-[9px] font-semibold tracking-[0.1em] text-accent">
+              AI
+            </span>
+          ) : null}
           {project.inProgress ? (
             <span className="rounded-full border border-gold/40 bg-gold-soft px-2 py-0.5 text-[9px] font-semibold tracking-[0.1em] text-gold">
               IN PROGRESS

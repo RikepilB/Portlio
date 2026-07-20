@@ -816,7 +816,7 @@ export const projects: Project[] = [
         inProgress: true,
         image: '/images/voidscape.png',
         images: ['/images/voidscape.png', '/images/read-video.gif', '/images/foglamp/voidscape.png'],
-        demoVideo: 'https://rikepilb.github.io/void-scape/',
+        demoVideo: 'https://voidscape.club/',
         codebaseMapUrl: 'https://foglamp.dev/scan/voidscape-8fd1nx',
         title: 'Voidscape — Teaching AI Agents to Watch Video',
         tagline:
