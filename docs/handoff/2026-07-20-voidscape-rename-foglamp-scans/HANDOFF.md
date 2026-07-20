@@ -48,13 +48,12 @@ studies. Finished with `/gsd-ship`: review, commit, push, PR.
   those repos (confirmed via `git status`); user was told and can ask for a narrow staged commit.
 
 ## Failed attempts
-- `pnpm build` fails on a pre-existing Tailwind/PostCSS bug (`Invalid code point 10009491` in
-  `globals.css` parsing) — reproduced identically after `git stash` on `main`, so it predates this
-  session's changes. Not fixed (out of scope); flagged in the PR body for separate investigation.
+- Initial local `pnpm build` failed because Tailwind scanned untracked Codex transcript exports
+  containing Windows path escapes such as `\98bb93`; Tailwind parsed the six hex digits as an
+  invalid Unicode code point. Temporarily excluding those untracked folders made the tracked-tree
+  production build pass (56 static pages). No application-code fix was needed.
 
 ## Next steps
-- Investigate/fix the pre-existing `pnpm build` Tailwind/PostCSS crash (blocks local prod builds
-  and likely Vercel deploys) — separate from this PR.
 - Decide whether to commit the README/foglamp changes in void-scape, peru-tech-map, ScoutLane-main,
   Examvault (narrow `git add README.md .gitignore docs/foglamp-scan.png` per repo recommended,
   given the large unrelated dirty state already present).
