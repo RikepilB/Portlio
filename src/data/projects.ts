@@ -32,9 +32,12 @@ export interface Project {
     stack: string[]
     /** Defaults to shipped when omitted. */
     status?: ProjectStatus
+    /** Small "in progress" tag on the card — project is shipped but still actively being iterated on. */
+    inProgress?: boolean
     image?: string // thumbnail for the card
     images?: string[] // gallery for case study page
     demoVideo?: string // Google Drive or external link for video demos
+    codebaseMapUrl?: string // Foglamp AI-generated architecture scan link
 }
 
 export function isComingSoon(project: Project): boolean {
@@ -244,9 +247,11 @@ export const projects: Project[] = [
         slug: 'exam-analysis-system',
         category: 'FULL STACK',
         catColor: '#0c5a40',
+        inProgress: true,
         image: '/images/ExamVault/Screenshot 2026-01-28 231019.png',
-        images: ['/images/ExamVault/Screenshot 2026-01-28 231019.png', '/images/ExamVault/Screenshot 2026-01-28 231230.png', '/images/ExamVault/Screenshot 2026-01-28 231258.png', '/images/ExamVault/Screenshot 2026-01-28 231310.png', '/images/ExamVault/Screenshot 2026-01-28 231356.png', '/images/ExamVault/Screenshot 2026-01-28 231412.png', '/images/ExamVault/Screenshot 2026-01-28 231420.png'],
+        images: ['/images/ExamVault/Screenshot 2026-01-28 231019.png', '/images/ExamVault/Screenshot 2026-01-28 231230.png', '/images/ExamVault/Screenshot 2026-01-28 231258.png', '/images/ExamVault/Screenshot 2026-01-28 231310.png', '/images/ExamVault/Screenshot 2026-01-28 231356.png', '/images/ExamVault/Screenshot 2026-01-28 231412.png', '/images/ExamVault/Screenshot 2026-01-28 231420.png', '/images/foglamp/examvault.png'],
         demoVideo: 'https://drive.google.com/file/d/1AWiisSM_dNwResQA2f_v2S19GIcfIIHv/view?usp=drive_link',
+        codebaseMapUrl: 'https://foglamp.dev/scan/examvault-if3mpl',
         title: 'ExamVault — Automated Exam Generation & Analysis',
         tagline:
             'Full-stack platform: automated exam generation, analytics dashboard, and grading pipeline processing 100,000+ student records.',
@@ -467,6 +472,7 @@ export const projects: Project[] = [
     {
         id: '8',
         slug: 'scoutlane-recruitment',
+        inProgress: true,
         title: 'ScoutLane — Recruitment Platform',
         tagline:
             'AI-powered recruitment platform: public career pages, resume parsing, drag-and-drop pipelines, role-based admin, and the email/storage/webhook infrastructure a real hiring team needs.',
@@ -475,8 +481,9 @@ export const projects: Project[] = [
         duration: 'Apr – Jul 2026',
         readTime: '7 min read',
         image: '/images/scoutlane.png',
-        images: ['/images/scoutlane.png'],
+        images: ['/images/scoutlane.png', '/images/foglamp/scoutlane.png'],
         demoVideo: 'https://scoutlane.vercel.app',
+        codebaseMapUrl: 'https://foglamp.dev/scan/scoutlane-shqt4o',
         stack: ['Next.js 16', 'React', 'TypeScript', 'Prisma', 'PostgreSQL', 'Auth.js', 'OpenRouter', 'Tailwind CSS 4'],
         results: [
             { metric: '236', label: 'tests passing across 36 files (Vitest + Playwright)' },
@@ -683,6 +690,7 @@ export const projects: Project[] = [
         category: 'FULL STACK 2026',
         catColor: '#8a6516',
         status: 'shipped',
+        inProgress: true,
         image: '/images/findleads.png',
         images: ['/images/findleads.png'],
         title: 'FindLeads — Lead Generation with a Built-in CRM',
@@ -742,14 +750,16 @@ export const projects: Project[] = [
         slug: 'peru-tech-map',
         category: 'OPEN SOURCE',
         catColor: '#b45309',
+        inProgress: true,
         title: 'Peru Grid — Mapping the Peruvian Tech Ecosystem',
         tagline:
             'Toronto has a beloved open-source tech map. Peru didn\'t. Peru Grid maps 53 researched startups, consultancies, incubators and funds across Lima and Arequipa — in one dependency-free HTML file.',
         duration: 'Jul 2026',
         readTime: '4 min read',
         image: '/images/peru-grid.png',
-        images: ['/images/peru-grid.png'],
+        images: ['/images/peru-grid.png', '/images/foglamp/peru-tech-map.png'],
         demoVideo: 'https://www.perugrid.com/',
+        codebaseMapUrl: 'https://foglamp.dev/scan/peru-grid-cnhzyw',
         overview:
             'Peru Grid is an interactive, terminal-styled map of the Lima and Arequipa tech ecosystems, rendered with MapLibre GL JS on OpenFreeMap vector tiles — no API keys, no build step, no framework, zero npm dependencies. The whole application is one 766-line HTML file plus two JSON datasets fetched at runtime. Visitors fly between the two cities, click markers for company details, and browse a live headline ticker. The structure is adapted, with credit, from BUILD416\'s toronto-tech-map, extended with a city switcher and per-city coordinate validation.',
         problem:
@@ -799,20 +809,22 @@ export const projects: Project[] = [
     },
     {
         id: '14',
-        slug: 'read-video',
+        slug: 'voidscape',
         category: 'AI ENGINEERING',
         catColor: '#1d4ed8',
         status: 'shipped',
+        inProgress: true,
         image: '/images/read-video.gif',
-        images: ['/images/read-video.gif'],
-        demoVideo: 'https://rikepilb.github.io/read-video/',
-        title: 'read-video — Teaching AI Agents to Watch Video',
+        images: ['/images/read-video.gif', '/images/foglamp/voidscape.png'],
+        demoVideo: 'https://rikepilb.github.io/void-scape/',
+        codebaseMapUrl: 'https://foglamp.dev/scan/voidscape-8fd1nx',
+        title: 'Voidscape — Teaching AI Agents to Watch Video',
         tagline:
-            'An AI coding agent can read images and PDFs — not video. read-video decomposes any video into frames plus a transcript, and prices the whole job before spending a cent or a token.',
+            'An AI coding agent can read images and PDFs — not video. Voidscape decomposes any video into frames plus a transcript, and prices the whole job before spending a cent or a token.',
         duration: 'Jun 2026 – Jul 2026',
         readTime: '6 min read',
         overview:
-            'read-video is an open-source (MIT) Claude Code / Codex skill that gives AI agents genuine video comprehension: point it at a local file or a URL (YouTube, Loom, Vimeo…) and it extracts frames for the visual track and a transcript for the audio track — the two things an agent can actually consume. Its defining feature is the cost gate: a probe → estimate → run pipeline that prices the entire job (transcription dollars and agent-token cost) up front, defaults to free local transcription with faster-whisper, and only touches paid cloud backends after explicit approval. The engine is a single 1,300-line Python CLI built on the standard library, with an opt-in machine-readable protocol (`manifest`, `--envelope`, deterministic exit codes) added for agent callers. The public landing page — live at https://rikepilb.github.io/read-video/ — presents the tool under the working name "Voidscape," its consumer-facing front door onto the same engine.',
+            'Voidscape is an open-source (MIT) Claude Code / Codex skill that gives AI agents genuine video comprehension: point it at a local file or a URL (YouTube, Loom, Vimeo…) and it extracts frames for the visual track and a transcript for the audio track — the two things an agent can actually consume. Its defining feature is the cost gate: a probe → estimate → run pipeline that prices the entire job (transcription dollars and agent-token cost) up front, defaults to free local transcription with faster-whisper, and only touches paid cloud backends after explicit approval. The engine is a single 1,300-line Python CLI built on the standard library, with an opt-in machine-readable protocol (`manifest`, `--envelope`, deterministic exit codes) added for agent callers. The public landing page is live at https://rikepilb.github.io/void-scape/.',
         problem:
             'Agents fake video understanding by reading titles and comments. Actually watching costs real money — frames dominate agent-token spend, and cloud transcription bills by the minute — so a naive implementation surprises users with the bill after the fact. The design problem was making video comprehension both real and pre-approved: never spend before showing the price, and never let audio leave the machine without explicit consent.',
         questions: [
@@ -864,8 +876,8 @@ export const projects: Project[] = [
             'Adversarial review plus actually running the documented commands caught a real regression unit tests missed entirely: a bug fix elsewhere in the same diff silently changed what the README\'s own privacy-proof example demonstrated.',
         ],
         conclusion:
-            'read-video is the most complete open-source piece in this portfolio: MIT-licensed with contribution docs, issue templates, a demo GIF, a live GitHub Pages landing page (https://rikepilb.github.io/read-video/), 60+ commits of real iteration, and a measured eval improvement. It\'s also honest about scale — the eval set is small and iteration continues — but the shape is what production agent-tooling looks like: priced, tested, local-first, multi-harness, and reviewed like real software rather than shipped on vibes. Submitted to OpenAI Build Week 2026 (Developer Tools track).',
-        github: 'https://github.com/RikepilB/read-video',
+            'Voidscape is the most complete open-source piece in this portfolio: MIT-licensed with contribution docs, issue templates, a demo GIF, a live GitHub Pages landing page (https://rikepilb.github.io/void-scape/), 60+ commits of real iteration, and a measured eval improvement. It\'s also honest about scale — the eval set is small and iteration continues — but the shape is what production agent-tooling looks like: priced, tested, local-first, multi-harness, and reviewed like real software rather than shipped on vibes. Submitted to OpenAI Build Week 2026 (Developer Tools track).',
+        github: 'https://github.com/RikepilB/void-scape',
         stack: ['Python', 'ffmpeg', 'yt-dlp', 'faster-whisper', 'pytest', 'Claude Code', 'Codex', 'GPT-5.6'],
     },
     {
@@ -922,7 +934,7 @@ export const projects: Project[] = [
             'The loop only works with an honesty constraint — an optimizer that invents content would maximize the score and destroy the artifact\'s purpose.',
         ],
         conclusion:
-            'ResumeScorer is a lab, not a product — no UI, thin-by-design wrappers around credited external OSS, results kept private. Its value is the feedback loop it created: a measured 0/35 open-source score is why read-video, Peru Grid and the skills work below exist in public. Sometimes the most useful thing a tool tells you is what to go build next.',
+            'ResumeScorer is a lab, not a product — no UI, thin-by-design wrappers around credited external OSS, results kept private. Its value is the feedback loop it created: a measured 0/35 open-source score is why Voidscape, Peru Grid and the skills work below exist in public. Sometimes the most useful thing a tool tells you is what to go build next.',
         github: 'https://github.com/RikepilB/ResumeScorer',
         stack: ['Python', 'PowerShell', 'OpenRouter', 'Ollama', 'Claude Code'],
     },
