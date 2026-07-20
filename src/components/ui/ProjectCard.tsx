@@ -69,6 +69,11 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
         <div className="flex items-center justify-between gap-3">
           <span className="flex items-center gap-2 font-accent text-[13px] uppercase tracking-[0.18em] text-gold-bright italic">
             {project.category}
+            {project.category === 'AI ENGINEERING' ? (
+              <span className="rounded border border-accent/30 bg-accent-soft px-1.5 py-0.5 font-mono text-[9px] font-semibold not-italic tracking-[0.1em] text-accent">
+                AI
+              </span>
+            ) : null}
             {project.inProgress ? (
               <span className="rounded-full border border-gold/40 bg-gold-soft px-2 py-0.5 font-mono text-[9px] font-semibold not-italic tracking-[0.1em] text-gold">
                 IN PROGRESS
