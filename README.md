@@ -5,7 +5,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v4-06B6D4?logo=tailwindcss)](https://tailwindcss.com)
 [![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?logo=vercel)](https://vercel.com)
 
-Personal portfolio for **Richard Pillaca Burga** — Data Analyst & BI Developer based in Toronto, Canada. Originally from Peru, Computer Science graduate from UBC Okanagan.
+Personal portfolio for **Richard Pillaca Burga** — a full-stack engineer with a frontend and AI focus, based in Toronto, Canada. Originally from Peru, Computer Science graduate from UBC Okanagan.
 
 **Live site:** [richardpillaca.com](https://richardpillaca.com)
 
@@ -18,7 +18,7 @@ Personal portfolio for **Richard Pillaca Burga** — Data Analyst & BI Developer
 | Framework | Next.js 16 (App Router) |
 | Language | TypeScript (strict mode, no `any`) |
 | Styling | Tailwind CSS v4 (utility-only, no CSS modules) |
-| Fonts | DM Sans (body) + Manrope (headings) via `next/font` |
+| Fonts | Manrope, Montserrat, Cormorant Garamond, JetBrains Mono via `next/font` |
 | Deployment | Vercel (push to main → auto-deploy) |
 | Content | TypeScript data objects in `src/data/` |
 
@@ -42,12 +42,10 @@ Personal portfolio for **Richard Pillaca Burga** — Data Analyst & BI Developer
 
 ## Projects
 
-| Project | Category | Scope |
-|---------|----------|-------|
-| **Bike Share Network Optimization v2** | Data Science | 2M+ records, graph theory, network analysis |
-| **AI Technical Debt in Software Repositories** | Research | 5,000+ repos, MSR empirical study |
-| **Accounting Journal Entry Automation** | Excel Automation | 4 hrs → 12 min, Power Query, M Language |
-| **Exam Analysis System** | Full Stack | 100K+ students, Django + React |
+17 case studies spanning full-stack products, data science research, AI engineering tooling, and
+open-source infrastructure — see them live at
+[richardpillaca.com/projects](https://richardpillaca.com/projects), or browse the source of truth
+at [`src/data/projects.ts`](./src/data/projects.ts).
 
 ---
 
@@ -87,10 +85,11 @@ src/
 
 ## Design
 
-- **Layout:** Minimal, clean, lots of whitespace (inspired by Michelle Liu)
-- **Case studies:** Deep methodology sections with metric cards (inspired by Vipul Soni)
-- **Essays:** Clean reading experience (inspired by Noah Barbaros)
-- **Colors:** White background, near-black text, emerald accent — no dark navy/teal
+- **Identity:** Felt & Gold — matte sage-green surfaces with metallic gold-foil accents, tactile
+  and premium rather than neon-terminal or generic SaaS. Full spec in [`DESIGN.md`](./DESIGN.md).
+- **Case studies:** Deep methodology sections with metric cards.
+- **Colors:** Sage felt (`#607466`) primary canvas, gold foil (`#D4AF37`) accents, white/near-white
+  ink on felt. About uses a complementary mist/silver palette — see `DESIGN.md`.
 
 ---
 

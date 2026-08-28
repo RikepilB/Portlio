@@ -19,6 +19,8 @@ export interface Project {
     catColor: string
     title: string
     tagline: string
+    /** Punchy ~12-18 word one-liner for compact/minimal display contexts (e.g. home landing rows). */
+    blurb?: string
     duration: string
     readTime: string
     overview: string
@@ -239,7 +241,7 @@ export const projects: Project[] = [
         ],
         conclusion:
             'Power Query is underutilized in accounting workflows. This project demonstrates that even complex multi-source reconciliation processes can be fully automated without custom software — just well-designed M Language queries and clear documentation. The time savings alone justify the investment within the first month of use.',
-        github: 'https://github.com/rikepilb',
+        github: '',
         stack: ['Excel', 'Power Query', 'M Language', 'VBA', 'Accounting', 'SAP'],
     },
     {
@@ -255,6 +257,7 @@ export const projects: Project[] = [
         title: 'ExamVault — Automated Exam Generation & Analysis',
         tagline:
             'Full-stack platform: automated exam generation, analytics dashboard, and grading pipeline processing 100,000+ student records.',
+        blurb: 'Automated exam generation and grading for 100K+ student records — down from 3 days to under 2 hours.',
         duration: 'May 2025 – Aug 2025',
         readTime: '9 min read',
         overview:
@@ -320,7 +323,7 @@ export const projects: Project[] = [
         duration: 'Jan 2024 – Apr 2024',
         readTime: '6 min read',
         overview:
-            'Sublime is a comprehensive event ticketing platform designed for usability, security, and scalability. It features event discovery, secure payment processing, and user account management. Built as part of a UBC Associate with The University of British Columbia, using a hybrid Waterfall–Agile methodology that combined structured planning with iterative sprints.',
+            'Sublime is a comprehensive event ticketing platform designed for usability, security, and scalability. It features event discovery, secure payment processing, and user account management. Built as a University of British Columbia course project, using a hybrid Waterfall–Agile methodology that combined structured planning with iterative sprints.',
         problem:
             'Existing ticketing platforms charge high fees and offer poor customization for student-run events. Campus event organizers needed a self-hosted, full-stack solution with real payment processing, event management, and a proper admin interface — without paying Eventbrite commissions.',
         questions: [
@@ -476,6 +479,7 @@ export const projects: Project[] = [
         title: 'ScoutLane — Recruitment Platform',
         tagline:
             'AI-powered recruitment platform: public career pages, resume parsing, drag-and-drop pipelines, role-based admin, and the email/storage/webhook infrastructure a real hiring team needs.',
+        blurb: 'AI resume parsing, Kanban pipelines, role-based admin — recruiting infrastructure a real hiring team runs on.',
         category: 'FULL STACK 2026',
         catColor: '#0c5a40',
         duration: 'Apr – Jul 2026',
@@ -594,6 +598,7 @@ export const projects: Project[] = [
         title: 'El Umbral — Relief Project Hub',
         tagline:
             'A bilingual "search before you build" hub for Venezuela earthquake relief — find an existing effort and join it, or publish yours with the stack and the help it needs.',
+        blurb: 'Bilingual relief-project hub so volunteers search before they duplicate effort. Live, open source.',
         category: 'FULL STACK',
         catColor: '#0c5a40',
         duration: 'Jun 2026',
@@ -697,6 +702,7 @@ export const projects: Project[] = [
         title: 'FindLeads — Lead Generation with a Built-in CRM',
         tagline:
             'A business with no website is a web developer\'s best prospect. FindLeads searches Google Places for them, flags the website-less as tier-1 leads, and wraps a tiny CRM around the results.',
+        blurb: 'Finds businesses with no website, flags them tier-1, and wraps a CRM around the results.',
         duration: 'Jul 2026',
         readTime: '5 min read',
         overview:
@@ -755,6 +761,7 @@ export const projects: Project[] = [
         title: 'Peru Grid — Mapping the Peruvian Tech Ecosystem',
         tagline:
             'Toronto has a beloved open-source tech map. Peru didn\'t. Peru Grid maps 53 researched startups, consultancies, incubators and funds across Lima and Arequipa — in one dependency-free HTML file.',
+        blurb: '53 verified Peru tech companies on one interactive map — zero dependencies, one HTML file.',
         duration: 'Jul 2026',
         readTime: '4 min read',
         image: '/images/peru-grid.png',
@@ -822,6 +829,7 @@ export const projects: Project[] = [
         title: 'Voidscape — Teaching AI Agents to Watch Video',
         tagline:
             'An AI coding agent can read images and PDFs — not video. Voidscape decomposes any video into frames plus a transcript, and prices the whole job before spending a cent or a token.',
+        blurb: 'Teaches AI agents to watch video, and prices the job before it spends a cent.',
         duration: 'Jun 2026 – Jul 2026',
         readTime: '6 min read',
         overview:

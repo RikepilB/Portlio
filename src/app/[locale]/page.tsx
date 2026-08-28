@@ -11,8 +11,18 @@ import { useDictionary, useLocale } from '@/contexts/LocaleContext'
 import { localePath } from '@/lib/locale-path'
 import type { Locale } from '@/i18n/config'
 import type { Dictionary } from '@/i18n/get-dictionary'
-import { ProjectImagePlaceholder } from '@/components/ui/ProjectImagePlaceholder'
 import { Reveal } from '@/components/ui/Reveal'
+
+function liveHostname(url?: string): string | null {
+  if (!url) return null
+  try {
+    const { hostname } = new URL(url)
+    if (hostname.includes('drive.google.com')) return null
+    return hostname.replace(/^www\./, '')
+  } catch {
+    return null
+  }
+}
 
 const featuredSlugs = [
   'voidscape',
@@ -123,7 +133,7 @@ export default function HomePage() {
           <div className="flex flex-col">
             {featuredProjects.map((project, i) => (
               <Reveal key={project.id} delayMs={i * 60}>
-                <ProjectRow project={project} index={i} flipped={i % 2 === 1} locale={locale} dict={dict} />
+                <ProjectRow project={project} index={i} locale={locale} dict={dict} />
               </Reveal>
             ))}
           </div>
@@ -203,104 +213,46 @@ export default function HomePage() {
 function ProjectRow({
   project,
   index,
-  flipped,
   locale,
   dict,
 }: {
   project: Project
   index: number
-  flipped: boolean
   locale: Locale
   dict: Dictionary
 }) {
-  const demoHref = project.demoVideo ?? '#'
+  const host = liveHostname(project.demoVideo)
 
   return (
-    <article className="group grid grid-cols-1 items-center gap-7 border-b border-rule py-11 last:border-b-0 md:grid-cols-2 md:gap-14 md:py-16">
-      <div
-        className={`relative aspect-[16/10] w-full overflow-visible ${
-          flipped ? 'md:order-2' : ''
-        }`}
-      >
-        {project.image ? (
-          <div className="absolute inset-0">
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-contain object-center p-3 transition-transform duration-700 ease-out group-hover:scale-[1.02] md:p-5"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
+    <Link
+      href={localePath(locale, `/projects/${project.slug}`)}
+      className="group flex items-start gap-5 border-b border-rule py-6 transition-colors first:pt-0 last:border-b-0 hover:bg-felt-deep/20 sm:items-center sm:gap-6"
+    >
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gold-soft font-mono text-[13px] font-semibold text-gold">
+        {String(index + 1).padStart(2, '0')}
+      </span>
+
+      <div className="flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h3 className="m-0 font-display text-lg font-bold leading-snug text-matte transition-colors group-hover:text-gold-bright">
+              {project.title}
+            </h3>
+            {project.inProgress ? (
+              <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-gold">
+                IN PROGRESS
+              </span>
+            ) : null}
           </div>
-        ) : (
-          <div className="absolute inset-0 overflow-hidden rounded-[14px] border border-rule bg-felt-frame">
-            <ProjectImagePlaceholder
-              title={project.title}
-              category={project.category}
-              index={index}
-              metric={project.results[0]?.metric}
-            />
-          </div>
-        )}
+          <p className="m-0 mt-1 max-w-[52ch] truncate text-sm leading-[1.5] text-ink-on-felt">
+            {project.blurb ?? project.tagline}
+          </p>
+        </div>
+
+        <span className="shrink-0 font-mono text-xs text-muted-2 transition-colors group-hover:text-gold-bright">
+          {host ? `${host} ↗` : `${dict.home.details} →`}
+        </span>
       </div>
-
-      <div className={`flex flex-col justify-center gap-3.5 ${flipped ? 'md:order-1' : ''}`}>
-        <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.12em]">
-          <span className="font-semibold tabular-nums text-gold">{String(index + 1).padStart(2, '0')}</span>
-          <span className="h-px w-6 bg-rule-2" aria-hidden="true" />
-          <span className="font-accent italic text-gold-bright">{project.category}</span>
-          <span className="text-muted-2">{project.duration}</span>
-          {project.category === 'AI ENGINEERING' ? (
-            <span className="rounded border border-accent/30 bg-accent-soft px-1.5 py-0.5 font-mono text-[9px] font-semibold tracking-[0.1em] text-accent">
-              AI
-            </span>
-          ) : null}
-          {project.inProgress ? (
-            <span className="rounded-full border border-gold/40 bg-gold-soft px-2 py-0.5 text-[9px] font-semibold tracking-[0.1em] text-gold">
-              IN PROGRESS
-            </span>
-          ) : null}
-        </div>
-
-        <h3 className="m-0 font-display text-[clamp(22px,2.4vw,30px)] font-bold leading-[1.08] tracking-[-0.02em] text-matte transition-colors group-hover:text-gold-bright">
-          {project.title}
-        </h3>
-
-        <div className="flex flex-wrap gap-[6px]">
-          {project.stack.slice(0, 6).map((s) => (
-            <span key={s} className="tag-pill">
-              {s}
-            </span>
-          ))}
-        </div>
-
-        <p className="m-0 max-w-[60ch] text-sm leading-[1.6] text-ink-on-felt">{project.tagline}</p>
-
-        <div className="mt-1 flex flex-wrap gap-2">
-          <a
-            href={demoHref}
-            target={demoHref.startsWith('http') ? '_blank' : undefined}
-            rel={demoHref.startsWith('http') ? 'noopener noreferrer' : undefined}
-            className="work-btn work-btn-demo"
-          >
-            {dict.home.demo}
-          </a>
-          <Link href={localePath(locale, `/projects/${project.slug}`)} className="work-btn work-btn-details">
-            {dict.home.details}
-          </Link>
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="work-btn work-btn-code"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-.99-.02-1.95-3.2.7-3.87-1.54-3.87-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.24.72-1.53-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.07 11.07 0 015.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.73.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14 0 1.54-.01 2.78-.01 3.16 0 .3.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z" />
-            </svg>
-            {dict.home.code}
-          </a>
-        </div>
-      </div>
-    </article>
+    </Link>
   )
 }

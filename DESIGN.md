@@ -1,5 +1,14 @@
 # DESIGN.md — Felt & Gold
 
+## Canonical positioning
+
+**Tagline:** "Full-stack engineer with a frontend and AI focus." (source: About page bio — the
+most specific and most recently authored framing on-site.) Other surfaces have drifted from this:
+`README.md` said "Data Analyst & BI Developer" (fixed), `layout.tsx` metadata says "Software &
+Data Engineer" (needs the same fix), the Journey résumé card says "Software Engineer & Data
+Analyst." Treat this file's tagline as the source of truth when reconciling copy — don't introduce
+a fifth variant.
+
 ## Color strategy
 
 Committed: sage felt carries primary surfaces; gold foil is the accent system (~10–20% of
