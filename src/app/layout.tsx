@@ -34,24 +34,24 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://richardpillaca.com'),
   title: 'Richard Pillaca',
   description:
-    'Portfolio of Richard Pillaca Burga — Software & Data Engineer based in Toronto.',
+    'Portfolio of Richard Pillaca Burga — a full-stack engineer with a frontend and AI focus, based in Toronto.',
   openGraph: {
     title: 'Richard Pillaca',
-    description: 'Software & Data projects, scalable solutions, and robust systems — built in Toronto.',
+    description: 'Full-stack, frontend & AI engineering — scalable products and robust systems, built in Toronto.',
     type: 'website',
     images: [
       {
         url: '/images/og-image.png',
         width: 955,
         height: 726,
-        alt: 'Richard Pillaca — Software & Data Engineer',
+        alt: 'Richard Pillaca — Full-Stack Engineer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Richard Pillaca',
-    description: 'Software & Data projects, scalable solutions, and robust systems — built in Toronto.',
+    description: 'Full-stack, frontend & AI engineering — scalable products and robust systems, built in Toronto.',
     images: ['/images/og-image.png'],
   },
   icons: {

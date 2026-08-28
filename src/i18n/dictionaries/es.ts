@@ -1,9 +1,9 @@
 export const dictionaryEs = {
   meta: {
     siteDescription:
-      'Portafolio de Richard Pillaca Burga — Ingeniero de Software y Datos en Toronto. Construyo productos escalables, pipelines de datos y sistemas robustos.',
+      'Portafolio de Richard Pillaca Burga — ingeniero full-stack con foco en frontend e IA, en Toronto. Construyo productos escalables, funcionalidades con IA y sistemas robustos.',
     ogDescription:
-      'Proyectos de software y datos, soluciones escalables y sistemas robustos — desde Toronto.',
+      'Ingeniería full-stack, frontend e IA — productos escalables y sistemas robustos, desde Toronto.',
   },
   nav: {
     home: 'Inicio',

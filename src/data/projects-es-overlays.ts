@@ -5,6 +5,7 @@ type ProjectOverlay = Pick<
     | 'category'
     | 'title'
     | 'tagline'
+    | 'blurb'
     | 'readTime'
     | 'overview'
     | 'problem'
@@ -193,6 +194,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
         title: 'ExamVault — Generación y análisis automatizado de exámenes',
         tagline:
             'Plataforma full-stack: generación automatizada de exámenes, panel de analítica y pipeline de calificación procesando más de 100.000 registros estudiantiles.',
+        blurb: 'Generación y calificación automatizada de exámenes para 100K+ registros — de 3 días a menos de 2 horas.',
         readTime: '9 min de lectura',
         overview:
             'ExamVault lleva a instructores de la página en blanco a insights calificados — genera exámenes de opción múltiple aleatorizados en segundos, califica sesiones completas automáticamente y lee el rendimiento de la clase desde un panel de analítica en vivo, todo en un solo lugar. Sin hojas de cálculo, sin calificación manual, sin esperar días por resultados. Construido en cuatro meses para un cliente real, reemplaza un flujo lento y propenso a errores con un pipeline rápido y defendible. Construí el motor backend de generación de exámenes y el panel de analítica, y lideré el proyecto como Scrum Master — manteniendo a un equipo de dos desarrolladores entregando bajo un plazo ajustado de semestre.',
@@ -248,7 +250,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
             'Plataforma de venta de entradas con procesamiento seguro de pagos y gestión de cuentas de usuario — construida con Django y Docker.',
         readTime: '6 min de lectura',
         overview:
-            'Sublime es una plataforma integral de venta de entradas diseñada para usabilidad, seguridad y escalabilidad. Incluye descubrimiento de eventos, procesamiento seguro de pagos y gestión de cuentas de usuario. Construida como parte de un Associate con The University of British Columbia, usando una metodología híbrida Waterfall–Agile que combinó planificación estructurada con sprints iterativos.',
+            'Sublime es una plataforma integral de venta de entradas diseñada para usabilidad, seguridad y escalabilidad. Incluye descubrimiento de eventos, procesamiento seguro de pagos y gestión de cuentas de usuario. Construida como proyecto universitario en la University of British Columbia, usando una metodología híbrida Waterfall–Agile que combinó planificación estructurada con sprints iterativos.',
         problem:
             'Las plataformas de ticketing existentes cobran comisiones altas y ofrecen poca personalización para eventos organizados por estudiantes. Los organizadores de eventos universitarios necesitaban una solución full-stack auto-hospedada con procesamiento real de pagos, gestión de eventos y una interfaz de admin adecuada — sin pagar comisiones de Eventbrite.',
         questions: [
@@ -387,6 +389,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
         title: 'ScoutLane — Plataforma de reclutamiento',
         tagline:
             'Plataforma de reclutamiento con IA: páginas públicas de vacantes, parseo de currículums, pipelines drag-and-drop, admin por roles, y la infraestructura de email/storage/webhooks que un equipo real de contratación necesita.',
+        blurb: 'Parseo de currículums con IA, pipelines Kanban, admin por roles — infraestructura real de reclutamiento.',
         readTime: '7 min de lectura',
         overview:
             'ScoutLane es una plataforma de reclutamiento que combina parseo de currículums con IA y gestión completa de pipeline: páginas públicas de carrera con formularios de postulación personalizados, un panel admin Kanban drag-and-drop, control de acceso por roles, y la infraestructura de producción — workers de trabajos async, email transaccional, storage cloud de archivos, webhooks salientes — que un equipo real de contratación opera día a día.',
@@ -488,6 +491,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
         title: 'El Umbral — Hub de proyectos de ayuda',
         tagline:
             'Un hub bilingüe de "busca antes de construir" para la ayuda tras el terremoto en Venezuela — encuentra un esfuerzo existente y únete, o publica el tuyo con el stack y la ayuda que necesita.',
+        blurb: 'Hub bilingüe de ayuda: busca antes de duplicar esfuerzos. En vivo, código abierto.',
         readTime: '7 min de lectura',
         overview:
             'El Umbral es el hub de descubrimiento de proyectos Build4Venezuela para ayuda post-terremoto: una plataforma de "busca antes de construir" para que los voluntarios dejen de duplicar esfuerzos. Busca una idea — si ya existe un esfuerzo similar, únete a ese repo y contribuye; si no, publica el tuyo con su stack tecnológico y la ayuda que necesita (contribuidores, créditos de API, patrocinadores). Un directorio de Builders importado del roster del hackathon muestra quién está disponible para ayudar. Se lanza bilingüe (español por defecto /es con /en), funciona sin base de datos para el MVP, y expone una API pública de solo lectura para que otras herramientas de ayuda construyan sobre el mismo catálogo.',
@@ -568,6 +572,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
         title: 'FindLeads — Generación de leads con CRM integrado',
         tagline:
             'Un negocio sin sitio web es el mejor prospecto de un desarrollador web. FindLeads los busca en Google Places, marca los sin web como leads tier-1, y envuelve un mini CRM alrededor de los resultados.',
+        blurb: 'Encuentra negocios sin sitio web, los marca tier-1, y les envuelve un CRM.',
         readTime: '5 min de lectura',
         overview:
             'FindLeads es una herramienta personal de generación de leads: busca en la API oficial de Google Places (Text Search New) negocios por categoría y ubicación, marca negocios sin sitio web como prospectos tier-1 para outreach de diseño web, y añade un CRM ligero encima — notas por negocio, toggle de contactado, exportación CSV. Next.js 16 App Router con React 19, Neon Postgres vía Drizzle ORM, validación Zod en cada límite, y un diseño de job async deliberadamente sin cola: una fila de job en la base de datos, trabajo en background vía Next.js after(), y polling del lado cliente.',
@@ -619,6 +624,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
         title: 'Peru Grid — Mapeando el ecosistema tech peruano',
         tagline:
             'Toronto tiene un mapa tech open-source querido. Perú no. Peru Grid mapea 53 startups, consultoras, incubadoras y fondos investigados en Lima y Arequipa — en un solo archivo HTML sin dependencias.',
+        blurb: '53 empresas tech peruanas verificadas en un mapa interactivo — cero dependencias, un archivo HTML.',
         readTime: '4 min de lectura',
         overview:
             'Peru Grid es un mapa interactivo con estilo terminal de los ecosistemas tech de Lima y Arequipa, renderizado con MapLibre GL JS sobre tiles vectoriales de OpenFreeMap — sin API keys, sin build step, sin framework, cero dependencias npm. Toda la aplicación es un archivo HTML de 766 líneas más dos datasets JSON cargados en runtime. Los visitantes vuelan entre las dos ciudades, clickean marcadores para detalles de empresas y navegan un ticker de titulares en vivo. La estructura está adaptada, con crédito, del toronto-tech-map de BUILD416, extendida con un selector de ciudad y validación de coordenadas por ciudad.',
@@ -670,6 +676,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
         title: 'Voidscape — Enseñando a agentes IA a ver video',
         tagline:
             'Un agente de codificación con IA puede leer imágenes y PDFs — no video. Voidscape descompone cualquier video en frames más transcripción, y cotiza todo el trabajo antes de gastar un centavo o un token.',
+        blurb: 'Enseña a agentes IA a ver video, y cotiza el trabajo antes de gastar un centavo.',
         readTime: '6 min de lectura',
         overview:
             'Voidscape es una skill open-source (MIT) de Claude Code / Codex que da a agentes IA comprensión genuina de video: apúntala a un archivo local o URL (YouTube, Loom, Vimeo…) y extrae frames para la pista visual y transcripción para la pista de audio — las dos cosas que un agente puede consumir realmente. Su feature definitoria es la puerta de costo: un pipeline probe → estimate → run que cotiza todo el trabajo (dólares de transcripción y costo de tokens del agente) por adelantado, usa transcripción local gratuita por defecto con faster-whisper, y solo toca backends cloud de pago tras aprobación explícita. El motor es un CLI Python de 1,300 líneas construido sobre la stdlib, con un protocolo opcional legible por máquina (`manifest`, `--envelope`, códigos de salida determinísticos) añadido para agentes que lo llaman. La landing page pública está en vivo en https://rikepilb.github.io/void-scape/.',
