@@ -19,10 +19,11 @@ Layouts are mobile-first. Reading order, keyboard order, and complete content mu
 
 ### Home
 
-1. Center-balanced hero with portrait, gold-foil name treatment, soft top-left radial lighting.
-2. My Work — image-led project rows (v2 `ProjectRow` structure preserved).
-3. Skills & Stack — three area cards embedded on the page.
-4. Supporting CTAs and footer.
+1. Editorial split hero: name and kicker left, portrait right, primary CTA View work.
+2. Selected work — six featured image-first project cards; full catalog on `/projects`.
+3. Writing — essays in reach from Home and primary nav.
+4. Skills & Stack — three area cards embedded on the page.
+5. Supporting CTAs and footer.
 
 ### Projects
 
@@ -52,8 +53,8 @@ Layouts are mobile-first. Reading order, keyboard order, and complete content mu
 - Primary routes use sage felt casing; About uses pearl satin.
 - Gold foil (or rose gold on About) is reserved for meaningful emphasis and interactive CTAs.
 - Preserve v2 shell utilities (`--spacing-gutter`, `--spacing-shell`) so pages fill the viewport.
-- Manrope/Montserrat for display and body; Cormorant Garamond italic / Cinzel for stamped labels;
-  JetBrains Mono for compact metadata.
+- Manrope for body/UI; Cormorant Garamond for headings and italic kickers;
+  JetBrains Mono for compact metadata. Do not use Montserrat.
 
 ## Motion and interaction
 

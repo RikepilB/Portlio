@@ -167,7 +167,7 @@ export default function JourneyPage() {
           </div>
 
           <Reveal delayMs={120}>
-            <aside aria-label={dict.journey.resumeLabel}>
+            <aside id="resume" aria-label={dict.journey.resumeLabel}>
               <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
                 {dict.journey.resumeLabel}
               </p>

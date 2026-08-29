@@ -41,30 +41,30 @@ export default async function EssayPage({
   if (!essay) notFound()
 
   return (
-    <article className="max-w-2xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
+    <article className="mx-auto max-w-2xl px-4 py-14 sm:px-6 sm:py-20">
       <Link
         href={localePath(locale, '/essays')}
         aria-label={dict.essays.backAria}
-        className="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-amber-700 transition-colors duration-150 mb-10"
+        className="mb-10 inline-flex items-center gap-1.5 text-sm text-muted transition-colors duration-150 hover:text-gold-bright"
       >
         ← {dict.essays.back}
       </Link>
 
-      <header className="flex flex-col gap-4 mb-10">
-        <div className="flex items-center gap-3 flex-wrap">
-          <span className="text-sm text-neutral-400 font-mono">{formatDate(essay.date)}</span>
-          <span className="text-neutral-300">·</span>
-          <span className="text-sm text-neutral-400 font-mono">{essay.readTime}</span>
+      <header className="mb-10 flex flex-col gap-4">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="font-mono text-sm text-muted">{formatDate(essay.date)}</span>
+          <span className="text-muted-2">·</span>
+          <span className="font-mono text-sm text-muted">{essay.readTime}</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold font-display text-neutral-900 leading-tight">
+        <h1 className="font-display text-3xl font-semibold leading-tight text-matte sm:text-4xl">
           {essay.title}
         </h1>
-        <p className="text-lg text-neutral-500 leading-relaxed">{essay.excerpt}</p>
+        <p className="text-lg leading-relaxed text-ink-on-felt">{essay.excerpt}</p>
         <div className="flex flex-wrap gap-1.5">
           {essay.tags.map((tag) => (
             <span
               key={tag}
-              className="text-xs font-mono text-neutral-500 border border-neutral-200 rounded px-2 py-0.5"
+              className="rounded border border-rule bg-felt-deep/35 px-2 py-0.5 font-mono text-xs text-muted"
             >
               {tag}
             </span>
@@ -72,16 +72,16 @@ export default async function EssayPage({
         </div>
       </header>
 
-      <div className="p-8 bg-neutral-50 border border-neutral-200 rounded-xl text-center flex flex-col gap-3">
+      <div className="flex flex-col gap-3 rounded-xl border border-rule bg-felt-deep/35 p-8 text-center">
         <span className="text-3xl">✍️</span>
-        <h2 className="text-lg font-bold font-display text-neutral-900">{dict.essays.placeholderTitle}</h2>
-        <p className="text-sm text-neutral-500 max-w-sm mx-auto">{dict.essays.placeholderBody}</p>
+        <h2 className="font-display text-lg font-semibold text-matte">{dict.essays.placeholderTitle}</h2>
+        <p className="mx-auto max-w-sm text-sm text-muted">{dict.essays.placeholderBody}</p>
         <Link
           href="https://substack.com/@richardpillaca"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Subscribe on Substack (opens in new tab)"
-          className="inline-flex self-center items-center gap-2 bg-amber-700 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-amber-800 transition-colors duration-150 mt-1"
+          className="mt-1 inline-flex self-center items-center gap-2 rounded-lg bg-matte px-4 py-2 text-sm font-semibold text-felt-deep transition-colors duration-150 hover:bg-gold"
         >
           {dict.essays.subscribe}
         </Link>

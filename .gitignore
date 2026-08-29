@@ -60,3 +60,7 @@ testsprite_tests/tmp/
 
 # local redesign reference scratch (not site code)
 redisgn/
+
+# Local agent/session dumps — Tailwind v4 scans these and crashes on invalid code points
+.codex/
+docs/handoff/*-codex-*/

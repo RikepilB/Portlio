@@ -28,13 +28,13 @@ export default async function EssaysPage({ params }: { params: Promise<{ locale:
   const essays = getEssays(locale)
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
-      <header className="flex flex-col gap-3 mb-12">
-        <span className="text-xs font-semibold tracking-widest uppercase text-amber-700">
+    <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
+      <header className="mb-12 flex flex-col gap-3">
+        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
           {dict.essays.title}
         </span>
-        <h1 className="text-4xl sm:text-5xl font-bold font-display text-neutral-900">{dict.essays.title}</h1>
-        <p className="text-lg text-neutral-500 max-w-xl">{dict.essays.subtitle}</p>
+        <h1 className="font-display text-4xl font-semibold text-matte sm:text-5xl">{dict.essays.title}</h1>
+        <p className="max-w-xl text-lg leading-relaxed text-ink-on-felt">{dict.essays.subtitle}</p>
       </header>
 
       <div className="flex flex-col" aria-label="Essay list">
@@ -43,14 +43,14 @@ export default async function EssaysPage({ params }: { params: Promise<{ locale:
         ))}
       </div>
 
-      <div className="mt-14 p-6 bg-amber-50 border border-amber-200 rounded-xl flex flex-col gap-3">
-        <h2 className="text-lg font-bold font-display text-neutral-900">{dict.essays.comingSoon}</h2>
+      <div className="mt-14 flex flex-col gap-3 rounded-xl border border-rule bg-felt-deep/35 p-6">
+        <h2 className="font-display text-lg font-semibold text-matte">{dict.essays.comingSoon}</h2>
         <Link
           href="https://substack.com/@richardpillaca"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Subscribe on Substack (opens in new tab)"
-          className="inline-flex self-start items-center gap-2 bg-amber-700 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-amber-800 transition-colors duration-150"
+          className="inline-flex self-start items-center gap-2 rounded-lg bg-matte px-4 py-2 text-sm font-semibold text-felt-deep transition-colors duration-150 hover:bg-gold"
         >
           Substack →
         </Link>

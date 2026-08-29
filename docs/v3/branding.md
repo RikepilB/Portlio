@@ -46,19 +46,17 @@ editorial system:
 | Silver shadow | `#5C6570` | Graphite fold / secondary accents |
 | Anthracite | `#2F3542` | Body and UI ink on mist |
 
-Display titles on About use silver-foil gradient text (Montserrat heavy, wide tracking).
+Display titles on About use Cormorant Garamond, not wide-tracked sans.
 Kickers use Cormorant italic. Soft left-side lighting. Matte satin surfaces, generous
 whitespace, clean-girl accessible luxury — no neon, no clutter.
 
 ## Typography
 
-- **Manrope** (or Montserrat for heavy display weights): tall capitals, heavy weighting, wide
-  tracking (`tracking-[0.18em]`) for the name banner and core project headings.
-- **Cormorant Garamond** (italic) or **Cinzel**: stamped serif labels, branding accents, small
-  uppercase metadata.
+- **Manrope**: body copy and UI chrome.
+- **Cormorant Garamond**: page titles, section headings, and italic kickers.
 - **JetBrains Mono**: compact technical tags, dates, and code-adjacent labels.
 
-Do not use Geist, Newsreader, Inter, Roboto, Arial, Ogg, or Playfair Display for the v3 interface.
+Do not use Montserrat, Geist, Newsreader, Inter, Roboto, Arial, Ogg, or Playfair Display for the v3 interface.
 
 ## Texture and lighting
 

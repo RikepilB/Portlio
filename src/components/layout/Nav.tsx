@@ -19,10 +19,10 @@ export function Nav() {
   const phraseRef = useRef<HTMLSpanElement>(null)
 
   const navItems = [
-    { href: localePath(locale, '/'), label: dict.nav.home },
+    { href: localePath(locale, '/projects'), label: dict.nav.work },
     { href: localePath(locale, '/about'), label: dict.nav.about },
-    { href: localePath(locale, '/journey'), label: dict.nav.journey },
-    { href: localePath(locale, '/projects'), label: dict.nav.projects },
+    { href: localePath(locale, '/essays'), label: dict.nav.essays },
+    { href: `${localePath(locale, '/journey')}#resume`, label: dict.nav.resume },
   ]
 
   useEffect(() => {
@@ -41,8 +41,9 @@ export function Nav() {
   const closeMobile = () => setMobileOpen(false)
 
   const isActive = (href: string) => {
-    if (href === localePath(locale, '/')) return pathname === href
-    return pathname === href || pathname.startsWith(`${href}/`)
+    const path = href.split('#')[0]
+    if (path === localePath(locale, '/')) return pathname === path
+    return pathname === path || pathname.startsWith(`${path}/`)
   }
 
   return (

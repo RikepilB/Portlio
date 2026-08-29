@@ -24,13 +24,13 @@ export function Footer() {
     }
   }, [dict.footer.funFacts])
 
-  if (tail === '/' || tail === '/about' || tail === '/journey') return null
+  if (tail === '/about') return null
 
   const menuLinks = [
-    { name: dict.nav.home, href: localePath(locale, '/') },
+    { name: dict.nav.work, href: localePath(locale, '/projects') },
     { name: dict.nav.about, href: localePath(locale, '/about') },
-    { name: dict.nav.journey, href: localePath(locale, '/journey') },
-    { name: dict.nav.projects, href: localePath(locale, '/projects') },
+    { name: dict.nav.essays, href: localePath(locale, '/essays') },
+    { name: dict.nav.resume, href: `${localePath(locale, '/journey')}#resume` },
   ]
 
   return (

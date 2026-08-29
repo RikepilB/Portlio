@@ -26,9 +26,10 @@ interactive emphasis). About flips to pearl satin + rose gold.
 - Silver-foil display titles; soft left lighting; matte satin; clean-girl whitespace
 
 ## Typography
-- Display/UI: Manrope (+ Montserrat heavy display), wide tracking on banners
-- Accents: Cormorant Garamond italic / Cinzel stamped labels
+- Body/UI: Manrope
+- Display headings + italic kickers: Cormorant Garamond
 - Mono: JetBrains Mono for tags and dates
+- Do not use Montserrat
 
 ## Texture & light
 - 3–5% SVG linen overlay on felt panels
@@ -41,7 +42,7 @@ interactive emphasis). About flips to pearl satin + rose gold.
 ## Components
 - FeltProjectCard: felt panel, stamped serif label, white title, gold-foil CTA
 - ResumePaper: satin pearl sheet with rose-gold accents
-- Nav: Home / About / Journey / Projects only
+- Nav: Work / About / Essays / Resume (Journey lives behind Resume; Get in touch stays in the bar)
 
 ## Explicit overrides vs baseline-ui
 Allowed: gradient foil text, wide tracking, linen texture overlays.

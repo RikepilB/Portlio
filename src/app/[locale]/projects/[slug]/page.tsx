@@ -43,6 +43,8 @@ export default async function ProjectPage({
   if (!project) notFound()
 
   const comingSoon = isComingSoon(project)
+  const heroSrc = project.image ?? project.images?.[0]
+  const galleryImages = (project.images ?? []).filter((src) => src !== heroSrc)
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
@@ -54,7 +56,7 @@ export default async function ProjectPage({
         ← {dict.caseStudy.back}
       </Link>
 
-      <header className="mb-12 flex flex-col gap-4">
+      <header className="mb-8 flex flex-col gap-4">
         <div className="flex flex-wrap items-center gap-3">
           <span className="font-accent text-[13px] uppercase italic tracking-[0.18em] text-gold-bright">
             {project.category}
@@ -69,18 +71,57 @@ export default async function ProjectPage({
             </span>
           ) : null}
         </div>
-        <h1 className="font-display text-4xl font-bold leading-tight text-matte sm:text-5xl">
+        <h1 className="font-display text-4xl font-semibold leading-tight text-matte sm:text-5xl">
           {project.title}
         </h1>
         <p className="text-lg leading-relaxed text-ink-on-felt sm:text-xl">{project.tagline}</p>
-        {project.stack.length > 0 ? (
-          <div className="flex flex-wrap gap-2 pt-1">
-            {project.stack.map((tech) => (
-              <TechTag key={tech} label={tech} />
+      </header>
+
+      {heroSrc ? (
+        <div className="relative mb-6 aspect-[16/10] w-full overflow-hidden rounded-2xl border border-rule bg-felt-deep/35">
+          <Image
+            src={heroSrc}
+            alt={project.title}
+            fill
+            priority
+            className="object-contain object-center p-4"
+            sizes="(max-width: 768px) 100vw, 768px"
+          />
+        </div>
+      ) : null}
+
+      {galleryImages.length > 0 ? (
+        <section className="mb-10" aria-label={dict.caseStudy.gallery}>
+          <div
+            className={`grid gap-4 ${galleryImages.length === 1 ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'}`}
+          >
+            {galleryImages.map((src, i) => (
+              <div
+                key={src}
+                className="relative aspect-video w-full overflow-hidden rounded-xl border border-rule bg-felt-deep/35"
+              >
+                <Image
+                  src={src}
+                  alt={`${project.title} ${dict.caseStudy.screenshotAltPrefix} ${i + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                />
+              </div>
             ))}
           </div>
-        ) : null}
-      </header>
+        </section>
+      ) : null}
+
+      {project.stack.length > 0 ? (
+        <div className="mb-12 flex flex-wrap gap-2">
+          {project.stack.map((tech) => (
+            <TechTag key={tech} label={tech} />
+          ))}
+        </div>
+      ) : (
+        <div className="mb-12" />
+      )}
 
       <section className="mb-10" aria-label={dict.caseStudy.overview}>
         <h2 className="mb-3 font-display text-xl font-bold text-matte">{dict.caseStudy.overview}</h2>
@@ -171,30 +212,6 @@ export default async function ProjectPage({
         <section className="mb-10" aria-label={dict.caseStudy.conclusion}>
           <h2 className="mb-3 font-display text-xl font-bold text-matte">{dict.caseStudy.conclusion}</h2>
           <p className="leading-relaxed text-ink-on-felt">{project.conclusion}</p>
-        </section>
-      ) : null}
-
-      {project.images && project.images.length > 0 ? (
-        <section className="mb-10" aria-label={dict.caseStudy.gallery}>
-          <h2 className="mb-4 font-display text-xl font-bold text-matte">{dict.caseStudy.gallery}</h2>
-          <div
-            className={`grid gap-4 ${project.images.length === 1 ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'}`}
-          >
-            {project.images.map((src, i) => (
-              <div
-                key={i}
-                className="relative aspect-video w-full overflow-hidden rounded-xl border border-rule bg-felt-deep/35"
-              >
-                <Image
-                  src={src}
-                  alt={`${project.title} ${dict.caseStudy.screenshotAltPrefix} ${i + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                />
-              </div>
-            ))}
-          </div>
         </section>
       ) : null}
 

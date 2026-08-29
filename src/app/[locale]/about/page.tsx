@@ -166,7 +166,7 @@ export default function AboutPage() {
       <section className="relative mx-auto max-w-6xl px-6 pb-10 pt-20 sm:px-12 md:pb-12">
         <div className="grid grid-cols-1 items-start gap-14 lg:grid-cols-[1.15fr_1fr]">
           <div className="flex flex-col gap-6">
-            <h1 className="font-display text-4xl font-extrabold uppercase leading-[0.95] tracking-[0.08em] text-gold-bright animate-fade-up sm:text-6xl">
+            <h1 className="animate-fade-up font-display text-4xl font-semibold leading-[0.95] tracking-[-0.02em] text-gold-bright sm:text-6xl">
               {dict.about.heading}
             </h1>
 
