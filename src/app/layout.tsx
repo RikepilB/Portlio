@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Manrope, Cormorant_Garamond, JetBrains_Mono } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import { GrainOverlay } from '@/components/ui/GrainOverlay'
 import './globals.css'
 
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <GrainOverlay />
         {children}
+        <Analytics />
       </body>
     </html>
   )

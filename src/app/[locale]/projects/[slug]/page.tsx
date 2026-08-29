@@ -24,9 +24,16 @@ export async function generateMetadata({
   if (!isLocale(locale)) return {}
   const project = getProjectBySlug(slug, locale)
   if (!project) return {}
+  const ogImage = project.image ?? project.images?.[0]
   return {
     title: `${project.title} — Richard Pillaca`,
     description: project.tagline,
+    openGraph: {
+      title: `${project.title} — Richard Pillaca`,
+      description: project.tagline,
+      type: 'article',
+      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
+    },
   }
 }
 

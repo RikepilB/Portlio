@@ -25,6 +25,11 @@ export async function generateMetadata({
   return {
     title: `${essay.title} — Richard Pillaca`,
     description: essay.excerpt,
+    openGraph: {
+      title: `${essay.title} — Richard Pillaca`,
+      description: essay.excerpt,
+      type: 'article',
+    },
   }
 }
 
@@ -72,20 +77,30 @@ export default async function EssayPage({
         </div>
       </header>
 
-      <div className="flex flex-col gap-3 rounded-xl border border-rule bg-felt-deep/35 p-8 text-center">
-        <span className="text-3xl">✍️</span>
-        <h2 className="font-display text-lg font-semibold text-matte">{dict.essays.placeholderTitle}</h2>
-        <p className="mx-auto max-w-sm text-sm text-muted">{dict.essays.placeholderBody}</p>
-        <Link
-          href="https://substack.com/@richardpillaca"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Subscribe on Substack (opens in new tab)"
-          className="mt-1 inline-flex self-center items-center gap-2 rounded-lg bg-matte px-4 py-2 text-sm font-semibold text-felt-deep transition-colors duration-150 hover:bg-gold"
-        >
-          {dict.essays.subscribe}
-        </Link>
-      </div>
+      {essay.body.length > 0 ? (
+        <div className="flex flex-col gap-5">
+          {essay.body.map((paragraph) => (
+            <p key={paragraph.slice(0, 48)} className="leading-relaxed text-ink-on-felt">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col gap-3 rounded-xl border border-rule bg-felt-deep/35 p-8 text-center">
+          <span className="text-3xl">✍️</span>
+          <h2 className="font-display text-lg font-semibold text-matte">{dict.essays.placeholderTitle}</h2>
+          <p className="mx-auto max-w-sm text-sm text-muted">{dict.essays.placeholderBody}</p>
+          <Link
+            href="https://substack.com/@richardpillaca"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Subscribe on Substack (opens in new tab)"
+            className="mt-1 inline-flex self-center items-center gap-2 rounded-lg bg-matte px-4 py-2 text-sm font-semibold text-felt-deep transition-colors duration-150 hover:bg-gold"
+          >
+            {dict.essays.subscribe}
+          </Link>
+        </div>
+      )}
     </article>
   )
 }
