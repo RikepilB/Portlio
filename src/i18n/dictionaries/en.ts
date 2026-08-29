@@ -14,6 +14,7 @@ export const dictionaryEn = {
     essays: 'Essays',
     resume: 'Resume',
     getInTouch: 'Get in touch',
+    skipToContent: 'Skip to content',
     toggleMenu: 'Toggle navigation menu',
     homeAria: 'Home page',
     languageSwitch: 'Language',

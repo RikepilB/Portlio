@@ -14,6 +14,7 @@ export const dictionaryEs = {
     essays: 'Ensayos',
     resume: 'CV',
     getInTouch: 'Contacto',
+    skipToContent: 'Saltar al contenido',
     toggleMenu: 'Abrir menú de navegación',
     homeAria: 'Página de inicio',
     languageSwitch: 'Idioma',

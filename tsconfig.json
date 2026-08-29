@@ -37,6 +37,7 @@
   ],
   "exclude": [
     "node_modules",
+    ".next/dev",
     "redisgn",
     "docs/v3/sources",
     "docs/v3/Vision board design",
