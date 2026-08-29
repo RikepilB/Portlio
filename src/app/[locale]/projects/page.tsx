@@ -63,7 +63,7 @@ export default function ProjectsPage() {
       <div className="side-light" aria-hidden="true" />
 
       <div className="relative mx-auto max-w-5xl px-6 pb-12 pt-16 sm:px-12">
-        <h1 className="mb-4 animate-fade-up font-display text-4xl font-bold tracking-[0.08em] text-matte sm:text-5xl">
+        <h1 className="mb-4 animate-fade-up font-display text-4xl font-semibold tracking-[-0.02em] text-matte sm:text-5xl">
           {dict.projects.title}
         </h1>
         <p className="animate-fade-up stagger-1 max-w-xl text-lg leading-relaxed text-muted">

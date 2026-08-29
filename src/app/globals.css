@@ -1,4 +1,12 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+
+/* Explicit folders only — globbing all of src/ hits Windows reserved `nul`. */
+@source "../app";
+@source "../components";
+@source "../i18n";
+@source "../data";
+@source "../lib";
+@source "../contexts";
 
 /* ── Richard Pillaca Portfolio v3 — Felt & Gold ─────────── */
 /* Tailwind v4 CSS-first config */
@@ -6,8 +14,8 @@
 @theme {
   /* Fonts */
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-  --font-accent: var(--font-accent), ui-serif, Georgia, serif;
+  --font-display: var(--font-display), ui-serif, Georgia, serif;
+  --font-accent: var(--font-display), ui-serif, Georgia, serif;
   --font-mono: var(--font-mono), ui-monospace, Menlo, monospace;
 
   /* Felt / gold primary canvas */
@@ -99,6 +107,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 72px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -114,7 +123,7 @@
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -0.02em;
   }
 

@@ -21,11 +21,11 @@ All three must pass before marking work complete.
 ```
 src/
 ├── app/                      # App Router pages
-│   ├── page.tsx              # Home — hero, image-led work, embedded Skills
+│   ├── page.tsx              # Home — editorial hero, image-led featured work, writing, Skills
 │   ├── layout.tsx            # Root layout (Nav + Footer)
 │   ├── projects/page.tsx     # Gallery — felt/gold filterable cards
-│   ├── projects/[slug]/page.tsx  # Case study detail
-│   ├── essays/page.tsx       # Essays list (preserved, not primary nav)
+│   ├── projects/[slug]/page.tsx  # Case study detail (images first)
+│   ├── essays/page.tsx       # Essays list (primary nav)
 │   ├── essays/[slug]/page.tsx    # Individual essay
 │   ├── about/page.tsx        # About — pearl satin + rose-gold vision board
 │   ├── journey/page.tsx      # Journey — timeline + embedded Resume
@@ -40,7 +40,7 @@ src/
 
 `@/*` import alias maps to `./src/*`.
 
-Primary nav: Home, About, Journey, Projects (+ Get in touch).
+Primary nav: Work, About, Essays, Resume (+ Get in touch). Logo links Home. Journey is the Resume destination (`/journey#resume`).
 
 ## Tailwind v4 specifics
 - Uses `@tailwindcss/postcss` plugin (not the v3 Tailwind plugin)

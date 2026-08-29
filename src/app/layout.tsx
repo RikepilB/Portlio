@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Manrope, Montserrat, Cormorant_Garamond, JetBrains_Mono } from 'next/font/google'
+import { Manrope, Cormorant_Garamond, JetBrains_Mono } from 'next/font/google'
 import { GrainOverlay } from '@/components/ui/GrainOverlay'
 import './globals.css'
 
@@ -9,18 +9,11 @@ const manrope = Manrope({
   display: 'swap',
 })
 
-const montserrat = Montserrat({
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
-  weight: ['600', '700', '800'],
-})
-
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  variable: '--font-accent',
-  display: 'swap',
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
   style: ['normal', 'italic'],
 })
 
@@ -63,7 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${manrope.variable} ${montserrat.variable} ${cormorant.variable} ${jetbrainsMono.variable}`}
+      className={`${manrope.variable} ${cormorant.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <body

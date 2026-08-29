@@ -18,7 +18,7 @@ Personal portfolio for **Richard Pillaca Burga** — a full-stack engineer with 
 | Framework | Next.js 16 (App Router) |
 | Language | TypeScript (strict mode, no `any`) |
 | Styling | Tailwind CSS v4 (utility-only, no CSS modules) |
-| Fonts | Manrope, Montserrat, Cormorant Garamond, JetBrains Mono via `next/font` |
+| Fonts | Manrope, Cormorant Garamond, JetBrains Mono via `next/font` |
 | Deployment | Vercel (push to main → auto-deploy) |
 | Content | TypeScript data objects in `src/data/` |
 
@@ -28,15 +28,15 @@ Personal portfolio for **Richard Pillaca Burga** — a full-stack engineer with 
 
 | Route | Page |
 |-------|------|
-| `/` | Home — hero, featured projects, recent essays, CTA |
-| `/projects` | Gallery — filterable project cards (category + tech tags) |
-| `/projects/[slug]` | Case study — overview, problem, methodology, metrics, findings |
+| `/` | Home — editorial hero, six featured project cards, essays, skills |
+| `/projects` | Gallery — filterable image-first project cards |
+| `/projects/[slug]` | Case study — images first, then overview, problem, methodology, metrics |
 | `/essays` | Essays list — title, date, read time, tags |
-| `/essays/[slug]` | Individual essay (MDX) |
-| `/about` | About — journey, skills, certifications, communities, education |
-| `/journey` | Timeline — filterable work/research/volunteer experience |
-| `/skills` | Skills directory |
-| `/resume` | Resume viewer + download |
+| `/essays/[slug]` | Individual essay (placeholder body) |
+| `/about` | About — bio and vision board |
+| `/journey` | Timeline + embedded résumé (Resume nav target) |
+| `/skills` | Redirects to Home |
+| `/resume` | Redirects to Journey |
 
 ---
 

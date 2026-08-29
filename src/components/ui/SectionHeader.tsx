@@ -9,15 +9,15 @@ export function SectionHeader({ eyebrow, heading, subtext, className = '' }: Sec
     return (
         <div className={`flex flex-col gap-2 ${className}`}>
             {eyebrow && (
-                <span className="text-xs font-semibold tracking-widest uppercase text-amber-700 font-sans">
+                <span className="font-mono text-xs font-semibold uppercase tracking-widest text-gold">
                     {eyebrow}
                 </span>
             )}
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-neutral-900 font-display leading-tight">
+            <h2 className="font-display text-3xl font-semibold leading-tight tracking-tight text-matte md:text-4xl">
                 {heading}
             </h2>
             {subtext && (
-                <p className="text-lg text-neutral-500 leading-relaxed max-w-2xl">{subtext}</p>
+                <p className="max-w-2xl text-lg leading-relaxed text-ink-on-felt">{subtext}</p>
             )}
         </div>
     )

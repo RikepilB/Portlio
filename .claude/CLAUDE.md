@@ -45,12 +45,12 @@ Rules are documentation + guardrails; skills are executable workflows — load b
 
 - ❌ No velvet-charcoal/copper direction (rejected); no dark navy/teal legacy palette
 - ❌ No Geist, Newsreader, Inter, Roboto, Arial, Ogg, or Playfair Display
-- ✅ Use Manrope/Montserrat for display + UI, Cormorant Garamond italic / Cinzel for stamped
-  accents, JetBrains Mono for technical metadata
+- ✅ Use Manrope for body/UI, Cormorant Garamond for headings and italic kickers,
+  JetBrains Mono for technical metadata. Do not use Montserrat.
 - ❌ No hardcoded colors — Tailwind classes or CSS custom properties only
 - ❌ No inline styles or hardcoded project content in presentation components
-- ❌ Do not change v2 page composition (section order, embedded Skills/Resume, nav IA)
-- ❌ Skills/Resume are not primary nav tabs — redirect `/skills → /`, `/resume → /journey`
+- Keep felt & gold tokens and the Home sequence: editorial hero → featured work → writing → skills. Do not invent a new palette.
+- Skills stay embedded on Home (`/skills` still redirects to `/`). Resume is a primary nav item pointing at `/journey#resume` (`/resume` still redirects to `/journey`).
 - ❌ `any` type is a lint error — TypeScript strict, always
 - ✅ Selective `framer-motion` + `shadcn/ui` allowed; CSS fallback + reduced-motion required
 
