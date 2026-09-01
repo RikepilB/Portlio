@@ -54,67 +54,55 @@ export default function HomePage() {
   return (
     <>
       <section
-        className="relative overflow-x-clip pb-16 pt-24 md:pb-24 md:pt-32"
+        className="relative overflow-x-clip pb-20 pt-24 md:pb-28 md:pt-32"
         aria-label={dict.home.introAria}
       >
         <div className="side-light" aria-hidden="true" />
 
         <div className="shell relative">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
-            <div className="flex max-w-xl flex-col items-start gap-6">
-              <p className="m-0 font-accent text-[20px] italic leading-none tracking-[-0.01em] text-gold-bright">
-                {dict.home.kicker}
-              </p>
-              <h1 className="m-0 font-display text-[clamp(44px,7vw,84px)] font-semibold leading-[0.95] tracking-[-0.03em] text-matte">
-                Richard Pillaca
-              </h1>
-              <p className="m-0 max-w-[38ch] text-[17px] leading-[1.7] text-ink-on-felt md:text-[18px]">
-                {dict.home.lede}
-              </p>
-              <p className="m-0 flex items-center gap-[6px] font-mono text-[11px] tracking-[0.06em] text-muted">
-                <span className="text-gold" aria-hidden="true">
-                  📍
-                </span>
-                {dict.home.location}
-              </p>
-
-              <div className="mt-2 flex flex-wrap items-center gap-4">
-                <a
-                  href="#work"
-                  className="inline-flex items-center gap-2 rounded-full bg-matte px-[22px] py-[12px] text-[14px] font-medium text-felt-deep transition-all duration-200 hover:-translate-y-px hover:bg-gold"
-                >
-                  {dict.home.viewWork}
-                  <span aria-hidden="true">↓</span>
-                </a>
-                <div className="flex items-center gap-3">
-                  {socialLinks.slice(0, 4).map((link) => {
-                    const Icon = iconMap[link.platform] ?? Github
-                    return (
-                      <a
-                        key={link.platform}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-felt-deep/60 text-matte transition-all hover:border-gold hover:bg-gold-soft hover:text-gold-bright"
-                        aria-label={link.label}
-                      >
-                        <Icon size={18} strokeWidth={2} className="transition-transform group-hover:scale-110" />
-                      </a>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
-
-            <div className="mx-auto w-full max-w-[340px] lg:mx-0 lg:justify-self-end">
+          <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
+            <div className="flex flex-col items-center gap-4">
               <Image
                 src="/images/hero-portrait.png"
                 alt={dict.home.heroAlt}
                 width={554}
                 height={672}
-                className="h-auto w-full drop-shadow-[0_18px_40px_rgba(32,40,34,0.35)]"
+                className="h-auto w-full max-w-[280px] drop-shadow-[0_18px_40px_rgba(32,40,34,0.35)]"
                 priority
               />
+              <p className="flex items-center justify-center gap-[6px] font-mono text-[10.5px] tracking-[0.06em] text-ink-on-felt">
+                <span className="text-gold" aria-hidden="true">
+                  📍
+                </span>
+                {dict.home.location}
+              </p>
+            </div>
+
+            <h1 className="m-0 font-display text-[clamp(42px,7vw,72px)] font-extrabold uppercase leading-[0.95] tracking-[0.12em] text-foil">
+              Richard Pillaca
+            </h1>
+
+            <div className="mt-2 flex w-full max-w-xl flex-col items-center gap-3 border-y border-rule py-4">
+              <span className="text-center font-accent text-[18px] font-light italic tracking-[-0.01em] text-gold-bright">
+                {dict.home.traits}
+              </span>
+              <div className="mt-1 flex items-center gap-4">
+                {socialLinks.slice(0, 4).map((link) => {
+                  const Icon = iconMap[link.platform] ?? Github
+                  return (
+                    <a
+                      key={link.platform}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-felt-deep/60 text-matte transition-all hover:border-gold hover:bg-gold-soft hover:text-gold-bright hover:shadow-md"
+                      aria-label={link.label}
+                    >
+                      <Icon size={20} strokeWidth={2} className="transition-transform group-hover:scale-110" />
+                    </a>
+                  )
+                })}
+              </div>
             </div>
           </div>
         </div>
