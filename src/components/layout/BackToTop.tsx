@@ -30,13 +30,13 @@ export function BackToTop() {
       onClick={scrollToTop}
       aria-label={dict.home.backToTop}
       className={cn(
-        'fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full border px-4 py-2.5 font-mono text-[11px] font-bold uppercase tracking-widest shadow-lg backdrop-blur-md transition-all duration-300',
+        'fixed bottom-4 right-4 z-50 inline-flex h-11 w-11 items-center justify-center border font-mono text-[11px] font-bold uppercase tracking-widest transition-all duration-300 sm:bottom-6 sm:right-6 sm:h-auto sm:w-auto sm:gap-2 sm:px-4 sm:py-2.5',
         'border-rule bg-felt-deep/90 text-muted hover:border-gold/40 hover:text-gold-bright',
         visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
       )}
     >
-      <span className="h-1.5 w-1.5 rounded-full bg-rule-2 transition-colors" aria-hidden="true" />
-      ↑ {dict.home.backToTop}
+      <span aria-hidden="true">↑</span>
+      <span className="sr-only sm:not-sr-only">{dict.home.backToTop}</span>
     </button>
   )
 }

@@ -9,7 +9,7 @@ export function SectionHeader({ eyebrow, heading, subtext, className = '' }: Sec
     return (
         <div className={`flex flex-col gap-2 ${className}`}>
             {eyebrow && (
-                <span className="font-mono text-xs font-semibold uppercase tracking-widest text-gold">
+                <span className="font-mono text-xs font-semibold uppercase tracking-widest text-gold-bright">
                     {eyebrow}
                 </span>
             )}

@@ -48,7 +48,7 @@ export default function JourneyPage() {
       <div className="relative mx-auto max-w-6xl border-t border-rule px-6 pb-24 pt-12 sm:px-12">
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1.05fr_0.95fr] xl:gap-16">
           <div>
-            <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
+            <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.18em] text-gold-bright">
               {dict.journey.pathLabel}
             </p>
             <div className="relative ml-3 space-y-16 border-l-2 border-rule sm:ml-0 md:pl-8">
@@ -168,7 +168,7 @@ export default function JourneyPage() {
 
           <Reveal delayMs={120}>
             <aside id="resume" aria-label={dict.journey.resumeLabel}>
-              <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
+              <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.18em] text-gold-bright">
                 {dict.journey.resumeLabel}
               </p>
               <ResumePaper />

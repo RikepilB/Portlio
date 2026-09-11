@@ -19,14 +19,14 @@
   --font-mono: var(--font-mono), ui-monospace, Menlo, monospace;
 
   /* Felt / gold primary canvas */
-  --color-felt: #607466;
-  --color-felt-soft: #708275;
-  --color-felt-deep: #4f6258;
-  --color-felt-frame: #3c4f42;
+  --color-felt: #18251f;
+  --color-felt-soft: #24372f;
+  --color-felt-deep: #111a16;
+  --color-felt-frame: #1b3028;
   --color-felt-border: rgba(255, 255, 255, 0.14);
 
   --color-gold: #d4af37;
-  --color-gold-bright: #f2e3c6;
+  --color-gold-bright: #fff6dc;
   --color-gold-shadow: #aa7c11;
   --color-gold-soft: rgba(212, 175, 55, 0.16);
 
@@ -51,9 +51,9 @@
   --color-rose-shadow: #735147;
 
   /* Semantic aliases used across v2 structure */
-  --color-bg: #607466;
-  --color-bg-soft: #708275;
-  --color-surface: #708275;
+  --color-bg: #18251f;
+  --color-bg-soft: #24372f;
+  --color-surface: #24372f;
   --color-ink: #ffffff;
   --color-ink-2: #eaeced;
   --color-muted: rgba(255, 255, 255, 0.72);
@@ -67,8 +67,8 @@
   --color-gold-ink: #aa7c11;
 
   /* Dark aliases kept for gradual migration */
-  --color-d-bg: #4f6258;
-  --color-d-bg-2: #607466;
+  --color-d-bg: #111a16;
+  --color-d-bg-2: #18251f;
   --color-d-ink: #ffffff;
   --color-d-ink-2: #eaeced;
   --color-d-muted: rgba(255, 255, 255, 0.65);
@@ -85,8 +85,8 @@
 
   /* Shadows */
   --shadow-polaroid: 0 1px 2px rgba(0, 0, 0, 0.04), 0 18px 40px -20px rgba(20, 16, 8, 0.25), 0 4px 10px -4px rgba(20, 16, 8, 0.10);
-  --shadow-card: 0 12px 40px -18px rgba(32, 40, 34, 0.45);
-  --shadow-felt: 0 18px 50px -24px rgba(20, 28, 22, 0.55);
+  --shadow-card: 0 12px 40px -18px rgba(4, 12, 9, 0.5);
+  --shadow-felt: 0 18px 50px -24px rgba(4, 12, 9, 0.68);
 
   /* Animation */
   --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -212,6 +212,51 @@
   );
 }
 
+.portfolio-page {
+  background-color: var(--color-felt);
+}
+
+.portfolio-hero {
+  isolation: isolate;
+  background-color: transparent;
+}
+
+.portfolio-aura {
+  position: absolute;
+  inset: -18% -10%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(76% 36% at 58% 46%, rgba(53, 142, 137, 0.28) 0%, rgba(28, 103, 101, 0.16) 38%, transparent 75%),
+    linear-gradient(168deg, transparent 31%, rgba(42, 118, 102, 0.18) 47%, rgba(22, 78, 66, 0.22) 55%, transparent 70%),
+    radial-gradient(42% 48% at 18% 26%, rgba(55, 132, 79, 0.14) 0%, transparent 68%);
+  mix-blend-mode: screen;
+  filter: blur(82px);
+  transform: translateZ(0);
+}
+
+.portfolio-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(10, 18, 14, 0.28), transparent 42%, rgba(7, 15, 12, 0.18));
+}
+
+.section-ground {
+  background: color-mix(in srgb, var(--color-felt) 94%, transparent);
+}
+
+.project-media {
+  background-image: linear-gradient(145deg, rgba(36, 55, 47, 0.9), rgba(17, 26, 22, 0.98));
+}
+
+.hero-glass-image {
+  filter: url("#hero-dark-key") drop-shadow(0 18px 40px rgba(4, 12, 9, 0.45));
+}
+
 @utility project-placeholder-wash {
   background:
     radial-gradient(ellipse 70% 60% at 18% 20%, rgba(112, 130, 117, 0.55) 0%, transparent 55%),
@@ -334,6 +379,24 @@
   gap: 12px;
 }
 
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  color: var(--color-gold-bright);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.text-link:hover {
+  color: var(--color-matte);
+  border-bottom-color: var(--color-gold);
+}
+
 .pulse-dot {
   width: 7px;
   height: 7px;
@@ -442,6 +505,11 @@
 @media (max-width: 840px) {
   :root {
     --spacing-gutter: 24px;
+  }
+
+  .portfolio-aura {
+    inset: -8% -40%;
+    filter: blur(64px);
   }
 }
 

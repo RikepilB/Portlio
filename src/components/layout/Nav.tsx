@@ -52,8 +52,8 @@ export function Nav() {
         className={cn(
           'fixed inset-x-0 top-0 z-50 border-b transition-all duration-300',
           isScrolled
-            ? 'border-rule bg-felt/92 backdrop-blur-md'
-            : 'border-transparent bg-felt/62 backdrop-blur-sm'
+            ? 'border-rule bg-felt-deep/94 backdrop-blur-md'
+            : 'border-transparent bg-felt-deep/64 backdrop-blur-sm'
         )}
         aria-label="Main navigation"
       >
@@ -61,7 +61,6 @@ export function Nav() {
           <Link
             href={localePath(locale, '/')}
             className="inline-flex shrink-0 items-center gap-2"
-            aria-label={dict.nav.homeAria}
           >
             <Image
               src="/images/logo.png"
@@ -73,10 +72,11 @@ export function Nav() {
             />
             <span
               ref={phraseRef}
-              className="font-sans text-[16px] font-bold tracking-[-0.01em] text-gold"
+              className="font-sans text-[16px] font-bold tracking-[-0.01em] text-gold-bright"
             >
               {dict.nav.phrases[0]}
             </span>
+            <span className="sr-only">{dict.nav.home}</span>
           </Link>
 
           <ul className="hidden list-none gap-7 p-0 m-0 md:flex lg:gap-9">
@@ -107,7 +107,7 @@ export function Nav() {
             <LocaleSwitcher />
             <a
               href={`mailto:${contactInfo.email}`}
-              className="inline-flex items-center gap-2 rounded-full bg-matte px-[18px] py-[10px] text-[13.5px] font-medium text-felt-deep transition-all duration-200 hover:-translate-y-px hover:bg-gold"
+              className="inline-flex items-center gap-2 border border-matte bg-matte px-[18px] py-[10px] text-[13px] font-semibold text-felt-deep transition-colors duration-200 hover:border-gold hover:bg-gold"
             >
               {dict.nav.getInTouch}
               <span className="text-xs">↗</span>
@@ -118,7 +118,7 @@ export function Nav() {
             <LocaleSwitcher />
             <button
               type="button"
-              className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-rule"
+              className="flex h-[42px] w-[42px] items-center justify-center border border-rule"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-expanded={mobileOpen}
               aria-label={dict.nav.toggleMenu}
@@ -131,7 +131,7 @@ export function Nav() {
 
       <div
         className={cn(
-          'fixed inset-x-0 top-[60px] z-40 overflow-hidden border-b border-rule bg-felt transition-all duration-200 md:hidden',
+          'fixed inset-x-0 top-[60px] z-40 overflow-hidden border-b border-rule bg-felt-deep transition-all duration-200 md:hidden',
           mobileOpen
             ? 'max-h-96 opacity-100 pointer-events-auto'
             : 'max-h-0 opacity-0 pointer-events-none'
@@ -160,7 +160,7 @@ export function Nav() {
             <a
               href={`mailto:${contactInfo.email}`}
               onClick={closeMobile}
-              className="inline-flex w-full items-center justify-center rounded-full bg-matte px-6 py-3 text-[13.5px] font-medium text-felt-deep"
+              className="inline-flex w-full items-center justify-center border border-matte bg-matte px-6 py-3 text-[13.5px] font-medium text-felt-deep"
             >
               {dict.nav.getInTouch}
               <span className="ml-2">↗</span>

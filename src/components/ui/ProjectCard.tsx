@@ -35,23 +35,17 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
     <Link
       ref={linkRef}
       href={localePath(locale, `/projects/${project.slug}`)}
-      aria-label={
-        comingSoon
-          ? `${dict.projects.comingSoonAriaPrefix} ${project.title}`
-          : `${dict.projects.viewCaseAriaPrefix} ${project.title}`
-      }
       onMouseMove={onMove}
-      className={cn(
-        'group felt-panel relative flex h-full flex-col overflow-hidden rounded-2xl p-0 transition-transform duration-300 hover:-translate-y-1'
-      )}
+      className={cn('group relative flex h-full flex-col border-t border-rule pt-4')}
     >
-      <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-felt-border bg-felt">
+      <div className="project-media relative aspect-[16/10] w-full overflow-hidden border border-rule bg-felt-deep">
         {showImage ? (
           <Image
             src={project.image!}
-            alt={project.title}
+            alt=""
             fill
-            className="object-contain object-center p-4 transition-transform duration-700 group-hover:scale-[1.02]"
+            priority={index < 2}
+            className="object-contain object-center p-3 transition-opacity duration-300 group-hover:opacity-90 md:p-5"
             sizes="(max-width: 768px) 100vw, 50vw"
             onError={() => setImageFailed(true)}
           />
@@ -65,49 +59,33 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
         )}
       </div>
 
-      <div className="flex flex-1 flex-col gap-4 p-7 md:p-8">
+      <div className="flex flex-1 flex-col gap-4 py-6">
         <div className="flex items-center justify-between gap-3">
-          <span className="flex items-center gap-2 font-accent text-[13px] uppercase tracking-[0.18em] text-gold-bright italic">
+          <span className="flex flex-wrap items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.1em] text-muted">
             {project.category}
-            {project.category === 'AI ENGINEERING' ? (
-              <span className="rounded border border-accent/30 bg-accent-soft px-1.5 py-0.5 font-mono text-[9px] font-semibold not-italic tracking-[0.1em] text-accent">
-                AI
-              </span>
-            ) : null}
             {project.inProgress ? (
-              <span className="rounded-full border border-gold/40 bg-gold-soft px-2 py-0.5 font-mono text-[9px] font-semibold not-italic tracking-[0.1em] text-gold">
-                IN PROGRESS
-              </span>
+              <><span aria-hidden="true">/</span><span className="text-gold-bright">IN PROGRESS</span></>
             ) : null}
           </span>
-          <span className="font-mono text-xs text-muted">{project.duration}</span>
+          <span className="shrink-0 font-mono text-[10.5px] text-muted">{project.duration}</span>
         </div>
 
-        <h2 className="font-display text-2xl font-bold leading-snug text-matte">{project.title}</h2>
-        <p className="text-sm leading-relaxed text-ink-on-felt">{project.tagline}</p>
+        <h2 className="font-display text-[27px] font-medium leading-[1.06] tracking-[-0.025em] text-matte md:text-[31px]">{project.title}</h2>
+        <p className="max-w-[58ch] text-sm leading-[1.7] text-ink-on-felt">{project.tagline}</p>
 
         {project.stack.length > 0 ? (
-          <div className="mt-auto flex flex-wrap gap-2 pt-2">
-            {project.stack.slice(0, 4).map((tech) => (
-              <span
-                key={tech}
-                className="rounded border border-rule bg-felt-deep/35 px-2.5 py-1 font-mono text-xs text-muted"
-              >
-                {tech}
-              </span>
-            ))}
+          <p className="mt-auto pt-2 font-mono text-[10px] uppercase leading-relaxed tracking-[0.07em] text-muted">
+            {project.stack.slice(0, 4).join(' / ')}
             {project.stack.length > 4 ? (
-              <span className="flex items-center px-1 text-xs font-medium text-muted">
-                +{project.stack.length - 4}
-              </span>
+              <span> / +{project.stack.length - 4}</span>
             ) : null}
-          </div>
+          </p>
         ) : (
           <div className="mt-auto pt-2" />
         )}
 
-        <div className="mt-4 border-t border-rule pt-5">
-          <span className="foil-link text-sm font-semibold">
+        <div className="mt-2 border-t border-rule pt-4">
+          <span className="text-link text-[12px]">
             {comingSoon ? dict.projects.comingSoonCta : `${dict.projects.viewCase} →`}
           </span>
         </div>
