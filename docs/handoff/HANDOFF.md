@@ -23,6 +23,10 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ## Current state — 2026-09-11
 
+**Featured-project refresh is verified in PR #35 on `codex/refresh-featured-projects` and ready to merge/deploy.** The six Home projects now use current product screenshots and source-backed EN/ES content, stacks, metrics, demo URLs, GitHub URLs, and Foglamp codebase-map URLs. Home cards restore the earlier stack pills plus direct Details, Demo, Code, and Codebase map controls; images and titles link to localized case studies. Detail galleries use horizontal `object-contain` framing. Desktop and mobile browser checks found no overflow, broken images, nested links, or console errors. `pnpm lint`, `npx tsc --noEmit`, `pnpm test` (9 tests), and `pnpm build` (58 routes) pass. GitHub CI, Vercel preview, and CodeRabbit pass; CodeRabbit's three valid minor findings were corrected before merge. El Umbral correctly has Details, Demo, and Code only because no authoritative codebase map exists. Existing unrelated untracked scaffolding remains excluded.
+
+## Previous state — 2026-09-11 (earlier)
+
 **Tideglass Felt portfolio redesign shipped to `main` through PR #33 at `82c6b00` and is live on `richardpillaca.com`.** The update deepens the existing felt/gold identity with a restrained sage/teal aura adapted from the supplied Tideglass and Neon Sludge references. Cormorant Garamond, Manrope, and JetBrains Mono remain the only font suite. Home project, essay, and skills surfaces were flattened and stripped of redundant kickers, chips, numbers, icon cards, duplicate CTAs, and universal hover lift. The exact centered gold-foil hero remains, while a new mint sea-glass portrait removes the previous corner mark and adds one restrained gold reflection; the original image is preserved. Project media remains horizontal and contained. CodeRabbit's six minor findings were resolved before merge. GitHub CI, CodeRabbit, Vercel preview, and the production deploy all passed. Live checks at 1440×1000 and 390×844 confirmed the hero asset, gold name, mobile navigation, no horizontal overflow, and 16:10 project media. Landing and production-readiness audits are recorded in `docs/v3/branding.md`; the Vercel rollback path is in `docs/ARCHITECTURE.md`. Existing unrelated untracked scaffolding remains excluded.
 
 ## Previous state — 2026-07-18 (later)
@@ -55,6 +59,7 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ## Session index (append-only, newest first)
 
+- [2026-09-11-featured-project-refresh](2026-09-11-featured-project-refresh/HANDOFF.md) — refreshed six featured projects from current source/live evidence; restored Home stack pills and Details/Demo/Code/Codebase map links; EN/ES desktop/mobile and full verification gate pass
 - [2026-09-10-tideglass-portfolio-preview](2026-09-10-tideglass-portfolio-preview/HANDOFF.md) — local dark felt/aura and anti-slop redesign preview; exact centered gold-foil hero restored; desktop/mobile EN/ES and full build gate pass; no commit/push
 - [2026-07-20-voidscape-rename-foglamp-scans](2026-07-20-voidscape-rename-foglamp-scans/HANDOFF.md) — ScoutLane thumbnail fix, read-video renamed to Voidscape (EN/ES), in-progress tags on 5 projects, Foglamp codebase-map scans on 4 sibling repos wired into case studies + those repos README; PR #26 opened against main
 - [2026-07-18-read-video-portfolio-entry](2026-07-18-read-video-portfolio-entry/HANDOFF.md) — `/goal`: audited ScoutLane/read-video/FindLeads live, verified real numbers + screenshots, FindLeads shipped, home showcase re-curated; PR #25 merged to main (`2a1168c`)

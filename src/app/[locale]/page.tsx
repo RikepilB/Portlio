@@ -120,7 +120,7 @@ export default function HomePage() {
           <div className="grid gap-8 md:grid-cols-2">
             {featuredProjects.map((project, i) => (
               <Reveal key={project.id} delayMs={i * 60}>
-                <ProjectCard project={project} index={i} />
+                <ProjectCard project={project} index={i} showActions />
               </Reveal>
             ))}
           </div>
