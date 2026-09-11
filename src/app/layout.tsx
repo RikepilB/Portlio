@@ -66,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <GrainOverlay />
         {children}
-        {process.env.VERCEL_ENV === 'production' ? <Analytics /> : null}
+        <Analytics mode="production" />
       </body>
     </html>
   )
