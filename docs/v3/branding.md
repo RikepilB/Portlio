@@ -125,6 +125,12 @@ felt/gold identity while applying the Tideglass background, typography, and edit
 - No decorative pre-heading labels, duplicate work CTA, ornamental skill numbers, icon-card trio,
   tag-cloud surfaces, or universal hover lift remain on Home. The hero’s social circles and italic
   traits are intentional identity elements chosen from Richard’s supplied reference.
+- **2026-09-11 project-media refresh:** pass at 1440×1000 after replacing the six featured covers
+  with current product evidence. Home cards render every image in a horizontal 16:10 frame with
+  `object-contain`; case-study galleries now use the same containment rule instead of cropping UI.
+  The added media earns its space by showing the actual product, workflow, or architecture map;
+  no decorative mockups or fabricated metrics were introduced. Direct Details, Demo, Code, and
+  Codebase map links restore the previously approved Home utility in one compact, functional row.
 
 ### Landing audit — pre-merge
 

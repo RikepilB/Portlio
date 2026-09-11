@@ -386,13 +386,13 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
     },
     'scoutlane-recruitment': {
         category: 'FULL STACK 2026',
-        title: 'ScoutLane — Plataforma de reclutamiento',
+        title: 'ScoutLane — Plataforma de reclutamiento basada en evidencia',
         tagline:
-            'Plataforma de reclutamiento con IA: páginas públicas de vacantes, parseo de currículums, pipelines drag-and-drop, admin por roles, y la infraestructura de email/storage/webhooks que un equipo real de contratación necesita.',
-        blurb: 'Parseo de currículums con IA, pipelines Kanban, admin por roles — infraestructura real de reclutamiento.',
+            'ScoutLane convierte currículums en evidencia revisable y mantiene cada decisión de contratación conectada con la persona candidata.',
+        blurb: 'Expedientes con evidencia, parseo de currículums con IA, pipelines Kanban e infraestructura real de contratación.',
         readTime: '7 min de lectura',
         overview:
-            'ScoutLane es una plataforma de reclutamiento que combina parseo de currículums con IA y gestión completa de pipeline: páginas públicas de carrera con formularios de postulación personalizados, un panel admin Kanban drag-and-drop, control de acceso por roles, y la infraestructura de producción — workers de trabajos async, email transaccional, storage cloud de archivos, webhooks salientes — que un equipo real de contratación opera día a día.',
+            'ScoutLane es una plataforma de reclutamiento basada en una regla simple: cada decisión de contratación debe dejar un rastro. La experiencia pública presenta vacantes y un expediente interactivo de candidato; el producto operativo combina parseo de currículums, evidencia estructurada, pipelines drag-and-drop, acceso por roles, analítica, plantillas y la infraestructura de producción — workers asíncronos, email transaccional, almacenamiento cloud e integraciones salientes firmadas — que necesita un equipo de contratación.',
         problem:
             'Los equipos de reclutamiento pasan horas revisando currículums manualmente y rastreando candidatos en hojas de cálculo. ScoutLane automatiza el parseo de currículums y proporciona gestión estructurada de pipeline para reducir el time-to-hire, sin dejar los huecos operativos — auth, permisos, notificaciones, integraciones — que convierten un demo en software no lanzable.',
         questions: [
@@ -419,23 +419,23 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
                 phase: 'Fase 3',
                 title: 'Panel admin, RBAC e integraciones',
                 detail:
-                    'Construí un panel admin por roles (Admin / Recruiter / Hiring Manager vía sesiones JWT de Auth.js) con pipelines Kanban drag-and-drop (dnd-kit), analítica Recharts, gestión de templates de vacante, gestión de equipo, e integraciones de webhooks salientes para sistemas externos — más una suite completa de tests Vitest + Playwright (236 tests, 36 archivos) y CI (lint → typecheck → test → build).',
-                tech: ['Auth.js', 'dnd-kit', 'Recharts', 'Vitest', 'Playwright'],
+                    'Construí un panel autenticado con Clerk y rutas para Admin, Recruiter, Hiring Manager y Guest de solo lectura; pipelines Kanban drag-and-drop; analítica Recharts; gestión de plantillas y equipo; e integraciones salientes firmadas. El último checkpoint de producción pasó lint, typecheck, 511 tests con uno omitido, migraciones y el build de producción.',
+                tech: ['Clerk', 'Prisma 7', 'dnd-kit', 'Recharts', 'Vitest', 'Playwright'],
             },
         ],
         results: [
-            { metric: '236', label: 'tests pasando en 36 archivos (Vitest + Playwright)' },
-            { metric: '3', label: 'niveles de acceso por rol — Admin, Recruiter, Hiring Manager' },
+            { metric: '511', label: 'tests pasaron en el último checkpoint de producción, con 1 omitido' },
+            { metric: '4', label: 'rutas por rol — Admin, Recruiter, Hiring Manager y Guest de solo lectura' },
             { metric: 'Async', label: 'workers de parseo de currículums y email vía pg-boss' },
         ],
         keyFindings: [
             'El parseo de currículums con IA redujo la entrada manual de datos en ~80%, permitiendo a reclutadores enfocarse en evaluación de candidatos.',
             'Las vistas kanban de pipeline mejoraron la visibilidad del equipo sobre cuellos de botella — candidatos estancados se volvieron inmediatamente visibles.',
             'Mover el parseo de currículums a workers async pg-boss mantuvo el flujo de postulación rápido sin importar la latencia de respuesta de la IA — una lección que el diseño síncrono anterior no sobrevivió bajo carga real.',
-            'El control de acceso por rol (Admin/Recruiter/Hiring Manager) importó más que cualquier feature individual — equipos reales de contratación necesitan límites de permisos antes de confiarle a una herramienta los datos de candidatos.',
+            'El acceso por roles y un modo Guest intencionalmente de solo lectura importan más que cualquier feature individual — un equipo necesita límites de permisos antes de confiar datos de candidatos.',
         ],
         conclusion:
-            'ScoutLane cierra la brecha entre automatización con IA y criterio humano en reclutamiento. Lo que empezó como un pipeline de parseo de currículums creció hasta ser infraestructura completa de reclutamiento — páginas públicas de carrera, RBAC, workers async, email, storage, webhooks, y una suite de tests real — porque eso es lo que requiere lanzar software para un equipo real de contratación, no solo lo que necesita un demo. En vivo en scoutlane.vercel.app.',
+            'ScoutLane conecta extracción de evidencia asistida por IA con criterio humano responsable. La experiencia pública y la aplicación de producción están en vivo en scoutlane.net, respaldadas por auth, límites de rol, workers asíncronos, email, almacenamiento, integraciones y verificaciones de despliegue.',
     },
     'vans-voice-navigation': {
         category: 'INVESTIGACIÓN IHC',
@@ -571,17 +571,17 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
         category: 'FULL STACK 2026',
         title: 'FindLeads — Generación de leads con CRM integrado',
         tagline:
-            'Un negocio sin sitio web es el mejor prospecto de un desarrollador web. FindLeads los busca en Google Places, marca los sin web como leads tier-1, y envuelve un mini CRM alrededor de los resultados.',
-        blurb: 'Encuentra negocios sin sitio web, los marca tier-1, y les envuelve un CRM.',
+            'FindLeads convierte resultados de Google Places en un pipeline de outreach, usando “No se encontró sitio web en Google” como señal y no como afirmación absoluta.',
+        blurb: 'Una consola compacta para encontrar, filtrar, seguir y exportar leads de negocios locales.',
         readTime: '5 min de lectura',
         overview:
-            'FindLeads es una herramienta personal de generación de leads: busca en la API oficial de Google Places (Text Search New) negocios por categoría y ubicación, marca negocios sin sitio web como prospectos tier-1 para outreach de diseño web, y añade un CRM ligero encima — notas por negocio, toggle de contactado, exportación CSV. Next.js 16 App Router con React 19, Neon Postgres vía Drizzle ORM, validación Zod en cada límite, y un diseño de job async deliberadamente sin cola: una fila de job en la base de datos, trabajo en background vía Next.js after(), y polling del lado cliente.',
+            'FindLeads es una consola de prospección para uso repetido construida sobre la API oficial de Google Places. Una búsqueda enfocada por categoría y ubicación puede recopilar hasta 60 resultados; el workspace de leads los convierte en una cola con métricas, búsqueda, filtros, enlaces telefónicos, cantidad de reseñas, estado de contacto, notas, exportación CSV y paginación de 25 filas. Next.js 16 y React 19 corren sobre Neon Postgres vía Drizzle, con Zod en cada límite y un worker asíncrono sin cola externa basado en filas de job, `after()` y polling con SWR.',
         problem:
-            'Prospectar para trabajo freelance web significa horas de scroll manual en mapas para responder una pregunta: ¿qué negocios reales y operativos cerca mío no tienen sitio web? Los datos existen en Google Places, pero los resultados crudos de API son inutilizables para seguimiento — sin memoria de quién ya contactaste, sin notas, sin export. La restricción de ingeniería interesante fue disciplina de scope: un usuario, sin auth, sin infraestructura de cola — ¿cuánta durabilidad puede entregar una fila de base de datos y diseño cuidadoso de concurrencia?',
+            'La prospección local empieza con resultados ruidosos de directorios y termina rápido en una hoja de cálculo que no muestra qué se contactó, qué necesita atención ni qué búsqueda produjo cada lead. La restricción fue crear un flujo durable para una sola persona sin agregar autenticación ni infraestructura externa de colas.',
         questions: [
             '¿Puede un job en background reanudable sobrevivir crashes y workers duplicados usando solo Postgres y updates atómicos?',
             '¿Cómo debe coexistir estado CRM durable con snapshots de búsqueda re-ejecutables para que un re-scrape nunca borre tus notas?',
-            '¿Hasta dónde llega una disciplina test-first en un MVP de una semana y una persona?',
+            '¿Cómo pueden la capacidad, el progreso y los estados vacíos o fallidos seguir siendo legibles en el uso diario?',
         ],
         methodology: [
             {
@@ -600,34 +600,34 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
             },
             {
                 phase: 'Fase 3',
-                title: 'Capa CRM y split durable/snapshot',
+                title: 'Consola de prospección y estado CRM durable',
                 detail:
-                    'El estado CRM durable (notas, status contactado) vive en una tabla businesses keyed por place_id, deliberadamente separado de snapshots de leads por job — re-scrapear una ciudad nunca resetea lo que sabes de un negocio. Exportación CSV cierra el loop para outreach real. 123 tests (unit + integración con DB real) cubren el pipeline; el código de test supera al de producto aproximadamente 1.35:1.',
+                    'El estado CRM durable (notas y estado de contacto) vive en una tabla businesses keyed por place_id, separado de los snapshots por job. La consola actual añade métricas de pipeline, búsqueda, cuatro filtros, teléfonos, reseñas, paginación de 25 filas, capacidad explícita de 3 páginas/60 resultados y feedback pendiente/exitoso/fallido para ediciones.',
                 tech: ['TypeScript', 'Vitest', 'Tailwind 4'],
             },
         ],
         results: [
-            { metric: '123', label: 'tests en verde en 24 archivos — unit más integración contra base Neon real' },
-            { metric: '27/27', label: 'requisitos MVP entregados y verificados en 5 fases planificadas' },
-            { metric: '1.35:1', label: 'ratio código test/producto (≈2.000 vs ≈1.490 líneas)' },
+            { metric: '125', label: 'tests en verde tras el último pase de usabilidad y reloj de base de datos' },
+            { metric: '400', label: 'negocios usados en la revisión verificada con datos reales de Neon' },
+            { metric: '60', label: 'máximo de resultados por búsqueda enfocada, visible en la interfaz' },
         ],
         keyFindings: [
             'Postgres es una cola de jobs perfectamente válida a escala de un solo usuario: un claim atómico single-UPDATE te da crash-safety y duplicate-worker safety con cero infraestructura nueva.',
             'Separar identidad durable (keyed por place_id) de snapshots de corrida es lo que hace un scraper re-ejecutable — el estado que te importa nunca debe vivir en estado que regeneras.',
-            'En builds asistidos por IA, la suite de tests es el contrato: 123 tests escritos junto a la implementación es lo que hizo "feature-complete" una afirmación verificable en lugar de una sensación.',
+            'Usar `now()` de Postgres de forma consistente evita que los timestamps del CRM retrocedan cuando el reloj de la aplicación y el de la base de datos difieren.',
         ],
         conclusion:
-            'FindLeads es un MVP completo y funcional construido en aproximadamente una semana — y honestamente scoped: single-user por diseño, localhost-only hasta ahora, con su propia auditoría de brechas de 15 ítems ordenados por severidad commiteada al repo. Es el ejemplo pequeño más claro del workflow detrás de los proyectos más grandes: planificar en fases, validar en límites, testear contra infraestructura real, y escribir lo que aún es débil.',
+            'FindLeads está en vivo como una herramienta intencionalmente acotada para prospección individual: adquirir un lote limitado, trabajar la cola, conservar estado CRM entre búsquedas y exportar cuando el outreach continúa fuera. La última revisión ejercitó el dataset real de Neon en desktop y móvil, dejando la paginación server-side como umbral futuro y no como infraestructura prematura.',
     },
     'peru-tech-map': {
         category: 'CÓDIGO ABIERTO',
         title: 'Peru Grid — Mapeando el ecosistema tech peruano',
         tagline:
-            'Toronto tiene un mapa tech open-source querido. Perú no. Peru Grid mapea 53 startups, consultoras, incubadoras y fondos investigados en Lima y Arequipa — en un solo archivo HTML sin dependencias.',
-        blurb: '53 empresas tech peruanas verificadas en un mapa interactivo — cero dependencias, un archivo HTML.',
+            'Peru Grid mapea 90 startups, consultoras, coworkings, incubadoras, aceleradoras, nonprofits y fondos investigados en Lima y Arequipa — en una web sin dependencias.',
+        blurb: '90 organizaciones tech peruanas investigadas en un mapa interactivo sin dependencias.',
         readTime: '4 min de lectura',
         overview:
-            'Peru Grid es un mapa interactivo con estilo terminal de los ecosistemas tech de Lima y Arequipa, renderizado con MapLibre GL JS sobre tiles vectoriales de OpenFreeMap — sin API keys, sin build step, sin framework, cero dependencias npm. Toda la aplicación es un archivo HTML de 766 líneas más dos datasets JSON cargados en runtime. Los visitantes vuelan entre las dos ciudades, clickean marcadores para detalles de empresas y navegan un ticker de titulares en vivo. La estructura está adaptada, con crédito, del toronto-tech-map de BUILD416, extendida con un selector de ciudad y validación de coordenadas por ciudad.',
+            'Peru Grid es un mapa interactivo con estilo terminal de los ecosistemas tech de Lima y Arequipa, renderizado con MapLibre GL JS sobre tiles vectoriales de OpenFreeMap — sin API keys, build step, framework ni dependencias npm. Una aplicación HTML estática carga datasets investigados de organizaciones y titulares. Los visitantes cambian de ciudad, filtran por tipo de organización y etapa de startup, inspeccionan detalles, eligen mapa 2D o 3D y envían nuevas entradas para revisión.',
         problem:
             'La escena tech peruana es real pero ilegible — startups, consultoras, incubadoras y fondos existen en Lima y Arequipa, pero no hay un solo lugar abierto para verlos. Cada entrada aquí fue investigada y verificada (registros SUNAT/RUC, Crunchbase, directorios YC) en lugar de scrapeada; candidatos no verificables o extintos se descartaron en lugar de rellenar.',
         questions: [
@@ -647,7 +647,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
                 phase: 'Fase 2',
                 title: 'Dataset verificado, no un scrape',
                 detail:
-                    '53 organizaciones — 38 Lima, 15 Arequipa: 25 startups, 9 consultoras, 8 incubadoras, 4 coworkings, 4 fondos, 2 adquiridas, 1 nonprofit — cada una verificada contra registros oficiales (SUNAT/RUC) y fuentes públicas (Crunchbase, YC) antes de inclusión. Seis candidatos se descartaron como no verificables o extintos. El código se lanza MIT; los datasets CC BY 4.0.',
+                    '90 organizaciones — 75 en Lima y 15 en Arequipa — cubren startups, consultoras tecnológicas, coworkings, incubadoras, nonprofits, fondos de venture capital y aceleradoras. Cada entrada lleva una categoría pública y, cuando existe fuente, una etapa de startup; el código usa licencia MIT y los datasets CC BY 4.0.',
                 tech: ['JSON', 'CC BY 4.0', 'MIT'],
             },
             {
@@ -659,13 +659,13 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
             },
         ],
         results: [
-            { metric: '53', label: 'organizaciones tech de Lima y Arequipa investigadas y mapeadas' },
+            { metric: '90', label: 'organizaciones tech de Lima y Arequipa investigadas y mapeadas' },
             { metric: '0', label: 'dependencias — un HTML, dos JSON, sin build step' },
-            { metric: '766', label: 'líneas — toda la aplicación en un solo archivo' },
+            { metric: '7', label: 'categorías públicas de organización con campos de datos validados' },
         ],
         keyFindings: [
             'Zero-dependency es una feature para proyectos cívicos: cualquiera puede forkear un HTML y dos JSON para su propia ciudad sin tocar npm.',
-            'Para datasets abiertos, la regla de curación importa más que el conteo — descartar seis entradas no verificables es lo que hace confiables las otras 53.',
+            'Para datasets abiertos, categorías explícitas, límites geográficos y fuentes revisables importan más que inflar el conteo.',
             'CI tiene trabajo incluso sin código de aplicación: validar schema de datos en cada push mantiene contribuciones comunitarias sin romper el mapa.',
         ],
         conclusion:
@@ -673,65 +673,65 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
     },
     'voidscape': {
         category: 'INGENIERÍA IA',
-        title: 'Voidscape — Enseñando a agentes IA a ver video',
+        title: 'Voidscape — Convirtiendo medios personales en evidencia citable',
         tagline:
-            'Un agente de codificación con IA puede leer imágenes y PDFs — no video. Voidscape descompone cualquier video en frames más transcripción, y cotiza todo el trabajo antes de gastar un centavo o un token.',
-        blurb: 'Enseña a agentes IA a ver video, y cotiza el trabajo antes de gastar un centavo.',
+            'Voidscape lee video, audio, imágenes, artículos, feeds y chats exportados mediante una secuencia visible: inspect, preview, read.',
+        blurb: 'Convierte medios personales en evidencia citable — local-first, consciente de costos y explícita sobre consentimiento.',
         readTime: '6 min de lectura',
         overview:
-            'Voidscape es una skill open-source (MIT) de Claude Code / Codex que da a agentes IA comprensión genuina de video: apúntala a un archivo local o URL (YouTube, Loom, Vimeo…) y extrae frames para la pista visual y transcripción para la pista de audio — las dos cosas que un agente puede consumir realmente. Su feature definitoria es la puerta de costo: un pipeline probe → estimate → run que cotiza todo el trabajo (dólares de transcripción y costo de tokens del agente) por adelantado, usa transcripción local gratuita por defecto con faster-whisper, y solo toca backends cloud de pago tras aprobación explícita. El motor es un CLI Python de 1,300 líneas construido sobre la stdlib, con un protocolo opcional legible por máquina (`manifest`, `--envelope`, códigos de salida determinísticos) añadido para agentes que lo llaman. La landing page pública está en vivo en https://rikepilb.github.io/void-scape/.',
+            'Voidscape es un motor de evidencia y una skill open-source, local-first. Convierte grabaciones, URLs públicas de video, notas de voz, imágenes, carruseles ordenados por nombre, artículos, feeds RSS/Atom y chats exportados en bundles inspeccionables: visuales seleccionados, texto con tiempo u orden y un manifest que un agente puede citar. El contrato es visible: inspeccionar la fuente, previsualizar costos y permisos, y leer solo los artefactos aprobados. Por defecto no requiere cuenta, subida ni API key.',
         problem:
-            'Los agentes fingen comprensión de video leyendo títulos y comentarios. Ver de verdad cuesta dinero real — los frames dominan el gasto en tokens del agente, y la transcripción cloud factura por minuto — así una implementación naive sorprende a usuarios con la factura después. El problema de diseño fue hacer la comprensión de video real y pre-aprobada: nunca gastar antes de mostrar el precio, y nunca dejar que el audio salga de la máquina sin consentimiento explícito.',
+            'Los agentes suelen responder desde nombres de archivo, thumbnails, snippets o resúmenes de página en lugar de la fuente. Eso produce afirmaciones seguras sin evidencia, mientras un procesamiento ingenuo puede subir audio privado, iniciar una descarga de modelo o generar costo cloud sin un punto claro de decisión. Voidscape convierte evidencia, consentimiento y recuperación en parte de la interfaz.',
         questions: [
-            '¿Cuál es el camino más barato y honesto a una transcripción — y qué tan seguido es gratis?',
-            '¿Puede una skill servir múltiples harnesses de agente (Claude Code, Codex, Gemini CLI, Copilot CLI) desde una sola instalación?',
-            '¿La skill supera mediblemente a un agente improvisando con ffmpeg por su cuenta?',
-            '¿Qué pasa cuando un agente de codificación extiende el mismo codebase meses después — el diseño original resiste una revisión adversarial real?',
+            '¿Cómo puede un solo contrato de evidencia funcionar para video, audio, imágenes, artículos, feeds y chats exportados?',
+            '¿Cómo se mantienen visibles las aprobaciones de costo, transferencia cloud y primera descarga de modelo?',
+            '¿Puede una sesión interrumpida o truncada recuperar el mismo manifest sin procesar la fuente otra vez?',
+            '¿Qué evidencia de release permite separar una capacidad probada de una afirmación amplia de “lanzado”?',
         ],
         methodology: [
             {
                 phase: 'Fase 1',
-                title: 'Probe → Estimate → Run, con puerta de costo',
+                title: 'Inspect → Preview → Read',
                 detail:
-                    'probe inspecciona la entrada (duración, resolución, audio, subtítulos existentes); estimate computa el costo completo — dólares de transcripción por backend y gasto proyectado de tokens del agente por conteo de frames — antes de cualquier trabajo; run solo ejecuta tras aprobación del usuario (o umbral cero dólares). Nueve paths de transcripción ordenados más barato-y-privado primero: subtítulos sidecar, captions de URL, faster-whisper y trx local (todos gratis) antes de Groq, OpenAI, OpenRouter y Gemini.',
+                    'inspect reporta hechos de la fuente sin procesarla; preview expone lector, dependencias, costo de tokens o transcripción y cualquier gate; read produce solo la evidencia aprobada. Un sidecar local compatible gana automáticamente, mientras transcripción cloud y primera descarga de modelo siguen siendo decisiones separadas y actuales.',
                 tech: ['Python', 'ffmpeg', 'yt-dlp', 'faster-whisper'],
             },
             {
                 phase: 'Fase 2',
-                title: 'Un motor solo stdlib',
+                title: 'Bundles de evidencia para distintos medios',
                 detail:
-                    'Los paths de API de pago usan requests multipart hechos a mano sobre urllib — sin SDKs — así los paths gratuitos nunca pagan costo de import y una dependencia opcional faltante nunca puede romper probe o estimate. 110 casos pytest en 17 archivos fijan chunking, deduplicación, estimación de costo, extracción de frames y hardening (incluyendo un fix anchor contra spoofing de dominios parecidos y una suite de tests a nivel subprocess para el contrato del CLI de agente).',
-                tech: ['Python stdlib', 'pytest'],
+                    'Las lecturas de video devuelven frames, transcripción con timestamps y manifest. Imágenes y carruseles conservan bytes y orden natural. Los lectores de artículos, RSS/Atom y chats producen texto ordenado con procedencia, y los artefactos parciales quedan marcados cuando una etapa posterior falla.',
+                tech: ['Python stdlib', 'JSON', 'RSS/Atom', 'pytest'],
             },
             {
                 phase: 'Fase 3',
-                title: 'Diseño de skill driven por evals',
+                title: 'Recuperación y errores para agentes',
                 detail:
-                    'La skill se benchmarkó con un loop de eval contra baseline sin skill: con la skill cargada, el agente pasó 14 de 15 assertions (93.3%) en escenarios de resumen visual, comprensión de audio y puerta de costo, versus 66.7% baseline. Un script de instalación la conecta a cuatro harnesses: Claude Code, Codex, Gemini CLI y Copilot CLI.',
-                tech: ['LLM Evals', 'Claude Code', 'PowerShell', 'Bash'],
+                    'Los consumidores reciben envelopes `{ok,data,error,meta}`, códigos de salida determinísticos 0–6, metadata de reintento y un puntero privado a la última lectura para recuperar manifests después de truncamiento. La skill enseña a citar `[MM:SS]`, `[image N]`, `[article N]` o `[message N]`.',
+                tech: ['Protocolos de Agente', 'JSON', 'PowerShell', 'Bash'],
             },
             {
                 phase: 'Fase 4',
-                title: 'Build Week: protocolos de agente, revisión adversarial, seguridad honesta',
+                title: 'Evidencia de release y hardening',
                 detail:
-                    'Extendida para OpenAI Build Week 2026 con Codex + GPT-5.6: tiers de transcripción local adaptativos, contabilidad de costo nativa GPT-5.6 por patches de 32×32, y un protocolo CLI opcional orientado a agentes (`manifest`, `--envelope`/`--compact`, una taxonomía determinística de códigos de salida con metadata de reintentabilidad). Una revisión de código adversarial contra la nueva puerta de costo/consentimiento reveló 9 hallazgos; los 6 defectos reales se corrigieron con tests de regresión antes de lanzar — incluyendo uno detectado solo al correr de verdad los comandos documentados, no por unit tests. Un escáner de seguridad estático marcó el flujo de datos intencional env-key-a-API-cloud como CRITICAL; en vez de ocultarlo, el hallazgo se divulga y explica en un `SECURITY.md` que el propio reporte del escáner verifica.',
-                tech: ['Codex', 'GPT-5.6', 'Revisión de Código Adversarial', 'Protocolos de Agente', 'GitHub Pages'],
+                    'El checkpoint actual pasó 1.314 tests en Windows y el mismo árbol fue ejercitado por checks hospedados. Hallazgos de seguridad, verificación de viewport incompleta y fuentes de colecciones de cuenta no soportadas siguen visibles en lugar de diluirse en una afirmación total de release.',
+                tech: ['pytest', 'GitHub Actions', 'Revisión de Seguridad', 'QA de Navegador'],
             },
         ],
         results: [
             { metric: '93.3%', label: 'assertions de eval pasadas con la skill, vs 66.7% baseline sin ella' },
-            { metric: '9', label: 'backends de transcripción, ordenados gratis-y-local primero' },
-            { metric: '110', label: 'tests sobre un motor de 1,300 líneas solo stdlib' },
-            { metric: '6', label: 'bugs reales encontrados por revisión adversarial y corregidos antes de lanzar' },
+            { metric: '1.314', label: 'tests pasaron en Windows en el checkpoint fusionado actual' },
+            { metric: '0–6', label: 'rango de códigos de salida determinísticos con metadata de reintento' },
+            { metric: '3', label: 'pasos visibles antes de consumir evidencia: inspect, preview, read' },
         ],
         keyFindings: [
             'La transparencia de costo es una feature UX para agentes: mostrar el precio antes del trabajo convierte "la IA me subió la factura" en un sí/no informado.',
-            'El orden local-first (captions → Whisper on-device → APIs de pago) hace del path gratuito el default — la mayoría de videos nunca cuestan un centavo leer.',
+            'Un sidecar local gana automáticamente; transferencia cloud y primera descarga de modelo son aprobaciones explícitas, no inferencias desde la configuración.',
             'Los evals superan las vibes para diseño de skills: un gap medido 93.3%-vs-66.7% es lo que separa "la skill ayuda" de esperar que lo haga.',
-            'La revisión adversarial más correr de verdad los comandos documentados detectó una regresión real que los unit tests pasaron por alto: un fix en otra parte del mismo diff cambió silenciosamente lo que demostraba el propio ejemplo de prueba-de-privacidad del README.',
+            'Manifests durables y punteros de recuperación importan porque una sesión del agente puede truncarse aunque el procesamiento haya terminado bien.',
         ],
         conclusion:
-            'Voidscape es la pieza open-source más completa de este portfolio: licencia MIT con docs de contribución, plantillas de issues, GIF demo, una landing page en vivo en GitHub Pages (https://rikepilb.github.io/void-scape/), 60+ commits de iteración real, y una mejora de eval medida. También es honesto sobre escala — el set de eval es pequeño e itera — pero la forma es lo que se parece a tooling de agente en producción: cotizado, testeado, local-first, multi-harness, y revisado como software real en vez de lanzado por vibes. Enviado a OpenAI Build Week 2026 (track Developer Tools).',
+            'Voidscape creció de una utilidad de video a una capa general de evidencia para workflows de agentes. El sitio público y la instalación están en vivo en voidscape.club, mientras el repositorio mantiene el estado de release acotado: capacidades fusionadas y testeadas se documentan por separado de gates pendientes de fuentes, viewport, proveedores e integraciones.',
     },
     'resume-scorer': {
         category: 'INGENIERÍA IA',

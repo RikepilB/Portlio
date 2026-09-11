@@ -111,7 +111,7 @@ export default async function ProjectPage({
                   src={src}
                   alt={`${project.title} ${dict.caseStudy.screenshotAltPrefix} ${i + 1}`}
                   fill
-                  className="object-cover"
+                  className="object-contain object-center p-3"
                   sizes="(max-width: 640px) 100vw, 50vw"
                 />
               </div>
