@@ -19,6 +19,8 @@ explicit approval.
 - Browser-checked Home/Projects at 1440×1000 and 390×844, including English and Spanish; no page overflow or console errors observed.
 - Passed `pnpm lint`, `npx tsc --noEmit`, `pnpm test` (9/9), and `pnpm build` (58 pages).
 - Passed the landing audit; documented advisory production-readiness decisions and the Vercel rollback path.
+- Opened PR #33, fixed all six CodeRabbit findings, and squash-merged the redesign to `main` at `82c6b00`.
+- Verified GitHub CI and Vercel production success, then browser-checked `https://richardpillaca.com/en` and `/en/projects` on desktop and mobile.
 
 ## Files changed
 
@@ -39,7 +41,7 @@ explicit approval.
 
 ## Next steps
 
-- Commit the approved portfolio-only file set on `codex/tideglass-portfolio`, integrate current `main`, push, merge, and verify GitHub/Vercel production checks.
+- Optional follow-ups only: add explicit per-route canonical links and decide whether the production analytics setup warrants a short privacy notice.
 
 ## Files in this folder
 
