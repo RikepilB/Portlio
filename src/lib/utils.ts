@@ -7,7 +7,11 @@ export function cn(...inputs: ClassValue[]): string {
 
 export function formatDate(dateStr: string): string {
     const date = new Date(dateStr)
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        timeZone: 'UTC',
+    })
 }
 
 export function slugify(str: string): string {
