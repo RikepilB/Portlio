@@ -80,8 +80,8 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 - [2026-06-30-scaffold-and-handoff-migration](2026-06-30-scaffold-and-handoff-migration/HANDOFF.md) — ran `project-scaffold` + migrated legacy `handoff.md`; deep-catch-up roadmap briefing; added El Umbral project (`7259831`) and updated résumé PDF + journey/embedded data (`0e48ad9`); mirrored next-steps to GitHub issues #11–#15; tested + pushed both branches and opened PR #16, PR #17; reordered home "My Work" to 5 newest projects + gave El Umbral an image (`602a52a`, `44125e0`, not pushed)
 
 <!-- compact-handoff:auto-snapshot -->
-<!-- Latest auto-snapshot: docs/handoff/2026-07-20-codex-019f7e579e5a/snapshot-213648.md -->
-## Latest auto snapshot — 2026-09-10T21:36:48.026Z
-- Session folder: `docs/handoff/2026-07-20-codex-019f7e579e5a/`
-- Snapshot file: `docs/handoff/2026-07-20-codex-019f7e579e5a/snapshot-213648.md`
-- Branch: feat/issue-closeout-7-9-19
+<!-- Latest auto-snapshot: docs/handoff/2026-07-02-98bb9341/snapshot-002022.md -->
+## Latest auto snapshot — 2026-07-02T00:20:22.015Z
+- Session folder: `docs/handoff/2026-07-02-98bb9341/`
+- Snapshot file: `docs/handoff/2026-07-02-98bb9341/snapshot-002022.md`
+- Branch: main

@@ -35,6 +35,11 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
     <Link
       ref={linkRef}
       href={localePath(locale, `/projects/${project.slug}`)}
+      aria-label={
+        comingSoon
+          ? `${dict.projects.comingSoonAriaPrefix} ${project.title}`
+          : `${dict.projects.viewCaseAriaPrefix} ${project.title}`
+      }
       onMouseMove={onMove}
       className={cn('group relative flex h-full flex-col border-t border-rule pt-4')}
     >

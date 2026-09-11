@@ -134,7 +134,7 @@ felt/gold identity while applying the Tideglass background, typography, and edit
 | Metadata and assets | Pass with follow-up | Local render has useful title/description, Open Graph and Twitter cards, favicon, and social image. Explicit per-route canonical links are not yet emitted. |
 | Trust and contact | Pass | The primary contact action is visible in navigation and footer and resolves to the configured `mailto:` address. |
 | Layout and navigation | Pass | Home and Projects were rendered at 1440×1000 and 390×844 in English and Spanish with no horizontal overflow or browser errors. |
-| Measurement | Pass | Vercel Analytics is enabled only in the Vercel runtime; no custom PII-bearing events are emitted by this site. |
+| Measurement | Pass | Vercel Analytics is enabled only for production deployments; no custom PII-bearing events are emitted by this site. |
 
 ### Production readiness — advisory
 

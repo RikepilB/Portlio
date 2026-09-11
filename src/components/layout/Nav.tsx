@@ -60,6 +60,7 @@ export function Nav() {
         <div className="shell flex h-[60px] items-center justify-between gap-3">
           <Link
             href={localePath(locale, '/')}
+            aria-label={dict.nav.homeAria}
             className="inline-flex shrink-0 items-center gap-2"
           >
             <Image

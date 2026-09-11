@@ -16,6 +16,7 @@ export function EssayCard({ essay }: EssayCardProps) {
   return (
     <Link
       href={localePath(locale, `/essays/${essay.slug}`)}
+      aria-label={essay.title}
       className="group grid gap-4 border-t border-rule py-7 md:grid-cols-[120px_1fr_auto] md:items-start md:gap-8"
     >
       <span className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-muted">{formatDate(essay.date)}</span>
