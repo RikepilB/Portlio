@@ -281,8 +281,8 @@ export const projects: Project[] = [
                 phase: 'Phase 2',
                 title: 'Frontend — React Dashboard',
                 detail:
-                    'Built a React.js SPA with role-based views (faculty vs. admin). Faculty view shows: class score distribution, question-level difficulty analysis, top/bottom performers, and integrity flag queue. Admin view adds bulk import, exam configuration, and export to PDF/CSV. Used Recharts for all data visualizations.',
-                tech: ['React.js', 'Recharts', 'Axios', 'CSS Modules'],
+                    'Built a React 19 SPA with role-based views (faculty vs. admin). Faculty view shows: class score distribution, question-level difficulty analysis, top/bottom performers, and integrity flag queue. Admin view adds bulk import, exam configuration, and export to PDF/CSV. Used Material UI for the interface and Nivo for data visualizations.',
+                tech: ['React 19', 'Material UI', 'Nivo', 'Axios'],
             },
             {
                 phase: 'Phase 3',
@@ -797,7 +797,7 @@ export const projects: Project[] = [
                 phase: 'Phase 3',
                 title: 'Guardrails in CI and at Runtime',
                 detail:
-                    'GitHub Actions validates on every push that both JSON files parse and every entry carries name, city, coordinates and funding type. At load time, entries outside their city\'s bounding box are skipped with a console warning — a bad coordinate can never silently render a marker in the ocean.',
+                    'GitHub Actions validates on every push that both JSON files parse and every entry carries a name, city, coordinates, and public category; startup stage remains optional. At load time, entries outside their city\'s bounding box are skipped with a console warning — a bad coordinate can never silently render a marker in the ocean.',
                 tech: ['GitHub Actions', 'CI Validation'],
             },
         ],

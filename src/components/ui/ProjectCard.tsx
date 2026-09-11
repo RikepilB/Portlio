@@ -88,7 +88,7 @@ export function ProjectCard({ project, index = 0, showActions = false }: Project
         <p className="max-w-[58ch] text-sm leading-[1.7] text-ink-on-felt">{project.tagline}</p>
 
         {showActions && project.stack.length > 0 ? (
-          <div className="mt-auto flex flex-wrap gap-2 pt-2" aria-label={dict.projects.techStackAria}>
+          <div className="mt-auto flex flex-wrap gap-2 pt-2" aria-label={`${dict.projects.techStackAria}: ${project.title}`}>
             {project.stack.slice(0, 6).map((tech) => (
               <span key={tech} className="rounded border border-rule bg-felt-deep/35 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.05em] text-muted">
                 {tech}
@@ -110,22 +110,22 @@ export function ProjectCard({ project, index = 0, showActions = false }: Project
         )}
 
         {showActions ? (
-          <nav className="mt-2 flex flex-wrap gap-2 border-t border-rule pt-4" aria-label={dict.projects.projectLinksAria}>
-            <Link href={detailHref} className="inline-flex min-h-11 items-center rounded border border-matte bg-matte px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-felt-deep transition-colors hover:border-gold hover:bg-gold">
+          <nav className="mt-2 flex flex-wrap gap-2 border-t border-rule pt-4" aria-label={`${dict.projects.projectLinksAria}: ${project.title}`}>
+            <Link href={detailHref} aria-label={detailAria} className="inline-flex min-h-11 items-center rounded border border-matte bg-matte px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-felt-deep transition-colors hover:border-gold hover:bg-gold">
               {comingSoon ? dict.projects.comingSoonCta : dict.projects.details}
             </Link>
             {project.demoVideo && !project.demoVideo.startsWith('PLACEHOLDER') ? (
-              <a href={project.demoVideo} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center rounded border border-gold/50 bg-gold-soft px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-gold-bright transition-colors hover:bg-gold hover:text-felt-deep">
+              <a href={project.demoVideo} target="_blank" rel="noopener noreferrer" aria-label={`${dict.projects.demo}: ${project.title}`} className="inline-flex min-h-11 items-center rounded border border-gold/50 bg-gold-soft px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-gold-bright transition-colors hover:bg-gold hover:text-felt-deep">
                 ↗ {dict.projects.demo}
               </a>
             ) : null}
             {project.github ? (
-              <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center rounded border border-rule bg-felt-deep/35 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-ink-on-felt transition-colors hover:border-gold hover:text-gold-bright">
+              <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`${dict.projects.code}: ${project.title}`} className="inline-flex min-h-11 items-center rounded border border-rule bg-felt-deep/35 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-ink-on-felt transition-colors hover:border-gold hover:text-gold-bright">
                 ↗ {dict.projects.code}
               </a>
             ) : null}
             {project.codebaseMapUrl ? (
-              <a href={project.codebaseMapUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center rounded border border-rule bg-felt-deep/35 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-ink-on-felt transition-colors hover:border-gold hover:text-gold-bright">
+              <a href={project.codebaseMapUrl} target="_blank" rel="noopener noreferrer" aria-label={`${dict.projects.codebase}: ${project.title}`} className="inline-flex min-h-11 items-center rounded border border-rule bg-felt-deep/35 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-ink-on-felt transition-colors hover:border-gold hover:text-gold-bright">
                 ↗ {dict.projects.codebase}
               </a>
             ) : null}

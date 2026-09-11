@@ -217,8 +217,8 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
                 phase: 'Fase 2',
                 title: 'Frontend — Panel React',
                 detail:
-                    'Construí una SPA en React.js con vistas basadas en roles (facultad vs. admin). La vista de facultad muestra: distribución de puntajes de clase, análisis de dificultad por pregunta, mejores/peores rendimientos e cola de banderas de integridad. La vista admin añade importación masiva, configuración de exámenes y exportación a PDF/CSV. Usé Recharts para todas las visualizaciones de datos.',
-                tech: ['React.js', 'Recharts', 'Axios', 'CSS Modules'],
+                    'Construí una SPA en React 19 con vistas basadas en roles (facultad vs. admin). La vista de facultad muestra: distribución de puntajes de clase, análisis de dificultad por pregunta, mejores/peores rendimientos y cola de banderas de integridad. La vista admin añade importación masiva, configuración de exámenes y exportación a PDF/CSV. Usé Material UI para la interfaz y Nivo para las visualizaciones de datos.',
+                tech: ['React 19', 'Material UI', 'Nivo', 'Axios'],
             },
             {
                 phase: 'Fase 3',
@@ -654,7 +654,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
                 phase: 'Fase 3',
                 title: 'Guardrails en CI y en runtime',
                 detail:
-                    'GitHub Actions valida en cada push que ambos JSON parsean y cada entrada lleva name, city, coordinates y funding type. Al cargar, entradas fuera del bounding box de su ciudad se omiten con warning en consola — una coordenada mala nunca puede renderizar silenciosamente un marcador en el océano.',
+                    'GitHub Actions valida en cada push que ambos JSON parsean y cada entrada lleva nombre, ciudad, coordenadas y categoría pública; la etapa de startup es opcional. Al cargar, entradas fuera del bounding box de su ciudad se omiten con warning en consola — una coordenada mala nunca puede renderizar silenciosamente un marcador en el océano.',
                 tech: ['GitHub Actions', 'CI Validation'],
             },
         ],

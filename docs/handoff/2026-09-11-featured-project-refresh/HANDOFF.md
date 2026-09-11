@@ -10,6 +10,7 @@ Refresh the portfolio's featured project images and source-backed details, then 
 - Changed case-study media from crop-to-fill to contained horizontal presentation → `src/app/[locale]/projects/[slug]/page.tsx`.
 - Verified desktop 1440×1000 and mobile 390×844 rendering → six linked images, action counts `4/4/4/3/4/4`, 44px controls, no overflow, and zero browser-console errors.
 - Passed the repository gate → `pnpm lint`, `npx tsc --noEmit`, `pnpm test` (9 tests), and `pnpm build` (58 routes).
+- Resolved all three valid CodeRabbit findings → explicit per-project action labels, current ExamVault UI/chart technology names, and aligned Peru Grid dataset-contract text in EN/ES.
 
 ## Files changed
 - `src/data/projects.ts` — current media, descriptions, metrics, stacks, project links, and codebase-map destinations.
@@ -26,7 +27,7 @@ Refresh the portfolio's featured project images and source-backed details, then 
 - The command runner blocked deletion of untracked browser screenshots; they were kept out of the Git staging set.
 
 ## Next steps
-- Commit the scoped files, push the branch, open a PR, wait for required checks, merge to `main`, and verify the production deployment.
+- Merge PR #35 to `main` after the refreshed hosted checks pass, then verify the production deployment.
 
 ## Files in this folder
 - `HANDOFF.md` — this file (curated digest).
