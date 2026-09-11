@@ -21,11 +21,9 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ---
 
-## Current state — 2026-07-20
+## Current state — 2026-09-11
 
-**Voidscape rename + in-progress tags + Foglamp codebase-map scans shipped: PR #26 opened against `main`.** Fixed the ScoutLane home/gallery thumbnail (had regressed to a vertical crop; restored the original horizontal `public/images/scoutlane.png` from commit `2b0f622`). Renamed the read-video project to Voidscape end-to-end in `src/data/projects.ts` + `projects-es-overlays.ts` (slug, title, GitHub URL `RikepilB/void-scape`, demo URL, overview/conclusion copy) to match the already-renamed local + GitHub repo. Added `Project.inProgress` and tagged Voidscape, FindLeads, Peru Grid, ScoutLane, ExamVault with a small "IN PROGRESS" pill on home and gallery cards. Drafted an X post about portfolio v1 (delivered in chat only). With explicit user consent, ran Foglamp AI architecture scans on 4 sibling repos (void-scape, peru-tech-map, ScoutLane-main, Examvault) via 4 parallel agents, published to foglamp.dev, screenshotted each via the Chrome extension, and added a "Codebase Map" README section to each of those 4 repos (uncommitted there — sitting on top of large pre-existing unrelated dirty state in those repos, left for the user to decide). Added `Project.codebaseMapUrl` + a "Codebase Map" button on the case-study page for those same 4 projects, plus the scan screenshot in each project's gallery. Ran `/gsd-ship`: independent code-review agent found no issues; committed `630df7b`; pushed `feat/portfolio-additions`; opened PR #26 (https://github.com/RikepilB/Portlio/pull/26). Note: `pnpm build` currently fails on a pre-existing Tailwind/PostCSS bug unrelated to this change (reproduced identically after `git stash` on `main`) — flagged in the PR body, not fixed.
-
-**Verification update:** merge conflicts with `main` were resolved while preserving the Voidscape data, home order, horizontal ScoutLane image, and append-only handoff history. `pnpm lint`, `npx tsc --noEmit`, and a clean tracked-tree `pnpm build` all pass. The earlier Tailwind crash was traced to untracked transcript exports containing Windows path escapes, not repository code.
+**Tideglass Felt portfolio redesign is approved and preflight-complete on `codex/tideglass-portfolio`; commit, merge, and production verification are in progress.** The update deepens the existing felt/gold identity with a restrained sage/teal aura adapted from the supplied Tideglass and Neon Sludge references. Cormorant Garamond, Manrope, and JetBrains Mono remain the only font suite. Home project, essay, and skills surfaces were flattened and stripped of redundant kickers, chips, numbers, icon cards, duplicate CTAs, and universal hover lift. The exact centered gold-foil hero remains, while a new mint sea-glass portrait removes the previous corner mark and adds one restrained gold reflection; the original image is preserved. Project media remains horizontal and contained. Browser checks passed at 1440×1000 and 390×844 in English and Spanish with no page overflow or console errors. `pnpm lint`, `npx tsc --noEmit`, `pnpm test` (9/9), and `pnpm build` (58 pages) pass. Landing and production-readiness audits are recorded in `docs/v3/branding.md`; the Vercel rollback path is in `docs/ARCHITECTURE.md`. Existing unrelated dirty worktree changes and untracked scaffolding remain excluded.
 
 ## Previous state — 2026-07-18 (later)
 
@@ -57,6 +55,7 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ## Session index (append-only, newest first)
 
+- [2026-09-10-tideglass-portfolio-preview](2026-09-10-tideglass-portfolio-preview/HANDOFF.md) — local dark felt/aura and anti-slop redesign preview; exact centered gold-foil hero restored; desktop/mobile EN/ES and full build gate pass; no commit/push
 - [2026-07-20-voidscape-rename-foglamp-scans](2026-07-20-voidscape-rename-foglamp-scans/HANDOFF.md) — ScoutLane thumbnail fix, read-video renamed to Voidscape (EN/ES), in-progress tags on 5 projects, Foglamp codebase-map scans on 4 sibling repos wired into case studies + those repos README; PR #26 opened against main
 - [2026-07-18-read-video-portfolio-entry](2026-07-18-read-video-portfolio-entry/HANDOFF.md) — `/goal`: audited ScoutLane/read-video/FindLeads live, verified real numbers + screenshots, FindLeads shipped, home showcase re-curated; PR #25 merged to main (`2a1168c`)
 - [2026-07-18-read-video-portfolio-entry](2026-07-18-read-video-portfolio-entry/HANDOFF.md) — read-video shipped (live demo, gif, Build Week Phase 4, EN+ES) + home reorder; committed `d2a45b9`, merged forward with PR #23, PR #24 opened
@@ -86,12 +85,3 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 - Session folder: `docs/handoff/2026-07-02-98bb9341/`
 - Snapshot file: `docs/handoff/2026-07-02-98bb9341/snapshot-002022.md`
 - Branch: main
-
-## Session index
-
-- 2026-07-18 13:41 - Codex export 019f64cf-81eb-7050-b7f3-c43f80156902: [2026-07-18-codex-019f64cf81eb](2026-07-18-codex-019f64cf81eb/HANDOFF.md). Archivo de contexto; no reemplaza Current state.
-- 2026-07-18 13:41 - Codex export 019f64cf-81c5-73c2-9ec3-b4ecedad6ad5: [2026-07-18-codex-019f64cf81c5](2026-07-18-codex-019f64cf81c5/HANDOFF.md). Archivo de contexto; no reemplaza Current state.
-- 2026-07-18 13:41 - Codex export 019f64cf-81df-7c83-bbf8-20dfb1ebb36c: [2026-07-18-codex-019f64cf81df](2026-07-18-codex-019f64cf81df/HANDOFF.md). Archivo de contexto; no reemplaza Current state.
-- 2026-07-18 13:41 - Codex export 019f64cf-9b5f-7a32-909e-eb45e7982933: [2026-07-18-codex-019f64cf9b5f](2026-07-18-codex-019f64cf9b5f/HANDOFF.md). Archivo de contexto; no reemplaza Current state.
-- 2026-07-18 13:41 - Codex export 019f64cf-e6b1-73e2-9d97-d073ca7c06cb: [2026-07-18-codex-019f64cfe6b1](2026-07-18-codex-019f64cfe6b1/HANDOFF.md). Archivo de contexto; no reemplaza Current state.
-- 2026-07-18 13:41 - Codex export 019f64cf-f256-7b93-8c3d-63a82f3b6e3d: [2026-07-18-codex-019f64cff256](2026-07-18-codex-019f64cff256/HANDOFF.md). Archivo de contexto; no reemplaza Current state.

@@ -30,7 +30,7 @@ export default async function EssaysPage({ params }: { params: Promise<{ locale:
   return (
     <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-20">
       <header className="mb-12 flex flex-col gap-3">
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
+        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold-bright">
           {dict.essays.title}
         </span>
         <h1 className="font-display text-4xl font-semibold text-matte sm:text-5xl">{dict.essays.title}</h1>

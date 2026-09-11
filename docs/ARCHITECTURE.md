@@ -57,3 +57,11 @@ src/data/
 - All images via `next/image` with explicit dimensions where possible
 - Client components only for interaction islands (filters, mobile menu, motion)
 - Design contracts live in `docs/v3/` (branding, PRD, design)
+
+## Deployment and rollback
+
+GitHub Actions runs install, lint, typecheck, tests, and build for pull requests and pushes to
+`main`. Vercel's Git integration creates previews for feature branches and deploys `main` to
+production. After merging, verify `https://richardpillaca.com/en`, its project route, and the
+hero asset. If production regresses, promote the previous known-good deployment in Vercel or
+revert the merge commit, then inspect the Vercel deployment logs before retrying.
