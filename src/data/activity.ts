@@ -50,6 +50,24 @@ export const activity: Activity[] = [
     href: 'https://perugrid.com/scout/',
   },
   {
+    id: 'scoutlane-hardening', kind: 'release', date: '2026-09-11',
+    title: { en: 'ScoutLane: hardening the public matcher', es: 'ScoutLane: endurecer el comparador público' },
+    description: { en: 'Put the open resume matcher on transactional Postgres rate limits with authenticated daily cleanup, added DOCX decompression preflight, bounded public model attempts, and kept advisory resume evidence separate from operational applicant scoring.', es: 'Puse el comparador abierto de CV sobre límites de uso transaccionales en Postgres con limpieza diaria autenticada, añadí preverificación de descompresión DOCX, acoté los intentos públicos de modelo y mantuve la evidencia orientativa separada de la puntuación operativa de candidatos.' },
+    href: 'https://github.com/RikepilB/ScoutLane/pull/213',
+  },
+  {
+    id: 'findleads-queue', kind: 'release', date: '2026-09-11',
+    title: { en: 'FindLeads: an actionable lead queue', es: 'FindLeads: una cola de prospectos accionable' },
+    description: { en: 'Turned raw Places results into a working queue with ready-to-call prioritisation, filters, sorting, search and responsive pagination, and moved CRM timestamps onto the database clock. This is a pilot, not a self-service product.', es: 'Convertí resultados crudos de Places en una cola de trabajo con priorización de listos para llamar, filtros, orden, búsqueda y paginación responsive, y llevé las marcas de tiempo del CRM al reloj de la base de datos. Es un piloto, no un producto de autoservicio.' },
+    href: 'https://github.com/RikepilB/findleads/pull/4',
+  },
+  {
+    id: 'perugrid-mobile', kind: 'release', date: '2026-09-11',
+    title: { en: 'PeruGrid: a mobile sheet you can actually drag', es: 'PeruGrid: una hoja móvil que sí se arrastra' },
+    description: { en: 'The mobile sidebar set touch-action to none but only listened for clicks, so every drag gesture was dead. Rebuilt it as a real bottom sheet with peek, mid and expanded anchor points, where flick momentum projects the landing anchor.', es: 'La barra lateral móvil fijaba touch-action en none pero solo escuchaba clics, así que todo gesto de arrastre estaba muerto. La rehíce como una hoja inferior real con anclajes de asomo, intermedio y abierta, donde el impulso proyecta el anclaje de aterrizaje.' },
+    href: 'https://github.com/RikepilB/peru-tech-map/pull/57',
+  },
+  {
     id: 'voice-navigation', kind: 'contribution',
     title: { en: 'Voice navigation: scrolling and search', es: 'Navegación por voz: desplazamiento y búsqueda' },
     description: { en: 'Contributed voice-command improvements to a shared Chrome extension: percentage scrolling, search highlighting and a scroll indicator.', es: 'Contribuí mejoras de comandos de voz a una extensión de Chrome en equipo: desplazamiento porcentual, resaltado de búsqueda e indicador de progreso.' },
