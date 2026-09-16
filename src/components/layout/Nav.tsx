@@ -51,6 +51,7 @@ export function Nav() {
   return (
     <>
       <nav
+        data-sound-zone="navigate"
         className={cn(
           'fixed inset-x-0 top-0 z-50 border-b transition-all duration-300',
           isScrolled
@@ -135,6 +136,7 @@ export function Nav() {
       </nav>
 
       <div
+        data-sound-zone="navigate"
         className={cn(
           'fixed inset-x-0 top-[60px] z-40 overflow-hidden border-b border-rule bg-felt-deep transition-all duration-200 lg:hidden',
           mobileOpen
