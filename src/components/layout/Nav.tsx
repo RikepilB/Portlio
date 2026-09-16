@@ -20,6 +20,7 @@ export function Nav() {
 
   const navItems = [
     { href: localePath(locale, '/projects'), label: dict.nav.work },
+    { href: localePath(locale, '/activity'), label: locale === 'es' ? 'Actividad' : 'Activity' },
     { href: localePath(locale, '/about'), label: dict.nav.about },
     { href: localePath(locale, '/essays'), label: dict.nav.essays },
     { href: `${localePath(locale, '/journey')}#resume`, label: dict.nav.resume },

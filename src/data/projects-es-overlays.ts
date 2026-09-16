@@ -419,12 +419,12 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
                 phase: 'Fase 3',
                 title: 'Panel admin, RBAC e integraciones',
                 detail:
-                    'Construí un panel autenticado con Clerk y rutas para Admin, Recruiter, Hiring Manager y Guest de solo lectura; pipelines Kanban drag-and-drop; analítica Recharts; gestión de plantillas y equipo; e integraciones salientes firmadas. El último checkpoint de producción pasó lint, typecheck, 511 tests con uno omitido, migraciones y el build de producción.',
+                    'Construí un panel autenticado con Clerk y rutas para Admin, Recruiter, Hiring Manager y Guest de solo lectura; pipelines Kanban drag-and-drop; analítica Recharts; gestión de plantillas y equipo; e integraciones salientes firmadas. El checkpoint de producción del 2026-09-11 pasó lint, typecheck, 544 tests con uno omitido, migraciones y el build de producción.',
                 tech: ['Clerk', 'Prisma 7', 'dnd-kit', 'Recharts', 'Vitest', 'Playwright'],
             },
         ],
         results: [
-            { metric: '511', label: 'tests pasaron en el último checkpoint de producción, con 1 omitido' },
+            { metric: '544', label: 'tests pasaron en el checkpoint de producción del 2026-09-11, con 1 omitido' },
             { metric: '4', label: 'rutas por rol — Admin, Recruiter, Hiring Manager y Guest de solo lectura' },
             { metric: 'Async', label: 'workers de parseo de currículums y email vía pg-boss' },
         ],
@@ -623,8 +623,8 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
         category: 'CÓDIGO ABIERTO',
         title: 'Peru Grid — Mapeando el ecosistema tech peruano',
         tagline:
-            'Peru Grid mapea 90 startups, consultoras, coworkings, incubadoras, aceleradoras, nonprofits y fondos investigados en Lima y Arequipa — en una web sin dependencias.',
-        blurb: '90 organizaciones tech peruanas investigadas en un mapa interactivo sin dependencias.',
+            'Peru Grid mapea 89 startups, consultoras, coworkings, incubadoras, aceleradoras, nonprofits y fondos investigados en Lima y Arequipa — en una web sin dependencias.',
+        blurb: '89 organizaciones tech peruanas investigadas en un mapa interactivo sin dependencias.',
         readTime: '4 min de lectura',
         overview:
             'Peru Grid es un mapa interactivo con estilo terminal de los ecosistemas tech de Lima y Arequipa, renderizado con MapLibre GL JS sobre tiles vectoriales de OpenFreeMap — sin API keys, build step, framework ni dependencias npm. Una aplicación HTML estática carga datasets investigados de organizaciones y titulares. Los visitantes cambian de ciudad, filtran por tipo de organización y etapa de startup, inspeccionan detalles, eligen mapa 2D o 3D y envían nuevas entradas para revisión.',
@@ -647,7 +647,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
                 phase: 'Fase 2',
                 title: 'Dataset verificado, no un scrape',
                 detail:
-                    '90 organizaciones — 75 en Lima y 15 en Arequipa — cubren startups, consultoras tecnológicas, coworkings, incubadoras, nonprofits, fondos de venture capital y aceleradoras. Cada entrada lleva una categoría pública y, cuando existe fuente, una etapa de startup; el código usa licencia MIT y los datasets CC BY 4.0.',
+                    '89 organizaciones en Lima y Arequipa cubren startups, consultoras tecnológicas, coworkings, incubadoras, nonprofits, fondos de venture capital y aceleradoras. Cada entrada lleva una categoría pública y, cuando existe fuente, una etapa de startup; el código usa licencia MIT y los datasets CC BY 4.0.',
                 tech: ['JSON', 'CC BY 4.0', 'MIT'],
             },
             {
@@ -659,7 +659,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
             },
         ],
         results: [
-            { metric: '90', label: 'organizaciones tech de Lima y Arequipa investigadas y mapeadas' },
+            { metric: '89', label: 'organizaciones tech de Lima y Arequipa investigadas y mapeadas' },
             { metric: '0', label: 'dependencias — un HTML, dos JSON, sin build step' },
             { metric: '7', label: 'categorías públicas de organización con campos de datos validados' },
         ],

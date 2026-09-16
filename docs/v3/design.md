@@ -1,5 +1,43 @@
 # Portfolio v3 — Interface Contract
 
+## September 2026 content expansion
+
+Richard explicitly authorizes restructuring outside the existing hero. Preserve the hero markup,
+portrait, type, colors and layout. Keep the existing felt/gold tokens and three font families.
+Recruiters need evidence of ownership; collaborators need current entry points and release limits.
+Home remains work-first, followed by recent activity, writing and capabilities. Activity separates
+public releases, contributed work and proposed ideas. Reading is a small annotated resource shelf,
+not a claim that Richard has read every book. Add Activity and Reading to the footer; Activity to
+main navigation. Project status reports distinguish public release, research, prototype and unknown
+availability. Do not manufacture project completion percentages from tests, commits or age.
+
+Use compact editorial rows with dates and real links instead of contribution heatmaps or vanity
+counters. Reuse existing Reveal/motion facilities, respect reduced motion, and make sound off by
+default with an explicit control and visual state. No decorative 3D model without a product role,
+licensed asset and static fallback. No new animation dependency is needed for this expansion.
+
+Verify EN/ES routes, mobile overflow, keyboard controls, sound failure recovery and hero preservation.
+Run lint, typecheck, build and the relevant content tests. Capture representative desktop/mobile
+renders and record the visual verdict here before completion.
+
+### Rendered review — 2026-09-14
+
+September 15 extension: Activity must surface Richard's own projects alongside contributions.
+The library groups authored essays/posts separately from suggested reading. Beyond Code uses
+the user-supplied football, travel, dance, French and journaling details. Learning labels follow
+the current profile source; in-progress credentials must not appear earned. Spotify requires an
+actual profile/playlist URL; do not invent a player, favorites or listening history.
+
+Pass for the scoped expansion: Activity reviewed at desktop and 390px mobile, Spanish Reading
+reviewed at 390px, and navigation checked at 768px. Felt/gold hierarchy and restrained editorial
+rows remain coherent with the approved site. No horizontal overflow in those checks. Activity
+filters returned three contributions and two releases; Enter activates filters. Sound defaults
+off, toggles on/off visibly and remains optional. Browser error log was empty in the checked
+routes. Mobile menu opens Activity; Home still shows the approved hero. Heading levels corrected
+so standalone Activity entries use h2, with h3 only inside the Home section. Sound error fallback
+and reduced-motion handling were reviewed in code; forced unsupported-audio behavior was not
+browser-tested. No new movement animation was introduced. No user visual approval is implied.
+
 ## Canonical status
 
 This document defines responsive and interaction behavior for the felt/gold re-skin. Pair with
@@ -74,3 +112,10 @@ The cinematic felt/gold treatment intentionally allows:
 - Linen/felt texture overlays at low opacity
 
 These override baseline-ui bans only where branded foil/texture is specified.
+
+
+## September 15 expanded-profile review
+
+The user explicitly approved content reorganization outside the hero. Activity foregrounds seven own-project links, keeps three upstream contributions distinct, and labels the supplied GitHub count as a dated snapshot. Library leads with existing essays and real author channels before suggested reading. Beyond Code uses a simple readable definition list rather than more decorative cards; the scrapbook remains available below. Certification preparation is not represented as an earned credential.
+
+Rendered review: desktop Activity project filter shows seven linked entries; Contributions shows three. Spanish Library at 390px shows nine writing/reference entries without horizontal overflow. English Beyond Code at 390px retains comfortable wrapping and visible links. Spanish Activity sound toggles on/off only by action; no errors in browser console. Preserved felt/gold type hierarchy, restrained borders, no decorative progress bars or fabricated heatmap. Native browser had one transient click transport timeout; reinspection and retry succeeded. Lint, typecheck, production build (62 pages) and 14 tests pass. Existing middleware deprecation remains outside scope.

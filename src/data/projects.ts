@@ -490,7 +490,7 @@ export const projects: Project[] = [
         codebaseMapUrl: 'https://foglamp.dev/scan/scoutlane-shqt4o',
         stack: ['Next.js 16', 'React 19', 'TypeScript', 'Prisma 7', 'PostgreSQL', 'Clerk', 'pg-boss', 'Tailwind CSS 4'],
         results: [
-            { metric: '511', label: 'tests passed at the latest production checkpoint, with 1 skipped' },
+            { metric: '544', label: 'tests passed at the 2026-09-11 production checkpoint, with 1 skipped' },
             { metric: '4', label: 'role paths — Admin, Recruiter, Hiring Manager, and read-only Guest' },
             { metric: 'Async', label: 'resume-parsing & email workers via pg-boss' },
         ],
@@ -522,7 +522,7 @@ export const projects: Project[] = [
                 phase: 'Phase 3',
                 title: 'Admin Dashboard, RBAC & Integrations',
                 detail:
-                    'Built a Clerk-authenticated admin dashboard with Admin, Recruiter, Hiring Manager, and read-only Guest paths; drag-and-drop Kanban pipelines; Recharts analytics; template and team management; and signed outbound integrations. The latest production checkpoint passed lint, typecheck, 511 tests with one skip, migrations, and the production build.',
+                    'Built a Clerk-authenticated admin dashboard with Admin, Recruiter, Hiring Manager, and read-only Guest paths; drag-and-drop Kanban pipelines; Recharts analytics; template and team management; and signed outbound integrations. The 2026-09-11 production checkpoint passed lint, typecheck, 544 tests with one skip, migrations, and the production build.',
                 tech: ['Clerk', 'Prisma 7', 'dnd-kit', 'Recharts', 'Vitest', 'Playwright'],
             },
         ],
@@ -761,8 +761,8 @@ export const projects: Project[] = [
         inProgress: true,
         title: 'Peru Grid — Mapping the Peruvian Tech Ecosystem',
         tagline:
-            'Peru Grid maps 90 researched startups, consultancies, coworking spaces, incubators, accelerators, nonprofits, and funds across Lima and Arequipa — in one dependency-free web app.',
-        blurb: '90 researched Peru tech organizations on one interactive, dependency-free map.',
+            'Peru Grid maps 89 researched startups, consultancies, coworking spaces, incubators, accelerators, nonprofits, and funds across Lima and Arequipa — in one dependency-free web app.',
+        blurb: '89 researched Peru tech organizations on one interactive, dependency-free map.',
         duration: 'Jul – Sep 2026',
         readTime: '4 min read',
         image: '/images/projects/peru-grid-home.png',
@@ -790,7 +790,7 @@ export const projects: Project[] = [
                 phase: 'Phase 2',
                 title: 'Verified Dataset, Not a Scrape',
                 detail:
-                    '90 organizations — 75 in Lima and 15 in Arequipa — span startups, technology consultancies, coworking spaces, incubators, nonprofits, venture funds, and accelerators. Entries carry a public category plus an optional startup stage; code ships under MIT and the datasets under CC BY 4.0.',
+                    '89 organizations across Lima and Arequipa span startups, technology consultancies, coworking spaces, incubators, nonprofits, venture funds, and accelerators. Entries carry a public category plus an optional startup stage; code ships under MIT and the datasets under CC BY 4.0.',
                 tech: ['JSON', 'CC BY 4.0', 'MIT'],
             },
             {
@@ -802,7 +802,7 @@ export const projects: Project[] = [
             },
         ],
         results: [
-            { metric: '90', label: 'researched Lima and Arequipa tech organizations mapped' },
+            { metric: '89', label: 'researched Lima and Arequipa tech organizations mapped' },
             { metric: '0', label: 'dependencies — one HTML file, two JSON datasets, no build step' },
             { metric: '7', label: 'public organization categories with validated data fields' },
         ],

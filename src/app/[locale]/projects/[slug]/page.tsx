@@ -8,6 +8,7 @@ import { isComingSoon } from '@/data/projects'
 import { localePath } from '@/lib/locale-path'
 import { TechTag } from '@/components/ui/TechTag'
 import { MetricCard } from '@/components/ui/MetricCard'
+import { ProjectHealth } from '@/components/ui/ProjectHealth'
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -83,6 +84,7 @@ export default async function ProjectPage({
         </h1>
         <p className="text-lg leading-relaxed text-ink-on-felt sm:text-xl">{project.tagline}</p>
       </header>
+      <ProjectHealth slug={project.slug} locale={locale} />
 
       {heroSrc ? (
         <div className="relative mb-6 aspect-[16/10] w-full overflow-hidden rounded-2xl border border-rule bg-felt-deep/35">
@@ -237,7 +239,7 @@ export default async function ProjectPage({
               {dict.caseStudy.github}
             </Link>
           ) : null}
-          {project.demoVideo && !project.demoVideo.startsWith('PLACEHOLDER') ? (
+            {project.demoVideo && !project.demoVideo.startsWith('PLACEHOLDER') && project.slug !== 'findleads' ? (
             <a
               href={project.demoVideo}
               target="_blank"

@@ -5,7 +5,7 @@ import { projects } from '@/data/projects'
 
 const BASE = 'https://richardpillaca.com'
 
-const staticPaths = ['', '/about', '/projects', '/essays', '/journey'] as const
+const staticPaths = ['', '/about', '/projects', '/essays', '/journey', '/activity', '/reading'] as const
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticEntries = locales.flatMap((locale) =>

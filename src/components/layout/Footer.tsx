@@ -28,6 +28,8 @@ export function Footer() {
 
   const menuLinks = [
     { name: dict.nav.work, href: localePath(locale, '/projects') },
+    { name: locale === 'es' ? 'Actividad' : 'Activity', href: localePath(locale, '/activity') },
+    { name: locale === 'es' ? 'Biblioteca' : 'Library', href: localePath(locale, '/reading') },
     { name: dict.nav.about, href: localePath(locale, '/about') },
     { name: dict.nav.essays, href: localePath(locale, '/essays') },
     { name: dict.nav.resume, href: `${localePath(locale, '/journey')}#resume` },

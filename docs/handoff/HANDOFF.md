@@ -21,7 +21,11 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ---
 
-## Current state — 2026-09-11
+## Current state — 2026-09-15
+
+Portfolio evidence and personal-content refresh on `codex/portfolio-evidence-refresh`. Richard has explicitly authorized commit, checks, merge and deployment. Hero preserved; bilingual Activity with own projects and upstream contributions, Library with existing essays and suggested references, Beyond Code and current learning added. Local lint, typecheck, build (62 pages), 14 tests and desktop/mobile checks passed. Publication is in progress. See [source report](../portfolio-refresh-2026-09-14.md) and [session](2026-09-15-portfolio-publication/HANDOFF.md).
+
+## Previous state — 2026-09-11
 
 **Featured-project refresh shipped through PR #35 at `2584250`; production hydration root cause is fixed in a focused follow-up.** The six Home projects on `richardpillaca.com` use current product screenshots and source-backed EN/ES content, stacks, metrics, demo URLs, GitHub URLs, and Foglamp codebase-map URLs. Home cards restore stack pills plus direct Details, Demo, Code, and Codebase map controls; images and titles link to localized case studies. GitHub CI, Vercel preview, and CodeRabbit passed, including fixes for all three valid review findings. Post-deploy checks then caught React hydration error 418. PR #36 normalized the Analytics mount but did not clear the error. Exact server-text comparison found the real mismatch: Vercel rendered date-only `2025-03-01` as March while the Chilean browser rendered February. `formatDate` now formats in UTC, backed by a regression test; fixed local production HTML matches the live server text exactly and hydrates without React errors. `pnpm lint`, `npx tsc --noEmit`, `pnpm test` (10 tests), and `pnpm build` (58 routes) pass. Existing unrelated untracked scaffolding remains excluded.
 
@@ -58,6 +62,8 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 ---
 
 ## Session index (append-only, newest first)
+
+- [2026-09-15-portfolio-publication](2026-09-15-portfolio-publication/HANDOFF.md) — evidence refresh, personal library/profile expansion and authorized publication.
 
 - [2026-09-11-date-hydration-fix](2026-09-11-date-hydration-fix/HANDOFF.md) — disproved the Analytics-only hypothesis; isolated Vercel/Chile month mismatch in `formatDate`; added deterministic UTC formatting and regression coverage
 - [2026-09-11-analytics-hydration-fix](2026-09-11-analytics-hydration-fix/HANDOFF.md) — reproduced post-deploy React hydration error 418; isolated Vercel-only Analytics markup; PR #36 uses a stable production-mode mount and passes the full local gate
