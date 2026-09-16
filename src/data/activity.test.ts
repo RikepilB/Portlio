@@ -1,11 +1,16 @@
 import { describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
-import { activity } from './activity'
+import { activity, activityProjectSlugs } from './activity'
 import { projectHealth } from './project-health'
 import { projects } from './projects'
 
 describe('public evidence', () => {
+  it('links each featured activity project to an existing case study', () => {
+    for (const slug of activityProjectSlugs) {
+      expect(projects.some((project) => project.slug === slug)).toBe(true)
+    }
+  })
   it('links contributions to upstream PRs, not fork ownership', () => {
     for (const item of activity.filter((entry) => entry.kind === 'contribution')) {
       expect(item.href).toMatch(/^https:\/\/github.com\/(?!RikepilB\/)[^/]+\/[^/]+\/pull\/\d+$/)

@@ -1,6 +1,20 @@
 import type { Locale } from '@/i18n/config'
 
 type Text = Record<Locale, string>
+
+export const activityProjectSlugs = ['voidscape', 'findleads', 'peru-tech-map', 'scoutlane-recruitment', 'empenalo-fintech', 'el-umbral']
+
+export const additionalActivityProjects: { title: string; href: string; description: Text }[] = [
+  {
+    title: 'Canada Research Path PE',
+    href: 'https://canada-research-path-pe.ridi-pillaca.chatgpt.site',
+    description: {
+      en: 'An editable guide to technology research opportunities between Peru and Canada, with official sources and dates to verify.',
+      es: 'Guía editable de oportunidades de investigación tecnológica entre Perú y Canadá, con fuentes oficiales y fechas por verificar.',
+    },
+  },
+]
+
 export interface Activity {
   id: string
   kind: 'release' | 'contribution' | 'idea'
