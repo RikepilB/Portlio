@@ -41,22 +41,36 @@ export function ProjectCard({ project, index = 0, showActions = false }: Project
 
   if (!showActions) return <Link href={href} aria-label={`${dict.projects.viewCaseAriaPrefix} ${project.title}`} className="group block h-full pb-4">{content}</Link>
 
+  const action = 'inline-flex min-h-11 items-center gap-1.5 rounded border px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] transition-colors'
+
   return <article className="group flex h-full flex-col">
     <Link href={href} aria-label={`${dict.projects.viewCaseAriaPrefix} ${project.title}`} className="block">{content}</Link>
-    <div className="mt-auto flex flex-wrap items-start justify-between gap-4 pt-4">
-      <Link href={href} className="inline-flex min-h-11 items-center text-xs text-gold-bright">{comingSoon ? dict.projects.comingSoonCta : dict.projects.details} ↗</Link>
-      <details className="quiet-disclosure max-w-full flex-1 text-right">
-        <summary className="ml-auto flex min-h-11 w-fit cursor-pointer items-center gap-3 text-xs text-muted">{locale === 'es' ? 'Stack y enlaces' : 'Stack & links'}<span className="disclosure-mark" aria-hidden="true">+</span></summary>
-        <div className="disclosure-body border-t border-rule py-4 text-left">
-          {health && <p className="mb-3 text-xs leading-6 text-muted">{health.summary[locale]}</p>}
-          <p className="font-mono text-[10px] leading-6 text-muted">{project.stack.join(' · ')}</p>
-          <div className="mt-3 flex flex-wrap gap-x-5">
-            {demo && <a href={demo} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-xs text-gold-bright">{health?.availability[locale] ?? dict.projects.demo} ↗</a>}
-            {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-xs text-gold-bright">{dict.projects.code} ↗</a>}
-            {project.codebaseMapUrl && <a href={project.codebaseMapUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-xs text-gold-bright">{dict.projects.codebase} ↗</a>}
-          </div>
-        </div>
-      </details>
-    </div>
+
+    {project.stack.length > 0 && (
+      <ul className="mt-4 flex flex-wrap gap-2" aria-label={`${dict.projects.techStackAria}: ${project.title}`}>
+        {project.stack.slice(0, 6).map((tech) => (
+          <li key={tech} className="rounded border border-rule bg-felt-deep/35 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.05em] text-muted">{tech}</li>
+        ))}
+        {project.stack.length > 6 && (
+          <li className="flex items-center px-1 font-mono text-[10px] text-muted">+{project.stack.length - 6}</li>
+        )}
+      </ul>
+    )}
+
+    <nav className="mt-auto flex flex-wrap gap-2 pt-5" aria-label={`${dict.projects.projectLinksAria}: ${project.title}`}>
+      <Link href={href} className={`${action} border-matte bg-matte text-felt-deep hover:border-gold hover:bg-gold`}>
+        {comingSoon ? dict.projects.comingSoonCta : dict.projects.details}
+      </Link>
+      {project.github && (
+        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`${dict.projects.code}: ${project.title}`} className={`${action} border-rule bg-felt-deep/35 text-ink-on-felt hover:border-gold hover:text-gold-bright`}>
+          {dict.projects.code} <span aria-hidden="true">↗</span>
+        </a>
+      )}
+      {demo && (
+        <a href={demo} target="_blank" rel="noopener noreferrer" aria-label={`${health?.availability[locale] ?? dict.projects.demo}: ${project.title}`} className={`${action} border-gold/50 bg-gold-soft text-gold-bright hover:bg-gold hover:text-felt-deep`}>
+          {health?.availability[locale] ?? dict.projects.demo} <span aria-hidden="true">↗</span>
+        </a>
+      )}
+    </nav>
   </article>
 }
