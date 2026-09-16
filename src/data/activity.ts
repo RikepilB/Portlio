@@ -17,11 +17,12 @@ export const additionalActivityProjects: { title: string; href: string; descript
 
 export interface Activity {
   id: string
-  kind: 'release' | 'contribution' | 'idea'
+  kind: 'release' | 'contribution' | 'idea' | 'post'
   date?: string
   title: Text
   description: Text
-  href: string
+  /** Optional: LinkedIn posts have no publicly reachable permalink. */
+  href?: string
 }
 
 export const activity: Activity[] = [
@@ -79,9 +80,34 @@ export const activity: Activity[] = [
     description: { en: 'A direction for Voidscape: strengthen the installed CLI and recovery workflow first, then explore richer review interfaces. This is a roadmap, not a released feature.', es: 'Una dirección para Voidscape: reforzar primero la CLI instalada y la recuperación, y luego explorar interfaces de revisión más completas. Es una hoja de ruta, no una función publicada.' },
     href: 'https://github.com/RikepilB/void-scape/issues/144',
   },
+  {
+    id: 'ai-governance-latam', kind: 'post',
+    title: { en: 'Who gets to shape the model', es: 'Quién moldea el modelo' },
+    description: { en: 'From a talk on AI governance at Trajectory Labs in Toronto. Spanish and Portuguese make up barely three percent of the datasets behind top frontier models, and when a model ignores your culture the software misses local legal rules, regional dialects and everyday context. That is why regional models like LatamGPT matter, and why education work like BrainTrainr makes a direct impact across Latin America and other underrepresented groups. Governance is not abstract theory: it decides who receives compute access, who sets safety rules, and who holds a seat at the table.', es: 'De una charla sobre gobernanza de IA en Trajectory Labs, Toronto. El español y el portugués apenas llegan al tres por ciento de los datos con los que se entrenan los modelos frontera, y cuando un modelo ignora tu cultura el software se pierde normas legales locales, dialectos regionales y contexto cotidiano. Por eso importan modelos regionales como LatamGPT, y por eso el trabajo educativo como BrainTrainr tiene impacto directo en Latinoamérica y otros grupos subrepresentados. La gobernanza no es teoría abstracta: decide quién accede a cómputo, quién fija las reglas de seguridad y quién tiene asiento en la mesa.' },
+  },
+  {
+    id: 'agent-boundaries', kind: 'post',
+    title: { en: 'Once an agent can act, the question changes', es: 'Cuando un agente puede actuar, la pregunta cambia' },
+    description: { en: 'Across Startupfest and conversations with founders building in the agent space, the same challenge kept showing up from different angles. Once an agent can take action, the question is no longer whether it generates good code, but whether anyone designed clear boundaries around what it is allowed to do. Kastra.ai reviews risky actions before they execute. Jetty replaces open-ended prompts with runbooks that define the task and what done looks like. Upivia treats agent access like a controlled wallet, a policy-checked gateway with logs and budget limits. Same shift: permissions, workflow constraints and memory get designed on purpose, rather than added after something breaks.', es: 'Entre Startupfest y conversaciones con fundadores que construyen agentes, el mismo reto apareció desde ángulos distintos. Cuando un agente puede ejecutar acciones, la pregunta deja de ser si genera buen código y pasa a ser si alguien diseñó límites claros sobre lo que puede hacer. Kastra.ai revisa las acciones riesgosas antes de ejecutarlas. Jetty cambia los prompts abiertos por runbooks que definen la tarea y qué significa terminado. Upivia trata el acceso del agente como una billetera controlada: una puerta con políticas, registros y límites de gasto. El mismo cambio de fondo: permisos, restricciones y memoria se diseñan a propósito, no se añaden después de que algo se rompe.' },
+  },
+  {
+    id: 'setup-not-chatbots', kind: 'post',
+    title: { en: 'Take away the setup, not the interface', es: 'Quitar la configuración, no la interfaz' },
+    description: { en: 'The best AI tools make setup easy so you can start right away. MigmaAI can begin from a website, a prompt, a Figma frame or an existing email and build something editable that matches the brand. What is interesting is not the speed: email is tricky, and a design that looks fine in an editor can break in Outlook, Gmail, dark mode or on mobile, so the product still has to let people review, edit and test what lands in the inbox. I do not think good AI products should remove interfaces entirely. People need control, context and a way to fix things. I am more interested in AI that takes away setup steps than in AI that adds another chatbot to a workflow.', es: 'Las mejores herramientas de IA hacen fácil la puesta en marcha para que puedas empezar de inmediato. MigmaAI puede partir de un sitio, un prompt, un frame de Figma o un correo existente y construir algo editable acorde a la marca. Lo interesante no es la velocidad: el correo es complicado, y un diseño que se ve bien en el editor puede romperse en Outlook, Gmail, modo oscuro o en móvil, así que el producto todavía tiene que dejar revisar, editar y probar lo que llega a la bandeja. No creo que un buen producto de IA deba eliminar las interfaces. La gente necesita control, contexto y una forma de corregir. Me interesa más la IA que quita pasos de configuración que la que añade otro chatbot al flujo.' },
+  },
+  {
+    id: 'networking-test', kind: 'post',
+    title: { en: 'The best part of networking is when nobody is networking', es: 'Lo mejor de hacer contactos es cuando ya nadie los hace' },
+    description: { en: 'At an event a few weeks ago, two people sat down and led with their company name, then their school. That was the whole pitch, no questions back, no curiosity about anyone else at the table, and they left before anything real got said. The ones who stayed asked what you were building, what you were stuck on, what you cared about outside work. Same room, same free drinks, completely different night. So my test is not how many connections I can collect. It is how many people I would still grab a coffee with if neither of us could do anything for the other.', es: 'En un evento hace unas semanas, dos personas se sentaron y empezaron por el nombre de su empresa y luego su universidad. Ese era todo el discurso: ninguna pregunta de vuelta, ninguna curiosidad por el resto de la mesa, y se fueron antes de que se dijera algo real. Los que se quedaron preguntaban qué estabas construyendo, dónde estabas atascado, qué te importaba fuera del trabajo. Misma sala, mismas bebidas, una noche completamente distinta. Así que mi prueba no es cuántos contactos junto, sino con cuánta gente seguiría tomando un café si ninguno de los dos pudiera hacer nada por el otro.' },
+  },
+  {
+    id: 'environment-is-a-variable', kind: 'post',
+    title: { en: 'Environment is an underrated productivity variable', es: 'El entorno es una variable de productividad subestimada' },
+    description: { en: 'Working from coworking spaces, I shipped more, stayed sharper and felt less isolated. The social layer of building is not a distraction, it is fuel. I still like the convenience of working from my room, but sometimes the time you optimize comes at a cost: it gets dull, there is no stimulus, and doomscrolling gets easier. I was not replenishing energy, I was compressing and getting drained. This is the itch behind Coworking Scout on PeruGrid.', es: 'Trabajando desde espacios de coworking publiqué más, me mantuve más agudo y me sentí menos aislado. La capa social de construir no es una distracción, es combustible. Me sigue gustando la comodidad de trabajar desde mi cuarto, pero a veces el tiempo que optimizas tiene un costo: se vuelve monótono, no hay estímulo y es más fácil caer en el doomscrolling. No estaba reponiendo energía, estaba comprimiendo y desgastándome. De ahí sale Coworking Scout en PeruGrid.' },
+  },
 ]
 
 export const activityLabels = {
-  en: { title: 'Activity', intro: 'Releases, open-source contributions, and ideas taking shape.', all: 'All', release: 'Releases', contribution: 'Contributions', idea: 'Ideas', undated: 'Public record', open: 'View source', more: 'All activity' },
-  es: { title: 'Actividad', intro: 'Lanzamientos, contribuciones de código abierto e ideas en desarrollo.', all: 'Todo', release: 'Lanzamientos', contribution: 'Contribuciones', idea: 'Ideas', undated: 'Registro público', open: 'Ver fuente', more: 'Toda la actividad' },
+  en: { title: 'Activity', intro: 'Releases, open-source contributions, and ideas taking shape.', all: 'All', release: 'Releases', contribution: 'Contributions', idea: 'Ideas', post: 'Posts', undated: 'Public record', open: 'View source', more: 'All activity' },
+  es: { title: 'Actividad', intro: 'Lanzamientos, contribuciones de código abierto e ideas en desarrollo.', all: 'Todo', release: 'Lanzamientos', contribution: 'Contribuciones', idea: 'Ideas', post: 'Publicaciones', undated: 'Registro público', open: 'Ver fuente', more: 'Toda la actividad' },
 }

@@ -20,10 +20,11 @@ describe('public evidence', () => {
     const ids = activity.map((entry) => entry.id)
     expect(new Set(ids).size).toBe(ids.length)
     for (const entry of activity) {
-      expect(entry.href).toMatch(/^https:\/\//)
+      if (entry.href) expect(entry.href).toMatch(/^https:\/\//)
       expect(entry.title.en && entry.title.es).toBeTruthy()
       expect(entry.description.en && entry.description.es).toBeTruthy()
       if (entry.date) expect(entry.date).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+      if (entry.kind === 'post') expect(entry.href).toBeUndefined()
     }
   })
   it('keeps health entries attached to real projects and dates', () => {

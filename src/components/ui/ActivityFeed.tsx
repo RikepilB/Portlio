@@ -14,7 +14,7 @@ export function ActivityFeed({ preview = false }: { preview?: boolean }) {
   const es = locale === 'es'
   const copy = activityLabels[locale]
   const Heading = preview ? 'h3' : 'h2'
-  const [filter, setFilter] = useState<'all' | 'project' | 'release' | 'contribution' | 'idea'>('all')
+  const [filter, setFilter] = useState<'all' | 'project' | 'release' | 'contribution' | 'idea' | 'post'>('all')
   const projects = getProjects(locale).filter((project) => activityProjectSlugs.includes(project.slug))
   const entries = preview
     ? [...activity.filter((entry) => entry.kind === 'release').slice(0, 2), ...activity.filter((entry) => entry.kind === 'contribution').slice(0, 1)]
@@ -22,7 +22,7 @@ export function ActivityFeed({ preview = false }: { preview?: boolean }) {
 
   return <div>
     {!preview && <div className="mb-5 flex flex-wrap gap-x-5 gap-y-1 border-b border-rule" role="group" aria-label={es ? 'Filtrar actividad' : 'Filter activity'}>
-      {(['all', 'project', 'release', 'contribution', 'idea'] as const).map((kind) => {
+      {(['all', 'project', 'release', 'contribution', 'idea', 'post'] as const).map((kind) => {
         const count = kind === 'project' ? projects.length + additionalActivityProjects.length : kind === 'all' ? activity.length + projects.length + additionalActivityProjects.length : activity.filter((item) => item.kind === kind).length
         return <button key={kind} type="button" aria-pressed={filter === kind} onClick={() => setFilter(kind)} className={`min-h-12 border-b-2 text-sm transition-colors ${filter === kind ? 'border-gold text-gold-bright' : 'border-transparent text-muted hover:text-matte'}`}>
           {kind === 'project' ? (es ? 'Proyectos' : 'Projects') : copy[kind]} <span aria-hidden="true" className="ml-1 font-mono text-[10px] opacity-60">{count}</span>
@@ -54,7 +54,7 @@ export function ActivityFeed({ preview = false }: { preview?: boolean }) {
           </summary>
           <div className="disclosure-body max-w-2xl pb-6 md:ml-[130px]">
             <p className="text-sm leading-7 text-ink-on-felt">{entry.description[locale]}</p>
-            <div className="mt-3 flex flex-wrap items-center gap-x-6"><a href={entry.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-xs text-gold-bright">{copy.open} ↗</a>{entry.date && <time className="font-mono text-[10px] text-muted" dateTime={entry.date}>{entry.date}</time>}</div>
+            <div className="mt-3 flex flex-wrap items-center gap-x-6">{entry.href && <a href={entry.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-xs text-gold-bright">{copy.open} ↗</a>}{entry.date && <time className="font-mono text-[10px] text-muted" dateTime={entry.date}>{entry.date}</time>}</div>
           </div>
         </details>)}
       </div>
