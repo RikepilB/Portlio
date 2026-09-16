@@ -9,6 +9,7 @@ import { useDictionary, useLocale } from '@/contexts/LocaleContext'
 import { localePath } from '@/lib/locale-path'
 import { LocaleSwitcher } from '@/components/layout/LocaleSwitcher'
 import { cn } from '@/lib/utils'
+import { SoundToggle } from '@/components/ui/InterfaceSound'
 
 export function Nav() {
   const { locale } = useLocale()
@@ -81,7 +82,7 @@ export function Nav() {
             <span className="sr-only">{dict.nav.home}</span>
           </Link>
 
-          <ul className="hidden list-none gap-7 p-0 m-0 md:flex lg:gap-9">
+          <ul className="hidden list-none gap-5 p-0 m-0 lg:flex xl:gap-9">
             {navItems.map((item) => {
               const active = isActive(item.href)
               return (
@@ -105,7 +106,8 @@ export function Nav() {
             })}
           </ul>
 
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center gap-2 lg:flex">
+            <SoundToggle />
             <LocaleSwitcher />
             <a
               href={`mailto:${contactInfo.email}`}
@@ -116,7 +118,8 @@ export function Nav() {
             </a>
           </div>
 
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-1 lg:hidden">
+            <SoundToggle />
             <LocaleSwitcher />
             <button
               type="button"
@@ -133,12 +136,13 @@ export function Nav() {
 
       <div
         className={cn(
-          'fixed inset-x-0 top-[60px] z-40 overflow-hidden border-b border-rule bg-felt-deep transition-all duration-200 md:hidden',
+          'fixed inset-x-0 top-[60px] z-40 overflow-hidden border-b border-rule bg-felt-deep transition-all duration-200 lg:hidden',
           mobileOpen
             ? 'max-h-96 opacity-100 pointer-events-auto'
             : 'max-h-0 opacity-0 pointer-events-none'
         )}
         aria-hidden={!mobileOpen}
+        inert={!mobileOpen}
       >
         <ul className="m-0 flex list-none flex-col p-0 px-[var(--spacing-gutter)]">
           {navItems.map((item) => {
