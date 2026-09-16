@@ -170,7 +170,7 @@ export const dictionaryEs = {
     degree: 'Lic. en Ciencias de la Computación',
     minor: 'Minor en Economía',
     certifications:
-      'Aprendizaje: AWS AI Practitioner (en curso), arquitectura de IA y computación en la nube.',
+      'Certificaciones: Power BI Data Analyst (Microsoft), Scrum Master (Scrum.org), Claude Certified Architect (Anthropic). En curso: AWS AI Practitioner.',
   },
   about: {
     label: 'Sobre mí',
@@ -290,7 +290,7 @@ export const dictionaryEs = {
         emoji: '🗣️',
         title: 'Idiomas',
         description:
-          'Español (nativo), inglés (fluido), francés (aprendiendo). La práctica diaria abre nuevas formas de conectar.',
+          'Español (nativo), inglés (fluido), francés (aprendiendo — estudio intensivo de 4 h/día ahora). Creo que aprender un idioma y aprender un lenguaje de programación usan el mismo músculo: reconocimiento de patrones + práctica diaria.',
       },
     ],
   },

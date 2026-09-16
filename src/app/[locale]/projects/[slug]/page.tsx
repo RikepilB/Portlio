@@ -239,7 +239,7 @@ export default async function ProjectPage({
               {dict.caseStudy.github}
             </Link>
           ) : null}
-            {project.demoVideo && !project.demoVideo.startsWith('PLACEHOLDER') && project.slug !== 'findleads' ? (
+          {project.demoVideo && !project.demoVideo.startsWith('PLACEHOLDER') && project.slug !== 'findleads' ? (
             <a
               href={project.demoVideo}
               target="_blank"
