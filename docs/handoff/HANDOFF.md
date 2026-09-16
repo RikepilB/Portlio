@@ -23,7 +23,7 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ## Current state — 2026-09-15
 
-Portfolio evidence and personal-content refresh on `codex/portfolio-evidence-refresh`. Richard has explicitly authorized commit, checks, merge and deployment. Hero preserved; bilingual Activity with own projects and upstream contributions, Library with existing essays and suggested references, Beyond Code and current learning added. Local lint, typecheck, build (62 pages), 14 tests and desktop/mobile checks passed. Publication is in progress. See [source report](../portfolio-refresh-2026-09-14.md) and [session](2026-09-15-portfolio-publication/HANDOFF.md).
+Portfolio refresh shipped through PR #38 at `dc1ae5a` and verified on `richardpillaca.com`. Hero preserved; bilingual Activity foregrounds own projects and upstream contributions, Library connects existing essays and recommendations, and Beyond Code reflects Richard's interests and in-progress learning. All 17 projects have dated stage summaries. Latest implementation passes lint, typecheck, build (62 pages) and 15 tests; hosted CI, Vercel deployment and live desktop/mobile checks pass. See [publication receipt](2026-09-15-portfolio-publication/HANDOFF.md) and [source report](../portfolio-refresh-2026-09-14.md). Spotify remains without a verified profile/playlist; unavailable source integrations and product-readiness limits are documented. Unrelated work is preserved.
 
 ## Previous state — 2026-09-11
 
