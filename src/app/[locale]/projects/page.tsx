@@ -73,6 +73,7 @@ export default function ProjectsPage() {
 
       <div className="relative mx-auto max-w-5xl border-t border-rule px-6 pb-24 pt-12 sm:px-12">
         <div
+          data-sound-zone="filter"
           role="group"
           aria-label={dict.projects.filterAria}
           className="animate-fade-up stagger-2 mb-12 flex flex-wrap gap-2"

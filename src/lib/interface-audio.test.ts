@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { playInterfaceTone } from './interface-audio'
+import { getInterfaceCueSpec, playInterfaceTone, type InterfaceCue } from './interface-audio'
 
 function audioFixture() {
   const oscillator = { type: '', frequency: { setValueAtTime: vi.fn(), exponentialRampToValueAtTime: vi.fn() }, connect: vi.fn(), start: vi.fn(), stop: vi.fn(), disconnect: vi.fn(), onended: null as (() => void) | null }
@@ -9,7 +9,7 @@ function audioFixture() {
 }
 
 describe('optional interface audio', () => {
-  it('does not even initialize audio without opt-in', async () => {
+  it('does not initialize audio while muted', async () => {
     const getContext = vi.fn()
     await playInterfaceTone(getContext, () => false)
     expect(getContext).not.toHaveBeenCalled()
@@ -39,5 +39,28 @@ describe('optional interface audio', () => {
     audio.oscillator.onended?.()
     expect(audio.oscillator.disconnect).toHaveBeenCalledOnce()
     expect(audio.gain.disconnect).toHaveBeenCalledOnce()
+  })
+
+  it('gives each interface area a distinct quiet cue', () => {
+    const cues: InterfaceCue[] = ['navigate', 'filter', 'expand', 'collapse', 'project', 'outbound', 'action']
+    const signatures = cues.map((cue) => {
+      const spec = getInterfaceCueSpec(cue)
+      expect(spec.gain).toBeLessThan(0.02)
+      expect(spec.duration).toBeLessThanOrEqual(0.09)
+      return `${spec.wave}:${spec.startHz}:${spec.endHz}:${spec.duration}`
+    })
+    expect(new Set(signatures).size).toBe(cues.length)
+  })
+
+  it('applies the requested cue envelope', async () => {
+    const audio = audioFixture()
+    await playInterfaceTone(audio.getContext, () => true, 'filter')
+    const spec = getInterfaceCueSpec('filter')
+    expect(audio.oscillator.type).toBe(spec.wave)
+    expect(audio.oscillator.frequency.setValueAtTime).toHaveBeenCalledWith(spec.startHz, audio.context.currentTime)
+    expect(audio.oscillator.frequency.exponentialRampToValueAtTime).toHaveBeenCalledWith(
+      spec.endHz,
+      audio.context.currentTime + spec.duration * 0.82,
+    )
   })
 })

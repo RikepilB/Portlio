@@ -13,7 +13,7 @@ export function LibraryShelf() {
   const [filter, setFilter] = useState<'all' | 'writing' | 'book' | 'reference'>('all')
   const labels = es ? { all: 'Todo', writing: 'Mis artículos', book: 'Libros', reference: 'Referencias' } : { all: 'All', writing: 'My writing', book: 'Books', reference: 'References' }
   return <div>
-    <div className="mb-8 flex flex-wrap gap-x-6 gap-y-1 border-b border-rule" role="group" aria-label={es ? 'Filtrar biblioteca' : 'Filter library'}>
+    <div data-sound-zone="filter" className="mb-8 flex flex-wrap gap-x-6 gap-y-1 border-b border-rule" role="group" aria-label={es ? 'Filtrar biblioteca' : 'Filter library'}>
       {(['all', 'writing', 'book', 'reference'] as const).map((kind) => <button type="button" key={kind} aria-pressed={filter === kind} onClick={() => setFilter(kind)} className={`min-h-12 border-b-2 text-sm transition-colors ${kind === filter ? 'border-gold text-gold-bright' : 'border-transparent text-muted hover:text-matte'}`}>{labels[kind]}</button>)}
     </div>
     <div key={filter} className="index-enter" aria-live="polite">

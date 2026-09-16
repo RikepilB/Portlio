@@ -141,3 +141,9 @@ PASS for the requested direction, without implying user visual approval. At 1440
 Latest local checks: lint, TypeScript, production build (62 pages), 20 tests and diff check pass. Four audio tests cover default silence/no initialization, muting while resume is pending, unavailable audio and short/quiet cues with node cleanup. Hero hash remains unchanged. No new dependency, remote sound asset, analytics provider or account data. Existing local Vercel analytics endpoint and middleware deprecation are unrelated. Landing/readiness: existing canonicals, metadata, sitemap, contact links and rollout/rollback setup retained. Preview deployment protection and public production checks remain separate gates.
 
 Concurrent release update PR #41 is preserved: isolated checkout starts at 4c499bb. The shared checkout was restored only by reversing this revision's exact patch; unrelated edits and new release records were untouched.
+
+## Sound zones — September 15
+
+The latest user direction makes interface sound enabled by default. Nothing plays on load or hover; the first cue still requires a click or keyboard activation, and the persistent navigation control can mute sound at any time. Sounds are synthesized locally with Web Audio and make no network request.
+
+Seven short, quiet cues now distinguish navigation, filters, expanding details, collapsing details, project actions, outbound links and remaining controls. The hero stays silent. Each cue remains at or below 90ms and below 0.02 gain, and audio failures still disable the control. The preference continues across client-side navigation while the shared layout remains mounted; a full reload returns to the requested enabled default.
