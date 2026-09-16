@@ -12,6 +12,8 @@ import { localePath } from '@/lib/locale-path'
 import { Reveal } from '@/components/ui/Reveal'
 import { ProjectCard } from '@/components/ui/ProjectCard'
 import { EssayCard } from '@/components/ui/EssayCard'
+import { ActivityFeed } from '@/components/ui/ActivityFeed'
+import { activityLabels } from '@/data/activity'
 
 const featuredSlugs = [
   'voidscape',
@@ -124,6 +126,13 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section id="activity" className="section-ground scroll-mt-[72px] border-t border-rule py-20">
+        <div className="shell">
+          <h2 className="mb-6 font-display text-[clamp(38px,4.5vw,58px)] font-medium leading-tight text-matte">{activityLabels[locale].title}</h2>
+          <div className="max-w-4xl"><ActivityFeed preview /></div>
         </div>
       </section>
 

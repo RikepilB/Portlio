@@ -170,7 +170,7 @@ export const dictionaryEn = {
     degree: 'B.Sc. Computer Science',
     minor: 'Minor in Economics',
     certifications:
-      'Certifications: Power BI Data Analyst (Microsoft), Scrum Master (Scrum.org), Claude Certified Architect (Anthropic)',
+      'Learning: AWS AI Practitioner (in progress), AI architecture, and cloud computing.',
   },
   about: {
     label: 'About',
@@ -290,7 +290,7 @@ export const dictionaryEn = {
         emoji: '🗣️',
         title: 'Languages',
         description:
-          'Spanish (native), English (fluent), French (learning — intensive 4hr/day study right now). I believe learning a language and learning a programming language require the same muscle: pattern recognition + daily practice.',
+          'Spanish (native), English (fluent), French (learning). Daily practice keeps opening new ways to connect.',
       },
     ],
   },

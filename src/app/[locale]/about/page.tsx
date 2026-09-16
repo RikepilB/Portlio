@@ -2,11 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Github, Linkedin, Instagram, Twitter, X } from 'lucide-react'
 import { socialLinks } from '@/data/social'
 import { AboutVisionBoard } from '@/components/about/AboutVisionBoard'
 import { Reveal } from '@/components/ui/Reveal'
-import { useDictionary } from '@/contexts/LocaleContext'
+import { useDictionary, useLocale } from '@/contexts/LocaleContext'
+import { personal } from '@/data/personal'
+import { localePath } from '@/lib/locale-path'
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>> = {
   github: Github,
@@ -17,6 +20,8 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; strokeWidth?:
 
 export default function AboutPage() {
   const dict = useDictionary()
+  const { locale } = useLocale()
+  const es = locale === 'es'
   const [selectedImage, setSelectedImage] = useState<{ src: string; label?: string } | null>(null)
   const [bioExpanded, setBioExpanded] = useState(false)
 
@@ -264,6 +269,18 @@ export default function AboutPage() {
               })}
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl border-t border-rule px-6 py-12 sm:px-12" aria-labelledby="beyond-code">
+        <h2 id="beyond-code" className="font-display text-4xl text-matte">{es ? 'Más allá del código' : 'Beyond code'}</h2>
+        <dl className="mt-8 grid gap-x-12 gap-y-7 sm:grid-cols-2">
+          {personal[locale].interests.map((item) => <div key={item.title}><dt className="font-display text-2xl text-gold-bright">{item.title}</dt><dd className="mt-2 max-w-md text-sm leading-7 text-ink-on-felt">{item.description}</dd></div>)}
+          <div><dt className="font-display text-2xl text-gold-bright">{es ? 'Aprendizaje y certificaciones' : 'Learning & certifications'}</dt><dd className="mt-2 max-w-md text-sm leading-7 text-ink-on-felt">{personal[locale].learning}</dd></div>
+        </dl>
+        <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
+          <Link className="section-link inline-flex min-h-11 items-center" href={localePath(locale, '/reading')}>{es ? 'Mi biblioteca y artículos' : 'My library & articles'} →</Link>
+          <a className="section-link inline-flex min-h-11 items-center" href="mailto:ridi.pillaca@gmail.com">{es ? 'Abierto a oportunidades. Hablemos' : 'Open to opportunities. Let’s talk'} ↗</a>
         </div>
       </section>
 

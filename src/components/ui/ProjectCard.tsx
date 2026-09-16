@@ -8,6 +8,7 @@ import { useDictionary, useLocale } from '@/contexts/LocaleContext'
 import { localePath } from '@/lib/locale-path'
 import { cn } from '@/lib/utils'
 import { ProjectImagePlaceholder } from '@/components/ui/ProjectImagePlaceholder'
+import { projectHealth } from '@/data/project-health'
 
 interface ProjectCardProps {
   project: Project
@@ -21,6 +22,7 @@ export function ProjectCard({ project, index = 0, showActions = false }: Project
   const [imageFailed, setImageFailed] = useState(false)
   const showImage = Boolean(project.image) && !imageFailed
   const comingSoon = isComingSoon(project)
+  const health = projectHealth[project.slug]
   const detailHref = localePath(locale, `/projects/${project.slug}`)
   const detailAria = comingSoon
     ? `${dict.projects.comingSoonAriaPrefix} ${project.title}`
@@ -69,8 +71,8 @@ export function ProjectCard({ project, index = 0, showActions = false }: Project
         <div className="flex items-center justify-between gap-3">
           <span className="flex flex-wrap items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.1em] text-muted">
             {project.category}
-            {project.inProgress ? (
-              <><span aria-hidden="true">/</span><span className="text-gold-bright">IN PROGRESS</span></>
+            {health || project.inProgress ? (
+              <><span aria-hidden="true">/</span><span className="text-gold-bright">{health?.stage[locale] ?? (locale === 'es' ? 'EN DESARROLLO' : 'IN PROGRESS')}</span></>
             ) : null}
           </span>
           <span className="shrink-0 font-mono text-[10.5px] text-muted">{project.duration}</span>
@@ -86,6 +88,7 @@ export function ProjectCard({ project, index = 0, showActions = false }: Project
           <h2 className="font-display text-[27px] font-medium leading-[1.06] tracking-[-0.025em] text-matte md:text-[31px]">{project.title}</h2>
         )}
         <p className="max-w-[58ch] text-sm leading-[1.7] text-ink-on-felt">{project.tagline}</p>
+        {health && <p className="text-xs leading-relaxed text-muted">{health.summary[locale]}</p>}
 
         {showActions && project.stack.length > 0 ? (
           <div className="mt-auto flex flex-wrap gap-2 pt-2" aria-label={`${dict.projects.techStackAria}: ${project.title}`}>
@@ -114,9 +117,9 @@ export function ProjectCard({ project, index = 0, showActions = false }: Project
             <Link href={detailHref} aria-label={detailAria} className="inline-flex min-h-11 items-center rounded border border-matte bg-matte px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-felt-deep transition-colors hover:border-gold hover:bg-gold">
               {comingSoon ? dict.projects.comingSoonCta : dict.projects.details}
             </Link>
-            {project.demoVideo && !project.demoVideo.startsWith('PLACEHOLDER') ? (
-              <a href={project.demoVideo} target="_blank" rel="noopener noreferrer" aria-label={`${dict.projects.demo}: ${project.title}`} className="inline-flex min-h-11 items-center rounded border border-gold/50 bg-gold-soft px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-gold-bright transition-colors hover:bg-gold hover:text-felt-deep">
-                ↗ {dict.projects.demo}
+            {project.demoVideo && !project.demoVideo.startsWith('PLACEHOLDER') && project.slug !== 'findleads' ? (
+              <a href={health?.url ?? project.demoVideo} target="_blank" rel="noopener noreferrer" aria-label={`${health?.availability[locale] ?? dict.projects.demo}: ${project.title}`} className="inline-flex min-h-11 items-center rounded border border-gold/50 bg-gold-soft px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-gold-bright transition-colors hover:bg-gold hover:text-felt-deep">
+                ↗ {health?.availability[locale] ?? dict.projects.demo}
               </a>
             ) : null}
             {project.github ? (
