@@ -121,3 +121,23 @@ The user explicitly approved content reorganization outside the hero. Activity f
 Rendered review: desktop Activity project filter shows seven linked entries; Contributions shows three. Spanish Library at 390px shows nine writing/reference entries without horizontal overflow. English Beyond Code at 390px retains comfortable wrapping and visible links. Spanish Activity sound toggles on/off only by action; no errors in browser console. Preserved felt/gold type hierarchy, restrained borders, no decorative progress bars or fabricated heatmap. Native browser had one transient click transport timeout; reinspection and retry succeeded. Lint, typecheck, production build (62 pages) and 14 tests pass. Existing middleware deprecation remains outside scope.
 
 Production verification: PR #38 (`dc1ae5a`) deployed successfully; desktop Activity filters and mobile Spanish Library/About verified live with no overflow. Fresh production console had no errors. Final test suite: 15 passed. See the September 15 publication receipt.
+
+
+## Minimal interactive revision — September 15
+
+Explicit user request: less text, more refined minimalism, interaction, sounds and effects; preserve the hero exactly. Audience remains recruiters/collaborators, primary action is inspect real work. Keep source-backed contributions, ideas, essays and recommended books.
+
+Plan: image-led project cards show a short blurb and stage; reveal technical details and secondary links on demand. Activity uses compact expandable rows and project thumbnails. Home previews contributions alongside releases and pares skills down to three expandable rows. Library becomes a filterable writing/book/reference index with annotations on demand. About keeps personal interests as a compact expandable list. No new claims or asset libraries.
+
+Direction: existing dark felt, warm gold, serif headings, fine rules and generous spacing. One tactile detail: restrained gold focus/hover movement on interactive rows. Native disclosure controls provide keyboard/touch interaction; filter updates get a short CSS entrance. Add one shared opt-in sound control to navigation, synthesized locally, quiet and silent on hover. Sound excludes the hero; default off, persists only while the layout is mounted, fails closed. Reduced-motion removes added animation. No cursor replacement, continuous animation, autoplay, or heavy dependency.
+
+References: Railly's compact project/writing index and separate bookshelf; Siddhant's short post previews and favorites navigation; Cris's distinct contributions section; The Next Craft's consistent motif. Cueva activity could not be retrieved by web, so no detailed design claim. Verification: unchanged hero hash, desktop/mobile Home/Activity/Library, keyboard disclosure and filter controls, sound opt-in/off, error fallback, reduced-motion CSS and overflow. Required local checks then existing authorized publication workflow.
+
+
+### Minimal revision: rendered verdict and verification
+
+PASS for the requested direction, without implying user visual approval. At 1440px, projects keep their screenshots and one short blurb, with metadata/links in native disclosures. Measured collapsed English Work text: 473 words on the prior production page versus 156 in this revision (about 67% less). Activity uses thumbnail rows, clear counts and expandable evidence; Home includes an upstream contribution beside releases. At 390px the Spanish book filter shows two books with readable titles; keyboard Enter reveals the annotation/source link. At 375px Home, project disclosure and Spanish personal-interest disclosure have no horizontal overflow; 768px Activity also fits. Mobile menu navigation, idea filter, sound on/off, and sound continuity through client navigation work. Closed mobile menu is inert. Added CSS animation has reduced-motion overrides; forced browser media-preference emulation was not performed.
+
+Latest local checks: lint, TypeScript, production build (62 pages), 20 tests and diff check pass. Four audio tests cover default silence/no initialization, muting while resume is pending, unavailable audio and short/quiet cues with node cleanup. Hero hash remains unchanged. No new dependency, remote sound asset, analytics provider or account data. Existing local Vercel analytics endpoint and middleware deprecation are unrelated. Landing/readiness: existing canonicals, metadata, sitemap, contact links and rollout/rollback setup retained. Preview deployment protection and public production checks remain separate gates.
+
+Concurrent release update PR #41 is preserved: isolated checkout starts at 4c499bb. The shared checkout was restored only by reversing this revision's exact patch; unrelated edits and new release records were untouched.

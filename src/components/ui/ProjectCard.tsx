@@ -1,12 +1,11 @@
 'use client'
 
-import { useCallback, useState, type MouseEvent } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { isComingSoon, type Project } from '@/data/projects'
 import { useDictionary, useLocale } from '@/contexts/LocaleContext'
 import { localePath } from '@/lib/locale-path'
-import { cn } from '@/lib/utils'
 import { ProjectImagePlaceholder } from '@/components/ui/ProjectImagePlaceholder'
 import { projectHealth } from '@/data/project-health'
 
@@ -20,141 +19,44 @@ export function ProjectCard({ project, index = 0, showActions = false }: Project
   const { locale } = useLocale()
   const dict = useDictionary()
   const [imageFailed, setImageFailed] = useState(false)
-  const showImage = Boolean(project.image) && !imageFailed
-  const comingSoon = isComingSoon(project)
   const health = projectHealth[project.slug]
-  const detailHref = localePath(locale, `/projects/${project.slug}`)
-  const detailAria = comingSoon
-    ? `${dict.projects.comingSoonAriaPrefix} ${project.title}`
-    : `${dict.projects.viewCaseAriaPrefix} ${project.title}`
-
-  const onMove = useCallback((event: MouseEvent<HTMLElement>) => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const el = event.currentTarget
-    const rect = el.getBoundingClientRect()
-    const x = ((event.clientX - rect.left) / rect.width) * 100
-    el.style.setProperty('--foil-x', `${Math.max(0, Math.min(100, x))}%`)
-  }, [])
-
-  const media = (
-    <div className="project-media relative aspect-[16/10] w-full overflow-hidden border border-rule bg-felt-deep">
-        {showImage ? (
-          <Image
-            src={project.image!}
-            alt=""
-            fill
-            priority={index < 2}
-            className="object-contain object-center p-3 transition-opacity duration-300 group-hover:opacity-90 md:p-5"
-            sizes="(max-width: 768px) 100vw, 50vw"
-            onError={() => setImageFailed(true)}
-          />
-        ) : (
-          <ProjectImagePlaceholder
-            title={project.title}
-            category={project.category}
-            index={index}
-            metric={project.results[0]?.metric}
-          />
-        )}
+  const href = localePath(locale, `/projects/${project.slug}`)
+  const title = project.title.split(' — ')[0]
+  const Heading = showActions ? 'h3' : 'h2'
+  const comingSoon = isComingSoon(project)
+  const demo = project.slug !== 'findleads' && !project.demoVideo?.startsWith('PLACEHOLDER') ? health?.url ?? project.demoVideo : undefined
+  const content = <>
+    <div className="project-media relative aspect-[16/10] overflow-hidden border border-rule bg-felt-deep transition-colors duration-300 group-hover:border-gold/60 group-focus-within:border-gold/60">
+      {project.image && !imageFailed ? <Image src={project.image} alt="" fill priority={index < 2} className="object-contain object-center p-3 transition-[filter] duration-300 group-hover:brightness-110 md:p-5" sizes="(max-width: 768px) 100vw, 50vw" onError={() => setImageFailed(true)} /> : <ProjectImagePlaceholder title={project.title} category={project.category} index={index} metric={project.results[0]?.metric} />}
+      <span aria-hidden="true" className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full border border-rule bg-felt-deep text-gold-bright transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transform-none">↗</span>
     </div>
-  )
-
-  const content = (
-    <>
-      {showActions ? (
-        <Link href={detailHref} aria-label={detailAria} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold">
-          {media}
-        </Link>
-      ) : media}
-
-      <div className="flex flex-1 flex-col gap-4 py-6">
-        <div className="flex items-center justify-between gap-3">
-          <span className="flex flex-wrap items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.1em] text-muted">
-            {project.category}
-            {health || project.inProgress ? (
-              <><span aria-hidden="true">/</span><span className="text-gold-bright">{health?.stage[locale] ?? (locale === 'es' ? 'EN DESARROLLO' : 'IN PROGRESS')}</span></>
-            ) : null}
-          </span>
-          <span className="shrink-0 font-mono text-[10.5px] text-muted">{project.duration}</span>
-        </div>
-
-        {showActions ? (
-          <Link href={detailHref} aria-label={detailAria} className="w-fit hover:text-gold-bright">
-            <h2 className="font-display text-[27px] font-medium leading-[1.06] tracking-[-0.025em] text-matte transition-colors md:text-[31px]">
-              {project.title}
-            </h2>
-          </Link>
-        ) : (
-          <h2 className="font-display text-[27px] font-medium leading-[1.06] tracking-[-0.025em] text-matte md:text-[31px]">{project.title}</h2>
-        )}
-        <p className="max-w-[58ch] text-sm leading-[1.7] text-ink-on-felt">{project.tagline}</p>
-        {health && <p className="text-xs leading-relaxed text-muted">{health.summary[locale]}</p>}
-
-        {showActions && project.stack.length > 0 ? (
-          <div className="mt-auto flex flex-wrap gap-2 pt-2" aria-label={`${dict.projects.techStackAria}: ${project.title}`}>
-            {project.stack.slice(0, 6).map((tech) => (
-              <span key={tech} className="rounded border border-rule bg-felt-deep/35 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.05em] text-muted">
-                {tech}
-              </span>
-            ))}
-            {project.stack.length > 6 ? (
-              <span className="flex items-center px-1 font-mono text-[10px] text-muted">+{project.stack.length - 6}</span>
-            ) : null}
-          </div>
-        ) : project.stack.length > 0 ? (
-          <p className="mt-auto pt-2 font-mono text-[10px] uppercase leading-relaxed tracking-[0.07em] text-muted">
-            {project.stack.slice(0, 4).join(' / ')}
-            {project.stack.length > 4 ? (
-              <span> / +{project.stack.length - 4}</span>
-            ) : null}
-          </p>
-        ) : (
-          <div className="mt-auto pt-2" />
-        )}
-
-        {showActions ? (
-          <nav className="mt-2 flex flex-wrap gap-2 border-t border-rule pt-4" aria-label={`${dict.projects.projectLinksAria}: ${project.title}`}>
-            <Link href={detailHref} aria-label={detailAria} className="inline-flex min-h-11 items-center rounded border border-matte bg-matte px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-felt-deep transition-colors hover:border-gold hover:bg-gold">
-              {comingSoon ? dict.projects.comingSoonCta : dict.projects.details}
-            </Link>
-            {project.demoVideo && !project.demoVideo.startsWith('PLACEHOLDER') && project.slug !== 'findleads' ? (
-              <a href={health?.url ?? project.demoVideo} target="_blank" rel="noopener noreferrer" aria-label={`${health?.availability[locale] ?? dict.projects.demo}: ${project.title}`} className="inline-flex min-h-11 items-center rounded border border-gold/50 bg-gold-soft px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-gold-bright transition-colors hover:bg-gold hover:text-felt-deep">
-                ↗ {health?.availability[locale] ?? dict.projects.demo}
-              </a>
-            ) : null}
-            {project.github ? (
-              <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`${dict.projects.code}: ${project.title}`} className="inline-flex min-h-11 items-center rounded border border-rule bg-felt-deep/35 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-ink-on-felt transition-colors hover:border-gold hover:text-gold-bright">
-                ↗ {dict.projects.code}
-              </a>
-            ) : null}
-            {project.codebaseMapUrl ? (
-              <a href={project.codebaseMapUrl} target="_blank" rel="noopener noreferrer" aria-label={`${dict.projects.codebase}: ${project.title}`} className="inline-flex min-h-11 items-center rounded border border-rule bg-felt-deep/35 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] text-ink-on-felt transition-colors hover:border-gold hover:text-gold-bright">
-                ↗ {dict.projects.codebase}
-              </a>
-            ) : null}
-          </nav>
-        ) : (
-          <div className="mt-2 border-t border-rule pt-4">
-            <span className="text-link text-[12px]">
-              {comingSoon ? dict.projects.comingSoonCta : `${dict.projects.viewCase} →`}
-            </span>
-          </div>
-        )}
+    <div className="pt-5">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
+        <Heading className="font-display text-[28px] leading-tight text-matte transition-colors group-hover:text-gold-bright">{title}</Heading>
+        <span className="font-mono text-[10px] text-muted">{health?.stage[locale] ?? project.category}</span>
       </div>
-    </>
-  )
+      <p className="mt-2 max-w-[55ch] text-sm leading-6 text-ink-on-felt">{project.blurb ?? project.tagline}</p>
+    </div>
+  </>
 
-  if (showActions) {
-    return (
-      <article onMouseMove={onMove} className={cn('group relative flex h-full flex-col border-t border-rule pt-4')}>
-        {content}
-      </article>
-    )
-  }
+  if (!showActions) return <Link href={href} aria-label={`${dict.projects.viewCaseAriaPrefix} ${project.title}`} className="group block h-full pb-4">{content}</Link>
 
-  return (
-    <Link href={detailHref} aria-label={detailAria} onMouseMove={onMove} className={cn('group relative flex h-full flex-col border-t border-rule pt-4')}>
-      {content}
-    </Link>
-  )
+  return <article className="group flex h-full flex-col">
+    <Link href={href} aria-label={`${dict.projects.viewCaseAriaPrefix} ${project.title}`} className="block">{content}</Link>
+    <div className="mt-auto flex flex-wrap items-start justify-between gap-4 pt-4">
+      <Link href={href} className="inline-flex min-h-11 items-center text-xs text-gold-bright">{comingSoon ? dict.projects.comingSoonCta : dict.projects.details} ↗</Link>
+      <details className="quiet-disclosure max-w-full flex-1 text-right">
+        <summary className="ml-auto flex min-h-11 w-fit cursor-pointer items-center gap-3 text-xs text-muted">{locale === 'es' ? 'Stack y enlaces' : 'Stack & links'}<span className="disclosure-mark" aria-hidden="true">+</span></summary>
+        <div className="disclosure-body border-t border-rule py-4 text-left">
+          {health && <p className="mb-3 text-xs leading-6 text-muted">{health.summary[locale]}</p>}
+          <p className="font-mono text-[10px] leading-6 text-muted">{project.stack.join(' · ')}</p>
+          <div className="mt-3 flex flex-wrap gap-x-5">
+            {demo && <a href={demo} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-xs text-gold-bright">{health?.availability[locale] ?? dict.projects.demo} ↗</a>}
+            {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-xs text-gold-bright">{dict.projects.code} ↗</a>}
+            {project.codebaseMapUrl && <a href={project.codebaseMapUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-xs text-gold-bright">{dict.projects.codebase} ↗</a>}
+          </div>
+        </div>
+      </details>
+    </div>
+  </article>
 }

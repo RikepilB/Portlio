@@ -150,7 +150,7 @@ export default function HomePage() {
 
           <div className="max-w-3xl" aria-label={dict.home.essaysTitle}>
             {essays.map((essay) => (
-              <EssayCard key={essay.slug} essay={essay} />
+              <EssayCard key={essay.slug} essay={essay} compact />
             ))}
           </div>
         </div>
@@ -162,28 +162,25 @@ export default function HomePage() {
             <h2 className="m-0 max-w-[9ch] font-display text-[clamp(38px,4.5vw,58px)] font-medium leading-[0.95] tracking-[-0.035em]">
               {dict.home.skillsTitle}
             </h2>
-            <div className="grid gap-6 md:grid-cols-2 md:gap-10">
-              <p className="text-[17px] leading-[1.75] text-ink-on-felt">{dict.home.skillsIntro1}</p>
-              <p className="text-base leading-[1.75] text-muted">
-                {dict.home.skillsIntro2}
-              </p>
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-2">
+              <Link href={localePath(locale, '/reading')} className="section-link inline-flex min-h-11 items-center">{locale === 'es' ? 'Biblioteca y lecturas' : 'Library & reading'} ↗</Link>
+              <Link href={localePath(locale, '/about')} className="section-link inline-flex min-h-11 items-center">{locale === 'es' ? 'Más allá del código' : 'Beyond code'} ↗</Link>
             </div>
           </div>
 
           <div className="divide-y divide-rule">
             {dict.home.areas.map((area, i) => (
               <Reveal key={area.title} delayMs={i * 90}>
-                <article className="grid gap-4 py-8 md:grid-cols-[0.78fr_1.22fr] md:gap-12 md:py-10">
-                  <h3 className="m-0 font-display text-[26px] font-medium leading-tight tracking-[-0.02em] text-matte md:text-[31px]">
-                    {area.title}
-                  </h3>
-                  <div>
-                    <p className="m-0 max-w-[64ch] text-[15px] leading-[1.7] text-ink-on-felt">{area.desc}</p>
-                    <p className="mb-0 mt-4 font-mono text-[10.5px] uppercase leading-[1.8] tracking-[0.08em] text-muted">
-                      {area.tools.join(' / ')}
-                    </p>
+                <details className="quiet-disclosure py-2">
+                  <summary className="flex min-h-20 cursor-pointer items-center justify-between gap-6 py-4">
+                    <h3 className="font-display text-2xl text-matte md:text-3xl">{area.title}</h3>
+                    <span className="disclosure-mark text-gold-bright" aria-hidden="true">+</span>
+                  </summary>
+                  <div className="disclosure-body max-w-2xl pb-6">
+                    <p className="text-sm leading-7 text-ink-on-felt">{area.desc}</p>
+                    <p className="mt-3 font-mono text-[10px] leading-6 text-muted">{area.tools.join(' · ')}</p>
                   </div>
-                </article>
+                </details>
               </Reveal>
             ))}
           </div>

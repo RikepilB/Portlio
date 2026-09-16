@@ -15,7 +15,7 @@ export default async function ActivityPage({ params }: { params: Promise<{ local
   const copy = activityLabels[locale]
   return <div className="shell min-h-screen pb-24 pt-32">
     <header className="mb-12 max-w-2xl"><h1 className="font-display text-5xl text-matte md:text-7xl">{copy.title}</h1><p className="mt-5 text-lg leading-relaxed text-ink-on-felt">{copy.intro}</p></header>
-    <p className="mb-8 max-w-2xl text-sm leading-7 text-muted"><a href="https://github.com/RikepilB" target="_blank" rel="noopener noreferrer" className="text-gold-bright hover:underline">GitHub ↗</a>{locale === 'es' ? ' · 2.268 contribuciones en el año anterior. Captura del perfil compartida el 15 de septiembre de 2026.' : ' · 2,268 contributions in the preceding year. Profile snapshot shared September 15, 2026.'}</p>
+    <p className="mb-8 max-w-2xl text-sm leading-7 text-muted"><a href="https://github.com/RikepilB" target="_blank" rel="noopener noreferrer" className="text-gold-bright hover:underline">GitHub ↗</a>{locale === 'es' ? ' · 2.268 en el último año · sep. 2026' : ' · 2,268 in the past year · Sep 2026'}</p>
     <div className="max-w-4xl"><ActivityFeed /></div>
   </div>
 }

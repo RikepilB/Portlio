@@ -7,6 +7,7 @@ import { Nav } from '@/components/layout/Nav'
 import { Footer } from '@/components/layout/Footer'
 import { ScrollProgress } from '@/components/layout/ScrollProgress'
 import { BackToTop } from '@/components/layout/BackToTop'
+import { InterfaceSound } from '@/components/ui/InterfaceSound'
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -48,6 +49,7 @@ export default async function LocaleLayout({
 
   return (
     <LocaleProvider locale={locale as Locale} dict={dict}>
+      <InterfaceSound>
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-matte focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-felt-deep"
@@ -61,6 +63,7 @@ export default async function LocaleLayout({
       </main>
       <Footer />
       <BackToTop />
+      </InterfaceSound>
     </LocaleProvider>
   )
 }

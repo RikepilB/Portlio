@@ -531,3 +531,19 @@
     background-clip: unset;
   }
 }
+
+
+/* Quiet interactions for the work indexes; the approved hero is unaffected. */
+.quiet-disclosure > summary { list-style: none; }
+.quiet-disclosure > summary::-webkit-details-marker { display: none; }
+.disclosure-mark { display: inline-block; flex-shrink: 0; transition: transform 180ms ease; }
+.quiet-disclosure[open] > summary .disclosure-mark { transform: rotate(45deg); }
+.quiet-disclosure[open] > .disclosure-body, .index-enter { animation: index-arrive 180ms ease-out; }
+.index-row .index-arrow { transition: transform 180ms ease; }
+.index-row:hover .index-arrow, .index-row:focus-visible .index-arrow { transform: translate(3px, -3px); }
+@keyframes index-arrive { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .quiet-disclosure[open] > .disclosure-body, .index-enter { animation: none; }
+  .disclosure-mark, .index-arrow { transition: none; }
+  .index-row:hover .index-arrow, .index-row:focus-visible .index-arrow { transform: none; }
+}
