@@ -29,6 +29,8 @@
   --color-gold-bright: #fff6dc;
   --color-gold-shadow: #aa7c11;
   --color-gold-soft: rgba(212, 175, 55, 0.16);
+  --color-gold-edge: rgba(212, 175, 55, 0.42);
+  --color-gold-wash: rgba(212, 175, 55, 0.07);
 
   --color-matte: #ffffff;
   --color-ink-on-felt: #eaeced;
@@ -87,6 +89,8 @@
   --shadow-polaroid: 0 1px 2px rgba(0, 0, 0, 0.04), 0 18px 40px -20px rgba(20, 16, 8, 0.25), 0 4px 10px -4px rgba(20, 16, 8, 0.10);
   --shadow-card: 0 12px 40px -18px rgba(4, 12, 9, 0.5);
   --shadow-felt: 0 18px 50px -24px rgba(4, 12, 9, 0.68);
+  --shadow-gold: 0 1px 0 rgba(255, 255, 255, 0.30) inset, 0 6px 16px -10px rgba(212, 175, 55, 0.50);
+  --shadow-gold-lift: 0 1px 0 rgba(255, 255, 255, 0.42) inset, 0 10px 24px -10px rgba(212, 175, 55, 0.62);
 
   /* Animation */
   --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -297,52 +301,79 @@
   50% { transform: scale(1.8); opacity: 0; }
 }
 
+/* Work card actions — one gold-foil primary, two quieter siblings. */
 .work-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 9px 16px;
-  border-radius: 6px;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: var(--radius-sm);
   font-family: var(--font-mono);
   font-size: 10.5px;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 500;
+  letter-spacing: 0.08em;
+  font-weight: 600;
   border: 1px solid var(--color-rule);
-  transition: all 0.2s ease;
   white-space: nowrap;
+  transition: background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease,
+    box-shadow 0.22s ease, transform 0.22s ease;
 }
 
-.work-btn-demo {
-  background: var(--color-matte);
-  color: var(--color-felt-deep);
-  border-color: var(--color-matte);
+.work-btn-arrow {
+  display: inline-block;
+  transition: transform 0.22s ease;
 }
 
-.work-btn-demo:hover {
-  background: var(--color-gold);
-  border-color: var(--color-gold);
-  color: var(--color-felt-deep);
+.work-btn:hover .work-btn-arrow,
+.work-btn:focus-visible .work-btn-arrow {
+  transform: translate(2px, -2px);
 }
 
+/* Primary — the case study. Same foil gradient as .foil-link, poured into a surface. */
 .work-btn-details {
-  color: var(--color-matte);
-  border-color: var(--color-rule-2);
+  background-image: linear-gradient(
+    135deg,
+    var(--color-gold-bright) 0%,
+    var(--color-gold) 48%,
+    var(--color-gold-shadow) 100%
+  );
+  color: var(--color-felt-deep);
+  border-color: var(--color-gold-shadow);
+  box-shadow: var(--shadow-gold);
 }
 
 .work-btn-details:hover {
-  border-color: var(--color-gold);
-  color: var(--color-gold-bright);
+  box-shadow: var(--shadow-gold-lift);
+  transform: translateY(-1px);
 }
 
+/* Secondary — the live thing. Gold-tinted outline that fills on hover. */
+.work-btn-demo {
+  background-color: var(--color-gold-soft);
+  color: var(--color-gold-bright);
+  border-color: var(--color-gold-edge);
+}
+
+.work-btn-demo:hover {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-felt-deep);
+  transform: translateY(-1px);
+}
+
+/* Tertiary — the source. Quiet until asked for. */
 .work-btn-code {
-  color: var(--color-muted);
-  border-color: var(--color-rule);
+  background-color: transparent;
+  color: var(--color-ink-on-felt);
+  border-color: var(--color-rule-2);
 }
 
 .work-btn-code:hover {
-  color: var(--color-matte);
-  border-color: var(--color-matte);
+  background-color: var(--color-gold-wash);
+  border-color: var(--color-gold);
+  color: var(--color-gold-bright);
 }
 
 .skill-tag {
@@ -529,6 +560,15 @@
     color: var(--color-gold);
     -webkit-background-clip: unset;
     background-clip: unset;
+  }
+
+  .work-btn:hover {
+    transform: none;
+  }
+
+  .work-btn:hover .work-btn-arrow,
+  .work-btn:focus-visible .work-btn-arrow {
+    transform: none;
   }
 }
 

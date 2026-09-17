@@ -41,8 +41,6 @@ export function ProjectCard({ project, index = 0, showActions = false }: Project
 
   if (!showActions) return <Link href={href} aria-label={`${dict.projects.viewCaseAriaPrefix} ${project.title}`} className="group block h-full pb-4">{content}</Link>
 
-  const action = 'inline-flex min-h-11 items-center gap-1.5 rounded border px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.06em] transition-colors'
-
   return <article className="group flex h-full flex-col">
     <Link href={href} aria-label={`${dict.projects.viewCaseAriaPrefix} ${project.title}`} className="block">{content}</Link>
 
@@ -57,18 +55,18 @@ export function ProjectCard({ project, index = 0, showActions = false }: Project
       </ul>
     )}
 
-    <nav data-sound-zone="project" className="mt-auto flex flex-wrap gap-2 pt-5" aria-label={`${dict.projects.projectLinksAria}: ${project.title}`}>
-      <Link href={href} className={`${action} border-matte bg-matte text-felt-deep hover:border-gold hover:bg-gold`}>
+    <nav data-sound-zone="project" className="mt-auto flex flex-wrap gap-2.5 pt-5" aria-label={`${dict.projects.projectLinksAria}: ${project.title}`}>
+      <Link href={href} className="work-btn work-btn-details">
         {comingSoon ? dict.projects.comingSoonCta : dict.projects.details}
       </Link>
       {project.github && (
-        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`${dict.projects.code}: ${project.title}`} className={`${action} border-rule bg-felt-deep/35 text-ink-on-felt hover:border-gold hover:text-gold-bright`}>
-          {dict.projects.code} <span aria-hidden="true">↗</span>
+        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`${dict.projects.code}: ${project.title}`} className="work-btn work-btn-code">
+          {dict.projects.code} <span className="work-btn-arrow" aria-hidden="true">↗</span>
         </a>
       )}
       {demo && (
-        <a href={demo} target="_blank" rel="noopener noreferrer" aria-label={`${health?.availability[locale] ?? dict.projects.demo}: ${project.title}`} className={`${action} border-gold/50 bg-gold-soft text-gold-bright hover:bg-gold hover:text-felt-deep`}>
-          {health?.availability[locale] ?? dict.projects.demo} <span aria-hidden="true">↗</span>
+        <a href={demo} target="_blank" rel="noopener noreferrer" aria-label={`${health?.availability[locale] ?? dict.projects.demo}: ${project.title}`} className="work-btn work-btn-demo">
+          {health?.availability[locale] ?? dict.projects.demo} <span className="work-btn-arrow" aria-hidden="true">↗</span>
         </a>
       )}
     </nav>
