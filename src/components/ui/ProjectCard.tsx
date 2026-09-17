@@ -55,7 +55,7 @@ export function ProjectCard({ project, index = 0, showActions = false }: Project
       </ul>
     )}
 
-    <nav className="mt-auto flex flex-wrap gap-2.5 pt-5" aria-label={`${dict.projects.projectLinksAria}: ${project.title}`}>
+    <nav data-sound-zone="project" className="mt-auto flex flex-wrap gap-2.5 pt-5" aria-label={`${dict.projects.projectLinksAria}: ${project.title}`}>
       <Link href={href} className="work-btn work-btn-details">
         {comingSoon ? dict.projects.comingSoonCta : dict.projects.details}
       </Link>

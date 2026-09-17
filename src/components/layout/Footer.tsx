@@ -63,7 +63,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-3">
+          <div data-sound-zone="navigate" className="flex flex-col gap-3">
             <p className="text-[10px] font-bold uppercase tracking-widest text-matte">{dict.footer.menu}</p>
             <ul className="flex flex-col gap-2.5">
               {menuLinks.map((link) => (

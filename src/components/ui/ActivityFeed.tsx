@@ -21,7 +21,7 @@ export function ActivityFeed({ preview = false }: { preview?: boolean }) {
     : activity.filter((entry) => filter === 'all' || entry.kind === filter)
 
   return <div>
-    {!preview && <div className="mb-5 flex flex-wrap gap-x-5 gap-y-1 border-b border-rule" role="group" aria-label={es ? 'Filtrar actividad' : 'Filter activity'}>
+    {!preview && <div data-sound-zone="filter" className="mb-5 flex flex-wrap gap-x-5 gap-y-1 border-b border-rule" role="group" aria-label={es ? 'Filtrar actividad' : 'Filter activity'}>
       {(['all', 'project', 'release', 'contribution', 'idea', 'post'] as const).map((kind) => {
         const count = kind === 'project' ? projects.length + additionalActivityProjects.length : kind === 'all' ? activity.length + projects.length + additionalActivityProjects.length : activity.filter((item) => item.kind === kind).length
         return <button key={kind} type="button" aria-pressed={filter === kind} onClick={() => setFilter(kind)} className={`min-h-12 border-b-2 text-sm transition-colors ${filter === kind ? 'border-gold text-gold-bright' : 'border-transparent text-muted hover:text-matte'}`}>
