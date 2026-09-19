@@ -2,7 +2,7 @@
 Publish the approved five public projects in EN/ES; feature CrafterWIKI first in place of ExamVault. Preserve the other five home selections, the approved hero, and unrelated shared-checkout edits. Authorized workflow: PR and merge after checks pass.
 
 ## Current state
-Implementation complete; local validation and responsive review in progress in C:/pf on feat/crafterwiki-and-new-projects, based on ff1a9f2.
+Implementation, local validation and responsive review complete in C:/pf on feat/crafterwiki-and-new-projects, based on ff1a9f2.
 
 ## Plan
 1. Reconcile existing worktree and current public repository evidence.
@@ -28,7 +28,7 @@ Five case studies and translations; real public-surface screenshots; dated avail
 Initial TypeScript check found missing catColor fields; added required fields. Initial tests caught missing project-health entries; supplied evidence-based EN/ES records. Neither test was weakened.
 
 ## Next steps
-Complete local and rendered checks, PR review, merge and public production verification.
+PR #46: complete the final check gate, merge and verify public production.
 
 ## Verification and release review
 - PASS: pnpm lint, npx tsc --noEmit, pnpm build (72 routes), pnpm test (22 tests), git diff --check. Approved hero hash test passes.
@@ -36,3 +36,5 @@ Complete local and rendered checks, PR review, merge and public production verif
 - Visual review: existing felt/gold card design retained; real project imagery, readable mobile wrapping, six home cards. Desktop and mobile screenshots saved beside this receipt locally. No redesign or new component library.
 - Landing audit: existing sitemap derives both locales from project data; page metadata derives titles/descriptions and images. Existing contact/navigation preserved. Local Vercel Insights script returns 404 outside Vercel; no application page errors observed. Initial home captures preceded the reveal animation; recaptured after visibility settled.
 - Production readiness: existing Vercel Analytics retained; no new forms, accounts, personal data collection or providers. Captcha is not applicable to these static additions. Existing deployment/rollback runbook: docs/ARCHITECTURE.md. No new policy decision introduced.
+
+Review follow-up: corrected the father handoff section replacement and stale checkpoint wording. GitHub CI and Vercel preview passed for the implementation; preview browsing is protected by Vercel login.
