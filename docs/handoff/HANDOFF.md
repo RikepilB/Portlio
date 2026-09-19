@@ -16,10 +16,9 @@ docs/handoff/
     transcript.md             ← optional full /export archive
 ```
 
-**Rules:** append, never overwrite. Only the father's `## Current state` is replaced each
-session. Solved tasks → one concrete one-liner (file / PR / command).
+**Rules:** append, never overwrite. Only the father's `## Current state — 2026-09-19
 
----
+Five approved public projects added in EN/ES; CrafterWIKI is first on Home and replaces ExamVault in the six featured cards. ExamVault remains in the catalog. The approved hero is unchanged. Source and privacy boundaries are recorded in [the catalog receipt](2026-09-19-project-catalog/HANDOFF.md). Local lint/typecheck/build (72 routes), 22 tests and responsive route/image checks pass. PR publication and production verification are pending.
 
 ## Current state — 2026-09-15
 
@@ -62,6 +61,8 @@ Portfolio refresh shipped through PR #38 at `dc1ae5a` and verified on `richardpi
 ---
 
 ## Session index (append-only, newest first)
+
+- [2026-09-19 project catalog](2026-09-19-project-catalog/HANDOFF.md) — five public projects, CrafterWIKI featured, EN/ES evidence and verification.
 
 - [2026-09-15-portfolio-publication](2026-09-15-portfolio-publication/HANDOFF.md) — evidence refresh, personal library/profile expansion and authorized publication.
 

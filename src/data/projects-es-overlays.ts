@@ -17,6 +17,149 @@ type ProjectOverlay = Pick<
 >
 
 export const projectOverlaysEs: Record<string, ProjectOverlay> = {
+
+    crafterwiki: {
+        category: 'AI ENGINEERING',
+        title: 'CrafterWIKI',
+        tagline: 'Explora proyectos de hackathons y convierte patrones con fuentes en un plan para tu próxima creación.',
+        blurb: 'Explora proyectos de hackathons y convierte patrones con fuentes en un plan para tu próxima creación.',
+        readTime: '2 min de lectura',
+        overview: 'Desarrollé una wiki pública de referencias de hackathons y herramientas de planificación centradas en la demo. Los registros conservan sus fuentes y distinguen declaraciones del organizador, del equipo e inferencias del curador.',
+        problem: 'La inspiración para hackathons suele perder la evidencia de los resultados. Una referencia útil distingue posiciones confirmadas de interpretaciones y listas parciales de participantes de listas completas.',
+        questions: [],
+        methodology: [
+            {
+                phase: 'Enfoque',
+                title: 'Exploración con fuentes y planes editables',
+                detail: 'El sitio Astro ofrece filtros y recursos originales. Una capa de consultas compartida sirve a la CLI, el servidor MCP y la API estática; un generador crea espacios editables para proyectos o hackathons.',
+                tech: [
+                    'Astro',
+                    'Node.js',
+                    'JavaScript',
+                    'MCP'
+                ]
+            }
+        ],
+        results: [],
+        keyFindings: [
+            'Los patrones son hipótesis que deben contrastarse con contraejemplos; el corpus no demuestra probabilidades de ganar.'
+        ],
+        conclusion: 'La wiki pública, las interfaces para desarrolladores y los materiales descargables permiten consultar el mismo corpus desde el navegador o un flujo con agentes.'
+    },
+    'spaceapps-flightdeck': {
+        category: 'AI ENGINEERING',
+        title: 'Space Apps Flightdeck',
+        tagline: 'Una guía editable para equipos de NASA Space Apps, desde los datos hasta la demo.',
+        blurb: 'Una guía editable para equipos de NASA Space Apps, desde los datos hasta la demo.',
+        readTime: '2 min de lectura',
+        overview: 'Desarrollé una biblioteca portátil de flujos con roles especializados, skills reutilizables, casos de evaluación adversarial y una guía en inglés y español. Su planificador permite distribuir responsabilidades y revisar la preparación localmente.',
+        problem: 'Una app funcional no resuelve por sí sola la validez científica, el acceso a datos, la responsabilidad del equipo ni la preparación de la entrega. Esas decisiones necesitan evidencia y traspasos claros.',
+        questions: [],
+        methodology: [
+            {
+                phase: 'Enfoque',
+                title: 'Guía portátil y planificación local',
+                detail: 'Los roles y skills en Markdown pueden leerse explícitamente desde distintos asistentes. El planificador permite exportar e importar instantáneas del equipo sin cuentas ni sincronización en vivo.',
+                tech: [
+                    'HTML',
+                    'CSS',
+                    'JavaScript',
+                    'Markdown',
+                    'Node.js'
+                ]
+            }
+        ],
+        results: [],
+        keyFindings: [
+            'Las comprobaciones estructurales, el comportamiento del modelo y el descubrimiento nativo del plugin son verificaciones separadas. Es un proyecto comunitario independiente, sin afiliación con NASA.'
+        ],
+        conclusion: 'La guía publicada conecta preparación del equipo, revisión científica y presentación en un repositorio editable.'
+    },
+    'canada-research-path-pe': {
+        category: 'RESEARCH',
+        title: 'Canada Research Path PE',
+        tagline: 'Una guía en español sobre oportunidades de investigación tecnológica entre Perú y Canadá.',
+        blurb: 'Una guía en español sobre oportunidades de investigación tecnológica entre Perú y Canadá.',
+        readTime: '2 min de lectura',
+        overview: 'Desarrollé una guía abierta para explorar rutas de investigación en Canadá según etapa académica y objetivo. Los datos editables alimentan un buscador, calendario de preparación, contactos institucionales y casos públicos.',
+        problem: 'La información sobre becas e investigación está dispersa. Quien postula necesita orientarse entre elegibilidad, supervisores, documentos y plazos, con fuentes oficiales para volver a comprobarlos.',
+        questions: [],
+        methodology: [
+            {
+                phase: 'Enfoque',
+                title: 'Datos editables y acceso sin conexión',
+                detail: 'La guía separa oportunidades, contactos, historias y calendario en archivos JSON. Una compilación HTML autónoma incluye el catálogo para navegar sin conexión; una CLI permite consultas programáticas.',
+                tech: [
+                    'HTML',
+                    'CSS',
+                    'JavaScript',
+                    'JSON',
+                    'Node.js'
+                ]
+            }
+        ],
+        results: [],
+        keyFindings: [
+            'Las fechas y reglas de elegibilidad cambian; la guía enlaza fuentes oficiales y no sustituye los requisitos vigentes.'
+        ],
+        conclusion: 'La guía pública y su versión descargable hacen accesible el catálogo sin crear una cuenta.'
+    },
+    'claude-skills-public': {
+        category: 'OPEN SOURCE',
+        title: 'Claude Skills Public',
+        tagline: 'Skills portátiles en Markdown para reportes, triaje, trabajo, prompts y traspasos de contexto.',
+        blurb: 'Skills portátiles en Markdown para reportes, triaje, trabajo, prompts y traspasos de contexto.',
+        readTime: '2 min de lectura',
+        overview: 'Publiqué una colección reutilizable de skills de un solo archivo y una plantilla de prompt independiente. Cada skill explica cuándo usarla, su formato de salida y sus fallos habituales para facilitar su adaptación.',
+        problem: 'Las instrucciones útiles suelen quedar atrapadas en conversaciones personales o configuraciones complejas. Compartirlas exige retirar el contexto privado y hacer comprensible cada archivo por separado.',
+        questions: [],
+        methodology: [
+            {
+                phase: 'Enfoque',
+                title: 'Distribución en un solo archivo',
+                detail: 'Las skills usan Markdown con metadatos YAML, sin scripts incluidos ni instalación de paquetes obligatoria. El repositorio documenta la colocación directa de archivos y la distribución mediante copiar y pegar.',
+                tech: [
+                    'Markdown',
+                    'Claude Code'
+                ]
+            }
+        ],
+        results: [],
+        keyFindings: [
+            'Las instrucciones son portátiles; su carga y comportamiento deben verificarse en el asistente elegido.'
+        ],
+        conclusion: 'Los archivos públicos permiten leer, adaptar y compartir las convenciones de trabajo de forma independiente.'
+    },
+    'reencuentro-terremoto-ve': {
+        category: 'OPEN SOURCE',
+        title: 'Reencuentro Terremoto Venezuela',
+        tagline: 'Contribuciones de seguridad a una plataforma de equipo para reportes y reencuentro de familias.',
+        blurb: 'Contribuciones de seguridad a una plataforma de equipo para reportes y reencuentro de familias.',
+        readTime: '2 min de lectura',
+        overview: 'Contribuí con correcciones de seguridad a Reencuentro, un proyecto de código abierto para reportar y buscar personas y mascotas desaparecidas. Mi trabajo se centró en validar orígenes CORS, agregar pruebas de regresión y mejorar la documentación de configuración.',
+        problem: 'Una comprobación permisiva de origen podía aceptar un dominio hostil que contuviera un host permitido. Los ejemplos de configuración también necesitaban requisitos de seguridad más claros.',
+        questions: [],
+        methodology: [
+            {
+                phase: 'Enfoque',
+                title: 'Coincidencia exacta de orígenes y pruebas',
+                detail: 'Reemplacé la coincidencia por subcadenas por una comparación normalizada y exacta, incluido el esquema. Agregué pruebas para subcadenas hostiles, degradación del esquema, subdominios y puertos no permitidos, y mejoré las plantillas y su documentación.',
+                tech: [
+                    'TypeScript',
+                    'Express',
+                    'React',
+                    'Vite'
+                ]
+            }
+        ],
+        results: [],
+        keyFindings: [
+            'Esta ficha documenta mi contribución de seguridad; no atribuye autoría individual ni resultados de respuesta a emergencias verificados independientemente.'
+        ],
+        conclusion: 'La contribución pública incluye una utilidad CORS probada y documentación alineada. La aplicación y sus demás funciones son trabajo del equipo.'
+    }
+,
+
     'bike-share-optimization': {
         category: 'CIENCIA DE DATOS',
         title: 'Optimización de la red de bicicletas compartidas',
