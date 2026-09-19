@@ -183,10 +183,10 @@ export const projects: Project[] = [
         catColor: '#1d4ed8',
         category: 'OPEN SOURCE',
         title: 'Claude Skills Public',
-        tagline: 'Portable Markdown skills for reporting, triage, work artifacts, prompts and durable handoffs.',
-        blurb: 'Portable Markdown skills for reporting, triage, work artifacts, prompts and durable handoffs.',
+        tagline: 'Portable skills for writing, handoffs, product design, accessibility and evidence-led debugging.',
+        blurb: 'Portable skills for writing, handoffs, product design, accessibility and evidence-led debugging.',
         readTime: '2 min read',
-        overview: 'I published a reusable collection of single-file skills and a standalone prompt template. Each skill describes its trigger, output conventions and failure modes so teams can inspect and adapt it.',
+        overview: 'I published ten reusable single-file skills and a standalone prompt template. Four adapted from my Skills Lab help teams define design intent, check accessible UI states, review rendered pages and debug with evidence. Each file can be inspected and installed independently.',
         problem: 'Useful working instructions often stay trapped in personal chat history or depend on an elaborate local setup. Sharing them requires removing private context and making each file understandable on its own.',
         questions: [],
         methodology: [
@@ -204,7 +204,7 @@ export const projects: Project[] = [
         keyFindings: [
             'Readable instructions are portable; actual loading and behavior still need verification in the chosen assistant.'
         ],
-        conclusion: 'Public source files let teammates read, adapt and share the working conventions independently.',
+        conclusion: 'Public source files let teammates read, adapt and share these workflows independently; behavior still needs testing in their own assistant.',
         duration: 'Sep 2026',
         status: 'shipped',
         github: 'https://github.com/RikepilB/claude-skills-public',
