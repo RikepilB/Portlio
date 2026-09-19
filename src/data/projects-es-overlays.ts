@@ -107,10 +107,10 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
     'claude-skills-public': {
         category: 'OPEN SOURCE',
         title: 'Claude Skills Public',
-        tagline: 'Skills portátiles en Markdown para reportes, triaje, trabajo, prompts y traspasos de contexto.',
-        blurb: 'Skills portátiles en Markdown para reportes, triaje, trabajo, prompts y traspasos de contexto.',
+        tagline: 'Skills portátiles para escritura, traspasos, diseño, accesibilidad y depuración con evidencia.',
+        blurb: 'Skills portátiles para escritura, traspasos, diseño, accesibilidad y depuración con evidencia.',
         readTime: '2 min de lectura',
-        overview: 'Publiqué una colección reutilizable de skills de un solo archivo y una plantilla de prompt independiente. Cada skill explica cuándo usarla, su formato de salida y sus fallos habituales para facilitar su adaptación.',
+        overview: 'Publiqué diez skills reutilizables de un solo archivo y una plantilla de prompt independiente. Cuatro adaptadas de mi Skills Lab ayudan a definir la intención de diseño, revisar estados accesibles, evaluar páginas renderizadas y depurar con evidencia. Cada archivo se puede inspeccionar e instalar por separado.',
         problem: 'Las instrucciones útiles suelen quedar atrapadas en conversaciones personales o configuraciones complejas. Compartirlas exige retirar el contexto privado y hacer comprensible cada archivo por separado.',
         questions: [],
         methodology: [
@@ -128,7 +128,7 @@ export const projectOverlaysEs: Record<string, ProjectOverlay> = {
         keyFindings: [
             'Las instrucciones son portátiles; su carga y comportamiento deben verificarse en el asistente elegido.'
         ],
-        conclusion: 'Los archivos públicos permiten leer, adaptar y compartir las convenciones de trabajo de forma independiente.'
+        conclusion: 'Los archivos públicos permiten leer, adaptar y compartir estos flujos de trabajo; su comportamiento debe probarse en cada asistente.'
     },
     'reencuentro-terremoto-ve': {
         category: 'OPEN SOURCE',
