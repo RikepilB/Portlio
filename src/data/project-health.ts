@@ -11,6 +11,37 @@ export interface ProjectHealth {
 
 // Dates describe the evidence checkpoint, not a promise of continuous uptime.
 export const projectHealth: Record<string, ProjectHealth> = {
+  crafterwiki: {
+    stage: { en: 'Public wiki and planning toolkit', es: 'Wiki pública y herramientas de planificación' },
+    availability: { en: 'Explore CrafterWIKI', es: 'Explorar CrafterWIKI' },
+    summary: { en: 'The reference site is live. Source labels and coverage limits remain visible; planning patterns are hypotheses, not measured success rates.', es: 'El sitio de referencias está publicado. Conserva etiquetas de fuentes y límites de cobertura; los patrones son hipótesis, no tasas de éxito medidas.' },
+    checked: '2026-09-19', url: 'https://crafterwiki.com',
+  },
+  'spaceapps-flightdeck': {
+    stage: { en: 'Public workflow library', es: 'Biblioteca pública de flujos de trabajo' },
+    availability: { en: 'Open the field guide', es: 'Abrir la guía' },
+    summary: { en: 'The bilingual guide and local crew planner are published. Native assistant discovery and real-event usefulness require separate validation.', es: 'La guía bilingüe y el planificador local están publicados. El descubrimiento nativo y la utilidad en eventos reales requieren validación separada.' },
+    checked: '2026-09-19', url: 'https://rikepilb.github.io/spaceapps-flightdeck/',
+  },
+  'canada-research-path-pe': {
+    stage: { en: 'Public research guide', es: 'Guía pública de investigación' },
+    availability: { en: 'Explore research routes', es: 'Explorar rutas de investigación' },
+    summary: { en: 'The guide is reachable and its editable source is public. Opportunity dates and eligibility must be rechecked with official sources.', es: 'La guía está accesible y su código editable es público. Las fechas y la elegibilidad deben comprobarse en las fuentes oficiales.' },
+    checked: '2026-09-19', url: 'https://canada-research-path-pe.ridi-pillaca.chatgpt.site',
+  },
+  'claude-skills-public': {
+    stage: { en: 'Published source library', es: 'Biblioteca de código publicada' },
+    availability: { en: 'Read the public skills', es: 'Leer las skills públicas' },
+    summary: { en: 'Reusable Markdown skills and a prompt template are publicly available. Loading and behavior depend on the chosen assistant.', es: 'Las skills reutilizables en Markdown y la plantilla de prompt son públicas. Su carga y comportamiento dependen del asistente elegido.' },
+    checked: '2026-09-19', url: 'https://github.com/RikepilB/claude-skills-public',
+  },
+  'reencuentro-terremoto-ve': {
+    stage: { en: 'Team project · security contribution', es: 'Proyecto de equipo · contribución de seguridad' },
+    availability: { en: 'Inspect the CORS contribution', es: 'Revisar la contribución CORS' },
+    summary: { en: 'The public landing is reachable. My contribution covers CORS validation, tests and configuration guidance; emergency workflows and backend availability were not validated.', es: 'La landing pública está accesible. Mi contribución cubre validación CORS, pruebas y documentación; no se validaron los flujos de emergencia ni la disponibilidad del backend.' },
+    checked: '2026-09-19', url: 'https://github.com/RikepilB/ReencuentroTerremotoVenezuela/commit/f975263b6ab63d6cd39c6262c2e7ece45873d70e',
+  },
+
   'bike-share-optimization': {
     stage: { en: 'Research · case study', es: 'Investigación · caso de estudio' },
     availability: { en: 'Recorded demo', es: 'Demo grabada' },

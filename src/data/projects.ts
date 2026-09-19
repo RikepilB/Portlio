@@ -48,6 +48,215 @@ export function isComingSoon(project: Project): boolean {
 
 export const projects: Project[] = [
     {
+        id: '18',
+        slug: 'crafterwiki',
+        catColor: '#1d4ed8',
+        category: 'AI ENGINEERING',
+        title: 'CrafterWIKI',
+        tagline: 'Explore hackathon projects and turn source-backed patterns into a plan for your next build.',
+        blurb: 'Explore hackathon projects and turn source-backed patterns into a plan for your next build.',
+        readTime: '2 min read',
+        overview: 'I built a public hackathon reference wiki and a demo-first planning toolkit. Event and project records retain source links and distinguish organizer statements, team statements and curator inference.',
+        problem: 'Hackathon inspiration often loses the evidence behind a result. A useful reference must distinguish a confirmed placement from an interpretation and an incomplete roster from a complete one.',
+        questions: [],
+        methodology: [
+            {
+                phase: 'Approach',
+                title: 'Source-backed browsing and editable plans',
+                detail: 'The Astro website exposes project filters and original resources. A shared query layer supports the CLI, MCP server and static API; a workspace generator produces editable project or hackathon plans.',
+                tech: [
+                    'Astro',
+                    'Node.js',
+                    'JavaScript',
+                    'MCP'
+                ]
+            }
+        ],
+        results: [],
+        keyFindings: [
+            'Patterns are hypotheses to test against counterexamples; the corpus does not establish measured odds of winning.'
+        ],
+        conclusion: 'A public wiki, developer interfaces and downloadable planning material make the same reference corpus usable in a browser or an agent workflow.',
+        duration: 'Sep 2026',
+        status: 'shipped',
+        github: 'https://github.com/RikepilB/crafterwiki',
+        stack: [
+            'Astro',
+            'Node.js',
+            'JavaScript',
+            'MCP'
+        ],
+        image: '/images/crafterwiki.png',
+        demoVideo: 'https://crafterwiki.com'
+    },
+    {
+        id: '19',
+        slug: 'spaceapps-flightdeck',
+        catColor: '#1d4ed8',
+        category: 'AI ENGINEERING',
+        title: 'Space Apps Flightdeck',
+        tagline: 'An editable field guide for teams preparing a NASA Space Apps project, from data to demo.',
+        blurb: 'An editable field guide for teams preparing a NASA Space Apps project, from data to demo.',
+        readTime: '2 min read',
+        overview: 'I built a portable workflow library with specialist roles, reusable skills, adversarial evaluation fixtures and an English/Spanish field guide. A crew planner helps teams assign responsibilities and track readiness locally.',
+        problem: 'A working app alone does not resolve scientific validity, data access, team ownership or submission preparation. Those decisions need inspectable evidence and clear handoffs.',
+        questions: [],
+        methodology: [
+            {
+                phase: 'Approach',
+                title: 'Portable guidance and local team planning',
+                detail: 'Markdown roles and skills can be read explicitly by different assistants. The static crew planner supports export and import of team snapshots without accounts or live synchronization.',
+                tech: [
+                    'HTML',
+                    'CSS',
+                    'JavaScript',
+                    'Markdown',
+                    'Node.js'
+                ]
+            }
+        ],
+        results: [],
+        keyFindings: [
+            'Structural checks, model behavior and native plugin discovery are separate evidence gates. This is an independent community project, not affiliated with NASA.'
+        ],
+        conclusion: 'The published field guide connects team preparation, scientific review and presentation in an editable repository.',
+        duration: 'Sep 2026',
+        status: 'shipped',
+        github: 'https://github.com/RikepilB/spaceapps-flightdeck',
+        stack: [
+            'HTML',
+            'CSS',
+            'JavaScript',
+            'Markdown',
+            'Node.js'
+        ],
+        image: '/images/spaceapps-flightdeck.png',
+        demoVideo: 'https://rikepilb.github.io/spaceapps-flightdeck/'
+    },
+    {
+        id: '20',
+        slug: 'canada-research-path-pe',
+        catColor: '#1d4ed8',
+        category: 'RESEARCH',
+        title: 'Canada Research Path PE',
+        tagline: 'A Spanish-language guide to technology research opportunities connecting Peru and Canada.',
+        blurb: 'A Spanish-language guide to technology research opportunities connecting Peru and Canada.',
+        readTime: '2 min read',
+        overview: 'I built an open guide that helps Peruvians explore research routes in Canada by academic stage and objective. Editable datasets support an opportunity finder, preparation calendar, institutional contacts and public research stories.',
+        problem: 'Scholarship and research information is scattered across institutions. Applicants need a route through eligibility, supervisors, documents and timing, with official sources available for rechecking.',
+        questions: [],
+        methodology: [
+            {
+                phase: 'Approach',
+                title: 'Editable data and offline access',
+                detail: 'The guide separates opportunity, contact, story and timeline data into JSON files. A standalone HTML build includes the catalogue for offline browsing; a CLI supports programmatic use.',
+                tech: [
+                    'HTML',
+                    'CSS',
+                    'JavaScript',
+                    'JSON',
+                    'Node.js'
+                ]
+            }
+        ],
+        results: [],
+        keyFindings: [
+            'Dates and eligibility rules change; the guide links to official sources and does not replace current application requirements.'
+        ],
+        conclusion: 'A public guide and downloadable offline version make the research catalogue accessible without an account.',
+        duration: 'Sep 2026',
+        status: 'shipped',
+        github: 'https://github.com/RikepilB/canada-research-path-pe',
+        stack: [
+            'HTML',
+            'CSS',
+            'JavaScript',
+            'JSON',
+            'Node.js'
+        ],
+        image: '/images/canada-research-path-pe.png',
+        demoVideo: 'https://canada-research-path-pe.ridi-pillaca.chatgpt.site'
+    },
+    {
+        id: '21',
+        slug: 'claude-skills-public',
+        catColor: '#1d4ed8',
+        category: 'OPEN SOURCE',
+        title: 'Claude Skills Public',
+        tagline: 'Portable Markdown skills for reporting, triage, work artifacts, prompts and durable handoffs.',
+        blurb: 'Portable Markdown skills for reporting, triage, work artifacts, prompts and durable handoffs.',
+        readTime: '2 min read',
+        overview: 'I published a reusable collection of single-file skills and a standalone prompt template. Each skill describes its trigger, output conventions and failure modes so teams can inspect and adapt it.',
+        problem: 'Useful working instructions often stay trapped in personal chat history or depend on an elaborate local setup. Sharing them requires removing private context and making each file understandable on its own.',
+        questions: [],
+        methodology: [
+            {
+                phase: 'Approach',
+                title: 'Single-file distribution',
+                detail: 'Skills are plain Markdown with YAML frontmatter, no bundled scripts and no required package installation. The repository documents direct file placement and copy-paste distribution.',
+                tech: [
+                    'Markdown',
+                    'Claude Code'
+                ]
+            }
+        ],
+        results: [],
+        keyFindings: [
+            'Readable instructions are portable; actual loading and behavior still need verification in the chosen assistant.'
+        ],
+        conclusion: 'Public source files let teammates read, adapt and share the working conventions independently.',
+        duration: 'Sep 2026',
+        status: 'shipped',
+        github: 'https://github.com/RikepilB/claude-skills-public',
+        stack: [
+            'Markdown',
+            'Claude Code'
+        ],
+        image: '/images/claude-skills-public.png'
+    },
+    {
+        id: '22',
+        slug: 'reencuentro-terremoto-ve',
+        catColor: '#1d4ed8',
+        category: 'OPEN SOURCE',
+        title: 'Reencuentro Terremoto Venezuela',
+        tagline: 'Security contributions to a team-built platform for missing-person reports and family reunification.',
+        blurb: 'Security contributions to a team-built platform for missing-person reports and family reunification.',
+        readTime: '2 min read',
+        overview: 'I contributed security fixes to Reencuentro, an open-source team project for reporting and searching for missing people and pets. My work focused on CORS origin validation, regression tests and safer configuration documentation.',
+        problem: 'A permissive origin check could accept a hostile domain containing an allowed hostname. Configuration examples also needed clearer security requirements.',
+        questions: [],
+        methodology: [
+            {
+                phase: 'Approach',
+                title: 'Exact-origin matching and regression coverage',
+                detail: 'I replaced substring-based CORS matching with normalized exact-origin comparison, including the scheme, and added tests for hostile substrings, scheme downgrades, unlisted subdomains and ports. I also improved configuration templates and documentation.',
+                tech: [
+                    'TypeScript',
+                    'Express',
+                    'React',
+                    'Vite'
+                ]
+            }
+        ],
+        results: [],
+        keyFindings: [
+            'This entry documents my security contribution; it does not claim sole authorship or independently verified emergency-response outcomes.'
+        ],
+        conclusion: 'The public contribution includes a tested CORS utility and aligned configuration guidance. The wider application and its features are the team’s work.',
+        duration: 'Jul 2026',
+        status: 'shipped',
+        github: 'https://github.com/RikepilB/ReencuentroTerremotoVenezuela',
+        stack: [
+            'TypeScript',
+            'Express',
+            'React',
+            'Vite'
+        ],
+        image: '/images/reencuentro-terremoto-ve.png',
+        demoVideo: 'https://reencuentros-terremoto-venezuela.vercel.app'
+    },
+    {
         id: '1',
         slug: 'bike-share-optimization',
         category: 'DATA SCIENCE',

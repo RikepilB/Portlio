@@ -16,12 +16,12 @@ import { ActivityFeed } from '@/components/ui/ActivityFeed'
 import { activityLabels } from '@/data/activity'
 
 const featuredSlugs = [
+  'crafterwiki',
   'voidscape',
   'findleads',
   'peru-tech-map',
   'el-umbral',
   'scoutlane-recruitment',
-  'exam-analysis-system',
 ]
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number }>> = {

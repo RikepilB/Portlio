@@ -21,9 +21,9 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ---
 
-## Current state — 2026-09-15
+## Current state — 2026-09-19
 
-Portfolio refresh shipped through PR #38 at `dc1ae5a` and verified on `richardpillaca.com`. Hero preserved; bilingual Activity foregrounds own projects and upstream contributions, Library connects existing essays and recommendations, and Beyond Code reflects Richard's interests and in-progress learning. All 17 projects have dated stage summaries. Latest implementation passes lint, typecheck, build (62 pages) and 15 tests; hosted CI, Vercel deployment and live desktop/mobile checks pass. See [publication receipt](2026-09-15-portfolio-publication/HANDOFF.md) and [source report](../portfolio-refresh-2026-09-14.md). Spotify remains without a verified profile/playlist; unavailable source integrations and product-readiness limits are documented. Unrelated work is preserved.
+Five approved public projects added in EN/ES; CrafterWIKI is first on Home and replaces ExamVault in the six featured cards. ExamVault remains in the catalog. The approved hero is unchanged. Source and privacy boundaries are recorded in [the catalog receipt](2026-09-19-project-catalog/HANDOFF.md). Local lint/typecheck/build (72 routes), 22 tests and responsive route/image checks pass. PR #46 is open; deployment and production verification follow the final check gate.
 
 ## Previous state — 2026-09-11
 
@@ -62,6 +62,8 @@ Portfolio refresh shipped through PR #38 at `dc1ae5a` and verified on `richardpi
 ---
 
 ## Session index (append-only, newest first)
+
+- [2026-09-19 project catalog](2026-09-19-project-catalog/HANDOFF.md) — five public projects, CrafterWIKI featured, EN/ES evidence and verification.
 
 - [2026-09-15-portfolio-publication](2026-09-15-portfolio-publication/HANDOFF.md) — evidence refresh, personal library/profile expansion and authorized publication.
 
