@@ -21,7 +21,11 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ---
 
-## Current state — 2026-09-19
+## Current state — 2026-09-30
+
+Eleven current public project screenshots are prepared on an isolated release branch; dated thumbnail paths and bilingual gallery retention are covered by regression checks. [Image release receipt](2026-09-30-project-images-release/HANDOFF.md). Publication is in progress.
+
+## Previous state — 2026-09-19
 
 Five approved public projects are live through PR #46; CrafterWIKI leads the six Home selections and the approved hero is unchanged. PR #47 updated the bilingual Skills Public case study to reflect four newly published Skills Lab workflows in a ten-skill library; local checks, hosted checks, and live EN/ES renders passed. ExamVault PRs #3 and #4 merged its landing and account-page redesign and release documentation; its public landing, login and signup pages were anonymously verified after deployment, while account content remains sign-in gated. Vercel Authentication is restricted to previews. A real account transaction was not exercised. See [this session's release receipt](2026-09-19-public-skills-and-examvault/HANDOFF.md) and [the project catalog receipt](2026-09-19-project-catalog/HANDOFF.md). Unrelated shared-checkout edits remain untouched.
 
@@ -62,6 +66,8 @@ Five approved public projects are live through PR #46; CrafterWIKI leads the six
 ---
 
 ## Session index (append-only, newest first)
+
+- [2026-09-30-project-images-release](2026-09-30-project-images-release/HANDOFF.md) — 11 public screenshots and bilingual media refresh
 
 - [2026-09-19 public skills and ExamVault](2026-09-19-public-skills-and-examvault/HANDOFF.md) — four public skills, bilingual portfolio case study, ExamVault redesign and deployment; checkpoint export retained locally.
 

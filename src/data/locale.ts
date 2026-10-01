@@ -1,5 +1,6 @@
 import type { Locale } from '@/i18n/config'
 import { projects } from '@/data/projects'
+import { projectImages } from '@/data/project-images'
 import { projectOverlaysEs } from '@/data/projects-es-overlays'
 import { experiences } from '@/data/experience'
 import { experiencesEs } from '@/data/experience-es'
@@ -10,10 +11,14 @@ import type { Experience } from '@/data/experience'
 import type { Essay } from '@/data/essays'
 
 export function getProjects(locale: Locale): Project[] {
-  if (locale === 'en') return projects
   return projects.map((project) => {
-    const overlay = projectOverlaysEs[project.slug]
-    return overlay ? { ...project, ...overlay } : project
+    const overlay = locale === 'es' ? projectOverlaysEs[project.slug] : undefined
+    const image = projectImages[project.slug]
+    const localized = overlay ? { ...project, ...overlay } : project
+    const previousImages = project.images ?? (project.image ? [project.image] : [])
+    return image
+      ? { ...localized, image, images: [image, ...previousImages.filter((entry) => entry !== image)] }
+      : localized
   })
 }
 
