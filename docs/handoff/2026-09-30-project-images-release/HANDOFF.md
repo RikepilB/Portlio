@@ -33,4 +33,3 @@ Complete current-main lint, typecheck, build and tests; push the isolated branch
 
 ## Local verification
 pnpm lint -> npx tsc --noEmit -> pnpm build passed on the clean main-based worktree (72 generated pages). pnpm test passed 24/24 across six files, including screenshot catalog, bundled-asset and EN/ES historical-gallery checks.
-
