@@ -29,7 +29,7 @@ Regression checks validate catalog membership, bundled files, shared EN/ES visua
 Shared-checkout sandbox initially blocked subprocesses and font downloads; permitted checks passed. Clean release verification and hosted release gates are recorded in the PR.
 
 # Next steps
-Complete current-main lint, typecheck, build and tests; push the isolated branch; pass PR checks; merge; verify production deployment and EN/ES desktop/mobile images. Shared-checkout work is excluded.
+Pass final PR checks; merge PR #49; verify production deployment and EN/ES desktop/mobile images. Local checks and the branch push are complete. Shared-checkout work is excluded.
 
 ## Local verification
 pnpm lint -> npx tsc --noEmit -> pnpm build passed on the clean main-based worktree (72 generated pages). pnpm test passed 24/24 across six files, including screenshot catalog, bundled-asset and EN/ES historical-gallery checks.
