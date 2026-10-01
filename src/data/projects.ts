@@ -461,7 +461,7 @@ export const projects: Project[] = [
         inProgress: true,
         image: '/images/projects/examvault-dashboard.png',
         images: ['/images/projects/examvault-dashboard.png', '/images/projects/examvault-exam.png', '/images/projects/examvault-analytics.png', '/images/projects/examvault-wizard.png', '/images/foglamp/examvault.png'],
-        demoVideo: 'https://drive.google.com/file/d/1AWiisSM_dNwResQA2f_v2S19GIcfIIHv/view?usp=drive_link',
+        demoVideo: 'https://exam-vault-five.vercel.app/',
         codebaseMapUrl: 'https://foglamp.dev/scan/examvault-if3mpl',
         title: 'ExamVault — Automated Exam Generation & Analysis',
         tagline:

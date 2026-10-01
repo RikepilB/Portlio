@@ -23,7 +23,7 @@ session. Solved tasks → one concrete one-liner (file / PR / command).
 
 ## Current state — 2026-09-30
 
-Eleven current public project screenshots are prepared on an isolated release branch; dated thumbnail paths and bilingual gallery retention are covered by regression checks. [Image release receipt](2026-09-30-project-images-release/HANDOFF.md). Publication is in progress.
+Project image refresh merged in PR #49 and deployed at d83c689; all 37 production HTTP checks passed. Requested FindLeads/ExamVault demo links and the featured ExamVault replacement are now prepared. [Demo-link receipt](2026-09-30-project-demo-links/HANDOFF.md).
 
 ## Previous state — 2026-09-19
 
@@ -108,3 +108,5 @@ Five approved public projects are live through PR #46; CrafterWIKI leads the six
 - Session folder: `docs/handoff/2026-07-02-98bb9341/`
 - Snapshot file: `docs/handoff/2026-07-02-98bb9341/snapshot-002022.md`
 - Branch: main
+
+- [2026-09-30 project demo links](2026-09-30-project-demo-links/HANDOFF.md)

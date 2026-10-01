@@ -24,7 +24,7 @@ export function ProjectCard({ project, index = 0, showActions = false }: Project
   const title = project.title.split(' — ')[0]
   const Heading = showActions ? 'h3' : 'h2'
   const comingSoon = isComingSoon(project)
-  const demo = project.slug !== 'findleads' && !project.demoVideo?.startsWith('PLACEHOLDER') ? health?.url ?? project.demoVideo : undefined
+  const demo = !project.demoVideo?.startsWith('PLACEHOLDER') ? health?.url ?? project.demoVideo : undefined
   const content = <>
     <div className="project-media relative aspect-[16/10] overflow-hidden border border-rule bg-felt-deep transition-colors duration-300 group-hover:border-gold/60 group-focus-within:border-gold/60">
       {project.image && !imageFailed ? <Image src={project.image} alt="" fill priority={index < 2} className="object-contain object-center p-3 transition-[filter] duration-300 group-hover:brightness-110 md:p-5" sizes="(max-width: 768px) 100vw, 50vw" onError={() => setImageFailed(true)} /> : <ProjectImagePlaceholder title={project.title} category={project.category} index={index} metric={project.results[0]?.metric} />}

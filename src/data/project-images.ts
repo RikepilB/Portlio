@@ -6,7 +6,7 @@ export const projectImages: Record<string, string> = {
   'peru-tech-map': '/images/projects/perugrid-2026-09-30.jpg',
   'el-umbral': '/images/projects/elumbral-2026-09-30.jpg',
   'scoutlane-recruitment': '/images/projects/scoutlane-2026-09-30.jpg',
-  'exam-analysis-system': '/images/projects/examvault-2026-09-30.jpg',
+  'exam-analysis-system': '/images/projects/examvault-demo-2026-09-30.jpg',
   'empenalo-fintech': '/images/projects/empenalo-2026-09-30.jpg',
   'spaceapps-flightdeck': '/images/projects/spaceapps-2026-09-30.jpg',
   'canada-research-path-pe': '/images/projects/canada-2026-09-30.jpg',

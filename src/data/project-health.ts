@@ -117,9 +117,9 @@ export const projectHealth: Record<string, ProjectHealth> = {
   },
   findleads: {
     stage: { en: 'Deployed · pilot', es: 'Desplegado · piloto' },
-    availability: { en: 'Case study', es: 'Caso de estudio' },
+    availability: { en: 'Visit demo', es: 'Visitar demo' },
     summary: { en: 'A lead work queue and acquisition monitor. Broader public access awaits verification of endpoint protection and usage limits.', es: 'Una cola de prospectos y un monitor de adquisición. La apertura al público depende de verificar la protección de endpoints y los límites de uso.' },
-    checked: '2026-09-11',
+    checked: '2026-09-30', url: 'https://findleads-opal.vercel.app/',
   },
   'el-umbral': {
     stage: { en: 'Deployed civic project', es: 'Proyecto cívico desplegado' },
@@ -128,9 +128,9 @@ export const projectHealth: Record<string, ProjectHealth> = {
     checked: '2026-09-11', url: 'https://elumbralvzla.org',
   },
   'exam-analysis-system': {
-    stage: { en: 'Team capstone · protected demo', es: 'Proyecto en equipo · demo protegida' },
-    availability: { en: 'Recorded demo', es: 'Demo grabada' },
-    summary: { en: 'A UBC team project for exam analysis, now redesigned around a graded-paper identity. The hosted demo requires Vercel authentication; a recorded demo remains available.', es: 'Un proyecto en equipo de UBC para análisis de exámenes, rediseñado con una identidad de examen corregido. La demo alojada requiere autenticación de Vercel; sigue disponible una grabación.' },
-    checked: '2026-09-14',
+    stage: { en: 'Team capstone · public demo', es: 'Proyecto en equipo · demo pública' },
+    availability: { en: 'Visit demo', es: 'Visitar demo' },
+    summary: { en: 'A UBC team project for exam analysis, now redesigned around a graded-paper identity. The public landing is accessible; instructor workflows require an account.', es: 'Un proyecto en equipo de UBC para análisis de exámenes, rediseñado con una identidad de examen corregido. La landing pública está accesible; los flujos de docentes requieren una cuenta.' },
+    checked: '2026-09-30', url: 'https://exam-vault-five.vercel.app/',
   },
 }
