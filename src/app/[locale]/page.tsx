@@ -20,7 +20,7 @@ const featuredSlugs = [
   'voidscape',
   'findleads',
   'peru-tech-map',
-  'el-umbral',
+  'exam-analysis-system',
   'scoutlane-recruitment',
 ]
 

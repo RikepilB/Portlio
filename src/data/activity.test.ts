@@ -36,8 +36,9 @@ describe('public evidence', () => {
       expect(entry.summary.es).toBeTruthy()
     }
   })
-  it('does not promote the FindLeads pilot as self-service', () => {
-    expect(projectHealth.findleads.url).toBeUndefined()
+  it('links the FindLeads pilot demo while retaining its pilot stage', () => {
+    expect(projectHealth.findleads.url).toBe('https://findleads-opal.vercel.app/')
+    expect(projectHealth.findleads.stage.en).toBe('Deployed · pilot')
   })
   it('preserves the approved hero exactly', () => {
     const path = 'src/app/[locale]/page.tsx'
