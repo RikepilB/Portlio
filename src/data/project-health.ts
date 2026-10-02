@@ -49,7 +49,7 @@ export const projectHealth: Record<string, ProjectHealth> = {
   },
   'ai-technical-debt-research': {
     stage: { en: 'Team research', es: 'Investigación en equipo' },
-    availability: { en: 'Research repository', es: 'Repositorio de investigación' },
+    availability: { en: 'Recorded demo', es: 'Demo grabada' },
     summary: { en: 'A collaborative study of AI-generated code and maintainability, presented as research rather than a commercial product.', es: 'Un estudio colaborativo sobre código generado por IA y mantenibilidad, presentado como investigación.' }, checked: '2026-09-14',
   },
   'accounting-automation': {

@@ -5,10 +5,10 @@ Replace FindLeads with AI Technical Debt on Home and order the six featured proj
 Scoped Home change prepared on codex/featured-creation-order, based on production main5e54c4e. Ordering uses src/data/projects.ts start months: CrafterWIKI Sep2026, Peru Grid Jul2026, Voidscape Jun2026, ScoutLane Apr2026, ExamVault May2025, AI Technical Debt Jan2025. ExamVault and Technical Debt occupy the bottom row. FindLeads remains in the full catalog with its existing demo link.
 
 ## Files in flight
-src/app/[locale]/page.tsx featuredSlugs only; this receipt and father current-state pointer. Shared original checkout has unrelated dirty work; preserve it.
+src/app/[locale]/page.tsx featuredSlugs and src/data/project-health.ts recorded-demo label; this receipt and father current-state pointer. Shared original checkout has unrelated dirty work; preserve it.
 
 ## Changed
-Six featured cards retain their existing content, screenshots, case-study links and design. Approved hero preserved. EN/ES share the same ordered list.
+Six featured cards retain their existing content, screenshots, case-study links and design. Technical Debt action now correctly says Recorded demo / Demo grabada for its existing Drive recording; Code still links to the research repository. Approved hero preserved. EN/ES share the same ordered list.
 
 ## Failed attempts
 Web reader could not access the linked public case study; repository content is authoritative and browser verification follows the build.
