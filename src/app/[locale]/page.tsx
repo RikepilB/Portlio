@@ -15,13 +15,14 @@ import { EssayCard } from '@/components/ui/EssayCard'
 import { ActivityFeed } from '@/components/ui/ActivityFeed'
 import { activityLabels } from '@/data/activity'
 
+// Newest first, using the project start dates in src/data/projects.ts.
 const featuredSlugs = [
   'crafterwiki',
-  'voidscape',
-  'findleads',
   'peru-tech-map',
-  'exam-analysis-system',
+  'voidscape',
   'scoutlane-recruitment',
+  'exam-analysis-system',
+  'ai-technical-debt-research',
 ]
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number }>> = {

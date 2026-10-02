@@ -16,14 +16,9 @@ docs/handoff/
     transcript.md             ← optional full /export archive
 ```
 
-**Rules:** append, never overwrite. Only the father's `## Current state` is replaced each
-session. Solved tasks → one concrete one-liner (file / PR / command).
+**Rules:** append, never overwrite. Only the father's `## Current state — 2026-10-01
 
----
-
-## Current state — 2026-09-30
-
-Project image refresh merged in PR #49 and deployed at d83c689; all 37 production HTTP checks passed. Requested FindLeads/ExamVault demo links and the featured ExamVault replacement are now prepared. [Demo-link receipt](2026-09-30-project-demo-links/HANDOFF.md).
+PR #50 is merged and deployed at 5e54c4e. Requested follow-up replaces FindLeads on Home with AI Technical Debt and orders the six projects by documented start date, newest first, with ExamVault and Technical Debt at the bottom. [Order receipt](2026-10-01-featured-creation-order/HANDOFF.md).
 
 ## Previous state — 2026-09-19
 
@@ -66,6 +61,8 @@ Five approved public projects are live through PR #46; CrafterWIKI leads the six
 ---
 
 ## Session index (append-only, newest first)
+
+- [2026-10-01-featured-creation-order](2026-10-01-featured-creation-order/HANDOFF.md) — featured project replacement and newest-first order
 
 - [2026-09-30-project-images-release](2026-09-30-project-images-release/HANDOFF.md) — 11 public screenshots and bilingual media refresh
 
