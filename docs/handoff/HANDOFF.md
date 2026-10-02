@@ -16,7 +16,12 @@ docs/handoff/
     transcript.md             ← optional full /export archive
 ```
 
-**Rules:** append, never overwrite. Only the father's `## Current state — 2026-10-01
+**Rules:** append, never overwrite. Only the father's `## Current state` is replaced each
+session. Solved tasks → one concrete one-liner (file / PR / command).
+
+---
+
+## Current state — 2026-10-01
 
 PR #50 is merged and deployed at 5e54c4e. Requested follow-up replaces FindLeads on Home with AI Technical Debt and orders the six projects by documented start date, newest first, with ExamVault and Technical Debt at the bottom. [Order receipt](2026-10-01-featured-creation-order/HANDOFF.md).
 
